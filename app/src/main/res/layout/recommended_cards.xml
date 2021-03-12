@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/recommended_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginRight="34dp"
+        android:layout_marginBottom="25dp"
+        app:cardBackgroundColor="#fff"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/target_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/avenir_heavy"
+                android:text="Environment Goals"
+                android:textColor="@color/subtxt_black"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.083"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/target_textView_subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenir_medium"
+                android:maxWidth="220dp"
+                android:text="Complete these goals for a sustainable future"
+                android:textSize="13dp"
+                app:layout_constraintStart_toStartOf="@+id/target_textView"
+                app:layout_constraintTop_toBottomOf="@+id/target_textView" />
+
+            <ImageView
+                android:id="@+id/target_black_imageView"
+                android:layout_width="200dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/ic_plant_trees"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.924"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.2" />
+
+            <ImageView
+                android:id="@+id/background_play_pause"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/rounded_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/target_textView_subtext"
+                app:layout_constraintTop_toBottomOf="@+id/target_textView_subtext" />
+
+            <ImageView
+                android:id="@+id/image_play_pause"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_playw"
+                app:layout_constraintBottom_toBottomOf="@+id/background_play_pause"
+                app:layout_constraintEnd_toEndOf="@+id/background_play_pause"
+                app:layout_constraintStart_toStartOf="@+id/background_play_pause"
+                app:layout_constraintTop_toTopOf="@+id/background_play_pause" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

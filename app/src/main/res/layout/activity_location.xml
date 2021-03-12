@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".location.Location">
+
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+        android:id="@+id/button"
+        android:layout_width="153dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="212dp"
+        android:text="Proceed"
+        app:spinning_bar_color="@android:color/white"
+        app:spinning_bar_padding="1dp"
+        android:background="@drawable/rounded_button_login_register"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLocationName" />
+
+    <EditText
+        android:id="@+id/editTextLocationName"
+        android:layout_width="248dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="288dp"
+        android:background="@drawable/rounded_corner_registration"
+        android:drawableLeft="@drawable/ic_baseline_home_24"
+        android:ems="10"
+        android:hint=" State"
+        android:inputType="text"
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

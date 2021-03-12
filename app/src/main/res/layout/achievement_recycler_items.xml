@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/target_black_imageView"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/rounded_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/achievement_imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_timew"
+        app:layout_constraintBottom_toBottomOf="@+id/target_black_imageView"
+        app:layout_constraintEnd_toEndOf="@+id/target_black_imageView"
+        app:layout_constraintStart_toStartOf="@+id/target_black_imageView"
+        app:layout_constraintTop_toTopOf="@+id/target_black_imageView" />
+
+    <TextView
+        android:id="@+id/achievement_name_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/avenir_heavy"
+        android:text="John Smith"
+        android:textColor="@color/txt_black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/target_black_imageView"
+        app:layout_constraintStart_toEndOf="@+id/target_black_imageView"
+        app:layout_constraintTop_toTopOf="@+id/target_black_imageView" />
+
+    <ImageView
+        android:id="@+id/achievement_arrow_imageview"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="95dp"
+        app:layout_constraintBottom_toBottomOf="@+id/achievement_name_textView"
+        app:layout_constraintStart_toEndOf="@+id/achievement_name_textView"
+        app:layout_constraintTop_toTopOf="@+id/achievement_name_textView"
+        app:srcCompat="@drawable/ic_go_forwardb" />
+</androidx.constraintlayout.widget.ConstraintLayout>

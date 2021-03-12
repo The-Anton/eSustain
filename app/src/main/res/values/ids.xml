@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="toolbartenTrees" type="id" />
+    <item name="imageView_ten_trees1" type="id" />
+    <item name="imageView_ten_trees_vg1" type="id" />
+    <item name="imageView_ten_trees_vg8" type="id" />
+    <item name="imageView_ten_trees_vg9" type="id" />
+    <item name="imageView_ten_trees_vg" type="id" />
+    <item name="imageView_ten_trees_vg7" type="id" />
+    <item name="imageView_ten_trees_vg6" type="id" />
+    <item name="imageView_ten_trees_vg2" type="id" />
+    <item name="imageView_ten_trees_vg3" type="id" />
+    <item name="imageView_ten_trees_vg4" type="id" />
+    <item name="imageView_ten_trees_vg5" type="id" />
+    <item name="imageView_ten_trees2" type="id" />
+    <item name="imageView_ten_trees4" type="id" />
+    <item name="imageView_ten_trees6" type="id" />
+    <item name="imageView_ten_trees3" type="id" />
+    <item name="tenTree_textView2" type="id" />
+    <item name="tenTree_textView4" type="id" />
+</resources>
