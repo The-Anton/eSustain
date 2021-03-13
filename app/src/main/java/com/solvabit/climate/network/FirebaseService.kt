@@ -45,7 +45,6 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
 
     fun isLocationPresent(myCallback: (result:Boolean)-> Unit){
         var database = FirebaseDatabase.getInstance();
-        database.setPersistenceEnabled(true);
         val refU = database.getReference("Users/$uid/locationUpdated")
 
         refU.get().addOnSuccessListener {

@@ -25,11 +25,12 @@ class LocationService(var uid:String, var locationManager: LocationManager) {
     private var hasNetwork = false
     private var locationGps: Location? = null
     private var locationNetwork: Location? = null
+    private var location: Location? = null
     var database = FirebaseDatabase.getInstance();
 
 
     @SuppressLint("MissingPermission")
-    fun getLocation(context: Context): Map<String, Double> {
+    fun getLocation(context: Context, myCallback: (result: Map<String, Double>) -> Unit) {
         val hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         val hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
         if (hasGps || hasNetwork) {
@@ -42,15 +43,15 @@ class LocationService(var uid:String, var locationManager: LocationManager) {
                     object : LocationListener {
                         override fun onLocationChanged(p0: Location) {
                             locationGps = p0
+                            location = locationGps
+                           // locationUpdate(locationGps!!)
+                            myCallback.invoke(mapOf<String,Double>("latitude" to locationGps!!.latitude, "longitude" to locationGps!!.longitude))
 
-                            locationUpdate(locationGps!!)
                         }
                     })
 
-                val localGpsLocation =
-                    locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                if (localGpsLocation != null)
-                    locationGps = localGpsLocation
+                val localGpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                if (localGpsLocation != null) locationGps = localGpsLocation
             }
 
             if (hasNetwork) {
@@ -61,24 +62,28 @@ class LocationService(var uid:String, var locationManager: LocationManager) {
                     object : LocationListener {
                         override fun onLocationChanged(p0: Location) {
                             locationNetwork = p0
-                            locationUpdate(locationGps!!)
+                            location = locationNetwork
+                            myCallback.invoke(mapOf<String,Double>("latitude" to location!!.latitude, "longitude" to location!!.longitude))
+
+                            //locationUpdate(locationGps!!)
 
                         }
 
                     })
 
-                val localNetworkLocation =
-                    locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-                if (localNetworkLocation != null)
-                    locationNetwork = localNetworkLocation
+                val localNetworkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                if (localNetworkLocation != null) locationNetwork = localNetworkLocation
             }
 
             if (locationGps != null && locationNetwork != null) {
-                if (locationGps!!.accuracy > locationNetwork!!.accuracy) {
-                    locationUpdate(locationGps!!)
+                if (locationGps!!.accuracy < locationNetwork!!.accuracy) {
+                    //locationUpdate(locationGps!!)
+                    location = locationNetwork
+                    myCallback.invoke(mapOf<String,Double>("latitude" to location!!.latitude, "longitude" to location!!.longitude))
 
-                } else {
-                    locationUpdate(locationGps!!)
+                } else{
+                    location = locationGps
+                    myCallback.invoke(mapOf<String,Double>("latitude" to locationGps!!.latitude, "longitude" to locationGps!!.longitude))
 
                 }
             }
@@ -89,18 +94,19 @@ class LocationService(var uid:String, var locationManager: LocationManager) {
 
         }
 
-        return  mapOf<String,Double>("latitude" to locationGps!!.latitude, "longitude" to locationGps!!.longitude)
+//        myCallback.invoke(mapOf<String,Double>("latitude" to locationGps!!.latitude, "longitude" to locationGps!!.longitude))
     }
 
 
 
-    fun locationUpdate(locationGps:Location){
+    fun locationUpdate(location:Map<String,Double>,myCallback: (result:Boolean)->Unit){
 
         val ref = database.getReference("Users/$uid")
         val refU = database.getReference("Users/$uid")
 
-
-        val cordinates = listOf<Double>(locationGps.latitude,locationGps.longitude)
+        var  lattitude = location["latitude"]!!.toDouble()
+        var  longitude = location["longitude"]!!.toDouble()
+        val cordinates = listOf<Double>(longitude,lattitude)
 
         val childUpdates = mapOf<String,List<Double>>(
             "location" to cordinates
@@ -112,26 +118,29 @@ class LocationService(var uid:String, var locationManager: LocationManager) {
         )
             .addOnSuccessListener {
                 Log.v("FirebaseService", "Updated Location on Firebase")
+                refU.updateChildren(
+                        mapOf("locationUpdated" to true)
+                )
+                        .addOnSuccessListener {
+                            Log.v("FirebaseService", "Updated Location Status on Firebase")
 
+                            myCallback.invoke(true)
+                        }
+                        .addOnFailureListener {
+                            Log.v("FirebaseService", "Failed to update location status on Firebase")
+                            myCallback.invoke(false)
+
+                        }
             }
             .addOnFailureListener {
                 Log.v("FirebaseService", "Failed to update location on Firebase")
+                myCallback.invoke(false)
 
             }
 
 
 
-        refU.updateChildren(
-                mapOf("locationUpdated" to true)
-        )
-                .addOnSuccessListener {
-                    Log.v("FirebaseService", "Updated Location Status on Firebase")
 
-                }
-                .addOnFailureListener {
-                    Log.v("FirebaseService", "Failed to update location status on Firebase")
-
-                }
     }
 
 

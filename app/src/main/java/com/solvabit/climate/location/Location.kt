@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.preference.PreferenceManager
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
@@ -37,6 +38,7 @@ class Location : AppCompatActivity() {
     lateinit var locationManager: LocationManager
     private var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
     private lateinit var uid:String
+    private var updatedToFirebase=false
     private lateinit var location: Map<String,Double>
     private var isLocationAlreadyAvailabe  = false
     var gpsStatus: Boolean = false
@@ -46,9 +48,8 @@ class Location : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location)
 
-
-         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-         uid = FirebaseAuth.getInstance().uid.toString()
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        uid = FirebaseAuth.getInstance().uid.toString()
 
         val button = findViewById<CircularProgressButton>(R.id.button)
         val cityEditText = findViewById<EditText>(R.id.editTextLocationName)
@@ -59,51 +60,42 @@ class Location : AppCompatActivity() {
 
         FirebaseService(dao,uid).isLocationPresent(){
             result -> isLocationAlreadyAvailabe = result
-        }
 
-        Toast.makeText(this, "Location on firebase: ${isLocationAlreadyAvailabe}", Toast.LENGTH_SHORT).show()
-
-
-
-        if(isLocationAlreadyAvailabe){
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }else{
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkPermission(permissions)) {
-                    location = LocationService(uid,locationManager).getLocation(this)
+            if(isLocationAlreadyAvailabe){
+                Toast.makeText(this, "Location Is Already on firebase: ${isLocationAlreadyAvailabe}", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkPermission(permissions)) {
+                        getLocation(uid,locationManager)
+                    } else {
+                        requestPermissions(permissions, PERMISSION_REQUEST)
+                    }
                 } else {
-                    requestPermissions(permissions, PERMISSION_REQUEST)
+                        getLocation(uid,locationManager)
                 }
-            } else {
-                location = LocationService(uid,locationManager).getLocation(this)
             }
         }
-
 
         button.setOnClickListener {
             button.startAnimation()
                 if(!cityEditText.text.isEmpty()){
-                    var flag=1;
+                    var flag=1
+                    var state = ""
                     var temp  = cityEditText.text.toString()
 
                     for(i in temp){
                         if(!i.isLetter()){
                             if(!i.isWhitespace()){
-                                Toast.makeText(
-                                        this,
-                                        "Please Enter correct city without any digit and special caracters",
-                                        Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(this, "Please Enter correct city without any digit and special caracters", Toast.LENGTH_SHORT).show()
                                 button.revertAnimation();
                                 flag=0;
                             }
 
                         }
                     }
-
-                    var state = ""
 
                     for (c in temp) {
                         state += when {
@@ -112,19 +104,23 @@ class Location : AppCompatActivity() {
                             else -> c
                         }
                     }
+                    Log.d("Updated", updatedToFirebase.toString())
+
                     Log.d("state", state)
+
                     if(state in stateList) {
 
-                            if(flag==1 && state!="State"){
-                                val intent = Intent(this@Location, MainActivity::class.java)
-                                startActivity(intent)
-                            }
+                            if(flag==1 && state!="State" && updatedToFirebase){
+                                val intent = Intent(this, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
+                                 startActivity(intent)
                             }else{
-                                Toast.makeText(
-                                        this,
-                                        "Please Enter correct city without any digit and special caracters",
-                                        Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                                button.revertAnimation();
+
+                            }
+                    }else{
+                                Toast.makeText(this, "Please Enter correct city without any digit and special caracters", Toast.LENGTH_SHORT).show()
                                 button.revertAnimation();
                             }
 
@@ -151,6 +147,21 @@ class Location : AppCompatActivity() {
     }
 
 
+    fun getLocation(uid:String,locationManager: LocationManager){
+        LocationService(uid,locationManager).getLocation(this) { result ->
+            location = result
+        }
+        Log.v("Coordinates", "Location from phone : ${location}")
+
+        LocationService(uid,locationManager).locationUpdate(location) { result ->
+            updatedToFirebase = result
+//
+        }
+
+        Log.v("Coordinates", "Location updated on firebase : ${updatedToFirebase}")
+    }
+
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST) {
@@ -167,8 +178,19 @@ class Location : AppCompatActivity() {
                 }
             }
             if (allSuccess)
-                location = LocationService(uid,locationManager).getLocation(this)
+                LocationService(uid,locationManager).getLocation(this, {
+                    result ->  location = result
 
-        }
+                    Log.v("Coordinates", "Location from phone : ${location}")
+
+                    LocationService(uid,locationManager).locationUpdate(location,{
+                        result -> updatedToFirebase = result
+                        Log.v("Coordinates", "Location updated on firebase : ${updatedToFirebase}")
+
+                    })
+
+
+                })
+            }
     }
 }
