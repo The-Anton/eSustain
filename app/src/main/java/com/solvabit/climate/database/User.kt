@@ -13,21 +13,21 @@ data class User(
         @ColumnInfo(name = "active")
         var active: Boolean?,
         @ColumnInfo(name = "completed_action")
-        var completedAction: List<Int>,
+        var completedAction: List<String>,
         @ColumnInfo(name = "email")
         var email: String?,
         @ColumnInfo(name = "image_url")
         var imageUrl: String?,
         @ColumnInfo(name = "location")
-        var location:List<Double>,
+        var location:List<String>,
         @ColumnInfo(name = "location_updated")
         var locationUpdated:Boolean?,
         @ColumnInfo(name = "normalized_score")
         var normalizedScore: Int?,
         @ColumnInfo(name = "ongoing_action")
-        var ongoingAction: List<Int>,
+        var ongoingAction: List<String>,
         @ColumnInfo(name = "present_action")
-        var presentAction:List<Int>,
+        var presentAction:List<String>,
         @ColumnInfo(name = "rating")
         var rating:String?,
         @ColumnInfo(name = "status")
@@ -35,7 +35,7 @@ data class User(
         @ColumnInfo(name = "target_trees")
         var targetTrees:Int?,
         @ColumnInfo(name = "task")
-        var task: List<Int>,
+        var task: List<String>,
         @ColumnInfo(name = "time_stamp")
         var timeStamp: Long?,
         @ColumnInfo(name = "trees_referred")
@@ -53,18 +53,18 @@ data class User(
 
 
         constructor(): this(null,
-                listOf<Int>(0),
+                listOf<String>("0","0"),
                 null,
                 null,
-                listOf<Double>(0.0,0.0),
+                listOf<String>("0.0","0.0"),
                 null,
                 null,
-                listOf<Int>(0),
-                listOf<Int>(0),
+                listOf<String>("0","0"),
+                listOf<String>("0","0"),
                 null,
                 null,
                 null,
-                listOf<Int>(0),
+                listOf<String>("0","0"),
                 null,
                 null,
                 null,
@@ -81,33 +81,46 @@ data class User(
 
 
 class ListTypeConverter(){
-        @TypeConverter
-        fun fromInteger(value:Int): List<Int>{
 
-                val listType = object: TypeToken<List<Int>>(){}.type
-                var newValue = value.toString()
-                return Gson().fromJson(newValue,listType)
+
+        @TypeConverter
+        fun fromInteger(value:String): List<String>{
+                val listType = object: TypeToken<List<String>>(){}.type
+                return Gson().fromJson(value,listType)
         }
 
 
         @TypeConverter
-        fun fromList(array:List<Int>):Int{
-                return Gson().toJson(array).toInt()
+        fun fromIntList(array:List<String>): String? {
+                return Gson().toJson(array)
         }
-
-
-
-        @TypeConverter
-        fun fromDouble(value:Double): List<Double>{
-
-                val listType = object: TypeToken<List<Double>>(){}.type
-                var newValue = value.toString()
-                return Gson().fromJson(newValue,listType)
-        }
-
-
-        @TypeConverter
-        fun fromAList(array:List<Double>):Double{
-                return Gson().toJson(array).toDouble()
-        }
+//
+//        @TypeConverter
+//        fun fromInteger(value:Int): List<Int>{
+//                val listType = object: TypeToken<List<Int>>(){}.type
+//                val newValue = value.toString()
+//                return Gson().fromJson(value,listType)
+//        }
+//
+//
+//        @TypeConverter
+//        fun fromIntList(array:List<Int>): String? {
+//                return Gson().toJson(array)
+//        }
+//
+//
+//
+//        @TypeConverter
+//        fun fromDouble(value:Double): List<Double>{
+//
+//                val listType = object: TypeToken<List<Double>>(){}.type
+//                var newValue = value.toString()
+//                return Gson().fromJson(newValue,listType)
+//        }
+//
+//
+//        @TypeConverter
+//        fun fromDoubleList(array:List<Double>): String? {
+//                return Gson().toJson(array)
+//        }
 }

@@ -104,11 +104,11 @@ class LocationService(var uid:String, var locationManager: LocationManager) {
         val ref = database.getReference("Users/$uid")
         val refU = database.getReference("Users/$uid")
 
-        var  lattitude = location["latitude"]!!.toDouble()
-        var  longitude = location["longitude"]!!.toDouble()
-        val cordinates = listOf<Double>(longitude,lattitude)
+        var  lattitude = location["latitude"]!!.toString()
+        var  longitude = location["longitude"]!!.toString()
+        val cordinates = listOf<String>(longitude,lattitude)
 
-        val childUpdates = mapOf<String,List<Double>>(
+        val childUpdates = mapOf<String,List<String>>(
             "location" to cordinates
         )
 

@@ -14,11 +14,11 @@ import com.solvabit.climate.database.UserDao
 import com.solvabit.climate.network.FetchAPI
 import com.solvabit.climate.network.FirebaseService
 
-public class Repository constructor(val dao: UserDao,val uid:String,val LATTITUDE:Double, val LONGITUDE:Double, val STATE:String) {
+public class Repository constructor(val dao: UserDao,val uid:String) {
 
     private  val firebaseService = FirebaseService(dao,uid)
 
-    suspend fun getUser():User {
+     suspend fun getUser(myCallback: (result: User) -> Unit) {
         val userCount = dao.hasUser(uid)
         Log.v("Repository", "User count : ${userCount}")
 
@@ -26,33 +26,37 @@ public class Repository constructor(val dao: UserDao,val uid:String,val LATTITUD
             Log.v("Repository", "User is present in room database")
             val user = dao.getUserByUID(uid)
             Log.v("Repository", "User updated to ${user}")
-            return user
+            myCallback.invoke(user)
         }
         else{
             Log.v("Repository", "User is not present in room database... fetchUserData is called")
 
-            val user = fetchUserData()
-            Log.v("Repository", "User updated to ${user}")
-
+            val user = fetchUserData{
+                result ->
+                Log.v("Repository", "User updated to ${result}")
+                dao.insert(result)
+                Log.i("FirebaseService", "User INSERTED")
+                myCallback.invoke(dao.getUserByUID(uid))
+            }
             return user
 
         }
 
     }
 
-    suspend fun fetchUserData():User{
+     fun fetchUserData(myCallback: (result:User)-> Unit){
         Log.v("Repository", "fetchUserData called")
 
         //if(firebaseService.isUserDataPresent() == true) {
-            Log.v("Repository", "User is present in firebase")
-            var user = firebaseService.fetchUser()
+            firebaseService.fetchUser { result ->
+                myCallback.invoke(result)
+            }
         //}
 //        else{
 //            var user:User = CalculateParameters()
 //            dao.insert(user)
 //            return dao.getUserByUID(uid)
 //        }
-        return dao.getUserByUID(uid)
 
     }
 

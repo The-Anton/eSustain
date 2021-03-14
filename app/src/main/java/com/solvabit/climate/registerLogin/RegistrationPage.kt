@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.solvabit.climate.R
 import com.solvabit.climate.database.User
+import com.solvabit.climate.database.UserDatabase
 import kotlinx.android.synthetic.main.activity_registerpage.*
 import java.util.*
 
@@ -196,18 +197,18 @@ class RegistrationPage : AppCompatActivity() {
         val active = true
         var users = User(
             active,
-            listOf(0),
+            listOf("0"),
             email,
             profileImageUrl,
-                listOf(0.000000,0.000000),
+                listOf("0.0","0.0"),
             false,
             0,
-                listOf(0),
-                listOf(0),
+                listOf("0"),
+                listOf("0"),
             "Rookie",
             status,
             0,
-                listOf(0),
+                listOf("0"),
             System.currentTimeMillis(),
             0,
             0,
@@ -218,6 +219,10 @@ class RegistrationPage : AppCompatActivity() {
         ref.setValue(users)
             .addOnSuccessListener {
                 Log.e("registerActivity","User is saved with $uid and $profileImageUrl")
+//                val instance = UserDatabase.getInstance(this)
+//                val dao = instance.userDao()
+//                dao.insert(users)
+//                Log.v("registerActivity", "User is saved in room with  ${dao.getUserByUID(uid)}")
 
                 val user = FirebaseAuth.getInstance().currentUser
 

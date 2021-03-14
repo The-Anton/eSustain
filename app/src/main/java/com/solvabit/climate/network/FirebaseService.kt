@@ -8,40 +8,28 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import java.lang.Exception
 
 public class FirebaseService(var dao:UserDao, var uid: String) {
-    //val uid = "PdZV87UWm9QMi4KeR9n4gMiQ23f1"//FirebaseAuth.getInstance().uid
-    
 
-    suspend fun fetchUser(){
+
+    fun fetchUser(myCallback: (result:User)-> Unit){
         var database = FirebaseDatabase.getInstance();
-        database.setPersistenceEnabled(true);
         val ref = database.getReference("Users/$uid")
         var user:User = User()
-        suspendCancellableCoroutine<User> {
-             try {
+
                 ref.get().addOnSuccessListener {
                     user = it.getValue(User::class.java)!!
                     Log.v("FirebaseService","Fetched User From Firebase ${user}")
 
-                    onResponse(user)
+                    myCallback.invoke(user)
                 }.addOnFailureListener{
                     Log.v("FirebaseService", "Error getting data")
                 }
-            }catch (e:Exception){
-                 Log.v("FirebaseService", "courutine error : ${e}")
-
-             }
-        }
 
     }
 
 
     fun onResponse(user: User) {
-        dao.insert(user)
-        Log.i("FirebaseService","User INSERTED")
 
     }
-
-
 
     fun isLocationPresent(myCallback: (result:Boolean)-> Unit){
         var database = FirebaseDatabase.getInstance();
@@ -59,7 +47,7 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
         }
     }
 
-    private fun fetchLocationFromFirebase(callback: Callback) {
+    private fun fetchLocationFromFirebase() {
 
     }
 
@@ -71,8 +59,4 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
 
     }
 
-
-    interface Callback {
-        fun onSuccess(status: Boolean):Boolean
-    }
 }

@@ -9,6 +9,8 @@ import android.location.LocationManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
@@ -29,6 +31,7 @@ import com.solvabit.climate.network.FirebaseService
 import kotlinx.android.synthetic.main.activity_location.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 private const val PERMISSION_REQUEST = 10
@@ -67,15 +70,29 @@ class Location : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }else{
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (checkPermission(permissions)) {
-                        getLocation(uid,locationManager)
-                    } else {
-                        requestPermissions(permissions, PERMISSION_REQUEST)
+
+                val mainHandler = Handler(Looper.getMainLooper())
+
+                mainHandler.post(object : Runnable {
+                    override fun run() {
+                        if(locationEnabled()){
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                if (checkPermission(permissions)) {
+                                    getLocation(uid,locationManager)
+                                } else {
+                                    requestPermissions(permissions, PERMISSION_REQUEST)
+                                }
+                            } else {
+                                getLocation(uid,locationManager)
+                            }
+                        }else{
+                            Toast.makeText(this@Location, "Please turn on your location ", Toast.LENGTH_SHORT).show()
+                        }
+
+                        mainHandler.postDelayed(this, 3000)
                     }
-                } else {
-                        getLocation(uid,locationManager)
-                }
+                })
+
             }
         }
 
@@ -131,10 +148,18 @@ class Location : AppCompatActivity() {
                 }
             }
 
-        }
+
+
+    }
 
 
 
+    private fun locationEnabled():Boolean {
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+        return gpsStatus
+    }
 
 
     private fun checkPermission(permissionArray: Array<String>): Boolean {
@@ -150,15 +175,15 @@ class Location : AppCompatActivity() {
     fun getLocation(uid:String,locationManager: LocationManager){
         LocationService(uid,locationManager).getLocation(this) { result ->
             location = result
+            Log.v("Coordinates", "Location from phone : ${location}")
+            LocationService(uid,locationManager).locationUpdate(location) { result ->
+                updatedToFirebase = result
+                Log.v("Coordinates", "Location updated on firebase : ${updatedToFirebase}")
+            }
         }
-        Log.v("Coordinates", "Location from phone : ${location}")
 
-        LocationService(uid,locationManager).locationUpdate(location) { result ->
-            updatedToFirebase = result
-//
-        }
 
-        Log.v("Coordinates", "Location updated on firebase : ${updatedToFirebase}")
+
     }
 
 

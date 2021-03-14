@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import androidx.room.Room
+import com.google.firebase.auth.FirebaseAuth
 import com.solvabit.climate.R
 import com.solvabit.climate.Repository.Repository
 import com.solvabit.climate.database.User
@@ -18,7 +19,7 @@ import kotlinx.coroutines.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
-
+    //private lateinit var user:User
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this,R.id.myNavHostFragment)
         bottomNavigation.setupWithNavController(navController)
 //
+
+
+
+
 //        GlobalScope.launch{
 //            // val db = Room.databaseBuilder(applicationContext, UserDatabase::class.java, "userDatabase" ).build()
 //            val instance = UserDatabase.getInstance(this@MainActivity)
