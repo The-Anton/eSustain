@@ -137,4 +137,8 @@ dependencies {
 
     //Circular Progress bar
     implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
+
+    //Straight line Progress bar
+    implementation "com.github.skydoves:progressview:1.1.1"
+    implementation 'com.github.krishnanmuthaiahpillai:ProgressBar:V2.0'
 }

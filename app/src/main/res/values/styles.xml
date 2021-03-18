@@ -9,4 +9,12 @@
 
 
 
+    <style name="progressBarStyle">
+        <item name="android:layout_width">4dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_marginStart">5dp</item>
+    </style>
+
+
 </resources>
