@@ -1,17 +1,8 @@
 package com.solvabit.climate.Repository;
 
-import android.app.Activity
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import android.util.Log
-import com.example.forests.data.airQualityDataService
-import com.example.forests.data.airQualityResponse.AirQualityData
-import com.example.forests.data.airQualityResponse.Data
-import com.google.firebase.database.*
-import com.solvabit.climate.dataModel.ForestData
 import com.solvabit.climate.database.User
 import com.solvabit.climate.database.UserDao
-import com.solvabit.climate.network.FetchAPI
 import com.solvabit.climate.network.FirebaseService
 
 public class Repository constructor(val dao: UserDao,val uid:String) {
@@ -44,46 +35,17 @@ public class Repository constructor(val dao: UserDao,val uid:String) {
 
     }
 
-     fun fetchUserData(myCallback: (result:User)-> Unit){
+     suspend fun fetchUserData(myCallback: (result:User)-> Unit){
         Log.v("Repository", "fetchUserData called")
 
-        //if(firebaseService.isUserDataPresent() == true) {
             firebaseService.fetchUser { result ->
                 myCallback.invoke(result)
             }
-        //}
-//        else{
-//            var user:User = CalculateParameters()
-//            dao.insert(user)
-//            return dao.getUserByUID(uid)
-//        }
 
     }
 
 
 
-//    suspend fun CalculateParameters(): User {
-//
-//        lateinit var forestData: ForestData
-//        lateinit var addressLocationData: List<Data>
-//        val apiService = airQualityDataService()
-//
-//        //val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
-//       // var LATTITUDE = //sharedPreferences.getString("lat", " ").toString()
-//       // var LONGITUDE = //sharedPreferences.getString("lon", " ").toString()
-//       // var STATE = //sharedPreferences.getString("state", " ").toString()
-//
-//        val airQualityData: Data = FetchAPI(LATTITUDE,LONGITUDE,STATE).AirQualityData()
-//
-//        var user:User = FirebaseService(dao).fetchUser()
-//
-//        user.lattitude = LATTITUDE
-//        user.longitude = LONGITUDE
-//        user.normalizedScore = airQualityData.aqi.toInt()
-//        user.rating = "Rookie"
-//        return user
-//    }
-//
 
 }
 

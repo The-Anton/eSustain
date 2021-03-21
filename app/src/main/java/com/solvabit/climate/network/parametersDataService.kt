@@ -1,6 +1,6 @@
 package com.example.forests.data
 
-import com.example.forests.data.stateForestDataResponse.StateForestData
+import android.util.Log
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.solvabit.climate.network.parametersData
 import kotlinx.coroutines.Deferred
@@ -17,9 +17,9 @@ const val KEY = "579b464db66ec23bdd00000157bc862d9f2146d84b764d388c4b7319"
 interface parametersDataService {
     @GET("/newuser")
     fun getData(
-        @Query("uid") uid: String = "0",
-        @Query("latitude") latitude: Double = 0.0,
-        @Query("longitude") longitude: Double = 0.0
+        @Query("uid") uid: String,
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double
     ): Deferred<parametersData>
 
     companion object{
@@ -30,6 +30,7 @@ interface parametersDataService {
                     .newBuilder()
                     .build()
 
+                Log.v("Coordinates", "Url : ${url}")
 
 
                 val request = chain.request()

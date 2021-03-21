@@ -26,31 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         navController = Navigation.findNavController(this,R.id.myNavHostFragment)
         bottomNavigation.setupWithNavController(navController)
-//
-
-
-
-
-//        GlobalScope.launch{
-//            // val db = Room.databaseBuilder(applicationContext, UserDatabase::class.java, "userDatabase" ).build()
-//            val instance = UserDatabase.getInstance(this@MainActivity)
-//            val dao = instance.userDao()
-//
-//            val repository = Repository(dao,"PdZV87UWm9QMi4KeR9n4gMiQ23f1",30.31,70.2,"Haryana")
-//
-//            /// userDao.insert(user)
-//            val users = repository.getUser()
-//
-//            Log.v("User", dao.hasUser("PdZV87UWm9QMi4KeR9n4gMiQ23f1").toString())
-//            //Log.v("User", users.toString())
-//
-//
-//        }
-//
-
-
-
-
 
 
     }

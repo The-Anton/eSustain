@@ -1,10 +1,13 @@
 package com.solvabit.climate.location
 
 import android.Manifest
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -12,149 +15,125 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.widget.EditText
+import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.preference.PreferenceManager
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-import com.example.forests.data.airQualityDataService
-import com.example.forests.data.airQualityResponse.Data
-import com.example.forests.data.revGeoCodingResponse.AddressLocationData
-import com.example.forests.data.revGeoCodingResponse.Result
-import com.example.forests.data.revGeoCodingService
 import com.google.firebase.auth.FirebaseAuth
 import com.solvabit.climate.R
 import com.solvabit.climate.activity.MainActivity
+import com.solvabit.climate.database.UserDao
 import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.network.FirebaseService
+import com.solvabit.climate.network.GenericApiService
 import kotlinx.android.synthetic.main.activity_location.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
 
 private const val PERMISSION_REQUEST = 10
+
 class Location : AppCompatActivity() {
 
 
     lateinit var locationManager: LocationManager
     private var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-    private lateinit var uid:String
-    private var updatedToFirebase=false
-    private lateinit var location: Map<String,Double>
-    private var isLocationAlreadyAvailabe  = false
+    private lateinit var uid: String
+    private var updatedToFirebase = false
+    private lateinit var location: Map<String, Double>
     var gpsStatus: Boolean = false
-    var stateList:List<String> = listOf("andhra pradesh", "arunachal pradesh","assam","bihar","chhattisgarh","delhi","new delhi","goa","gujarat","haryana","himachal pradesh","jammu and kashmir","jharkhand","karnataka", "kerala","madhya pradesh","maharashtra","meghalaya","manipur","mizoram","nagaland","orissa","punjab","rajasthan","sikkim","tamil nadu","telangana","tripura","uttar pradesh","uttarakhand","west bengal","andaman and nicobar","chandigarh","dadar nagar haveli","daman and diu","lakshadweep","puducherry")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location)
+        //button.visibility = View.INVISIBLE
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         uid = FirebaseAuth.getInstance().uid.toString()
 
-        val button = findViewById<CircularProgressButton>(R.id.button)
-        val cityEditText = findViewById<EditText>(R.id.editTextLocationName)
-
-
         val instance = UserDatabase.getInstance(this@Location)
         val dao = instance.userDao()
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-        FirebaseService(dao,uid).isLocationPresent(){
-            result -> isLocationAlreadyAvailabe = result
 
-            if(isLocationAlreadyAvailabe){
-                Toast.makeText(this, "Location Is Already on firebase: ${isLocationAlreadyAvailabe}", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-            }else{
+        var editor: SharedPreferences.Editor? = sharedPreferences.edit()
+        editor?.putString("noOfTimesLocationUpdated", 0.toString())
+        editor?.putString("locationListenerCount", 0.toString())
+        editor?.apply()
 
-                val mainHandler = Handler(Looper.getMainLooper())
 
-                mainHandler.post(object : Runnable {
-                    override fun run() {
-                        if(locationEnabled()){
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                if (checkPermission(permissions)) {
-                                    getLocation(uid,locationManager)
-                                } else {
-                                    requestPermissions(permissions, PERMISSION_REQUEST)
-                                }
-                            } else {
-                                getLocation(uid,locationManager)
-                            }
-                        }else{
-                            Toast.makeText(this@Location, "Please turn on your location ", Toast.LENGTH_SHORT).show()
-                        }
+        checkStatus(dao)
 
-                        mainHandler.postDelayed(this, 3000)
-                    }
-                })
-
-            }
-        }
-
-        button.setOnClickListener {
+        button.setOnClickListener{
             button.startAnimation()
-                if(!cityEditText.text.isEmpty()){
-                    var flag=1
-                    var state = ""
-                    var temp  = cityEditText.text.toString()
-
-                    for(i in temp){
-                        if(!i.isLetter()){
-                            if(!i.isWhitespace()){
-                                Toast.makeText(this, "Please Enter correct city without any digit and special caracters", Toast.LENGTH_SHORT).show()
-                                button.revertAnimation();
-                                flag=0;
-                            }
-
-                        }
-                    }
-
-                    for (c in temp) {
-                        state += when {
-                            c.isUpperCase() -> c.toLowerCase()
-                            c.isWhitespace() -> " "
-                            else -> c
-                        }
-                    }
-                    Log.d("Updated", updatedToFirebase.toString())
-
-                    Log.d("state", state)
-
-                    if(state in stateList) {
-
-                            if(flag==1 && state!="State" && updatedToFirebase){
-                                val intent = Intent(this, MainActivity::class.java)
-                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
-                                 startActivity(intent)
-                            }else{
-                                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
-                                button.revertAnimation();
-
-                            }
-                    }else{
-                                Toast.makeText(this, "Please Enter correct city without any digit and special caracters", Toast.LENGTH_SHORT).show()
-                                button.revertAnimation();
-                            }
-
-
-                }else{
-                    Toast.makeText(this, "Please Enter your city", Toast.LENGTH_SHORT).show()
-                    button.revertAnimation();
-                }
-            }
-
+            //initiateNewUser(location["latitude"]!!.toDouble(),location["longitude"]!!.toDouble())
+            checkStatus(dao)
+        }
 
 
     }
 
 
 
-    private fun locationEnabled():Boolean {
+    fun checkStatus(dao:UserDao){
+        FirebaseService(dao, uid).userStatus { result ->
+            if(result.equals("error")){
+                Log.v("Firebase", "Got error ")
+
+                button.visibility = View.VISIBLE
+                button.revertAnimation()
+            }else{
+                if(result.equals("true")){
+                    Log.v("Firebase", "Got true")
+                    startMainActivity()
+                }else{
+                    Log.v("Firebase", "Got false")
+                    runnableHandler()
+                }
+            }
+        }
+    }
+    fun runnableHandler() {
+        val mainHandler = Handler(Looper.getMainLooper())
+
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                if (locationEnabled()) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (checkPermission(permissions)) {
+                            getUserLocation(uid, locationManager)
+
+                        } else {
+                            requestPermissions(permissions, PERMISSION_REQUEST)
+                        }
+                    } else {
+                        getUserLocation(uid, locationManager)
+                    }
+                } else {
+                    Toast.makeText(this@Location, "Please turn on your location ", Toast.LENGTH_SHORT).show()
+                    mainHandler.postDelayed(this, 3000)
+                }
+
+
+            }
+        })
+
+    }
+
+    fun startMainActivity() {
+        Log.v("Intent", "Stared Intent")
+
+        val intent = Intent(this, MainActivity::class.java)
+        Log.v("Intent", "Stared Intent2")
+
+        startActivity(intent)
+    }
+
+
+    private fun locationEnabled(): Boolean {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
@@ -172,18 +151,40 @@ class Location : AppCompatActivity() {
     }
 
 
-    fun getLocation(uid:String,locationManager: LocationManager){
-        LocationService(uid,locationManager).getLocation(this) { result ->
+    fun getUserLocation(uid: String, locationManager: LocationManager) {
+
+        LocationService(uid, locationManager).getLocation(this) { result ->
             location = result
+            var latitude = location["latitude"]!!.toDouble()
+            var longitude = location["longitude"]!!.toDouble()
             Log.v("Coordinates", "Location from phone : ${location}")
-            LocationService(uid,locationManager).locationUpdate(location) { result ->
-                updatedToFirebase = result
-                Log.v("Coordinates", "Location updated on firebase : ${updatedToFirebase}")
-            }
+
+            initiateNewUser(latitude, longitude)
+
+
         }
 
 
+    }
 
+
+    fun initiateNewUser(latitude: Double, longitude: Double) {
+        button.startAnimation()
+        GlobalScope.launch {
+            GenericApiService(uid, latitude, longitude).newUser {
+
+                Log.v("Coordinates", "Made api call ")
+
+                if (it) {
+                    Log.v("Coordinates", "Response : ${it}")
+                    button.revertAnimation()
+                    startMainActivity()
+                }else{
+                    button.revertAnimation()
+                    button.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
 
@@ -202,20 +203,20 @@ class Location : AppCompatActivity() {
                     }
                 }
             }
-            if (allSuccess)
-                LocationService(uid,locationManager).getLocation(this, {
-                    result ->  location = result
+          if (allSuccess) {
+              Log.v("Permission", "Got permission")
+              getUserLocation(uid, locationManager)
 
-                    Log.v("Coordinates", "Location from phone : ${location}")
-
-                    LocationService(uid,locationManager).locationUpdate(location,{
-                        result -> updatedToFirebase = result
-                        Log.v("Coordinates", "Location updated on firebase : ${updatedToFirebase}")
-
-                    })
-
-
-                })
-            }
+          }
+//                LocationService(uid, locationManager).getLocation(this, { result ->
+//                    location = result
+//                    var latitude = location["latitude"]!!.toDouble()
+//                    var longitude = location["longitude"]!!.toDouble()
+//
+//                    Log.v("Coordinates", "Location from phone : ${location}")
+//                    initiateNewUser(latitude,longitude)
+//
+//                })
+        }
     }
 }

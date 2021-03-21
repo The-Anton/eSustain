@@ -10,35 +10,31 @@
         android:id="@+id/button"
         android:layout_width="153dp"
         android:layout_height="53dp"
-        android:layout_marginBottom="212dp"
-        android:text="Proceed"
-        app:spinning_bar_color="@android:color/white"
-        app:spinning_bar_padding="1dp"
+        android:layout_marginBottom="88dp"
         android:background="@drawable/rounded_button_login_register"
+        android:text="Try Again"
         android:textColor="@android:color/white"
         android:textSize="18dp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLocationName" />
+        app:spinning_bar_color="@android:color/white"
+        app:spinning_bar_padding="1dp" />
 
-    <EditText
-        android:id="@+id/editTextLocationName"
-        android:layout_width="248dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="288dp"
-        android:background="@drawable/rounded_corner_registration"
-        android:drawableLeft="@drawable/ic_baseline_home_24"
-        android:ems="10"
-        android:hint=" State"
-        android:inputType="text"
-        android:paddingLeft="16dp"
-        android:textColor="@color/black"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="388dp"
+        android:layout_height="533dp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loadingearth" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
