@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.solvabit.climate.R
-import com.solvabit.climate.viewModal.TenTreesPlantViewModel
+import com.solvabit.climate.viewModel.TenTreesPlantViewModel
 
 class TenTreesPlant : Fragment() {
 

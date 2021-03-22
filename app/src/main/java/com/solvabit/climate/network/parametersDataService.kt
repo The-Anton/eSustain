@@ -10,9 +10,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.util.concurrent.TimeUnit
 
-
-const val KEY = "579b464db66ec23bdd00000157bc862d9f2146d84b764d388c4b7319"
 
 interface parametersDataService {
     @GET("/newuser")
@@ -24,13 +23,14 @@ interface parametersDataService {
 
     companion object{
         operator fun invoke(): parametersDataService? {
+
             val requestInterceptor = Interceptor{chain ->
                 val url = chain.request()
                     .url()
                     .newBuilder()
                     .build()
 
-                Log.v("Coordinates", "Url : ${url}")
+                Log.v("API", "Url : ${url}")
 
 
                 val request = chain.request()
@@ -42,6 +42,9 @@ interface parametersDataService {
 
             }
             val okHttpClient = OkHttpClient.Builder()
+
+                    .readTimeout(50,TimeUnit.SECONDS)
+                    .connectTimeout(50,TimeUnit.SECONDS)
                 .addInterceptor(requestInterceptor)
                 .build()
 

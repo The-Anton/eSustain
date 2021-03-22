@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.solvabit.climate.R
 import com.solvabit.climate.Repository.Repository
 import com.solvabit.climate.database.UserDatabase
-import com.solvabit.climate.viewModal.DashboardViewModel
+import com.solvabit.climate.viewModel.DashboardViewModel
 import kotlinx.android.synthetic.main.dashboard_fragment.*
 import kotlinx.android.synthetic.main.dashboard_fragment.view.*
 import kotlinx.coroutines.GlobalScope
