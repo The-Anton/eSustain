@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class parametersData(
     val actualForest: Int,
-    val aqi: Int,
+    val aqi: Double,
     val city: String,
     val co: Double,
     val country: String,
@@ -20,6 +20,7 @@ data class parametersData(
     val recommendedTarget: Int,
     val so2: Double,
     val state: String,
+    val apistatus:Boolean,
     val status: Boolean,
     val totalArea: Int,
     val updated: Boolean

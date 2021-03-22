@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.forests.data.airQualityDataService
 import com.example.forests.data.airQualityResponse.Data
 import com.example.forests.data.parametersDataService
+import java.net.CacheResponse
 
 public class GenericApiService(val uid: String, val lattitude: Double, val longitude: Double) {
 
@@ -41,14 +42,15 @@ public class GenericApiService(val uid: String, val lattitude: Double, val longi
     suspend fun newUser(callback: (result: Boolean) -> Unit) {
 
 
-        lateinit var parametersData: parametersData
+        lateinit var response: parametersData
         Log.v("NewUser", "started new user initiating")
 
         val apiService = parametersDataService()
 
         try {
             val response = apiService?.getData(uid, lattitude, longitude)?.await()
-            if (response != null || response?.status == true) {
+
+            if (response?.apistatus == true) {
                 Log.v("NewUser", response.toString())
                 callback(true)
             } else {
@@ -58,6 +60,7 @@ public class GenericApiService(val uid: String, val lattitude: Double, val longi
         }catch (e:Exception){
             Log.v("API Exception", e.toString())
             callback(false)
+            //reFetch()
         }
 
 
