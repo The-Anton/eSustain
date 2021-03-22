@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
@@ -78,23 +80,24 @@
             android:background="@drawable/rounded_button_login_register"
             android:text="Sign In"
             android:textAllCaps="false"
-            app:spinning_bar_color="@android:color/white"
-            app:spinning_bar_padding="1dp"
             android:textColor="@android:color/white"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password_editText_login" />
+            app:layout_constraintTop_toBottomOf="@+id/password_editText_login"
+            app:spinning_bar_color="@android:color/white"
+            app:spinning_bar_padding="1dp" />
 
         <View
             android:id="@+id/divider"
             android:layout_width="130dp"
             android:layout_height="2dp"
-            android:layout_marginEnd="20dp"
             android:background="#9498AE"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
             app:layout_constraintEnd_toStartOf="@+id/textView3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/login_button_login"
             app:layout_constraintTop_toTopOf="@+id/textView3" />
 
 
@@ -102,20 +105,21 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="44dp"
             android:text="Or"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/divider2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/divider"
             app:layout_constraintTop_toBottomOf="@+id/login_button_login" />
 
         <View
             android:id="@+id/divider2"
             android:layout_width="130dp"
             android:layout_height="2dp"
-            android:layout_marginStart="20dp"
             android:background="#9498AE"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="@+id/login_button_login"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView3"
             app:layout_constraintTop_toTopOf="@+id/textView3" />
 
@@ -195,3 +199,5 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
+
+</layout>

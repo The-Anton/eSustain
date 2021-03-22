@@ -18,12 +18,14 @@ import com.solvabit.climate.onboarding.Onboarding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class SplashScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+        Timber.plant(Timber.DebugTree())
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
 

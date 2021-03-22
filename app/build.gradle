@@ -113,6 +113,9 @@ dependencies {
     implementation 'com.xwray:groupie:2.1.0'
     implementation 'com.xwray:groupie-kotlin-android-extensions:2.1.0'
 
+    //Timber for Log
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
     // Preference
     implementation "androidx.preference:preference:1.1.1"
 
