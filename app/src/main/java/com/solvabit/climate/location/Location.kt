@@ -82,9 +82,8 @@ class Location : AppCompatActivity() {
         FirebaseService(dao, uid).userStatus { result ->
             if(result.equals("error")){
                 Log.v("Firebase", "Got error ")
-
+//                button.revertAnimation()
                 button.visibility = View.VISIBLE
-                button.revertAnimation()
             }else{
                 if(result.equals("true")){
                     Log.v("Firebase", "Got true")
@@ -180,8 +179,11 @@ class Location : AppCompatActivity() {
                     button.revertAnimation()
                     startMainActivity()
                 }else{
-                    button.revertAnimation()
-                    button.visibility = View.VISIBLE
+//                    button.revertAnimation()
+//                    button.visibility = View.VISIBLE
+                    Log.v("Coordinates", "Retrying...... : ${it}")
+
+                        getUserLocation(uid,locationManager)
                 }
             }
         }
