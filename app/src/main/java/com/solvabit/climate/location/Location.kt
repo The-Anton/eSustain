@@ -179,15 +179,15 @@ class Location : AppCompatActivity() {
                     button.revertAnimation()
                     startMainActivity()
                 }else{
-//                    button.revertAnimation()
-//                    button.visibility = View.VISIBLE
                     Log.v("Coordinates", "Retrying...... : ${it}")
-
-                        getUserLocation(uid,locationManager)
+                   
+                    initiateNewUser(latitude,longitude)
+                        //getUserLocation(uid,locationManager)
                 }
             }
         }
     }
+
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
