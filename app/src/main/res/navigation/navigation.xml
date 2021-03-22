@@ -14,4 +14,9 @@
         android:name="com.solvabit.climate.fragment.Profile"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/feed_fragment"
+        android:name="com.solvabit.climate.FeedFragment"
+        android:label="feed_fragment"
+        tools:layout="@layout/feed_fragment" />
 </navigation>

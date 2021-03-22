@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Climate</string>
+    <string name="app_name">E-Sustain</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="btn_persistent">Persistent Bottom Sheet</string>

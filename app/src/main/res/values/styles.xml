@@ -16,5 +16,12 @@
         <item name="android:layout_marginStart">5dp</item>
     </style>
 
+    <style name="normaltext">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/avenir_book</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 
 </resources>

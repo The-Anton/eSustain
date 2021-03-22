@@ -8,10 +8,10 @@
 
 
     <item
-        android:id="@+id/wiki_fragment"
+        android:id="@+id/feed_fragment"
         android:enabled="true"
-        android:icon="@drawable/ic_info_24"
-        android:title="Wiki"/>
+        android:icon="@drawable/ic_baseline_dynamic_feed_24"
+        android:title="Feed"/>
 
     <item
         android:id="@+id/profile_fragment"
