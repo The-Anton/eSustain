@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.solvabit.climate.R
-import com.solvabit.climate.viewModal.SendReferralViewModel
+import com.solvabit.climate.viewModel.SendReferralViewModel
 
 class SendReferral : Fragment() {
 

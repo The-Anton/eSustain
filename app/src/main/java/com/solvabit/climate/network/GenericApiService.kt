@@ -46,16 +46,22 @@ public class GenericApiService(val uid: String, val lattitude: Double, val longi
 
         val apiService = parametersDataService()
 
-        val response = apiService?.getData(uid, lattitude, longitude)?.await()
-
-
-        if (response != null || response?.status == true) {
-            Log.v("NewUser", response.toString())
-            callback(true)
-        } else {
-            Log.v("NewUser", "NO data fetched")
+        try {
+            val response = apiService?.getData(uid, lattitude, longitude)?.await()
+            if (response != null || response?.status == true) {
+                Log.v("NewUser", response.toString())
+                callback(true)
+            } else {
+                Log.v("NewUser", "NO data fetched")
+                callback(false)
+            }
+        }catch (e:Exception){
+            Log.v("API Exception", e.toString())
             callback(false)
         }
+
+
+
 
     }
 

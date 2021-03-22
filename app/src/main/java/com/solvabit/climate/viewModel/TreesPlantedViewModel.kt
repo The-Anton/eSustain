@@ -1,4 +1,4 @@
-package com.solvabit.climate.viewModal
+package com.solvabit.climate.viewModel
 
 import androidx.lifecycle.ViewModel
 
