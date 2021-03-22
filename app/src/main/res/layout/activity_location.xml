@@ -10,7 +10,7 @@
         android:id="@+id/button"
         android:layout_width="153dp"
         android:layout_height="53dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="64dp"
         android:background="@drawable/rounded_button_login_register"
         android:text="Try Again"
         android:textColor="@android:color/white"
@@ -27,14 +27,26 @@
         android:id="@+id/animationView"
         android:layout_width="388dp"
         android:layout_height="533dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loadingearth" />
+
+    <TextView
+        android:id="@+id/locationStatusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="115dp"
+        android:text="We are processing your data... "
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/animationView"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
