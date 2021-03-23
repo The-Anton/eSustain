@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -39,37 +40,154 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/post_card"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="50dp"
         android:layout_marginTop="16dp"
         android:background="@color/white"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="0"
+                android:src="@drawable/ic_profile_circle_24" />
+
+            <TextView
+                android:id="@+id/username"
+                style="@style/normaltext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="Username"
+                android:textColor="@color/colorPrimary" />
+
+            <Spinner
+                android:pointerIcon="vertical_double_arrow"
+                android:padding="5dp"
+                android:background="@drawable/spinnerbg"
+                android:id="@+id/spinner2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="?android:attr/listDivider" />
+        <EditText
+            android:id="@+id/post_text"
+            android:background="@drawable/edittextbg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            style="@style/normaltext"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:hint="Write Something for your post!"
+            android:inputType="textMultiLine" />
+
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/post_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Post Image" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/add_image"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/post_card">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_image_24"/>
+        <TextView
+            android:layout_marginStart="10dp"
+            android:textColor="#4FC1E9"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add an Image"
+            style="@style/normaltext"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_image">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_baseline_video_call_24"/>
+        <TextView
+            android:layout_marginStart="10dp"
+            android:textColor="#4FC1E9"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add an Video"
+            style="@style/normaltext"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/postButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorPrimary"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            style="@style/normaltext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="POST"
-            android:textColor="@color/white"
-            style="@style/normaltext"
-            android:layout_gravity="center"/>
+            android:textColor="@color/white" />
     </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
