@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#203cc3"
@@ -135,7 +137,7 @@
                         android:id="@+id/progress_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="34dp"
+                        android:layout_marginStart="34dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/avenir_medium"
                         android:textStyle="bold"
@@ -225,7 +227,6 @@
                                     app:layout_constraintTop_toTopOf="parent">
 
                                     <androidx.constraintlayout.widget.ConstraintLayout
-                                        android:id="@+id/constraintLayout2"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginRight="20dp"
@@ -448,14 +449,14 @@
 
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/airQualityFrame"
+                            android:id="@+id/forestDensityFrame"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
-                                android:id="@+id/linearLayout2"
+                                android:id="@+id/linearLayoutForest"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
@@ -498,13 +499,14 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayoutForest">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:gravity="center"
                                     android:orientation="horizontal"
-                                    android:gravity="center">
+                                    app:layout_constraintTop_toTopOf="parent">
 
 
                                     <LinearLayout
@@ -529,32 +531,32 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="bottom"
-                                                android:layout_weight="2"
                                                 android:layout_margin="5dp"
+                                                android:layout_weight="2"
                                                 android:gravity="center"
-                                                android:textAlignment="center"
-                                                android:orientation="vertical">
+                                                android:orientation="vertical"
+                                                android:textAlignment="center">
 
                                                 <com.skydoves.progressview.ProgressView
                                                     android:id="@+id/actualForestCover_progressView"
-                                                    app:progressView_orientation="vertical"
-                                                    app:progressView_max="100"
+                                                    style="@style/progressBarStyle"
                                                     app:progressView_colorProgress="#8542DC"
-                                                    style="@style/progressBarStyle" />
+                                                    app:progressView_max="100"
+                                                    app:progressView_orientation="vertical" />
 
                                                 <TextView
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:textAlignment="center"
-                                                    android:text="Actual\nForest" />
+                                                    android:text="Actual\nForest"
+                                                    android:textAlignment="center" />
                                             </LinearLayout>
 
                                             <LinearLayout
-                                                android:layout_weight="2"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="bottom"
                                                 android:layout_margin="5dp"
+                                                android:layout_weight="2"
                                                 android:gravity="center"
                                                 android:orientation="vertical">
 
@@ -563,45 +565,44 @@
                                                     android:layout_width="4dp"
                                                     android:layout_height="100dp"
                                                     android:layout_margin="10dp"
-                                                    app:progressView_max="100"
-                                                    app:progressView_orientation="vertical"
                                                     android:layout_marginStart="5dp"
-                                                    app:progressView_colorProgress="#8542DC" />
+                                                    app:progressView_colorProgress="#8542DC"
+                                                    app:progressView_max="100"
+                                                    app:progressView_orientation="vertical" />
 
                                                 <TextView
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:textAlignment="center"
-                                                    android:text="Open\nForest" />
+                                                    android:text="Open\nForest"
+                                                    android:textAlignment="center" />
                                             </LinearLayout>
 
                                             <LinearLayout
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="bottom"
-                                                android:layout_weight="2"
                                                 android:layout_margin="5dp"
+                                                android:layout_weight="2"
                                                 android:gravity="center"
-                                                android:textAlignment="center"
-                                                android:orientation="vertical">
+                                                android:orientation="vertical"
+                                                android:textAlignment="center">
 
                                                 <com.skydoves.progressview.ProgressView
                                                     android:id="@+id/noForest_progressView"
                                                     android:layout_width="4dp"
                                                     android:layout_height="100dp"
                                                     android:layout_margin="10dp"
-                                                    app:progressView_max="100"
-                                                    app:progressView_orientation="vertical"
                                                     android:layout_marginStart="5dp"
-                                                    app:progressView_colorProgress="#8542DC"/>
+                                                    app:progressView_colorProgress="#8542DC"
+                                                    app:progressView_max="100"
+                                                    app:progressView_orientation="vertical" />
 
                                                 <TextView
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:textAlignment="center"
-                                                    android:text="No\nForest" />
+                                                    android:text="No\nForest"
+                                                    android:textAlignment="center" />
                                             </LinearLayout>
-
 
 
                                         </LinearLayout>
@@ -614,10 +615,11 @@
                                             android:textSize="10sp" />
 
                                     </LinearLayout>
+
                                     <View
-                                        android:layout_gravity="center_vertical"
                                         android:layout_width="4dp"
                                         android:layout_height="130dp"
+                                        android:layout_gravity="center_vertical"
                                         android:layout_margin="10dp"
                                         android:background="?android:attr/listDivider"
                                         app:layout_constraintBottom_toBottomOf="parent"
@@ -687,8 +689,8 @@
                                                     <TextView
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:text="Value of Index"
                                                         android:fontFamily="@font/avenir_book"
+                                                        android:text="Value of Index"
                                                         android:textSize="10sp" />
                                                 </LinearLayout>
 
@@ -751,25 +753,4 @@
 
 </ScrollView>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</layout>
