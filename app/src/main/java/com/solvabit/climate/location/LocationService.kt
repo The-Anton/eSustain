@@ -61,9 +61,9 @@ class LocationService(var uid: String, var locationManager: LocationManager) {
                         locationListener
                 )
 
-
-                val localGpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                if (localGpsLocation != null) locationGps = localGpsLocation
+//
+//                val localGpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+//                if (localGpsLocation != null) locationGps = localGpsLocation
 
             }
         } else {
