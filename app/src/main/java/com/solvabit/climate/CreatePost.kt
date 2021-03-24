@@ -36,6 +36,7 @@ class CreatePost : AppCompatActivity() {
         
         fetchCurrentUser()
 
+
         val spinner: Spinner = binding.spinner2
         ArrayAdapter.createFromResource(
                 this,
