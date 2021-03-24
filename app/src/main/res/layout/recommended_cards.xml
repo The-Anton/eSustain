@@ -3,16 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recommended_cardView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="34dp"
-        android:layout_marginRight="34dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="25dp"
+        android:background="@drawable/cardsbg"
         app:cardBackgroundColor="#fff"
         app:cardCornerRadius="15dp"
         app:cardElevation="5dp"
@@ -86,7 +88,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

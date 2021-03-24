@@ -2,33 +2,31 @@ package com.solvabit.climate
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.solvabit.climate.database.User
+import com.squareup.picasso.Picasso
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.activity_create_post.*
+import kotlinx.android.synthetic.main.card_post_view.view.*
+import kotlinx.android.synthetic.main.feed_fragment.*
+import timber.log.Timber.d
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FeedFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FeedFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private lateinit var v:View
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -42,27 +40,57 @@ class FeedFragment : Fragment() {
                 it.startActivity(intent)
             }
         }
-
+        fetchPostData()
         return v
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FeedFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                FeedFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
+    private fun fetchPostData() {
+        var ref = FirebaseDatabase.getInstance().getReference("/PostData")
+        ref.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val adapter= GroupAdapter<ViewHolder>()
+                snapshot.children.forEach {
+                    Log.v("data",it.toString())
+                    val post = it.getValue(Post::class.java)
+                    if (post!=null){
+                        adapter.add(postItem(post))}
                 }
+                post_recycler_view.adapter=adapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+
+}
+class postItem(private val post: Post): Item<ViewHolder>(){
+    override fun getLayout(): Int {
+        return R.layout.card_post_view
+    }
+
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+        viewHolder.itemView.post_main_text.text=post.post_text
+        Picasso.get().load(post.post_image).into(viewHolder.itemView.post_main_image)
+        val uid = post.uid
+        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
+        ref.keepSynced(true)
+
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val user = p0.getValue(User::class.java)
+                viewHolder.itemView.username.text = user?.username
+                if (user?.imageUrl!=null){
+                    Picasso.get().load(user.imageUrl).into(viewHolder.itemView.user_image)
+                }
+
+            }
+
+        })
     }
 }
