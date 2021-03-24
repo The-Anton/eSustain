@@ -7,7 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.solvabit.climate.databinding.ProfileFragmentBinding
+import android.widget.PopupMenu
+import androidx.databinding.DataBindingUtil
 import com.solvabit.climate.R
+import com.solvabit.climate.databinding.DashboardFragmentBinding
 import com.solvabit.climate.fragment.Dashboard.Companion.localuser
 import com.solvabit.climate.viewModel.ProfileViewModel
 
@@ -22,8 +26,28 @@ class Profile : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+        val binding: ProfileFragmentBinding = DataBindingUtil.inflate(
+            inflater, R.layout.profile_fragment, container, false
+        )
         Log.v("Profile", localuser.toString())
-        return inflater.inflate(R.layout.profile_fragment, container, false)
+        binding.logoutPopup?.setOnClickListener {
+            context?.let {
+                val popupMenu = PopupMenu(it, binding.logoutPopup)
+                popupMenu.menuInflater.inflate(R.menu.nav_menu,popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener {
+                    if (it.itemId == R.id.sign_out_menu) {
+                        Log.d("SignOut", "Signout pressed")
+                    } else {
+                        Log.d("Not clicked", "Nothing happened")
+                    }
+                    true
+                }
+
+                popupMenu.show()
+            }
+
+        }
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

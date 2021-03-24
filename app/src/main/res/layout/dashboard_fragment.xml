@@ -98,9 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/home_rounded_button"
-                    android:fontFamily="@font/avenir_book"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    style="@style/normalTitles"
                     android:text="  Congratulation! You are good"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
@@ -139,11 +137,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="34dp"
                         android:layout_marginTop="16dp"
-                        android:fontFamily="@font/avenir_medium"
-                        android:textStyle="bold"
+                        style="@style/normalTitles"
                         android:text="Your Place"
-                        android:textColor="#AE9AE2"
-                        android:textSize="20sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -179,10 +174,10 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="16dp"
+                                    android:layout_gravity="center"
+                                    android:layout_width="7dp"
+                                    android:layout_height="14dp"
                                     android:layout_marginStart="10dp"
-                                    android:layout_marginTop="3dp"
                                     android:layout_weight="1"
                                     android:src="@drawable/air" />
 
@@ -191,16 +186,15 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="5dp"
+                                    android:gravity="center_vertical"
                                     android:layout_weight="15"
-                                    android:textSize="18sp"
-                                    android:fontFamily="@font/avenir_book"
-                                    android:text="Air Quality Index"
-
-                                    android:textStyle="bold" />
+                                    style="@style/normalSubText"
+                                    android:text="Air Quality Index" />
 
                                 <ImageView
-                                    android:layout_width="5dp"
-                                    android:layout_height="20dp"
+                                    android:id="@+id/forest_more"
+                                    android:layout_width="10dp"
+                                    android:layout_height="30dp"
                                     android:layout_gravity="end"
                                     android:layout_weight="1"
                                     android:src="@drawable/ic_baseline_more_vert_24" />
@@ -466,8 +460,9 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <ImageView
+                                    android:layout_gravity="center"
                                     android:layout_weight="1"
-                                    android:layout_width="20dp"
+                                    android:layout_width="7dp"
                                     android:layout_height="20dp"
                                     android:layout_marginStart="4dp"
                                     android:src="@drawable/forestree" />
@@ -477,16 +472,15 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Forest Density"
-                                    android:textSize="18sp"
                                     android:layout_gravity="center_vertical"
-                                    android:textStyle="bold"
-                                    android:fontFamily="@font/avenir_book"
-                                    android:layout_marginStart="0dp"/>
+                                    style="@style/normalSubText"
+                                    android:layout_marginStart="5dp"/>
 
                                 <ImageView
+                                    android:id="@+id/air_more"
                                     android:layout_weight="1"
-                                    android:layout_width="5dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="10dp"
+                                    android:layout_height="30dp"
                                     android:layout_gravity="end"
                                     android:src="@drawable/ic_baseline_more_vert_24" />
 
@@ -712,11 +706,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="8dp"
-                        android:fontFamily="@font/avenir_medium"
+                        style="@style/normalTitles"
                         android:text="Recommended"
-                        android:textColor="#AE9AE2"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"

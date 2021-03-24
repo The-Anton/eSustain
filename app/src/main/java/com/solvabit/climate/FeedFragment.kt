@@ -1,13 +1,17 @@
 package com.solvabit.climate
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -41,11 +45,11 @@ class FeedFragment : Fragment() {
                 it.startActivity(intent)
             }
         }
-        fetchPostData()
+        fetchPostData(requireContext())
         return v
     }
 
-    private fun fetchPostData() {
+    private fun fetchPostData(context: Context) {
         var ref = FirebaseDatabase.getInstance().getReference("/PostData")
         ref.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -53,7 +57,7 @@ class FeedFragment : Fragment() {
                 snapshot.children.forEach {
                     val post = it.getValue(Post::class.java)
                     if (post!=null){
-                        adapter.add(postItem(post))}
+                        adapter.add(postItem(post,context))}
                 }
                 post_recycler_view.adapter=adapter
             }
@@ -66,7 +70,9 @@ class FeedFragment : Fragment() {
 
 
 }
-class postItem(private val post: Post): Item<ViewHolder>(){
+class postItem(private val post: Post,val context: Context): Item<ViewHolder>(){
+
+
     override fun getLayout(): Int {
         return R.layout.card_post_view
     }
@@ -96,5 +102,15 @@ class postItem(private val post: Post): Item<ViewHolder>(){
             }
 
         })
+        viewHolder.itemView.post_more.setOnClickListener {
+
+                val popupMenu = PopupMenu(context, viewHolder.itemView.post_more)
+                popupMenu.menuInflater.inflate(R.menu.post_more_options,popupMenu.menu)
+
+            popupMenu.show()
+        }
     }
+
 }
+
+

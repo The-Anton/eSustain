@@ -36,7 +36,6 @@ class CreatePost : AppCompatActivity() {
         
         fetchCurrentUser()
 
-
         val spinner: Spinner = binding.spinner2
         ArrayAdapter.createFromResource(
                 this,
@@ -111,6 +110,7 @@ class CreatePost : AppCompatActivity() {
         ref.setValue(postData).addOnSuccessListener {
             Toast.makeText(this,"Posted Successfully!!",Toast.LENGTH_SHORT).show()
             val intent  = Intent(this,MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
     }
