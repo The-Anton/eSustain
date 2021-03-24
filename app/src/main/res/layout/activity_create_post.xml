@@ -107,6 +107,7 @@
             android:inputType="textMultiLine" />
 
         <ImageView
+            android:scaleType="centerCrop"
             android:layout_gravity="center"
             android:id="@+id/post_image"
             android:layout_width="wrap_content"

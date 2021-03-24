@@ -17,10 +17,11 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.activity_create_post.*
 import kotlinx.android.synthetic.main.card_post_view.view.*
 import kotlinx.android.synthetic.main.feed_fragment.*
 import timber.log.Timber.d
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class FeedFragment : Fragment() {
@@ -74,6 +75,10 @@ class postItem(private val post: Post): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.post_main_text.text=post.post_text
         Picasso.get().load(post.post_image).into(viewHolder.itemView.post_main_image)
+        viewHolder.itemView.category.text=post.category
+        val time = post.time.toLong()
+        val sfd = SimpleDateFormat("dd-MM-yyyy")
+        viewHolder.itemView.time.text=sfd.format(Date(time))
         val uid = post.uid
         val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
         ref.keepSynced(true)

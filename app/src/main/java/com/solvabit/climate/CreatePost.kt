@@ -122,7 +122,7 @@ class CreatePost : AppCompatActivity() {
             selectedPhotoUri = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,selectedPhotoUri)
             binding.postImage.setImageBitmap(bitmap)
-            binding.postCard.updatePadding(bottom = 0)
+            binding.postCard.updatePadding(bottom = 8)
         }
 
     }
