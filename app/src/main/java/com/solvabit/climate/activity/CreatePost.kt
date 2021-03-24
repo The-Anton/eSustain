@@ -1,4 +1,4 @@
-package com.solvabit.climate
+package com.solvabit.climate.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -6,7 +6,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
@@ -18,7 +17,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
-import com.solvabit.climate.activity.MainActivity
+import com.solvabit.climate.R
+import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.database.User
 import com.solvabit.climate.databinding.ActivityCreatePostBinding
 import com.solvabit.climate.dialog.Dialog
