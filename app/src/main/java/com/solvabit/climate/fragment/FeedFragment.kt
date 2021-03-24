@@ -48,11 +48,10 @@ class FeedFragment : Fragment() {
 
     private fun fetchPostData() {
         var ref = FirebaseDatabase.getInstance().getReference("/PostData")
-        ref.addListenerForSingleValueEvent(object :ValueEventListener{
+        ref.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val adapter= GroupAdapter<ViewHolder>()
                 snapshot.children.forEach {
-                    Log.v("data",it.toString())
                     val post = it.getValue(Post::class.java)
                     if (post!=null){
                         adapter.add(postItem(post))}
