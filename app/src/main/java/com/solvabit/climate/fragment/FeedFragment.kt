@@ -12,6 +12,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.solvabit.climate.activity.CreatePost
+import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.database.User
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
@@ -19,7 +21,6 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.card_post_view.view.*
 import kotlinx.android.synthetic.main.feed_fragment.*
-import timber.log.Timber.d
 import java.text.SimpleDateFormat
 import java.util.*
 

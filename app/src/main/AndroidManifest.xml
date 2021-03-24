@@ -14,7 +14,7 @@
         android:roundIcon="@drawable/rounded_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".CreatePost"></activity>
+        <activity android:name=".activity.CreatePost"></activity>
         <activity android:name=".location.Location" />
         <activity android:name=".registerLogin.ResetPassword" />
         <activity android:name=".registerLogin.RegistrationPage" />
