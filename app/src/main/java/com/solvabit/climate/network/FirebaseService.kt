@@ -15,7 +15,6 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
         var database = FirebaseDatabase.getInstance();
         val ref = database.getReference("Users/$uid")
         var user:User = User()
-         newapi(uid)
                 ref.get().addOnSuccessListener {
                     user = it.getValue(User::class.java)!!
                     Log.v("FirebaseService","Fetched User From Firebase ${user}")
@@ -26,8 +25,6 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
                     Log.v("FirebaseService", "Error getting data")
                 }
     }
-
-
 
 
 
@@ -47,21 +44,7 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
 
 
 
-    suspend fun newapi(uid: String) {
-        lateinit var parametersData: parametersData
-        Log.v("NewUser","started new user initiating")
 
-        val apiService = parametersDataService()
-        val response = apiService?.getData(uid,30.3752 , 76.7821)?.await()
-        if (response != null) {
-            Log.v("NewUser", response.toString())
-            //callback(true)
-        }else{
-            Log.v("NewUser", "NO data fetched")
-            //callback(false)
-        }
-
-    }
 
 
 
