@@ -3,6 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="myUser"
+            type="com.solvabit.climate.database.User" />
+    </data>
+
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -73,10 +80,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:text="John Smith"
+                tools:text="John Smith"
                 android:textColor="#8542DC"
                 style="@style/normaltext"
                 android:textStyle="bold"
+                android:text="@={myUser.username}"
                 app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
                 app:layout_constraintStart_toEndOf="@+id/username_black_imageView"
                 app:layout_constraintTop_toTopOf="@+id/username_black_imageView"
@@ -87,9 +95,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_book"
-                android:text="johnsmith@gmail.com"
+                tools:text="johnsmith@gmail.com"
                 android:textColor="@color/subtxt_black"
-                android:textSize="15dp"
+                android:textSize="15sp"
+                android:text="@={myUser.email}"
                 app:layout_constraintStart_toStartOf="@+id/achievement_name_textView"
                 app:layout_constraintTop_toBottomOf="@+id/achievement_name_textView" />
 
@@ -223,9 +232,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:fontFamily="@font/avenir_medium"
-                    android:text="00"
+                    tools:text="00"
                     android:textColor="#4FC1E9"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
+                    android:text="@={`` + myUser.treesPlanted}"
                     app:layout_constraintEnd_toEndOf="@+id/progess_tree_imageView8"
                     app:layout_constraintStart_toStartOf="@+id/progess_tree_imageView8"
                     app:layout_constraintTop_toBottomOf="@+id/progess_tree_imageView8" />
@@ -237,7 +247,7 @@
                     android:fontFamily="@font/avenir_book"
                     android:maxWidth="250dp"
                     android:text="Trees Planted"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="@+id/number_trees_planted_textView"
                     app:layout_constraintStart_toStartOf="@+id/number_trees_planted_textView"
                     app:layout_constraintTop_toBottomOf="@+id/number_trees_planted_textView" />
@@ -277,9 +287,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/avenir_medium"
-                    android:text="54"
+                    tools:text="54"
                     android:textColor="#4FC1E9"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
+                    android:text="@={`` + myUser.treesReferred}"
                     app:layout_constraintEnd_toEndOf="@+id/progess_give_tree_imageView"
                     app:layout_constraintStart_toStartOf="@+id/progess_give_tree_imageView"
                     app:layout_constraintTop_toBottomOf="@+id/progess_give_tree_imageView" />
@@ -291,7 +302,7 @@
                     android:fontFamily="@font/avenir_book"
                     android:maxWidth="250dp"
                     android:text="Trees Referred"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="@+id/number_trees_referred_textView"
                     app:layout_constraintStart_toStartOf="@+id/number_trees_referred_textView"
                     app:layout_constraintTop_toBottomOf="@+id/number_trees_referred_textView" />

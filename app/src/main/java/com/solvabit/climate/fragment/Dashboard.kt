@@ -1,5 +1,6 @@
 package com.solvabit.climate.fragment
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -9,14 +10,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.solvabit.climate.R
 import com.solvabit.climate.Repository.Repository
+import com.solvabit.climate.database.SingleAction
 import com.solvabit.climate.database.User
 import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.DashboardFragmentBinding
 import com.solvabit.climate.viewModel.DashboardViewModel
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.recommended_cards.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -58,6 +66,8 @@ class Dashboard : Fragment() {
         addDataToDashboard()
 
         popMenu()
+
+
 
         return  binding.root
     }
@@ -108,6 +118,7 @@ class Dashboard : Fragment() {
         circularloader(localuser.aqi?.toFloat() ?: 0f, 500f, binding.circularProgressBarAirQuality)
         initializeAirData()
         initializeForestData()
+        addRecommendedDashboardItems()
     }
 
     private fun initializeAirData() {
@@ -144,6 +155,29 @@ class Dashboard : Fragment() {
         }
     }
 
+    private fun addRecommendedDashboardItems(){
+
+        val adapter = GroupAdapter<ViewHolder>()
+        binding.recommendedRecyclerView.adapter = adapter
+
+        localuser.presentAction = listOf("1","2","3","4")
+        localuser.presentAction.forEach {
+            adapter.add(AddRecycleItemRecommended(it.toInt()))
+        }
+
+        adapter.setOnItemClickListener{item, view ->
+            val userItem = item as AddRecycleItemRecommended
+            when(userItem.a){
+                1-> view.findNavController().navigate(R.id.action_dashboard_fragment_to_treesPlanted)
+                2-> view.findNavController().navigate(R.id.action_dashboard_fragment_to_treesPlanted)
+                3-> view.findNavController().navigate(R.id.action_dashboard_fragment_to_sendReferral)
+                4-> view.findNavController().navigate(R.id.action_dashboard_fragment_to_sendReferral)
+            }
+        }
+
+    }
+
+
     private fun circularloader(data: Float, max:Float, circularProgressBar : CircularProgressBar){
         circularProgressBar.apply {
             setProgressWithAnimation(data, 3000) // =1s
@@ -153,22 +187,39 @@ class Dashboard : Fragment() {
         }
     }
 
-
-
-//    fun startAnimation(){
-//
-//    }
-//    fun closeAnimation() {
-//        Log.v("User", "Closed Animation")
-//
-//        v.treeloader.visibility = View.GONE
-//        v.dashboardScrollView.visibility = View.VISIBLE
-//    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+}
+
+
+class AddRecycleItemRecommended(val a: Int): Item<ViewHolder>(){
+
+    //Create instances of all actions
+    private val action1 = SingleAction(1, "Plant five Trees", "Let's begin a new journey!", 5)
+    private val action2 = SingleAction(2, "Plant ten Trees", "Let's begin a new journey!", 10)
+    private val action3 = SingleAction(3, "Use Public Transport", "Let's begin a new journey!", 15)
+    private val action4 = SingleAction(4, "Refer a friend", "Let's begin a new journey!", 5)
+
+    override fun getLayout(): Int {
+        return R.layout.recommended_cards
+    }
+
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+        var action = SingleAction()
+        action = when(a)
+        {
+            1->action1
+            2->action2
+            3->action3
+            4->action4
+            else->action1
+        }
+        viewHolder.itemView.target_textView.text = action.topic
+        viewHolder.itemView.target_textView_subtext.text = action.subtopic
     }
 
 }

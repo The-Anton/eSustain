@@ -8,7 +8,14 @@
         android:id="@+id/dashboard_fragment"
         android:name="com.solvabit.climate.fragment.Dashboard"
         android:label="dashboard_fragment"
-        tools:layout="@layout/dashboard_fragment" />
+        tools:layout="@layout/dashboard_fragment" >
+        <action
+            android:id="@+id/action_dashboard_fragment_to_sendReferral"
+            app:destination="@id/sendReferral" />
+        <action
+            android:id="@+id/action_dashboard_fragment_to_treesPlanted"
+            app:destination="@id/treesPlanted" />
+    </fragment>
     <fragment
         android:id="@+id/profile_fragment"
         android:name="com.solvabit.climate.fragment.Profile"
@@ -19,4 +26,13 @@
         android:name="com.solvabit.climate.FeedFragment"
         android:label="feed_fragment"
         tools:layout="@layout/feed_fragment" />
+    <fragment
+        android:id="@+id/sendReferral"
+        android:name="com.solvabit.climate.fragment.SendReferral"
+        android:label="send_referral_fragment"
+        tools:layout="@layout/send_referral_fragment" />
+    <fragment
+        android:id="@+id/treesPlanted"
+        android:name="com.solvabit.climate.fragment.TreesPlanted"
+        android:label="TreesPlanted" />
 </navigation>
