@@ -100,13 +100,14 @@ class CreatePost : AppCompatActivity() {
     }
 
     private fun post(postImageUrl: String) {
-        val id = UUID.randomUUID().toString()
         val uid = FirebaseAuth.getInstance().uid?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/PostData/$id")
         val time = System.currentTimeMillis().toString()
+        val max = Long.MAX_VALUE
+        val timestamp = max - System.currentTimeMillis()
+        val ref = FirebaseDatabase.getInstance().getReference("/PostData/$timestamp")
         val text = binding.postText.text.toString()
         val category = binding.spinner2.selectedItem.toString()
-        val postData = Post(text,postImageUrl,uid,time,category)
+        val postData = Post(text,postImageUrl,uid,time,category, mutableListOf("0"),0)
         ref.setValue(postData).addOnSuccessListener {
             Toast.makeText(this,"Posted Successfully!!",Toast.LENGTH_SHORT).show()
             val intent  = Intent(this,MainActivity::class.java)
