@@ -47,11 +47,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <TextView
                 android:id="@+id/normalizedScoreData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:fontFamily="@font/avenir_medium"
                 android:maxLength="3"
                 android:text="00"
@@ -65,11 +65,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/circularProgressBar"
                 tools:text="952" />
 
-
             <TextView
                 android:id="@+id/textViewNormalizedScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/avenir_book"
                 android:text="Normalized Score"
                 android:textColor="#FFFFFF"
@@ -98,17 +98,17 @@
                     android:id="@+id/imageView6"
                     android:layout_width="0dp"
                     android:layout_height="15dp"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
                     android:src="@drawable/ic_baseline_check_circle_24" />
 
                 <TextView
-                    android:layout_gravity="center_vertical"
                     android:id="@+id/statusText"
+                    style="@style/normalTitles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:background="@drawable/home_rounded_button"
-                    style="@style/normalTitles"
                     android:text="  Congratulation! You are good"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
