@@ -144,4 +144,7 @@ dependencies {
     //Straight line Progress bar
     implementation "com.github.skydoves:progressview:1.1.1"
     implementation 'com.github.krishnanmuthaiahpillai:ProgressBar:V2.0'
+
+    //circular seekbar half dashboard
+    implementation 'me.tankery.lib:circularSeekBar:1.3.0'
 }

@@ -32,7 +32,7 @@ class SplashScreen : AppCompatActivity() {
         Handler().postDelayed(
             {
                 verifyUserIsLoggedIn(this)
-            }, 4000)
+            }, 1000)
     }
 
     private fun verifyUserIsLoggedIn(context: Context){

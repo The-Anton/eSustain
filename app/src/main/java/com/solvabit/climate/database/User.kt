@@ -66,9 +66,6 @@ data class User(
         var username: String?
 
         ){
-
-
-
         constructor(): this(null,
                 null,
                 null,

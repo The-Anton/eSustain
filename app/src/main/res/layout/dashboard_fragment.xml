@@ -2,12 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <variable
+            name="myUser"
+            type="com.solvabit.climate.database.User" />
+    </data>
 
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#203cc3"
-    tools:context=".fragment.Dashboard">
+    tools:context=".fragment.Dashboard.Dashboard">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,58 +29,66 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/upperFrame"
             android:layout_width="match_parent"
-            android:layout_height="320dp">
+            android:layout_height="310dp">
 
 
-            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            <me.tankery.lib.circularseekbar.CircularSeekBar
                 android:id="@+id/circularProgressBar"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="28dp"
-                app:cpb_background_progressbar_color="#16298f"
-                app:cpb_background_progressbar_width="15dp"
-                app:cpb_progress_direction="to_right"
-                app:cpb_progressbar_color="#60cbf6"
-                app:cpb_progressbar_width="15dp"
-                app:cpb_round_border="true"
+                android:layout_width="230dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="80dp"
+                app:cs_circle_color="#16298f"
+                app:cs_circle_progress_color="#60cbf6"
+                app:cs_circle_stroke_width="20dp"
+                app:cs_circle_style="round"
+                app:cs_disable_pointer="true"
+                app:cs_end_angle="45"
+                app:cs_maintain_equal_circle="true"
+                app:cs_progress="00"
+                app:cs_start_angle="135"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.daasuu.cat.CountAnimationTextView
+            <TextView
                 android:id="@+id/normalizedScoreData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:fontFamily="@font/avenir_medium"
-                android:text="00"
+                android:maxLength="3"
+                android:text="@={`` + myUser.normalizedScore}"
                 android:textColor="#FFFFFF"
                 android:textSize="40sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textViewNormalizedScore"
                 app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-                app:layout_constraintTop_toTopOf="@+id/circularProgressBar" />
+                app:layout_constraintTop_toBottomOf="@+id/circularProgressBar"
+                tools:text="952" />
+
 
             <TextView
                 android:id="@+id/textViewNormalizedScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="110dp"
-                android:text="Normalized Score"
                 android:fontFamily="@font/avenir_book"
+                android:text="Normalized Score"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@+id/circularProgressBar"
                 app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-                app:layout_constraintHorizontal_bias="0.506"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-                app:layout_constraintTop_toTopOf="@+id/circularProgressBar" />
-
+                app:layout_constraintTop_toBottomOf="@+id/normalizedScoreData" />
 
             <LinearLayout
+                android:id="@+id/linearLayout3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
                 android:background="@drawable/home_rounded_button"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
@@ -87,22 +101,23 @@
 
                 <ImageView
                     android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
                     android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_baseline_check_circle_24" />
 
                 <TextView
-                    android:layout_gravity="center_vertical"
                     android:id="@+id/statusText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:background="@drawable/home_rounded_button"
                     android:fontFamily="@font/avenir_book"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
                     android:text="  Congratulation! You are good"
                     android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
                     app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressBar" />
@@ -280,7 +295,8 @@
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="center_horizontal"
-                                                        android:text="00" />
+                                                        android:text="@={``+myUser.aqi}"
+                                                        android:maxLength="3"/>
 
                                                     <TextView
                                                         android:layout_width="wrap_content"
@@ -418,12 +434,12 @@
 
                                             </LinearLayout>
 
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_gravity="center_horizontal"
-                                                android:text="Health alert:Risk of health effects"
-                                                android:textSize="10sp" />
+<!--                                            <TextView-->
+<!--                                                android:layout_width="wrap_content"-->
+<!--                                                android:layout_height="wrap_content"-->
+<!--                                                android:layout_gravity="center_horizontal"-->
+<!--                                                android:text="Health alert:Risk of health effects"-->
+<!--                                                android:textSize="10sp" />-->
 
                                         </LinearLayout>
                                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -684,7 +700,8 @@
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="center_horizontal"
-                                                        android:text="00" />
+                                                        android:maxLength="4"
+                                                        android:text="@={``+ myUser.forestDensity}" />
 
                                                     <TextView
                                                         android:layout_width="wrap_content"

@@ -6,7 +6,7 @@
     app:startDestination="@id/dashboard_fragment">
     <fragment
         android:id="@+id/dashboard_fragment"
-        android:name="com.solvabit.climate.fragment.Dashboard"
+        android:name="com.solvabit.climate.fragment.Dashboard.Dashboard"
         android:label="dashboard_fragment"
         tools:layout="@layout/dashboard_fragment" />
     <fragment
