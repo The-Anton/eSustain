@@ -2,17 +2,25 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.TreesPlanted">
+    tools:context=".fragment.TreesPlanted"
+    >
 
-<FrameLayout
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:background="@color/white">
         <ImageView
             android:id="@+id/username_black_imageView"
             android:layout_width="70dp"
@@ -89,7 +97,7 @@
             android:layout_width="110dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:background="@drawable/rounded_button_login_register"
+            android:background="@drawable/blue_button"
             android:text="Add Image"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -101,7 +109,7 @@
             android:id="@+id/post_add_pic_five_Trees"
             android:layout_width="110dp"
             android:layout_height="50dp"
-            android:background="@drawable/rounded_button_login_register"
+            android:background="@drawable/blue_button"
             android:text="Post"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -160,20 +168,21 @@
                 app:layout_constraintTop_toBottomOf="@+id/circularProgressBar" />
 
         </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/all_trees_recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:nestedScrollingEnabled="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:nestedScrollingEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/top" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</ScrollView>
 
 </layout>
