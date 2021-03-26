@@ -58,6 +58,7 @@ class FeedFragment : Fragment() {
         val ref = FirebaseDatabase.getInstance().getReference("/PostData")
                 v.post_recycler_view.adapter = adapter
 
+
                 ref.addChildEventListener(object: ChildEventListener{
 
                     override fun onCancelled(p0: DatabaseError) {}
@@ -93,8 +94,6 @@ class postItem(private val post: Post,val context: Context): Item<ViewHolder>() 
         Picasso.get().load(post.post_image).into(viewHolder.itemView.post_main_image)
         viewHolder.itemView.category.text = post.category
         database = Firebase.database.reference
-        val likes = post.likes.toMutableList()
-        viewHolder.itemView.like_count.text = (likes.size-1).toString()
         val time = post.time.toLong()
         val key = Long.MAX_VALUE - time
         val sfd = SimpleDateFormat("dd-MM-yyyy")
@@ -104,12 +103,12 @@ class postItem(private val post: Post,val context: Context): Item<ViewHolder>() 
         ref.keepSynced(true)
 
         val currentUserUid = FirebaseAuth.getInstance().uid
-        for (i in likes) {
+        /* for (i in likes) {
             if (i == currentUserUid) {
                 viewHolder.itemView.like_icon.setColorFilter(Color.BLUE)
                 viewHolder.itemView.like_text.setTextColor(Color.BLUE)
             }
-        }
+        } */
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
@@ -131,13 +130,53 @@ class postItem(private val post: Post,val context: Context): Item<ViewHolder>() 
 
             popupMenu.show()
         }
+        val likeref = FirebaseDatabase.getInstance().getReference("/PostData/$key/likes/")
+
+        likeref.get().addOnSuccessListener { snapshot ->
+            var count = 0;
+            snapshot.children.forEach {
+                if (it.value==true){
+                    count++
+                }
+            }
+            viewHolder.itemView.like_count.text=count.toString()
+            if (snapshot.hasChild(currentUserUid.toString())){
+                if (snapshot.child(currentUserUid.toString()).value==true){
+                    viewHolder.itemView.like_icon.setColorFilter(Color.BLUE)
+                    viewHolder.itemView.like_text.setTextColor(Color.BLUE)
+                }
+            }
+        }
         viewHolder.itemView.like_button.setOnClickListener {
 
-            if (currentUserUid !in likes){
+
+            likeref.get().addOnSuccessListener { snapshot ->
+                if (snapshot.hasChild(currentUserUid.toString())){
+                    val bool = snapshot.child(currentUserUid.toString()).value
+                    if (bool==true){
+                        viewHolder.itemView.like_icon.setColorFilter(Color.BLACK)
+                        viewHolder.itemView.like_text.setTextColor(Color.BLACK)
+                        viewHolder.itemView.like_count.text = (viewHolder.itemView.like_count.text.toString().toInt()-1).toString()
+                        likeref.child(currentUserUid.toString()).setValue(false)
+                    }else{
+                        viewHolder.itemView.like_icon.setColorFilter(Color.BLUE)
+                        viewHolder.itemView.like_text.setTextColor(Color.BLUE)
+                        viewHolder.itemView.like_count.text = (viewHolder.itemView.like_count.text.toString().toInt()+1).toString()
+                        likeref.child(currentUserUid.toString()).setValue(true)
+                    }
+                }else{
+                    viewHolder.itemView.like_icon.setColorFilter(Color.BLUE)
+                    viewHolder.itemView.like_text.setTextColor(Color.BLUE)
+                    viewHolder.itemView.like_count.text = (viewHolder.itemView.like_count.text.toString().toInt()+1).toString()
+                    likeref.child(currentUserUid.toString()).setValue(true)
+                }
+
+            }
+
+            /* if (currentUserUid !in likes){
                 val updatedList:MutableList<String> = (likes+currentUserUid) as MutableList<String>
-                //  val updatedPost = Post(post.post_text,post.post_image,post.uid,post.time,post.category, updatedList,post.interested)
-                val ref = FirebaseDatabase.getInstance().getReference("/PostData/$key")
-                ref.updateChildren(mapOf("likes" to updatedList))
+
+                ref.push().setValue(updatedList)
             }
             if (currentUserUid in likes) {
                     // dislike the button
@@ -145,7 +184,7 @@ class postItem(private val post: Post,val context: Context): Item<ViewHolder>() 
                     val updatedList = likes.remove(currentUserUid)
                     val ref = FirebaseDatabase.getInstance().getReference("/PostData/$key/likes/$listKey")
                     ref.removeValue()
-            }
+            } */
         }
     }
 }

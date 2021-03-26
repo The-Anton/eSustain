@@ -9,7 +9,6 @@ class Post(var post_text: String,
                 val uid: String,
                 val time: String,
                 val category: String,
-                var likes: List<String>,
                 val interested: Int): Parcelable {
 
     constructor():this(
@@ -18,6 +17,5 @@ class Post(var post_text: String,
             "",
             "",
             "",
-            listOf<String>(),
             0)
 }
