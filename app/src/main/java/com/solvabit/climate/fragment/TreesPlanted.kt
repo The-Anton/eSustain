@@ -38,7 +38,7 @@ import java.util.*
 class TreesPlanted : Fragment() {
 
     private val uid = FirebaseAuth.getInstance().uid
-    var treesPlanted : Int = 0
+    private var treesPlanted : Int = 0
     private var targetTrees: Int = 0
 
     companion object {
@@ -144,9 +144,9 @@ class TreesPlanted : Fragment() {
                                 .addOnSuccessListener {
                                     val handler = Handler()
                                     handler.postDelayed({
+                                        fetchTrees()
                                         binding.addPicFiveTrees.revertAnimation()
                                         binding.postAddPicFiveTrees.revertAnimation()
-                                        fetchTrees()
                                         FirebaseDatabase.getInstance().getReference("/Users/$uid").child("treesPlanted").setValue(treesPlanted)
                                         binding.addPicFiveTrees.setCompoundDrawablesWithIntrinsicBounds(R.drawable.rounded_button_login_register, 0, 0, 0);
                                         binding.postAddPicFiveTrees.visibility = View.INVISIBLE
@@ -208,8 +208,6 @@ class TreesPlanted : Fragment() {
             }
 
         })
-
-
     }
 
     private fun fetchCurrentUser(){

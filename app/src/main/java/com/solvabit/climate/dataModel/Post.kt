@@ -1,12 +1,16 @@
 package com.solvabit.climate.dataModel
 
-data class Post(var post_text: String,
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+class Post(var post_text: String,
                 val post_image: String,
                 val uid: String,
                 val time: String,
                 val category: String,
-                var likes: MutableList<String>,
-                val interested: Int) {
+                var likes: List<String>,
+                val interested: Int): Parcelable {
 
     constructor():this(
             "",
@@ -14,7 +18,6 @@ data class Post(var post_text: String,
             "",
             "",
             "",
-            mutableListOf<String>("0.0","0.0"),
+            listOf<String>(),
             0)
-
 }

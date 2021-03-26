@@ -61,7 +61,6 @@ class Dashboard : Fragment() {
                     Timber.i("${user}")
                     addDataToDashboard()
                 }
-
             }
         }
         addDataToDashboard()
