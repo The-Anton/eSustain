@@ -37,5 +37,12 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="table_text">
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/avenir_book</item>
+        <item name="android:textColor">@color/txt_black</item>
+    </style>
+
 
 </resources>

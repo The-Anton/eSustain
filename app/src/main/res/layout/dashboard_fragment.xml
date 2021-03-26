@@ -23,7 +23,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/upperFrame"
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="280dp">
 
 
             <me.tankery.lib.circularseekbar.CircularSeekBar
@@ -36,7 +36,7 @@
                 android:layout_marginEnd="80dp"
                 app:cs_circle_color="#16298f"
                 app:cs_circle_progress_color="#60cbf6"
-                app:cs_circle_stroke_width="20dp"
+                app:cs_circle_stroke_width="16dp"
                 app:cs_circle_style="round"
                 app:cs_disable_pointer="true"
                 app:cs_end_angle="45"
@@ -208,7 +208,7 @@
                                     android:layout_height="30dp"
                                     android:layout_gravity="end"
                                     android:layout_weight="1"
-                                    android:src="@drawable/ic_baseline_more_vert_24" />
+                                    android:src="@drawable/ic_info_24" />
 
 
                             </LinearLayout>
@@ -738,11 +738,11 @@
 
                     <TextView
                         android:id="@+id/recommended_textview"
+                        style="@style/normalTitles"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
-                        android:layout_marginTop="8dp"
-                        style="@style/normalTitles"
+                        android:layout_marginTop="16dp"
                         android:text="Recommended"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -752,6 +752,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

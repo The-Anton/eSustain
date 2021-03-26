@@ -20,6 +20,7 @@ import com.solvabit.climate.database.SingleAction
 import com.solvabit.climate.database.User
 import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.DashboardFragmentBinding
+import com.solvabit.climate.dialog.AqiDialog
 import com.solvabit.climate.viewModel.DashboardViewModel
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -29,6 +30,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import androidx.fragment.app.FragmentTransaction as AppFragmentTransaction
 
 
 class Dashboard : Fragment() {
@@ -65,6 +67,9 @@ class Dashboard : Fragment() {
         }
         addDataToDashboard()
 
+        binding.forestMore.setOnClickListener {
+            AqiDialog().show(childFragmentManager, "AQId")
+        }
         popMenu()
 
 
@@ -73,22 +78,7 @@ class Dashboard : Fragment() {
     }
 
     private fun popMenu() {
-        binding.forestMore.setOnClickListener {
-            context?.let {
-                val popupMenu = PopupMenu(it, binding.forestMore)
-                popupMenu.menuInflater.inflate(R.menu.cards_menu, popupMenu.menu)
-                popupMenu.setOnMenuItemClickListener {
-                    if (it.itemId == R.id.Refresh) {
-                        Timber.i("SignOut pressed")
-                    } else if (it.itemId == R.id.more) {
-                        Timber.i( "Nothing happened")
-                    }
-                    true
-                }
 
-                popupMenu.show()
-            }
-        }
 
         binding.airMore.setOnClickListener {
             context?.let {

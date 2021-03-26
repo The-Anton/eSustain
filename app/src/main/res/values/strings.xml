@@ -17,4 +17,12 @@
         <item>Achievement</item>
         <item>Issue</item>
     </string-array>
+    <string name="str1">
+    <ul>
+        <li><i> o3: Concentration of surface O3 (µg/m³)</i> item</li>
+        <li> so2: Concentration of surface SO2 (µg/m³)</li>
+        <li> no2: Concentration of surface NO2 (µg/m³)</li>
+        <li> co: Concentration of carbon monoxide (µg/m³)</li>
+    </ul>
+    </string>
 </resources>
