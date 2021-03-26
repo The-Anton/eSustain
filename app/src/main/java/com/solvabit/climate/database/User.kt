@@ -34,8 +34,8 @@ data class User(
         @ColumnInfo(name = "normalized_score")
         var normalizedScore: Double?,
         var o3: Double?,
-        @ColumnInfo(name = "ongoing_action")
-        var ongoingAction: List<String>,
+        @ColumnInfo(name = "remaining_action")
+        var remainingAction: List<String>,
         var openForest: Int?,
         var pm10: Double?,
         var pm25: Double?,

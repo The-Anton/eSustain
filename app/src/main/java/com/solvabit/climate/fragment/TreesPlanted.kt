@@ -17,10 +17,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.solvabit.climate.R
@@ -42,6 +39,7 @@ class TreesPlanted : Fragment() {
 
     private val uid = FirebaseAuth.getInstance().uid
     var treesPlanted : Int = 0
+    private var targetTrees: Int = 0
 
     companion object {
         fun newInstance() = TreesPlanted()
@@ -57,6 +55,9 @@ class TreesPlanted : Fragment() {
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.trees_planted_fragment, container, false
         )
+
+        val args = TreesPlantedArgs.fromBundle(requireArguments())
+        targetTrees = args.targetTrees
 
         fetchCurrentUser()
 
@@ -128,7 +129,11 @@ class TreesPlanted : Fragment() {
                         Timber.i("image downloaded url : $imageUrl")
 
                         val timestamp = System.currentTimeMillis()
-                        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/fiveTrees/$timestamp")
+                        val ref : DatabaseReference
+                        if(targetTrees==5)
+                            ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/fiveTrees/$timestamp")
+                        else
+                            ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/tenTrees/$timestamp")
                         treesPlanted += 1
                         val tree = Trees(
                                 imageUrl.toString(),
@@ -164,7 +169,11 @@ class TreesPlanted : Fragment() {
 
     private fun fetchTrees(){
         binding.numberofTreesPlanted.text = "00"
-        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/fiveTrees")
+        val ref: DatabaseReference
+        if(targetTrees==5)
+            ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/fiveTrees")
+        else
+            ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/tenTrees")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
@@ -177,9 +186,24 @@ class TreesPlanted : Fragment() {
                     val tree = it.getValue(Trees::class.java)
                     adapter.add(AddRecycleItemTrees(tree!!))
                     i += 1;
-                    if(i>=5)
+                    if(i>=targetTrees) {
                         binding.linearLayout.visibility = View.VISIBLE
-                    binding.numberofTreesPlanted.text = "0" + i.toString()
+                        binding.addPicFiveTrees.visibility = View.GONE
+                        binding.postAddPicFiveTrees.visibility = View.GONE
+                        val changeRemainingList = Dashboard.localuser.remainingAction.toMutableList()
+                        val changeCompletedList = Dashboard.localuser.completedAction.toMutableList()
+                        if(targetTrees==5) {
+                            changeRemainingList.removeAt(0)
+                            changeCompletedList.add("1")
+                        }
+                        else {
+                            changeRemainingList.removeAt(1)
+                            changeCompletedList.add("2")
+                        }
+                        FirebaseDatabase.getInstance().getReference("/Users/$uid/remainingAction").setValue(changeRemainingList)
+                        FirebaseDatabase.getInstance().getReference("/Users/$uid/completedAction").setValue(changeCompletedList)
+                    }
+                    binding.numberofTreesPlanted.text = "0" + i.toString() + "/ 0" + targetTrees
                 }
             }
 

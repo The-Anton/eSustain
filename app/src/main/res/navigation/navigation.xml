@@ -34,5 +34,10 @@
     <fragment
         android:id="@+id/treesPlanted"
         android:name="com.solvabit.climate.fragment.TreesPlanted"
-        android:label="TreesPlanted" />
+        android:label="TreesPlanted"
+        tools:layout="@layout/trees_planted_fragment">
+        <argument
+            android:name="targetTrees"
+            app:argType="integer" />
+    </fragment>
 </navigation>

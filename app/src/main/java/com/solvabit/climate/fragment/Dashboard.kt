@@ -160,18 +160,31 @@ class Dashboard : Fragment() {
         val adapter = GroupAdapter<ViewHolder>()
         binding.recommendedRecyclerView.adapter = adapter
 
-        localuser.presentAction = listOf("1","2","3","4")
-        localuser.presentAction.forEach {
-            adapter.add(AddRecycleItemRecommended(it.toInt()))
+        localuser.presentAction.forEach{
+            if(it!="0") {
+                adapter.add(AddRecycleItemRecommended(it.toInt(), "present"))
+            }
+        }
+
+        localuser.remainingAction.forEach {
+            if(it!="0") {
+                adapter.add(AddRecycleItemRecommended(it.toInt(), "remaining"))
+            }
+        }
+
+        localuser.completedAction.forEach{
+            if(it!="0") {
+                adapter.add(AddRecycleItemRecommended(it.toInt(), "completed"))
+            }
         }
 
         adapter.setOnItemClickListener{item, view ->
             val userItem = item as AddRecycleItemRecommended
             when(userItem.a){
-                1-> view.findNavController().navigate(R.id.action_dashboard_fragment_to_treesPlanted)
-                2-> view.findNavController().navigate(R.id.action_dashboard_fragment_to_treesPlanted)
-                3-> view.findNavController().navigate(R.id.action_dashboard_fragment_to_sendReferral)
-                4-> view.findNavController().navigate(R.id.action_dashboard_fragment_to_sendReferral)
+                1-> view.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(5))
+                2-> view.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(10))
+                3-> view.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
+                4-> view.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
             }
         }
 
@@ -195,20 +208,22 @@ class Dashboard : Fragment() {
 
 }
 
+//Create instances of all actions
+private val action1 = SingleAction(1, "Plant five Trees", "Let's begin a new journey!", 5)
+private val action2 = SingleAction(2, "Plant ten Trees", "Let's begin a new journey!", 10)
+private val action3 = SingleAction(3, "Use Public Transport", "Let's begin a new journey!", 15)
+private val action4 = SingleAction(4, "Refer a friend", "Let's begin a new journey!", 5)
 
-class AddRecycleItemRecommended(val a: Int): Item<ViewHolder>(){
 
-    //Create instances of all actions
-    private val action1 = SingleAction(1, "Plant five Trees", "Let's begin a new journey!", 5)
-    private val action2 = SingleAction(2, "Plant ten Trees", "Let's begin a new journey!", 10)
-    private val action3 = SingleAction(3, "Use Public Transport", "Let's begin a new journey!", 15)
-    private val action4 = SingleAction(4, "Refer a friend", "Let's begin a new journey!", 5)
+class AddRecycleItemRecommended(val a: Int, val action: String): Item<ViewHolder>(){
 
     override fun getLayout(): Int {
         return R.layout.recommended_cards
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
+        if(a==0)
+            return
         var action = SingleAction()
         action = when(a)
         {
@@ -216,7 +231,7 @@ class AddRecycleItemRecommended(val a: Int): Item<ViewHolder>(){
             2->action2
             3->action3
             4->action4
-            else->action1
+            else-> action4
         }
         viewHolder.itemView.target_textView.text = action.topic
         viewHolder.itemView.target_textView_subtext.text = action.subtopic
