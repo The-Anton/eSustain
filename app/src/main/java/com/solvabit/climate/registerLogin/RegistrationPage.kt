@@ -207,6 +207,7 @@ class RegistrationPage : AppCompatActivity() {
                 "Country",
                 email,
                 0.0,
+                listOf("0"),
                 profileImageUrl,
                 listOf("0.0","0.0"),
                 false,

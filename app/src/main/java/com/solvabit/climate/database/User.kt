@@ -23,6 +23,7 @@ data class User(
         @ColumnInfo(name = "email")
         var email: String?,
         var forestDensity: Double?,
+        var groundWaterData: List<String>,
         @ColumnInfo(name = "image_url")
         var imageUrl: String?,
         @ColumnInfo(name = "location")
@@ -79,6 +80,7 @@ data class User(
                 "Country",
                 null,
                 null,
+                listOf<String>("0"),
                 null,
                 listOf<String>("0.0","0.0"),
                 null,
