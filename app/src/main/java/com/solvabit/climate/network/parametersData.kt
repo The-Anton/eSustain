@@ -23,5 +23,6 @@ data class parametersData(
     val apistatus:Boolean,
     val status: Boolean,
     val totalArea: Int,
-    val updated: Boolean
+    val updated: Boolean,
+    val groundWaterData: List<String>
 )
