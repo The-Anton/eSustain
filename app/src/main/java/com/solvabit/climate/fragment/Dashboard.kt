@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.recommended_cards.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 class Dashboard : Fragment() {
@@ -53,11 +54,11 @@ class Dashboard : Fragment() {
         val dao = instance.userDao()
 
         val localRepo = Repository(dao, uid)
-        if (localuser?.uid == "1") {
+        if (localuser.uid == "1") {
             GlobalScope.launch(Dispatchers.Main) {
                 localRepo.getUser { user ->
                     localuser = user
-                    Log.v("User", "${user}")
+                    Timber.i("${user}")
                     addDataToDashboard()
                 }
 
@@ -79,9 +80,9 @@ class Dashboard : Fragment() {
                 popupMenu.menuInflater.inflate(R.menu.cards_menu, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener {
                     if (it.itemId == R.id.Refresh) {
-                        Log.d("SignOut", "Signout pressed")
+                        Timber.i("SignOut pressed")
                     } else if (it.itemId == R.id.more) {
-                        Log.d("Not clicked", "Nothing happened")
+                        Timber.i( "Nothing happened")
                     }
                     true
                 }
@@ -96,9 +97,9 @@ class Dashboard : Fragment() {
                 popupMenu.menuInflater.inflate(R.menu.cards_menu, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener {
                     if (it.itemId == R.id.Refresh) {
-                        Log.d("SignOut", "Signout pressed")
+                        Timber.i("Signout pressed")
                     } else if (it.itemId == R.id.more) {
-                        Log.d("Not clicked", "Nothing happened")
+                        Timber.i("Nothing happened")
                     }
                     true
                 }
@@ -162,29 +163,19 @@ class Dashboard : Fragment() {
 
         localuser.presentAction.forEach{
             if(it!="0") {
-                adapter.add(AddRecycleItemRecommended(it.toInt(), "present"))
+//                adapter.add(AddRecycleItemRecommended(it.toInt(), "present"))
             }
         }
 
         localuser.remainingAction.forEach {
             if(it!="0") {
-                adapter.add(AddRecycleItemRecommended(it.toInt(), "remaining"))
+                adapter.add(AddRecycleItemRecommended(it.toInt(), "remaining", binding))
             }
         }
 
         localuser.completedAction.forEach{
             if(it!="0") {
-                adapter.add(AddRecycleItemRecommended(it.toInt(), "completed"))
-            }
-        }
-
-        adapter.setOnItemClickListener{item, view ->
-            val userItem = item as AddRecycleItemRecommended
-            when(userItem.a){
-                1-> view.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(5))
-                2-> view.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(10))
-                3-> view.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
-                4-> view.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
+//                adapter.add(AddRecycleItemRecommended(it.toInt(), "completed"))
             }
         }
 
@@ -215,7 +206,7 @@ private val action3 = SingleAction(3, "Use Public Transport", "Let's begin a new
 private val action4 = SingleAction(4, "Refer a friend", "Let's begin a new journey!", 5)
 
 
-class AddRecycleItemRecommended(val a: Int, val action: String): Item<ViewHolder>(){
+class AddRecycleItemRecommended(val a: Int, val action: String, val binding: DashboardFragmentBinding): Item<ViewHolder>(){
 
     override fun getLayout(): Int {
         return R.layout.recommended_cards
@@ -235,6 +226,14 @@ class AddRecycleItemRecommended(val a: Int, val action: String): Item<ViewHolder
         }
         viewHolder.itemView.target_textView.text = action.topic
         viewHolder.itemView.target_textView_subtext.text = action.subtopic
+        viewHolder.itemView.background_play_pause.setOnClickListener {
+            when(a){
+                1-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(5))
+                2-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(10))
+                3-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
+                4-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
+            }
+        }
     }
 
 }

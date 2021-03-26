@@ -213,22 +213,9 @@ class TreesPlanted : Fragment() {
     }
 
     private fun fetchCurrentUser(){
-        val uid = FirebaseAuth.getInstance().uid
-        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
-        ref.keepSynced(true)
-
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                val currentUser = p0.getValue(User::class.java)
-                treesPlanted = currentUser?.treesPlanted!!
-                binding.achievementNameTextView.text = currentUser?.username
-                Picasso.get().load(currentUser.imageUrl).into(binding.userprofileImageView)
-            }
-
-        })
+                treesPlanted = Dashboard.localuser.treesPlanted ?: 0
+                binding.achievementNameTextView.text = Dashboard.localuser.username
+                Picasso.get().load(Dashboard.localuser.imageUrl).into(binding.userprofileImageView)
     }
 
     private fun circularProgress() {
