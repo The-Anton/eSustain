@@ -1,7 +1,7 @@
 # eSustain🌳
 Version - 1
 
-This repository contains the solution code for the apps for the
+### [Backend Server](https://github.com/The-Anton/eSustain_Backend)
 
 Introduction
 ------------
@@ -36,11 +36,9 @@ During development of this application, it built using Android Studio 4.0
 Support Version
 ----------------------
 
-Minimun SDK support Version - 21
+Minimun SDK Support Version - 21
 
-Target Support Version - 30
-
-[Android Studio download page](https://developer.android.com/studio) for details. 
+Target SDK Support Version - 30
 
 ## Getting the sample code
 
