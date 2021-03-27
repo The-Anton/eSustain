@@ -131,36 +131,21 @@ class Dashboard : Fragment() {
     }
 
     private fun initializeAirData() {
-        val co:Double = localuser.co ?: 0.toDouble()
-        val so2:Double = localuser.so2 ?: 0.toDouble()
-        val o3:Double = localuser.o3 ?: 0.toDouble()
-        val no2: Double = localuser.no2 ?: 0.toDouble()
-        val totalSum = co + so2 + o3 + no2
-        val coPercentage = ( co.toFloat() /totalSum.toFloat() ) * 100
-        val so2Percentage = ( so2.toFloat() /totalSum.toFloat() ) * 100
-        val o3Percentage = ( o3.toFloat() /totalSum.toFloat() ) * 100
-        val no2Percentage = ( no2.toFloat() / totalSum.toFloat()) * 100
         binding.apply {
-            this.coAirQualityProgressView.progress = coPercentage
-            this.so2AirQualityProgressbar.progress = so2Percentage
-            this.o3AirQualityProgressView.progress = o3Percentage
-            this.no2AirQualityProgressView.progress = no2Percentage
+            this.coAirQuality.text = localuser.co.toString()
+            this.so2AirQuality.text = localuser.so2.toString()
+            this.o3AirQuality.text = localuser.o3.toString()
+            this.no2AirQuality.text = localuser.no2.toString()
         }
     }
 
     private fun initializeForestData() {
         circularloader(localuser.forestDensity?.toFloat() ?: 0f, 10f, binding.circularProgressBarForestDensity)
-        val actualForest:Int = localuser.actualForest ?: 0
-        val openForest:Int = localuser.openForest ?: 0
-        val noForest:Int = localuser.noForest ?: 0
-        val totalSum = actualForest + openForest + noForest
-        val actualForestPercentage = ( actualForest.toFloat() /totalSum.toFloat() ) * 100
-        val openForestPercentage = ( openForest.toFloat() /totalSum.toFloat() ) * 100
-        val noForestPercentage = ( noForest.toFloat() /totalSum.toFloat() ) * 100
         binding.apply {
-            this.actualForestCoverProgressView.progress = actualForestPercentage
-            this.openForestProgessView.progress = openForestPercentage
-            this.noForestProgressView.progress = noForestPercentage
+            this.actualForestCover.text = localuser.actualForest.toString()
+            this.openForestCover.text = localuser.openForest.toString()
+            this.noForestCover.text = localuser.noForest.toString()
+            this.totalAreaCover.text = localuser.totalArea.toString()
         }
     }
 

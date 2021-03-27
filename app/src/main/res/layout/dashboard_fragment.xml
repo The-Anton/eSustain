@@ -3,782 +3,804 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#203cc3"
-    tools:context=".fragment.Dashboard">
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient_background"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="#203cc3"
+        tools:context=".fragment.Dashboard">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/upperFrame"
-            android:layout_width="match_parent"
-            android:layout_height="280dp">
-
-
-            <me.tankery.lib.circularseekbar.CircularSeekBar
-                android:id="@+id/circularProgressBar"
-                android:layout_width="200dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="22dp"
-                android:layout_marginEnd="80dp"
-                app:cs_circle_color="#16298f"
-                app:cs_circle_progress_color="#60cbf6"
-                app:cs_circle_stroke_width="16dp"
-                app:cs_circle_style="round"
-                app:cs_disable_pointer="true"
-                app:cs_end_angle="45"
-                app:cs_maintain_equal_circle="true"
-                app:cs_progress="00"
-                app:cs_start_angle="135"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/normalizedScoreData"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/avenir_medium"
-                android:maxLength="3"
-                android:text="00"
-                android:textColor="#FFFFFF"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textViewNormalizedScore"
-                app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-                app:layout_constraintTop_toBottomOf="@+id/circularProgressBar"
-                tools:text="952" />
-
-            <TextView
-                android:id="@+id/textViewNormalizedScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/avenir_book"
-                android:text="Normalized Score"
-                android:textColor="#FFFFFF"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toTopOf="@+id/circularProgressBar"
-                app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-                app:layout_constraintTop_toBottomOf="@+id/normalizedScoreData" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/home_rounded_button"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingTop="6dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="6dp"
-                app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-                app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-                app:layout_constraintTop_toBottomOf="@+id/circularProgressBar">
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="0dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_baseline_check_circle_24" />
-
-                <TextView
-                    android:id="@+id/statusText"
-                    style="@style/normalTitles"
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/home_rounded_button"
-                    android:text="  Congratulation! You are good"
-                    android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-                    app:layout_constraintTop_toBottomOf="@+id/circularProgressBar" />
-
-            </LinearLayout>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-30dp">
+            android:background="@drawable/gradient_background"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.cardview.widget.CardView
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/upperFrame"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/background"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="280dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/belowFrame"
-                    android:layout_width="match_parent"
+
+                <me.tankery.lib.circularseekbar.CircularSeekBar
+                    android:id="@+id/circularProgressBar"
+                    android:layout_width="200dp"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginEnd="80dp"
+                    app:cs_circle_color="#16298f"
+                    app:cs_circle_progress_color="#60cbf6"
+                    app:cs_circle_stroke_width="16dp"
+                    app:cs_circle_style="round"
+                    app:cs_disable_pointer="true"
+                    app:cs_end_angle="45"
+                    app:cs_maintain_equal_circle="true"
+                    app:cs_progress="00"
+                    app:cs_start_angle="135"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/normalizedScoreData"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="28dp">
+                    android:fontFamily="@font/avenir_medium"
+                    android:maxLength="3"
+                    android:text="00"
+                    android:textColor="#FFFFFF"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/textViewNormalizedScore"
+                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/circularProgressBar"
+                    tools:text="952" />
+
+                <TextView
+                    android:id="@+id/textViewNormalizedScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/avenir_book"
+                    android:text="Normalized Score"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@+id/circularProgressBar"
+                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/normalizedScoreData" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/home_rounded_button"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="6dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="6dp"
+                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/circularProgressBar">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="0dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_baseline_check_circle_24" />
 
                     <TextView
-                        android:id="@+id/progress_textView"
+                        android:id="@+id/statusText"
+                        style="@style/normalTitles"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="34dp"
-                        android:layout_marginTop="16dp"
-                        style="@style/normalTitles"
-                        android:text="Your Place"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/home_rounded_button"
+                        android:text="  Congratulation! You are good"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+                        app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+                        app:layout_constraintTop_toBottomOf="@+id/circularProgressBar" />
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-30dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/background"
+                    app:cardCornerRadius="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/airQualityCardView"
+                        android:id="@+id/belowFrame"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/cardsbg"
-                        android:elevation="10dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/progress_textView">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="28dp">
+
+                        <TextView
+                            android:id="@+id/progress_textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="34dp"
+                            android:layout_marginTop="16dp"
+                            style="@style/normalTitles"
+                            android:text="Your Place"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/airQualityFrame"
+                            android:id="@+id/airQualityCardView"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/cardsbg"
+                            android:elevation="10dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <LinearLayout
-                                android:id="@+id/linearLayout2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:orientation="horizontal"
-                                android:padding="5dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                                <ImageView
-                                    android:layout_gravity="center"
-                                    android:layout_width="7dp"
-                                    android:layout_height="14dp"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_weight="1"
-                                    android:src="@drawable/air" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginStart="5dp"
-                                    android:gravity="center_vertical"
-                                    android:layout_weight="15"
-                                    style="@style/normalSubText"
-                                    android:text="Air Quality Index" />
-
-                                <ImageView
-                                    android:id="@+id/forest_more"
-                                    android:layout_width="10dp"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="end"
-                                    android:layout_weight="1"
-                                    android:src="@drawable/ic_info_24" />
-
-
-                            </LinearLayout>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/progress_textView">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/airQualityFrame"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_height="match_parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <LinearLayout
+                                    android:id="@+id/linearLayout2"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
+                                    android:layout_margin="5dp"
                                     android:orientation="horizontal"
-                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:padding="5dp"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent">
 
-                                    <androidx.constraintlayout.widget.ConstraintLayout
+                                    <ImageView
+                                        android:layout_gravity="center"
+                                        android:layout_width="7dp"
+                                        android:layout_height="14dp"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/air" />
+
+                                    <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginRight="20dp"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                                        <LinearLayout
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginStart="8dp"
-                                            app:layout_constraintBottom_toBottomOf="parent"
-                                            app:layout_constraintEnd_toEndOf="parent"
-                                            app:layout_constraintStart_toStartOf="parent"
-                                            app:layout_constraintTop_toTopOf="parent">
-
-                                            <androidx.constraintlayout.widget.ConstraintLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_gravity="center"
-                                                app:layout_constraintBottom_toBottomOf="parent"
-                                                app:layout_constraintStart_toStartOf="parent"
-                                                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                                                <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                                                    android:id="@+id/circularProgressBar_airQuality"
-                                                    android:layout_width="110dp"
-                                                    android:layout_height="110dp"
-                                                    app:cpb_background_progressbar_color="#EEE4FA"
-                                                    app:cpb_background_progressbar_width="10dp"
-                                                    app:cpb_progress_direction="to_right"
-                                                    app:cpb_progressbar_color="#8542DC"
-                                                    app:cpb_progressbar_width="8dp"
-                                                    app:cpb_round_border="true"
-                                                    app:layout_constraintBottom_toBottomOf="parent"
-                                                    app:layout_constraintEnd_toEndOf="parent"
-                                                    app:layout_constraintStart_toStartOf="parent"
-                                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:orientation="vertical"
-                                                    app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar_airQuality"
-                                                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar_airQuality"
-                                                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar_airQuality"
-                                                    app:layout_constraintTop_toTopOf="@+id/circularProgressBar_airQuality">
-
-                                                    <com.daasuu.cat.CountAnimationTextView
-                                                        android:id="@+id/airQualityData"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_gravity="center_horizontal"
-                                                        android:maxLength="3"
-                                                        android:text="00" />
-
-                                                    <TextView
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:text="Value of Index"
-                                                        android:fontFamily="@font/avenir_book"
-                                                        android:textSize="10sp" />
-                                                </LinearLayout>
-
-                                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                                        </LinearLayout>
-                                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                                    <View
-                                        android:layout_width="4dp"
-                                        android:layout_height="120dp"
                                         android:layout_gravity="center_vertical"
-                                        android:layout_margin="10dp"
-                                        android:background="?android:attr/listDivider"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintCircleRadius="10dp"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
+                                        android:layout_marginStart="5dp"
+                                        android:gravity="center_vertical"
+                                        android:layout_weight="15"
+                                        style="@style/normalSubText"
+                                        android:text="Air Quality Index" />
 
-                                    <androidx.constraintlayout.widget.ConstraintLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity=""
-                                        android:layout_marginLeft="20dp"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
-                                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                                    <ImageView
+                                        android:id="@+id/forest_more"
+                                        android:layout_width="10dp"
+                                        android:layout_height="30dp"
+                                        android:layout_gravity="end"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/ic_info_24" />
 
-                                        <LinearLayout
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="16dp"
-                                            android:gravity="end"
-                                            android:orientation="vertical"
-                                            android:weightSum="8"
-                                            app:layout_constraintBottom_toBottomOf="parent"
-                                            app:layout_constraintEnd_toEndOf="parent"
-                                            app:layout_constraintStart_toStartOf="parent"
-                                            app:layout_constraintTop_toTopOf="parent">
 
-                                            <LinearLayout
-
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_gravity="center_horizontal"
-                                                android:orientation="horizontal">
-
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="bottom"
-                                                    android:layout_margin="5dp"
-                                                    android:layout_weight="2"
-                                                    android:orientation="vertical">
-
-                                                    <com.skydoves.progressview.ProgressView
-                                                        android:layout_gravity="center"
-                                                        android:id="@+id/co_airQuality_progressView"
-                                                        style="@style/progressBarStyle"
-                                                        app:progressView_colorProgress="#FB6837"
-                                                        app:progressView_orientation="vertical" />
-
-                                                    <TextView
-                                                        style="@style/normaltext"
-                                                        android:textSize="12sp"
-                                                        android:layout_gravity="center_horizontal"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:text="C0" />
-                                                </LinearLayout>
-
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="bottom"
-                                                    android:layout_margin="5dp"
-                                                    android:layout_weight="2"
-                                                    android:orientation="vertical">
-
-                                                    <com.skydoves.progressview.ProgressView
-                                                        android:id="@+id/so2_airQuality_progressbar"
-                                                        style="@style/progressBarStyle"
-                                                        app:progressView_colorProgress="#FB6837"
-                                                        app:progressView_orientation="vertical" />
-
-                                                    <TextView
-                                                        style="@style/normaltext"
-                                                        android:textSize="12sp"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:text="S02"
-                                                        android:layout_gravity="center_horizontal"/>
-                                                </LinearLayout>
-
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="bottom"
-                                                    android:layout_margin="5dp"
-                                                    android:layout_weight="2"
-                                                    android:orientation="vertical">
-
-                                                    <com.skydoves.progressview.ProgressView
-                                                        android:id="@+id/o3_airQuality_progressView"
-                                                        style="@style/progressBarStyle"
-                                                        app:progressView_colorProgress="#FB6837"
-                                                        app:progressView_orientation="vertical" />
-
-                                                    <TextView
-                                                        style="@style/normaltext"
-                                                        android:textSize="12sp"
-                                                        android:layout_gravity="center_horizontal"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:text="03" />
-                                                </LinearLayout>
-
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="bottom"
-                                                    android:layout_margin="5dp"
-                                                    android:layout_weight="2"
-                                                    android:orientation="vertical">
-
-                                                    <com.skydoves.progressview.ProgressView
-                                                        android:id="@+id/no2_airQuality_progressView"
-                                                        style="@style/progressBarStyle"
-                                                        app:progressView_colorProgress="#FB6837"
-                                                        app:progressView_orientation="vertical" />
-
-                                                    <TextView
-                                                        style="@style/normaltext"
-                                                        android:textSize="12sp"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:text="NO2"
-                                                        android:layout_gravity="center_horizontal"/>
-                                                </LinearLayout>
-
-                                            </LinearLayout>
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_gravity="center_horizontal"
-                                                android:text="Health alert:Risk of health effects"
-                                                style="@style/normaltext"
-                                                android:textSize="10sp"/>
-
-                                        </LinearLayout>
-                                    </androidx.constraintlayout.widget.ConstraintLayout>
                                 </LinearLayout>
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/ForestIndexCardView"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:elevation="0dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/cardsbg"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/airQualityCardView">
-
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/forestDensityFrame"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <LinearLayout
-                                android:id="@+id/linearLayoutForest"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="10dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                                <ImageView
-                                    android:layout_gravity="center"
-                                    android:layout_weight="1"
-                                    android:layout_width="7dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginStart="4dp"
-                                    android:src="@drawable/forestree" />
-
-                                <TextView
-                                    android:layout_weight="15"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Forest Density"
-                                    android:layout_gravity="center_vertical"
-                                    style="@style/normalSubText"
-                                    android:layout_marginStart="5dp"/>
-
-                                <ImageView
-                                    android:id="@+id/air_more"
-                                    android:layout_weight="1"
-                                    android:layout_width="10dp"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="end"
-                                    android:src="@drawable/ic_baseline_more_vert_24" />
-
-
-                            </LinearLayout>
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/linearLayoutForest">
-
-                                <LinearLayout
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/constraintLayout6"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:orientation="horizontal"
-                                    app:layout_constraintTop_toTopOf="parent">
-
+                                    android:layout_marginTop="5dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                                     <LinearLayout
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:gravity="end"
-                                        android:orientation="vertical"
-                                        android:weightSum="8"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent">
 
-                                        <LinearLayout
-
+                                        <androidx.constraintlayout.widget.ConstraintLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_gravity="center_horizontal"
-                                            android:orientation="horizontal">
+                                            android:layout_marginRight="20dp"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                                             <LinearLayout
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_gravity="bottom"
-                                                android:layout_margin="2dp"
-                                                android:layout_weight="2"
-                                                android:gravity="center"
-                                                android:orientation="vertical"
-                                                android:textAlignment="center">
+                                                app:layout_constraintBottom_toBottomOf="parent"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toTopOf="parent">
 
-                                                <com.skydoves.progressview.ProgressView
-                                                    android:id="@+id/actualForestCover_progressView"
-                                                    style="@style/progressBarStyle"
-                                                    android:layout_height="60dp"
-                                                    app:progressView_colorProgress="#8542DC"
-                                                    app:progressView_max="100"
-                                                    app:progressView_orientation="vertical" />
-
-                                                <TextView
-                                                    style="@style/normaltext"
-                                                    android:textSize="12sp"
+                                                <androidx.constraintlayout.widget.ConstraintLayout
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:text="Actual\nForest"
-                                                    android:textAlignment="center" />
+                                                    android:layout_gravity="center"
+                                                    app:layout_constraintBottom_toBottomOf="parent"
+                                                    app:layout_constraintStart_toStartOf="parent"
+                                                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                                                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                                                        android:id="@+id/circularProgressBar_airQuality"
+                                                        android:layout_width="110dp"
+                                                        android:layout_height="110dp"
+                                                        app:cpb_background_progressbar_color="#EEE4FA"
+                                                        app:cpb_background_progressbar_width="10dp"
+                                                        app:cpb_progress_direction="to_right"
+                                                        app:cpb_progressbar_color="#8542DC"
+                                                        app:cpb_progressbar_width="8dp"
+                                                        app:cpb_round_border="true"
+                                                        app:layout_constraintBottom_toBottomOf="parent"
+                                                        app:layout_constraintEnd_toEndOf="parent"
+                                                        app:layout_constraintStart_toStartOf="parent"
+                                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:orientation="vertical"
+                                                        app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar_airQuality"
+                                                        app:layout_constraintEnd_toEndOf="@+id/circularProgressBar_airQuality"
+                                                        app:layout_constraintStart_toStartOf="@+id/circularProgressBar_airQuality"
+                                                        app:layout_constraintTop_toTopOf="@+id/circularProgressBar_airQuality">
+
+                                                        <com.daasuu.cat.CountAnimationTextView
+                                                            android:id="@+id/airQualityData"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center_horizontal"
+                                                            android:maxLength="4"
+                                                            android:text="00" />
+
+                                                        <TextView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:fontFamily="@font/avenir_book"
+                                                            android:text="Value of Index"
+                                                            android:textSize="10sp" />
+                                                    </LinearLayout>
+
+                                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
                                             </LinearLayout>
-
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_gravity="bottom"
-                                                android:layout_margin="2dp"
-                                                android:layout_weight="2"
-                                                android:gravity="center"
-                                                android:orientation="vertical">
-
-                                                <com.skydoves.progressview.ProgressView
-                                                    android:id="@+id/openForest_progessView"
-                                                    android:layout_width="4dp"
-                                                    android:layout_height="60dp"
-                                                    android:layout_margin="10dp"
-                                                    android:layout_marginStart="5dp"
-                                                    app:progressView_colorProgress="#8542DC"
-                                                    app:progressView_max="100"
-                                                    app:progressView_orientation="vertical" />
-
-                                                <TextView
-                                                    style="@style/normaltext"
-                                                    android:textSize="12sp"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:text="Open\nForest"
-                                                    android:textAlignment="center" />
-                                            </LinearLayout>
-
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_gravity="bottom"
-                                                android:layout_margin="2dp"
-                                                android:layout_weight="2"
-                                                android:gravity="center"
-                                                android:orientation="vertical"
-                                                android:textAlignment="center">
-
-                                                <com.skydoves.progressview.ProgressView
-                                                    android:id="@+id/noForest_progressView"
-                                                    android:layout_width="4dp"
-                                                    android:layout_height="60dp"
-                                                    android:layout_margin="10dp"
-                                                    android:layout_marginStart="5dp"
-                                                    app:progressView_colorProgress="#8542DC"
-                                                    app:progressView_max="100"
-                                                    app:progressView_orientation="vertical" />
-
-                                                <TextView
-                                                    style="@style/normaltext"
-                                                    android:textSize="12sp"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:text="No\nForest"
-                                                    android:textAlignment="center" />
-                                            </LinearLayout>
+                                        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                                        </LinearLayout>
-
-                                        <TextView
-                                            style="@style/normaltext"
+                                        <androidx.constraintlayout.widget.ConstraintLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_gravity="center_horizontal"
-                                            android:text="Health alert:Risk of health effects"
-                                            android:textSize="10sp" />
+                                            android:layout_gravity="center"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginTop="5dp"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
+                                            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="end"
+                                                android:orientation="vertical"
+                                                android:weightSum="8"
+                                                app:layout_constraintBottom_toBottomOf="parent"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toTopOf="parent">
+
+                                                <LinearLayout
+
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center_horizontal"
+                                                    android:orientation="vertical">
+
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="bottom"
+                                                        android:layout_margin="2dp"
+                                                        android:layout_weight="2"
+                                                        android:orientation="horizontal">
+
+                                                        <TextView
+                                                            style="@style/normaltext"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center"
+                                                            android:text="Carbon Monoxide(CO) : "
+                                                            android:textSize="12sp" />
+
+                                                        <TextView
+                                                            android:id="@+id/co_airQuality"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center_horizontal"
+                                                            android:maxLength="5"
+                                                            tools:text="15.4" />
+
+                                                    </LinearLayout>
+
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="bottom"
+                                                        android:layout_margin="2dp"
+                                                        android:layout_weight="2"
+                                                        android:orientation="horizontal">
+
+                                                        <TextView
+                                                            style="@style/normaltext"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center"
+                                                            android:text="Sulfur Dioxide(SO2) : "
+                                                            android:textSize="12sp" />
+
+                                                        <TextView
+                                                            android:id="@+id/so2_airQuality"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center"
+                                                            android:maxLength="4"
+                                                            tools:text="24.4" />
+
+
+                                                    </LinearLayout>
+
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="bottom"
+                                                        android:layout_margin="2dp"
+                                                        android:layout_weight="2"
+                                                        android:orientation="horizontal">
+
+                                                        <TextView
+                                                            style="@style/normaltext"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center"
+                                                            android:text="Ozone(O3) : "
+                                                            android:textSize="12sp" />
+
+                                                        <TextView
+                                                            android:id="@+id/o3_airQuality"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center"
+                                                            android:maxLength="5"
+                                                            tools:text="15.4" />
+
+                                                    </LinearLayout>
+
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="bottom"
+                                                        android:layout_margin="2dp"
+                                                        android:layout_weight="2"
+                                                        android:orientation="horizontal">
+
+                                                        <TextView
+                                                            style="@style/normaltext"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center_horizontal"
+                                                            android:text="Nitrogen Dioxide(NO2) : "
+                                                            android:textSize="12sp" />
+
+                                                        <TextView
+                                                            android:id="@+id/no2_airQuality"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center_horizontal"
+                                                            android:maxLength="4"
+                                                            tools:text="56.4" />
+
+                                                    </LinearLayout>
+
+                                                </LinearLayout>
+
+                                            </LinearLayout>
+
+                                        </androidx.constraintlayout.widget.ConstraintLayout>
                                     </LinearLayout>
 
-                                    <View
-                                        android:layout_width="4dp"
-                                        android:layout_height="130dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_margin="10dp"
-                                        android:background="?android:attr/listDivider"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintCircleRadius="10dp"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <TextView
+                                    style="@style/normaltext"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="Health alert:Risk of health effects"
+                                    android:textSize="10sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                                    <androidx.constraintlayout.widget.ConstraintLayout
-                                        android:id="@+id/constraintLayout2"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/ForestIndexCardView"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:elevation="0dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/cardsbg"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/airQualityCardView">
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/forestDensityFrame"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <LinearLayout
+                                    android:id="@+id/linearLayoutForest"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="10dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <ImageView
+                                        android:layout_gravity="center"
+                                        android:layout_weight="1"
+                                        android:layout_width="7dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginStart="4dp"
+                                        android:src="@drawable/forestree" />
+
+                                    <TextView
+                                        android:layout_weight="15"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginRight="20dp"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                                        android:text="Forest Density"
+                                        android:layout_gravity="center_vertical"
+                                        style="@style/normalSubText"
+                                        android:layout_marginStart="5dp"/>
+
+                                    <ImageView
+                                        android:id="@+id/air_more"
+                                        android:layout_weight="1"
+                                        android:layout_width="10dp"
+                                        android:layout_height="30dp"
+                                        android:layout_gravity="end"
+                                        android:src="@drawable/ic_info_24" />
+
+
+                                </LinearLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/constraintLayout7"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutForest">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal"
+                                        app:layout_constraintTop_toTopOf="parent">
+
 
                                         <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginStart="15dp"
+                                            android:layout_marginStart="25dp"
+                                            android:gravity="start"
+                                            android:orientation="vertical"
+                                            android:weightSum="10"
                                             app:layout_constraintBottom_toBottomOf="parent"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toTopOf="parent">
 
-                                            <androidx.constraintlayout.widget.ConstraintLayout
+                                            <LinearLayout
+
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center_horizontal"
-                                                app:layout_constraintBottom_toBottomOf="parent"
-                                                app:layout_constraintStart_toStartOf="parent"
-                                                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                                                <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                                                    android:id="@+id/circularProgressBar_forestDensity"
-                                                    android:layout_width="110dp"
-                                                    android:layout_height="110dp"
-                                                    app:cpb_background_progressbar_color="#FFEAE2"
-                                                    app:cpb_background_progressbar_width="10dp"
-                                                    app:cpb_progress_direction="to_right"
-                                                    app:cpb_progressbar_color="#FB6837"
-                                                    app:cpb_progressbar_width="8dp"
-                                                    app:cpb_round_border="true"
-                                                    app:layout_constraintBottom_toBottomOf="parent"
-                                                    app:layout_constraintEnd_toEndOf="parent"
-                                                    app:layout_constraintStart_toStartOf="parent"
-                                                    app:layout_constraintTop_toTopOf="parent" />
+                                                android:orientation="vertical">
 
                                                 <LinearLayout
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:orientation="vertical"
-                                                    app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar_forestDensity"
-                                                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar_forestDensity"
-                                                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar_forestDensity"
-                                                    app:layout_constraintTop_toTopOf="@+id/circularProgressBar_forestDensity">
+                                                    android:layout_gravity="bottom"
+                                                    android:layout_margin="2dp"
+                                                    android:layout_weight="2"
+                                                    android:gravity="center"
+                                                    android:orientation="horizontal"
+                                                    android:textAlignment="center">
 
-                                                    <com.daasuu.cat.CountAnimationTextView
-                                                        android:id="@+id/forestDensityData"
+                                                    <TextView
+                                                        style="@style/normaltext"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="center"
+                                                        android:text="Actual Forest : "
+                                                        android:textAlignment="center"
+                                                        android:textSize="12sp" />
+
+                                                    <TextView
+                                                        android:id="@+id/actualForestCover"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="center_horizontal"
-                                                        android:maxLength="4"
-                                                        android:text="00" />
-
-                                                    <TextView
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:fontFamily="@font/avenir_book"
-                                                        android:text="Value of Index"
-                                                        android:textSize="10sp" />
+                                                        tools:text="56.4" />
                                                 </LinearLayout>
 
-                                            </androidx.constraintlayout.widget.ConstraintLayout>
+                                                <LinearLayout
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="bottom"
+                                                    android:layout_margin="2dp"
+                                                    android:layout_weight="2"
+                                                    android:gravity="center"
+                                                    android:orientation="horizontal">
 
+                                                    <TextView
+                                                        style="@style/normaltext"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="center"
+                                                        android:text="Open Forest : "
+                                                        android:textAlignment="center"
+                                                        android:textSize="12sp" />
+
+                                                    <TextView
+                                                        android:id="@+id/openForestCover"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="center_horizontal"
+                                                        tools:text="56.4" />
+                                                </LinearLayout>
+
+                                                <LinearLayout
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="bottom"
+                                                    android:layout_margin="2dp"
+                                                    android:layout_weight="2"
+                                                    android:gravity="center"
+                                                    android:orientation="horizontal"
+                                                    android:textAlignment="center">
+
+                                                    <TextView
+                                                        style="@style/normaltext"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="No Forest : "
+                                                        android:textAlignment="center"
+                                                        android:textSize="12sp" />
+
+                                                    <TextView
+                                                        android:id="@+id/noForestCover"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="center_horizontal"
+                                                        tools:text="56.4" />
+
+                                                </LinearLayout>
+
+
+                                                <LinearLayout
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="bottom"
+                                                    android:layout_margin="2dp"
+                                                    android:layout_weight="2"
+                                                    android:gravity="center"
+                                                    android:orientation="horizontal"
+                                                    android:textAlignment="center">
+
+                                                    <TextView
+                                                        style="@style/normaltext"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="Total Area : "
+                                                        android:textAlignment="center"
+                                                        android:textSize="12sp" />
+
+                                                    <TextView
+                                                        android:id="@+id/totalAreaCover"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="center_horizontal"
+                                                        tools:text="56.4" />
+                                                </LinearLayout>
+
+
+                                            </LinearLayout>
 
                                         </LinearLayout>
-                                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                                </LinearLayout>
+                                        <androidx.constraintlayout.widget.ConstraintLayout
+                                            android:id="@+id/constraintLayout2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                app:layout_constraintBottom_toBottomOf="parent"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toTopOf="parent">
+
+                                                <androidx.constraintlayout.widget.ConstraintLayout
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center_horizontal"
+                                                    app:layout_constraintBottom_toBottomOf="parent"
+                                                    app:layout_constraintStart_toStartOf="parent"
+                                                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                                                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                                                        android:id="@+id/circularProgressBar_forestDensity"
+                                                        android:layout_width="110dp"
+                                                        android:layout_height="110dp"
+                                                        app:cpb_background_progressbar_color="#FFEAE2"
+                                                        app:cpb_background_progressbar_width="10dp"
+                                                        app:cpb_progress_direction="to_right"
+                                                        app:cpb_progressbar_color="#FB6837"
+                                                        app:cpb_progressbar_width="8dp"
+                                                        app:cpb_round_border="true"
+                                                        app:layout_constraintBottom_toBottomOf="parent"
+                                                        app:layout_constraintEnd_toEndOf="parent"
+                                                        app:layout_constraintStart_toStartOf="parent"
+                                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:orientation="vertical"
+                                                        app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar_forestDensity"
+                                                        app:layout_constraintEnd_toEndOf="@+id/circularProgressBar_forestDensity"
+                                                        app:layout_constraintStart_toStartOf="@+id/circularProgressBar_forestDensity"
+                                                        app:layout_constraintTop_toTopOf="@+id/circularProgressBar_forestDensity">
+
+                                                        <com.daasuu.cat.CountAnimationTextView
+                                                            android:id="@+id/forestDensityData"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center_horizontal"
+                                                            android:maxLength="4"
+                                                            android:text="00" />
+
+                                                        <TextView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:fontFamily="@font/avenir_book"
+                                                            android:text="Value of Index"
+                                                            android:textSize="10sp" />
+                                                    </LinearLayout>
+
+                                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                                            </LinearLayout>
+                                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                    </LinearLayout>
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <TextView
+                                    style="@style/normaltext"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="Health alert:Risk of health effects"
+                                    android:textSize="10sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
+
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:id="@+id/recommended_textview"
+                            style="@style/normalTitles"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Recommended"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ForestIndexCardView" />
 
-                    <TextView
-                        android:id="@+id/recommended_textview"
-                        style="@style/normalTitles"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Recommended"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ForestIndexCardView" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="5dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/recommended_textview">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recommended_recyclerView"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false"
-                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@+id/recommended_textview">
 
-                    </RelativeLayout>
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recommended_recyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        </RelativeLayout>
 
-            </androidx.cardview.widget.CardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+        </LinearLayout>
+
+    </ScrollView>
 
 </layout>
