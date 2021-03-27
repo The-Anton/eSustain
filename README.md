@@ -6,9 +6,9 @@ Version - 1
 Introduction
 ------------
 
-#### Our application focuses on solving the problem of climate change by utilizing the real-world data that is currently available. The Application searches data like air-quality, forest density and ground water level in the user area and uses all the data to calculate a normalized score for each user and recommend them tasks based on their normalized score. Users can also maintain, track, share, and collaborate with other users.
+Our application focuses on solving the problem of climate change by utilizing the real-world data that is currently available. The Application searches data like air-quality, forest density and ground water level in the user area and uses all the data to calculate a normalized score for each user and recommend them tasks based on their normalized score. Users can also maintain, track, share, and collaborate with other users.
 
-#### The application fetches the address of the user through reverse geocoding API from the location coordinates obtained from the app. Using the location we fetch the following data - 
+The application fetches the address of the user through reverse geocoding API from the location coordinates obtained from the app. Using the location we fetch the following data - 
 
 1. [Air quality data of user location through whether it API](https://www.weatherbit.io/api/airquality-current)
 
