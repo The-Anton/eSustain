@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".fragment.StatisticsFragment">
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="20dp"
+        android:translationZ="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/username_black_imageView"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_profilew"
+            app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+            app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
+            app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
+            app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/circularProgressBar"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:cpb_background_progressbar_color="#b6bbd8"
+            app:cpb_background_progressbar_width="5dp"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progressbar_color="#3f51b5"
+            app:cpb_progressbar_width="6dp"
+            app:cpb_round_border="false"
+            app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+            app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
+            app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
+            app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userprofile_imageView"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+            app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
+            app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
+            app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
+
+
+        <TextView
+            android:id="@+id/username_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            tools:text="John Smith"
+            android:textColor="#8542DC"
+            style="@style/normaltext"
+            android:textStyle="bold"
+            android:text="Chandresh Singh"
+            app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+            app:layout_constraintStart_toEndOf="@+id/username_black_imageView"
+            app:layout_constraintTop_toTopOf="@+id/username_black_imageView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/place_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_book"
+            tools:text="Agra, Uttar Pradesh"
+            android:textColor="@color/subtxt_black"
+            android:textSize="15sp"
+            android:text="Agra, Uttar Pradesh"
+            app:layout_constraintStart_toStartOf="@+id/username_stats"
+            app:layout_constraintTop_toBottomOf="@+id/username_stats" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/statsNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="visible"
+            app:itemIconTint="@drawable/bottom_navigation_selected_color"
+            app:itemRippleColor="#000"
+            app:itemTextColor="@color/subtxt_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:menu="@menu/stats_menu"
+            tools:visibility="visible"/>
+
+        <fragment
+            android:id="@+id/statsNavHostFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statsNavigation"
+            app:navGraph="@navigation/stats_navigation" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

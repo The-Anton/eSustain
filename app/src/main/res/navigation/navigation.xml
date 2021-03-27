@@ -40,4 +40,9 @@
             android:name="targetTrees"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.solvabit.climate.fragment.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
 </navigation>

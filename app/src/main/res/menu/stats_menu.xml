@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/airQualityStatsFragment"
+        android:enabled="true"
+        android:icon="@drawable/airicon"
+        android:title="Air" />
+
+    <item
+        android:id="@+id/forestDensityStatsFragment"
+        android:enabled="true"
+        android:icon="@drawable/forestree"
+        android:title="Forests" />
+
+
+    <item
+        android:id="@+id/groundWaterStatsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_dynamic_feed_24"
+        android:title="Water"/>
+
+</menu>
