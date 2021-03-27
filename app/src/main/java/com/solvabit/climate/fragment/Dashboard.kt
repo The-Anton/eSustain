@@ -20,6 +20,7 @@ import com.solvabit.climate.database.SingleAction
 import com.solvabit.climate.database.User
 import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.DashboardFragmentBinding
+import com.solvabit.climate.network.FirebaseService
 import com.solvabit.climate.dialog.AqiDialog
 import com.solvabit.climate.viewModel.DashboardViewModel
 import com.xwray.groupie.GroupAdapter
@@ -72,11 +73,29 @@ class Dashboard : Fragment() {
         }
         popMenu()
 
+        GlobalScope.launch {
+            Repository(dao,uid).fetchUpdates {
+                Log.v("Dashboard", localuser.toString())
+                addRecommendedDashboardItems()
+            }
+        }
 
 
         return  binding.root
     }
 
+
+    override fun onStart() {
+        super.onStart()
+        addRecommendedDashboardItems()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        addRecommendedDashboardItems()
+
+    }
     private fun popMenu() {
 
 
