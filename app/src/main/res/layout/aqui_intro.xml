@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView8"
+        style="@style/normalTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="AIR QUAILITY INDEX"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"
+        android:stretchColumns="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+        <TableRow android:background="@color/colorPrimary">
+
+            <TextView
+                style="@style/table_text"
+                android:text="AQI"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/table_text"
+                android:text="Associated Health Impacts"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/table_text"
+                android:text="Good(0-50)" />
+
+            <TextView
+                style="@style/table_text"
+                android:maxWidth="100dp"
+                android:text="Air quality is satisfactory, and air pollution poses little or no risk.t" />
+        </TableRow>
+
+        <TableRow android:background="@color/background">
+
+            <TextView
+                style="@style/table_text"
+                android:maxHeight="100dp"
+                android:text="SatisfacTory(51-100)" />
+
+            <TextView
+                style="@style/table_text"
+                android:maxWidth="100dp"
+                android:text="Air quality is acceptable. However, there may be a risk for some people, particularly those who are unusually sensitive to air pollution." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/table_text"
+                android:maxWidth="20dp"
+                android:text="Moderately polluted(101-200)" />
+
+            <TextView
+                style="@style/table_text"
+                android:maxWidth="100dp"
+                android:text="Members of sensitive groups may experience health effects. The general public is less likely to be affected." />
+        </TableRow>
+
+        <TableRow android:background="@color/background">
+
+            <TextView
+                style="@style/table_text"
+                android:text="Poor(201-300)" />
+
+            <TextView
+                style="@style/table_text"
+                android:maxWidth="100dp"
+                android:text="Some members of the general public may experience health effects; members of sensitive groups may experience more serious health effects." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/table_text"
+                android:text="Very Poor(301-400)" />
+
+            <TextView
+                style="@style/table_text"
+                android:maxWidth="100dp"
+                android:text="Health alert: The risk of health effects is increased for everyone." />
+        </TableRow>
+
+        <TableRow android:background="@color/background">
+
+            <TextView
+                style="@style/table_text"
+                android:text="Severe(401-500)" />
+
+            <TextView
+                style="@style/table_text"
+                android:maxWidth="100dp"
+                android:text="Health warning of emergency conditions: everyone is more likely to be affected." />
+        </TableRow>
+    </TableLayout>
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView10"
+        style="@style/normalSubText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Field Decriptions:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+
+    <TextView
+        style="@style/normaltext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/str1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

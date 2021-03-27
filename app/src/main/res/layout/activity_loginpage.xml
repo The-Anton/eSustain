@@ -6,7 +6,7 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="@color/background"
     tools:context=".registerLogin.loginpage">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,8 +41,7 @@
             android:hint="Email Address"
             android:inputType="textEmailAddress"
             android:paddingLeft="15dp"
-            android:textColor="@color/black"
-            android:textSize="14dp"
+            style="@style/normaltext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,8 +59,7 @@
             android:hint="Password"
             android:inputType="textPassword"
             android:paddingLeft="15dp"
-            android:textColor="@color/black"
-            android:textSize="14dp"
+            style="@style/normaltext"
             app:layout_constraintEnd_toEndOf="@+id/email_editText_login"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/email_editText_login"
@@ -79,8 +77,7 @@
             android:text="Sign In"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:textSize="18dp"
-            android:textStyle="bold"
+            style="@style/normaltext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_editText_login"

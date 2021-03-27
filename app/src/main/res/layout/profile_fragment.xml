@@ -120,7 +120,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
@@ -137,13 +137,11 @@
 
                 <TextView
                     android:id="@+id/action_textView"
+                    style="@style/normalTitles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:fontFamily="@font/avenir_book"
                     android:text="Target Underway"
-                    android:textColor="@color/subtxt_black"
-                    android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.083"
                     app:layout_constraintStart_toStartOf="parent"
@@ -151,12 +149,11 @@
 
                 <TextView
                     android:id="@+id/action_textView_subtext"
+                    style="@style/normaltext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenir_book"
                     android:maxWidth="210dp"
                     android:text="Learn more about everything that you have achieved below "
-                    android:textSize="13dp"
                     app:layout_constraintStart_toStartOf="@+id/action_textView"
                     app:layout_constraintTop_toBottomOf="@+id/action_textView" />
 
@@ -206,7 +203,6 @@
             android:layout_height="150dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="4dp"
             android:background="@drawable/cardsbg"
             app:layout_constraintEnd_toStartOf="@+id/progress_cardView_2"
             app:layout_constraintStart_toStartOf="parent"
@@ -214,7 +210,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="-37dp"
+                tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
                     android:id="@+id/progess_tree_imageView8"
@@ -232,13 +230,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:fontFamily="@font/avenir_medium"
-                    tools:text="00"
+                    android:text="@={`` + myUser.treesPlanted}"
                     android:textColor="#4FC1E9"
                     android:textSize="20sp"
-                    android:text="@={`` + myUser.treesPlanted}"
                     app:layout_constraintEnd_toEndOf="@+id/progess_tree_imageView8"
                     app:layout_constraintStart_toStartOf="@+id/progess_tree_imageView8"
-                    app:layout_constraintTop_toBottomOf="@+id/progess_tree_imageView8" />
+                    app:layout_constraintTop_toBottomOf="@+id/progess_tree_imageView8"
+                    tools:text="00" />
 
                 <TextView
                     android:id="@+id/number_trees_planted_textView_subtext"
@@ -260,7 +258,6 @@
             android:id="@+id/progress_cardView_2"
             android:layout_width="160dp"
             android:layout_height="150dp"
-            android:layout_marginStart="4dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/cardsbg"
             app:layout_constraintBottom_toBottomOf="@+id/progress_cardView_1"
@@ -270,7 +267,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
                     android:id="@+id/progess_give_tree_imageView"
@@ -287,13 +286,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/avenir_medium"
-                    tools:text="54"
+                    android:text="@={`` + myUser.treesReferred}"
                     android:textColor="#4FC1E9"
                     android:textSize="20sp"
-                    android:text="@={`` + myUser.treesReferred}"
                     app:layout_constraintEnd_toEndOf="@+id/progess_give_tree_imageView"
                     app:layout_constraintStart_toStartOf="@+id/progess_give_tree_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/progess_give_tree_imageView" />
+                    app:layout_constraintTop_toBottomOf="@+id/progess_give_tree_imageView"
+                    tools:text="54" />
 
                 <TextView
                     android:id="@+id/number_trees_referred_textView_subtext"
@@ -347,7 +346,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:text="Ongoing"
-            android:textStyle="bold"
             android:fontFamily="@font/avenir_medium"
             android:textColor="#4FC1E9"
             android:textSize="20sp"
