@@ -1,10 +1,13 @@
 package com.solvabit.climate.network
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.example.forests.data.parametersDataService
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 import com.solvabit.climate.database.User
 import com.solvabit.climate.database.UserDao
+import com.solvabit.climate.registerLogin.ResetPassword.Companion.TAG
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.lang.Exception
 
@@ -65,6 +68,47 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
         }.addOnFailureListener{
             Log.v("FirebaseService", "Error getting data")
             myCallback.invoke("error")
+        }
+    }
+
+    fun fetchContinuosUpdates(myCallback: (result: User) -> Unit){
+        var database = FirebaseDatabase.getInstance();
+        val refU = database.getReference("Users/$uid")
+
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val user = dataSnapshot.getValue<User>()
+                Log.v("Repository", user.toString())
+                myCallback.invoke(user as User)
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        refU.addValueEventListener(postListener)
+    }
+
+
+
+    fun fetchUpdates(myCallback: (result: User) -> Unit){
+        var database = FirebaseDatabase.getInstance();
+        val refU = database.getReference("Users/$uid")
+
+        refU.get().addOnSuccessListener {
+
+            var user = it.getValue(User::class.java)!!
+
+            Log.v("FirebaseService","One time fetch update called")
+
+            myCallback.invoke(user)
+
+        }.addOnFailureListener{
+            Log.v("FirebaseService", "Error getting data")
         }
     }
 

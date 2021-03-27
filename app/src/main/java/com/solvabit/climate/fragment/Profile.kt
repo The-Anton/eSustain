@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.skydoves.progressview.progressView
 import com.solvabit.climate.R
+import com.solvabit.climate.Repository.Repository
 import com.solvabit.climate.database.UserDao
 import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.DashboardFragmentBinding
@@ -25,6 +26,8 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.achievement_recycler_items.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class Profile : Fragment() {
@@ -69,9 +72,28 @@ class Profile : Fragment() {
             }
 
         }
+
+        GlobalScope.launch {
+            Repository(dao, localuser.uid).fetchUpdates {
+                Log.v("Dashboard", localuser.toString())
+                addItemsRecyclerView( localuser.completedAction)
+
+            }
+        }
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        addItemsRecyclerView( localuser.completedAction)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        addItemsRecyclerView( localuser.completedAction)
+
+    }
     private fun addItemsRecyclerView(completed: List<String>) {
         val adapter = GroupAdapter<ViewHolder>()
         binding.recyclerViewProfileAchievements.adapter = adapter

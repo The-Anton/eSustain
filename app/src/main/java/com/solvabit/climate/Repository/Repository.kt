@@ -1,8 +1,10 @@
 package com.solvabit.climate.Repository;
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.solvabit.climate.database.User
 import com.solvabit.climate.database.UserDao
+import com.solvabit.climate.fragment.Dashboard.Companion.localuser
 import com.solvabit.climate.network.FirebaseService
 
 public class Repository constructor(val dao: UserDao,val uid:String) {
@@ -45,6 +47,28 @@ public class Repository constructor(val dao: UserDao,val uid:String) {
     }
 
 
+
+    suspend fun fetchUpdates(myCallback: (result: User) -> Unit){
+
+        FirebaseService(dao,uid).fetchUpdates{
+            localuser = it
+            dao.update(it)
+            val user = dao.getUserByUID(uid)
+            Log.v("Repository","One time update " + it.toString())
+            myCallback.invoke(it)
+
+        }
+
+        FirebaseService(dao,uid).fetchContinuosUpdates{
+            localuser = it
+            dao.update(it)
+            val user = dao.getUserByUID(uid)
+            Log.v("Repository", "Continuous updates " + it.toString())
+            myCallback.invoke(it)
+
+        }
+
+    }
 
 
 }
