@@ -79,7 +79,7 @@
 
                 <com.mikhaellopez.circularprogressbar.CircularProgressBar
                     android:id="@+id/circularProgressBar_airQuality_stats"
-                    android:layout_width="90dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="90dp"
                     app:cpb_background_progressbar_color="#EEE4FA"
                     app:cpb_background_progressbar_width="10dp"

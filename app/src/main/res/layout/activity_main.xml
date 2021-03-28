@@ -27,7 +27,7 @@
         android:visibility="visible"
         app:itemIconTint="@drawable/bottom_navigation_selected_color"
         app:itemRippleColor="#000"
-        app:itemTextColor="@color/subtxt_hint"
+        app:itemTextColor="@color/txt_black"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
