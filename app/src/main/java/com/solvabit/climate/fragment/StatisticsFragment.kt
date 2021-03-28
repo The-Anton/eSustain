@@ -16,6 +16,7 @@ import com.solvabit.climate.fragment.StatsFragments.ForestDensityStatsFragment
 import com.solvabit.climate.fragment.StatsFragments.GroundWaterStatsFragment
 import com.solvabit.climate.fragment.StatsFragments.StatsViewPagerAdapter
 import com.solvabit.climate.onboarding.ViewPagerAdapter
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.aqui_intro.view.*
 import kotlinx.android.synthetic.main.fragment_statistics.*
@@ -26,6 +27,7 @@ class StatisticsFragment : Fragment() {
     lateinit var v: View
     lateinit var viewPager: ViewPager
     lateinit var tabLayout: TabLayout
+    val localuser = Dashboard.localuser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,10 @@ class StatisticsFragment : Fragment() {
         viewPager = v.findViewById(R.id.statsViewPager)
         tabLayout = v.findViewById(R.id.statsNavigationTabLayout)
 
+        v.username_stats.text = localuser.username.toString()
+        v.place_stats.text = localuser.city + ", " + localuser.state
+        Picasso.get().load(localuser.imageUrl).into(v.userprofile_imageView_stats)
+
         return v
 
     }
@@ -53,7 +59,7 @@ class StatisticsFragment : Fragment() {
 
         tabLayout.getTabAt(0)!!.setIcon(R.drawable.air)
         tabLayout.getTabAt(1)!!.setIcon(R.drawable.forestree)
-        tabLayout.getTabAt(2)!!.setIcon(R.drawable.air)
+        tabLayout.getTabAt(2)!!.setIcon(R.drawable.drop)
 
     }
 

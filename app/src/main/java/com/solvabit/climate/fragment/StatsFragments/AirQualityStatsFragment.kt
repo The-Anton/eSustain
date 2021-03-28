@@ -10,6 +10,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.solvabit.climate.R
 import com.solvabit.climate.databinding.DashboardFragmentBindingImpl
 import com.solvabit.climate.databinding.FragmentAirQualityStatsBinding
+import com.solvabit.climate.dialog.AqiDialog
 import com.solvabit.climate.fragment.Dashboard
 
 class AirQualityStatsFragment : Fragment() {
@@ -30,7 +31,12 @@ class AirQualityStatsFragment : Fragment() {
                 inflater, R.layout.fragment_air_quality_stats, container, false
         )
 
+
         addData()
+
+        binding.airQualityMoreStats.setOnClickListener {
+            AqiDialog().show(childFragmentManager, "AQId")
+        }
 
         return binding.root
 

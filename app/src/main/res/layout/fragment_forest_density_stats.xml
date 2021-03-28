@@ -4,21 +4,424 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragment.StatsFragments.ForestDensityStatsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FORESTS"
-            android:textSize="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingBottom="25dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/cardsbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/forestQualityHeading"
+                        style="@style/normalTitles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:text="Forest Density"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.083"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/action_textView_subtext"
+                        style="@style/normaltext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:maxWidth="210dp"
+                        android:text="Learn more about everything that you have achieved below "
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/forestQualityHeading"
+                        app:layout_constraintTop_toBottomOf="@+id/forestQualityHeading" />
+
+                    <ImageView
+                        android:id="@+id/action_imageView"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/rounded_button"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/forestQuality_stats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="98.4"
+                        android:maxLength="4"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
+                        app:layout_constraintEnd_toEndOf="@+id/action_imageView"
+                        app:layout_constraintStart_toStartOf="@+id/action_imageView"
+                        app:layout_constraintTop_toTopOf="@+id/action_imageView" />
+
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                        android:id="@+id/circularProgressBar_forestQuality_stats"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        app:cpb_background_progressbar_color="#EEE4FA"
+                        app:cpb_background_progressbar_width="10dp"
+                        app:cpb_progress="45"
+                        app:cpb_progress_direction="to_right"
+                        app:cpb_progressbar_color="#8542DC"
+                        app:cpb_progressbar_width="8dp"
+                        app:cpb_round_border="true"
+                        app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
+                        app:layout_constraintEnd_toEndOf="@+id/action_imageView"
+                        app:layout_constraintStart_toStartOf="@+id/action_imageView"
+                        app:layout_constraintTop_toTopOf="@+id/action_imageView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progress_cardView_1"
+                android:layout_width="160dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/recomendbg"
+                app:layout_constraintEnd_toStartOf="@+id/progress_cardView_2"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout8"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="-37dp"
+                    tools:layout_editor_absoluteY="0dp">
+
+                    <ImageView
+                        android:id="@+id/progess_tree_imageView8"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="25dp"
+                        android:src="@drawable/ic_small_tree_on_ground"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.daasuu.cat.CountAnimationTextView
+                        android:id="@+id/trees_planted_stats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/avenir_medium"
+                        android:textColor="#4FC1E9"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="@+id/progess_tree_imageView8"
+                        app:layout_constraintStart_toStartOf="@+id/progess_tree_imageView8"
+                        app:layout_constraintTop_toBottomOf="@+id/progess_tree_imageView8"
+                        tools:text="00" />
+
+                    <TextView
+                        android:id="@+id/trees_planted_stats_subtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_book"
+                        android:maxWidth="250dp"
+                        android:text="Trees Planted"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="@+id/trees_planted_stats"
+                        app:layout_constraintStart_toStartOf="@+id/trees_planted_stats"
+                        app:layout_constraintTop_toBottomOf="@+id/trees_planted_stats" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progress_cardView_2"
+                android:layout_width="160dp"
+                android:layout_height="150dp"
+                android:background="@drawable/recomendbg"
+                app:layout_constraintBottom_toBottomOf="@+id/progress_cardView_1"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/progress_cardView_1"
+                app:layout_constraintTop_toTopOf="@+id/progress_cardView_1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp">
+
+                    <ImageView
+                        android:id="@+id/progess_give_tree_imageView"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_plant_a_tree"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.daasuu.cat.CountAnimationTextView
+                        android:id="@+id/trees_referred_stats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_medium"
+                        android:textColor="#4FC1E9"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="@+id/progess_give_tree_imageView"
+                        app:layout_constraintStart_toStartOf="@+id/progess_give_tree_imageView"
+                        app:layout_constraintTop_toBottomOf="@+id/progess_give_tree_imageView"
+                        tools:text="54" />
+
+                    <TextView
+                        android:id="@+id/trees_referred_stats_subtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_book"
+                        android:maxWidth="250dp"
+                        android:text="Trees Referred"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="@+id/trees_referred_stats"
+                        app:layout_constraintStart_toStartOf="@+id/trees_referred_stats"
+                        app:layout_constraintTop_toBottomOf="@+id/trees_referred_stats" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/forestQualityCardView"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/cardsbg"
+                android:elevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress_cardView_1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/forestQualityFrame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:padding="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="7dp"
+                            android:layout_height="14dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/forestree" />
+
+                        <TextView
+                            style="@style/normalSubText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="15"
+                            android:gravity="center_vertical"
+                            android:text="Composition of Forest" />
+
+                        <ImageView
+                            android:id="@+id/forest_quality_more_stats"
+                            android:layout_width="10dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="end"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_info_24" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:gravity="end"
+                        android:orientation="vertical"
+                        android:weightSum="8"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_margin="4dp"
+                                android:layout_weight="2"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/normaltext"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="Total Area : "
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/total_area_forest_stats"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:maxLength="5"
+                                    android:textStyle="bold"
+                                    tools:text="15.4" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_margin="4dp"
+                                android:layout_weight="2"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/normaltext"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="Actual Forest : "
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/actual_forest_stats"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:maxLength="4"
+                                    android:textStyle="bold"
+                                    tools:text="24.4" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_margin="4dp"
+                                android:layout_weight="2"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/normaltext"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="Open Forest : "
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/open_forest_stats"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:maxLength="5"
+                                    android:textStyle="bold"
+                                    tools:text="15.4" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_margin="4dp"
+                                android:layout_weight="2"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/normaltext"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="No Forest : "
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/no_forest_stats"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:maxLength="4"
+                                    android:textStyle="bold"
+                                    tools:text="56.4" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        style="@style/normaltext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="All values are in unit - sq. Km"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

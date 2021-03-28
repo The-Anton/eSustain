@@ -277,7 +277,7 @@
                         android:text="Composition in Air" />
 
                     <ImageView
-                        android:id="@+id/forest_more"
+                        android:id="@+id/air_quality_more_stats"
                         android:layout_width="10dp"
                         android:layout_height="30dp"
                         android:layout_gravity="end"

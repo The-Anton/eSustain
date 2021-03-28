@@ -57,7 +57,7 @@
                 app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/userprofile_imageView"
+                android:id="@+id/userprofile_imageView_stats"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
@@ -72,7 +72,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:text="Chandresh Singh"
                 android:textColor="#8542DC"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
@@ -86,7 +85,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_book"
-                android:text="Agra, Uttar Pradesh"
                 android:textColor="@color/subtxt_black"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="@+id/username_stats"
@@ -121,6 +119,7 @@
                         android:id="@+id/statsNavigationTabLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:tabIndicatorColor="#00CFC3"
                         android:background="@color/white">
 
                     </com.google.android.material.tabs.TabLayout>
