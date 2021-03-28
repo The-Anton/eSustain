@@ -41,6 +41,8 @@
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
+        app:layout_constraintEnd_toStartOf="@+id/achievement_arrow_imageview"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/action_imageView"
         app:layout_constraintTop_toTopOf="@+id/action_imageView" />
 
@@ -48,11 +50,10 @@
         android:id="@+id/achievement_arrow_imageview"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/achievement_name_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/achievement_name_textView"
         app:layout_constraintTop_toTopOf="@+id/achievement_name_textView"
+        app:layout_constraintVertical_bias="0.538"
         app:srcCompat="@drawable/ic_go_forwardb" />
 </androidx.constraintlayout.widget.ConstraintLayout>

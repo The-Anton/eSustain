@@ -82,11 +82,16 @@
 
             <TextView
                 android:id="@+id/place_stats"
+                style="@style/normaltext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/avenir_book"
-                android:textColor="@color/subtxt_black"
-                android:textSize="15sp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tagsbg"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="@+id/imageView4"
@@ -96,7 +101,7 @@
                 android:id="@+id/imageView4"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="@+id/username_stats"
                 app:layout_constraintTop_toBottomOf="@+id/username_stats"
                 app:srcCompat="@drawable/map_pointer" />

@@ -19,9 +19,9 @@
                 android:id="@+id/constraintLayout8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/cardsbg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,18 +69,18 @@
                         android:id="@+id/forestQuality_stats"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="98.4"
                         android:maxLength="4"
                         android:textColor="@color/white"
                         android:textSize="20dp"
                         app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
                         app:layout_constraintEnd_toEndOf="@+id/action_imageView"
                         app:layout_constraintStart_toStartOf="@+id/action_imageView"
-                        app:layout_constraintTop_toTopOf="@+id/action_imageView" />
+                        app:layout_constraintTop_toTopOf="@+id/action_imageView"
+                        tools:text="98.4" />
 
                     <com.mikhaellopez.circularprogressbar.CircularProgressBar
                         android:id="@+id/circularProgressBar_forestQuality_stats"
-                        android:layout_width="90dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="90dp"
                         app:cpb_background_progressbar_color="#EEE4FA"
                         app:cpb_background_progressbar_width="10dp"

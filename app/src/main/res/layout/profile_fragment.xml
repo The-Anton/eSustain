@@ -105,24 +105,29 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginTop="2dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
                 android:src="@drawable/map_pointer"
                 app:layout_constraintStart_toStartOf="@+id/email_profile"
                 app:layout_constraintTop_toBottomOf="@+id/email_profile" />
 
             <TextView
                 android:id="@+id/place_profile"
+                style="@style/normaltext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/avenir_book"
-                android:textColor="@color/subtxt_black"
-                android:textSize="12sp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tagsbg"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="@+id/imageView4"
-                tools:text=" Agra, Uttar Pradesh" />
+                tools:text=" Agra, Uttar Pradesh"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
 
             <ImageView
                 android:id="@+id/logout_popup"
@@ -233,7 +238,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="-37dp"
+                tools:layout_editor_absoluteX="-16dp"
                 tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
@@ -349,11 +354,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_profile_achievements"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:nestedScrollingEnabled="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"

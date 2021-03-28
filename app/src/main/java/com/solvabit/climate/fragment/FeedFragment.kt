@@ -67,8 +67,9 @@ class FeedFragment : Fragment() {
                     override fun onChildRemoved(p0: DataSnapshot) {}
 
                     override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                        val key = p0.key
                         val post = p0.getValue(Post::class.java)
-                        Timber.i("Again - ${post}")
+                        Timber.i("Key - $key")
                         if(post!=null)
                             adapter.add(postItem(post, context))
                     }
