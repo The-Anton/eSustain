@@ -1,6 +1,5 @@
 package com.solvabit.climate.fragment
 
-import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
@@ -20,7 +18,6 @@ import com.solvabit.climate.database.SingleAction
 import com.solvabit.climate.database.User
 import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.DashboardFragmentBinding
-import com.solvabit.climate.network.FirebaseService
 import com.solvabit.climate.dialog.AqiDialog
 import com.solvabit.climate.viewModel.DashboardViewModel
 import com.xwray.groupie.GroupAdapter
@@ -31,7 +28,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import androidx.fragment.app.FragmentTransaction as AppFragmentTransaction
 
 
 class Dashboard : Fragment() {
@@ -77,6 +73,7 @@ class Dashboard : Fragment() {
             Repository(dao,uid).fetchUpdates {
                 Log.v("Dashboard", localuser.toString())
                 addRecommendedDashboardItems()
+                addDataToDashboard()
             }
         }
 
@@ -123,6 +120,28 @@ class Dashboard : Fragment() {
         binding.airQualityData.text = localuser.aqi.toString()
         binding.forestDensityData.text = localuser.forestDensity.toString()
         val normalizedScore: Float = localuser.normalizedScore?.toFloat() ?: 0f
+
+        if (localuser.normalizedScore!=null){
+            if(localuser.normalizedScore!! <= 500 ){
+                binding.statusText.text = " Your are in Critical Condition!"
+                binding.linearLayout3.setBackgroundResource(R.drawable.red_rounded_button)
+                binding.imageView6.setBackgroundResource(R.drawable.ic_baseline_block_24)
+
+                binding.imageView6.setBackgroundResource(R.drawable.ic_baseline_block_24)
+            }else if(localuser.normalizedScore!! <= 700 ){
+                binding.statusText.text = "  Your are on border line !"
+                binding.linearLayout3.setBackgroundResource(R.drawable.orange_rounded_button)
+                binding.imageView6.setBackgroundResource(R.drawable.ic_baseline_warning_24)
+            }else{
+                binding.statusText.text = "  Congratulation! You are good"
+                binding.linearLayout3.setBackgroundResource(R.drawable.home_rounded_button)
+                binding.imageView6.setBackgroundResource(R.drawable.ic_baseline_check_circle_24)
+            }
+        }else{
+            binding.statusText.text = "  Congratulation! You are good"
+            binding.imageView6.setBackgroundResource(R.drawable.ic_baseline_check_circle_24)
+        }
+
         binding.circularProgressBar.progress = normalizedScore/10
         circularloader(localuser.aqi?.toFloat() ?: 0f, 500f, binding.circularProgressBarAirQuality)
         initializeAirData()

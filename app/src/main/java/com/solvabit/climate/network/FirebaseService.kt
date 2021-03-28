@@ -57,7 +57,10 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
 
         refU.get().addOnSuccessListener {
 
-            var status = it.value as Boolean
+            var status =false
+            if(it.value != null){
+                status = it.value as Boolean
+            }
             Log.v("FirebaseService","User is updated ->> ${status}")
 
             if(status==true){
