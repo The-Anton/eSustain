@@ -28,4 +28,6 @@
     <color name="desh_line">#f4f4f4</color>
     <color name="yellow">#FFFF00</color>
     <color name="txt">#1a202c</color>
+    <color name="red">#ff304f</color>
+
 </resources>

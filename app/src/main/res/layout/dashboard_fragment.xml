@@ -96,11 +96,11 @@
 
                     <ImageView
                         android:id="@+id/imageView6"
-                        android:layout_width="0dp"
-                        android:layout_height="15dp"
+                        android:layout_width="13dp"
+                        android:layout_height="12dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_baseline_check_circle_24" />
+                         />
 
                     <TextView
                         android:id="@+id/statusText"
@@ -109,7 +109,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:background="@drawable/home_rounded_button"
                         android:text="  Congratulation! You are good"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
