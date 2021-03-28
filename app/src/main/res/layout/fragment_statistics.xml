@@ -135,7 +135,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:tabIndicatorColor="#00CFC3"
-                        android:background="@color/white">
+                        android:background="@color/white"
+                        style="@style/normalTitles">
 
                     </com.google.android.material.tabs.TabLayout>
 

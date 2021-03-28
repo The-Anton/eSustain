@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:paddingBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView8"
+            style="@style/normalTitles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="FOREST DENSITY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="10dp"
+            android:stretchColumns="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+            <TableRow android:background="@color/colorPrimary">
+
+                <TextView
+                    style="@style/table_text"
+                    android:text="Class"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/table_text"
+                    android:text="Description"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/table_text"
+                    android:text="Very Dense Forest	" />
+
+                <TextView
+                    style="@style/table_text"
+                    android:maxWidth="100dp"
+                    android:text="All lands with tree canopy density of 70% and above.
+" />
+            </TableRow>
+
+            <TableRow android:background="@color/background">
+
+                <TextView
+                    style="@style/table_text"
+                    android:maxHeight="100dp"
+                    android:text="Moderately Dense Forest" />
+
+                <TextView
+                    style="@style/table_text"
+                    android:maxWidth="100dp"
+                    android:text="All lands with tree canopy density of 40% and more but less than 70%." />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/table_text"
+                    android:maxWidth="20dp"
+                    android:text="Open Forest	" />
+
+                <TextView
+                    style="@style/table_text"
+                    android:maxWidth="100dp"
+                    android:text="All lands with tree canopy density of 10% and more but less than 40%." />
+            </TableRow>
+
+            <TableRow android:background="@color/background">
+
+                <TextView
+                    style="@style/table_text"
+                    android:text="Scrub" />
+
+                <TextView
+                    style="@style/table_text"
+                    android:maxWidth="100dp"
+                    android:text="Degraded forest lands with canopy density less than 10%.
+" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/table_text"
+                    android:text="Non-forest" />
+
+                <TextView
+                    style="@style/table_text"
+                    android:maxWidth="100dp"
+                    android:text="Lands not included in any of the above classes." />
+            </TableRow>
+        </TableLayout>
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/normalSubText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:text="Source:"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <TextView
+            style="@style/normaltext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:maxWidth="250dp"
+            android:text="Source: Forest Survey of India, Dehradun. State of Forest Report (2013)"
+            app:layout_constraintBottom_toBottomOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintTop_toTopOf="@+id/textView10"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

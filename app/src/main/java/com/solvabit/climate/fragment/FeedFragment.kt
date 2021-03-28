@@ -96,7 +96,6 @@ class postItem(private val post: Post,val context: Context): Item<ViewHolder>() 
         viewHolder.itemView.category.text = post.category
         database = Firebase.database.reference
         val time = post.time.toLong()
-        val key = Long.MAX_VALUE - time
         val sfd = SimpleDateFormat("dd-MM-yyyy")
         viewHolder.itemView.time.text = sfd.format(Date(time))
         val uid = post.uid
@@ -131,7 +130,7 @@ class postItem(private val post: Post,val context: Context): Item<ViewHolder>() 
 
             popupMenu.show()
         }
-        val likeref = FirebaseDatabase.getInstance().getReference("/PostData/$key/likes/")
+        val likeref = FirebaseDatabase.getInstance().getReference("/PostData/${post.key}/likes/")
 
         likeref.get().addOnSuccessListener { snapshot ->
             var count = 0;

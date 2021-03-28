@@ -19,6 +19,7 @@ import com.solvabit.climate.database.User
 import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.DashboardFragmentBinding
 import com.solvabit.climate.dialog.AqiDialog
+import com.solvabit.climate.dialog.ForestDialog
 import com.solvabit.climate.viewModel.DashboardViewModel
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -67,7 +68,10 @@ class Dashboard : Fragment() {
         binding.forestMore.setOnClickListener {
             AqiDialog().show(childFragmentManager, "AQId")
         }
-        popMenu()
+        binding.airMore.setOnClickListener {
+            ForestDialog().show(childFragmentManager, "Forest")
+        }
+
 
         GlobalScope.launch {
             Repository(dao,uid).fetchUpdates {
@@ -93,6 +97,7 @@ class Dashboard : Fragment() {
         addRecommendedDashboardItems()
 
     }
+  /*
     private fun popMenu() {
 
 
@@ -113,7 +118,7 @@ class Dashboard : Fragment() {
             }
         }
 
-    }
+    }  */
 
     private fun addDataToDashboard() {
         binding.normalizedScoreData.text = localuser.normalizedScore.toString()

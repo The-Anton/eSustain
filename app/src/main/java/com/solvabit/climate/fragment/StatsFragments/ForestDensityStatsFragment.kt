@@ -10,6 +10,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.solvabit.climate.R
 import com.solvabit.climate.databinding.FragmentAirQualityStatsBinding
 import com.solvabit.climate.databinding.FragmentForestDensityStatsBinding
+import com.solvabit.climate.dialog.ForestDialog
 import com.solvabit.climate.fragment.Dashboard
 
 class ForestDensityStatsFragment : Fragment() {
@@ -29,6 +30,9 @@ class ForestDensityStatsFragment : Fragment() {
                 inflater, R.layout.fragment_forest_density_stats, container, false)
 
         addData()
+        binding.forestQualityMoreStats.setOnClickListener {
+            ForestDialog().show(childFragmentManager, "Forest")
+        }
 
         return binding.root
     }

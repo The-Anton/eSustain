@@ -9,9 +9,11 @@ class Post(var post_text: String,
                 val uid: String,
                 val time: String,
                 val category: String,
+                val key:String,
                 val interested: Int): Parcelable {
 
     constructor():this(
+            "",
             "",
             "",
             "",
