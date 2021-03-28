@@ -44,6 +44,7 @@ class AirQualityStatsFragment : Fragment() {
 
     private fun addData() {
         circularloader(localuser.aqi?.toFloat() ?: 0f, 500f, binding.circularProgressBarAirQualityStats)
+
         binding.apply {
             this.airQualityStats.text = localuser.aqi.toString()
             this.pm10Stats.text = localuser.pm10.toString()
