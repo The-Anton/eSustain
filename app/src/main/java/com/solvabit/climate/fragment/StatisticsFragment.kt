@@ -7,13 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayout
 import com.solvabit.climate.R
+import com.solvabit.climate.fragment.StatsFragments.AirQualityStatsFragment
+import com.solvabit.climate.fragment.StatsFragments.ForestDensityStatsFragment
+import com.solvabit.climate.fragment.StatsFragments.GroundWaterStatsFragment
+import com.solvabit.climate.fragment.StatsFragments.StatsViewPagerAdapter
+import com.solvabit.climate.onboarding.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.aqui_intro.view.*
 import kotlinx.android.synthetic.main.fragment_statistics.*
 import kotlinx.android.synthetic.main.fragment_statistics.view.*
 
 class StatisticsFragment : Fragment() {
+
+    lateinit var v: View
+    lateinit var viewPager: ViewPager
+    lateinit var tabLayout: TabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,22 +33,35 @@ class StatisticsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        val v = inflater.inflate(R.layout.fragment_statistics, container, false)
-        val statsNavigation = v.findViewById<BottomNavigationView>(R.id.statsNavigation)
-        val fragmentContainer = v.findViewById<View>(R.id.statsNavHostFragment)
-        val navControllerStats = Navigation.findNavController(fragmentContainer)
-        statsNavigation.setupWithNavController(navControllerStats)
+        v = inflater.inflate(R.layout.fragment_statistics, container, false)
 
-
-//        val navController = Navigation.findNavController(requireActivity() ,R.id.statsNavHostFragment)
-//        statsNavigation.setupWithNavController(navController)
+        viewPager = v.findViewById(R.id.statsViewPager)
+        tabLayout = v.findViewById(R.id.statsNavigationTabLayout)
 
         return v
 
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
+        setUpViewPager(viewPager)
+        tabLayout.setupWithViewPager(viewPager)
+
+        tabLayout.getTabAt(0)!!.setIcon(R.drawable.air)
+        tabLayout.getTabAt(1)!!.setIcon(R.drawable.forestree)
+        tabLayout.getTabAt(2)!!.setIcon(R.drawable.air)
+
+    }
+
+    private fun setUpViewPager(viewPager: ViewPager) {
+        val adapter = StatsViewPagerAdapter(childFragmentManager)
+        adapter.addFragment(AirQualityStatsFragment(), "Air")
+        adapter.addFragment(ForestDensityStatsFragment(), "Forest")
+        adapter.addFragment(GroundWaterStatsFragment(), "Water")
+        viewPager.adapter = adapter
+    }
 }

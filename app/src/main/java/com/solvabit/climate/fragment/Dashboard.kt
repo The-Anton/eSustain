@@ -156,7 +156,7 @@ class Dashboard : Fragment() {
 
         localuser.presentAction.forEach{
             if(it!="0") {
-//                adapter.add(AddRecycleItemRecommended(it.toInt(), "present"))
+                adapter.add(AddRecycleItemRecommended(it.toInt(), "present", binding))
             }
         }
 
@@ -168,7 +168,7 @@ class Dashboard : Fragment() {
 
         localuser.completedAction.forEach{
             if(it!="0") {
-//                adapter.add(AddRecycleItemRecommended(it.toInt(), "completed"))
+                adapter.add(AddRecycleItemRecommended(it.toInt(), "completed", binding))
             }
         }
 
