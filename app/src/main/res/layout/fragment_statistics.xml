@@ -87,9 +87,19 @@
                 android:fontFamily="@font/avenir_book"
                 android:textColor="@color/subtxt_black"
                 android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/imageView4"
+                tools:text="Agra, Uttar Pradesh" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="4dp"
                 app:layout_constraintStart_toStartOf="@+id/username_stats"
                 app:layout_constraintTop_toBottomOf="@+id/username_stats"
-                tools:text="Agra, Uttar Pradesh" />
+                app:srcCompat="@drawable/map_pointer" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

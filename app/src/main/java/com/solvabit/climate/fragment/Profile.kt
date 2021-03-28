@@ -26,6 +26,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.achievement_recycler_items.view.*
+import kotlinx.android.synthetic.main.fragment_statistics.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -49,6 +50,8 @@ class Profile : Fragment() {
         Timber.i( "User data: ${localuser.toString()}")
         binding.myUser = localuser
         Picasso.get().load(localuser.imageUrl).into(binding.userprofileImageView)
+        binding.placeProfile.text = " " + localuser.city + ", " + localuser.state
+
 
         addItemsRecyclerView( localuser.completedAction)
 

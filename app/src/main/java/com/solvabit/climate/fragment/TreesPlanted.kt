@@ -40,6 +40,7 @@ class TreesPlanted : Fragment() {
     private val uid = FirebaseAuth.getInstance().uid
     private var treesPlanted : Int = 0
     private var targetTrees: Int = 0
+    private var status: String = "remaining"
 
     companion object {
         fun newInstance() = TreesPlanted()
@@ -58,6 +59,7 @@ class TreesPlanted : Fragment() {
 
         val args = TreesPlantedArgs.fromBundle(requireArguments())
         targetTrees = args.targetTrees
+        status = args.status
 
         fetchCurrentUser()
 
@@ -192,11 +194,11 @@ class TreesPlanted : Fragment() {
                         binding.postAddPicFiveTrees.visibility = View.GONE
                         val changeRemainingList = Dashboard.localuser.remainingAction.toMutableList()
                         val changeCompletedList = Dashboard.localuser.completedAction.toMutableList()
-                        if(targetTrees==5) {
+                        if(targetTrees==5 && status=="remaining") {
                             changeRemainingList.removeAt(0)
                             changeCompletedList.add("1")
                         }
-                        else {
+                        else if(targetTrees==10 && status=="remaining") {
                             changeRemainingList.removeAt(1)
                             changeCompletedList.add("2")
                         }

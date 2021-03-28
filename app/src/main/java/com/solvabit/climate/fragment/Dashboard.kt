@@ -199,7 +199,7 @@ private val action3 = SingleAction(3, "Use Public Transport", "Let's begin a new
 private val action4 = SingleAction(4, "Refer a friend", "Let's begin a new journey!", 5)
 
 
-class AddRecycleItemRecommended(val a: Int, val action: String, val binding: DashboardFragmentBinding): Item<ViewHolder>(){
+class AddRecycleItemRecommended(val a: Int, val status: String, val binding: DashboardFragmentBinding): Item<ViewHolder>(){
 
     override fun getLayout(): Int {
         return R.layout.recommended_cards
@@ -221,8 +221,8 @@ class AddRecycleItemRecommended(val a: Int, val action: String, val binding: Das
         viewHolder.itemView.target_textView_subtext.text = action.subtopic
         viewHolder.itemView.background_play_pause.setOnClickListener {
             when(a){
-                1-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(5))
-                2-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(10))
+                1-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(5, status))
+                2-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(10, status))
                 3-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
                 4-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
             }

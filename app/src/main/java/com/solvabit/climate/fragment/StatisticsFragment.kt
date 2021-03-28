@@ -44,7 +44,7 @@ class StatisticsFragment : Fragment() {
         tabLayout = v.findViewById(R.id.statsNavigationTabLayout)
 
         v.username_stats.text = localuser.username.toString()
-        v.place_stats.text = localuser.city + ", " + localuser.state
+        v.place_stats.text = " " + localuser.city + ", " + localuser.state
         Picasso.get().load(localuser.imageUrl).into(v.userprofile_imageView_stats)
 
         return v

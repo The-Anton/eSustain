@@ -39,6 +39,9 @@
         <argument
             android:name="targetTrees"
             app:argType="integer" />
+        <argument
+            android:name="status"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
