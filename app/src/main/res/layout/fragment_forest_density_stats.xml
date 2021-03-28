@@ -49,8 +49,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
-                        android:maxWidth="210dp"
-                        android:text="Learn more about everything that you have achieved below "
+                        android:maxWidth="190dp"
+                        android:text="Two mature trees can provide enough oxygen for a family of four"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/forestQualityHeading"
                         app:layout_constraintTop_toBottomOf="@+id/forestQualityHeading" />
@@ -101,7 +101,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/progress_cardView_1"
-                android:layout_width="160dp"
+                android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/recomendbg"
@@ -157,7 +157,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/progress_cardView_2"
-                android:layout_width="160dp"
+                android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:background="@drawable/recomendbg"
                 app:layout_constraintBottom_toBottomOf="@+id/progress_cardView_1"
