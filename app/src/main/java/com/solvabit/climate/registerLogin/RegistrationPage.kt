@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -175,19 +176,23 @@ class RegistrationPage : AppCompatActivity() {
 
 
     private fun uploadPhotoToFirebase(username: String, email: String) {
-        if(selectedPhotoUri == null) return
+        if(selectedPhotoUri == null){
+            val defaultProfilePic = "https://firebasestorage.googleapis.com/v0/b/forest-59f3b.appspot.com/o/images%2Fprofile_picture.jpg?alt=media&token=d56efeb6-bc80-4acc-836e-96032c712be7"
+            saveUserToFirebaseDatabase(username, email, defaultProfilePic)
+        }
+        else {
+            val filename = UUID.randomUUID().toString()
+            val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+            ref.putFile(selectedPhotoUri!!)
+                .addOnSuccessListener {
+                    Log.e("registerActivity", "Photo uploaded successfully: ${it.metadata?.path}")
 
-        val filename = UUID.randomUUID().toString()
-        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
-        ref.putFile(selectedPhotoUri!!)
-            .addOnSuccessListener {
-                Timber.i( "Photo uploaded successfully: ${it.metadata?.path}")
-
-                ref.downloadUrl.addOnSuccessListener{
-                    Timber.i( "image downloaded url : $it")
-                    saveUserToFirebaseDatabase(username, email, it.toString())
+                    ref.downloadUrl.addOnSuccessListener {
+                        Log.e("registerActivity", "image downloaded url : $it")
+                        saveUserToFirebaseDatabase(username, email, it.toString())
+                    }
                 }
-            }
+        }
     }
 
 
