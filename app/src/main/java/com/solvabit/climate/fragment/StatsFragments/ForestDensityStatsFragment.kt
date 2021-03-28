@@ -34,6 +34,7 @@ class ForestDensityStatsFragment : Fragment() {
     }
 
     private fun addData() {
+
         circularloader(localuser.forestDensity?.toFloat()
                 ?: 0f, 10f, binding.circularProgressBarForestQualityStats)
         binding.apply {
