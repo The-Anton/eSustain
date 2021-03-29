@@ -25,7 +25,7 @@
         <li> co: Concentration of carbon monoxide (µg/m³)</li>
     </ul>
     </string>
-    <string name="string_diameter_pm10" >Diameter \u2264 10μm</string >
-    <string name="string_diameter_pm25" >Diameter \u2264 2.5μm</string >
+    <string name="string_diameter_pm10">Diameter \u2264 10μm</string>
+    <string name="string_diameter_pm25">Diameter \u2264 2.5μm</string>
 
 </resources>

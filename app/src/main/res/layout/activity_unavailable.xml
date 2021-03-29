@@ -4,52 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".location.Location">
+    tools:context=".activity.UnavailableActivity">
 
-    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-        android:id="@+id/randomButton"
+    <Button
+        android:id="@+id/randomButton1"
+        style="@style/normalSubText"
         android:layout_width="153dp"
         android:layout_height="53dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="72dp"
         android:background="@drawable/blue_button"
-        android:text="Try Again"
+        android:text="Try a Random Location"
         android:textColor="@android:color/white"
-        android:textSize="18dp"
+        android:textSize="12sp"
         android:textStyle="bold"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.534"
         app:layout_constraintStart_toStartOf="parent"
-        app:spinning_bar_color="@android:color/white"
-        app:spinning_bar_padding="1dp" />
+         />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
-        android:layout_width="388dp"
-        android:layout_height="533dp"
+        android:layout_width="316dp"
+        android:layout_height="417dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/loadingearth" />
+        app:lottie_rawRes="@raw/error" />
 
     <TextView
         android:id="@+id/locationStatusText"
         style="@style/normalSubText"
-        android:layout_width="352dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="9dp"
+        android:layout_width="366dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="115dp"
-        android:text="We are processing your data... It will take some time"
+        android:text="We are currently providing services to India Only"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/randomButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/animationView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="22dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
