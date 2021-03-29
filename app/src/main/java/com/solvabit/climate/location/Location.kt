@@ -1,33 +1,29 @@
 package com.solvabit.climate.location
 
 import android.Manifest
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import com.google.firebase.auth.FirebaseAuth
 import com.solvabit.climate.R
 import com.solvabit.climate.activity.MainActivity
+import com.solvabit.climate.activity.UnavailableActivity
 import com.solvabit.climate.database.UserDao
 import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.network.FirebaseService
 import com.solvabit.climate.network.GenericApiService
 import kotlinx.android.synthetic.main.activity_location.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
@@ -39,7 +35,10 @@ class Location : AppCompatActivity() {
 
 
     lateinit var locationManager: LocationManager
-    private var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+    private var permissions = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
     private lateinit var uid: String
     private var updatedToFirebase = false
     private lateinit var location: Map<String, Double>
@@ -54,36 +53,53 @@ class Location : AppCompatActivity() {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         uid = FirebaseAuth.getInstance().uid.toString()
 
-        val instance = UserDatabase.getInstance(this@Location)
-        val dao = instance.userDao()
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val bundle = this.intent.extras
+
+        if (bundle != null) {
+            var fakeLatitude = bundle.getSerializable("latitude")
+            var fakeLongtitude = bundle.getSerializable("longitude")
+
+            initiateNewUser(fakeLatitude as Double, fakeLongtitude as Double)
+
+        }else{
+            val instance = UserDatabase.getInstance(this@Location)
+            val dao = instance.userDao()
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
 
-        var editor: SharedPreferences.Editor? = sharedPreferences.edit()
-        editor?.putString("noOfTimesLocationUpdated", 0.toString())
-        editor?.putString("locationListenerCount", 0.toString())
-        editor?.apply()
+            var editor: SharedPreferences.Editor? = sharedPreferences.edit()
+            editor?.putString("noOfTimesLocationUpdated", 0.toString())
+            editor?.putString("locationListenerCount", 0.toString())
+            editor?.apply()
 
 
-        checkStatus(dao)
-
-        button.setOnClickListener{
-            button.startAnimation()
-            //initiateNewUser(location["latitude"]!!.toDouble(),location["longitude"]!!.toDouble())
             checkStatus(dao)
-        }
 
+            randomButton.setOnClickListener{
+                randomButton.startAnimation()
+                //initiateNewUser(location["latitude"]!!.toDouble(),location["longitude"]!!.toDouble())
+                checkStatus(dao)
+            }
+
+
+            Handler().postDelayed(
+                {
+                    locationStatusText.text =
+                        "It is taking more than usual... Please wait for some time!!"
+                }, 20000
+            )
+        }
 
     }
 
 
 
-    fun checkStatus(dao:UserDao){
+    fun checkStatus(dao: UserDao){
         FirebaseService(dao, uid).userStatus { result ->
             if(result.equals("error")){
                 Log.v("Firebase", "Got error ")
 //                button.revertAnimation()
-                button.visibility = View.VISIBLE
+                randomButton.visibility = View.VISIBLE
             }else{
                 if(result.equals("true")){
                     Log.v("Firebase", "Got true")
@@ -112,7 +128,11 @@ class Location : AppCompatActivity() {
                         getUserLocation(uid, locationManager)
                     }
                 } else {
-                    Toast.makeText(this@Location, "Please turn on your location ", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@Location,
+                        "Please turn on your location ",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     mainHandler.postDelayed(this, 3000)
                 }
 
@@ -131,7 +151,15 @@ class Location : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun startUnavailableActivity() {
+        Log.v("Intent", "Stared Intent")
 
+        val intent = Intent(this, UnavailableActivity::class.java)
+        Log.v("Intent", "Stared Intent2")
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        startActivity(intent)
+    }
     private fun locationEnabled(): Boolean {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
@@ -168,20 +196,24 @@ class Location : AppCompatActivity() {
 
 
     fun initiateNewUser(latitude: Double, longitude: Double) {
-        button.startAnimation()
+        randomButton.startAnimation()
         GlobalScope.launch {
             GenericApiService(uid, latitude, longitude).newUser {
 
                 Log.v("Coordinates", "Made api call ")
 
-                if (it) {
+                if (it[0].equals("true")) {
                     Log.v("Coordinates", "Response : ${it}")
-                    button.revertAnimation()
-                    startMainActivity()
+                    if (it[1].equals("India")){
+                        startMainActivity()
+                    }else{
+                        startUnavailableActivity()
+                    }
+
                 }else{
                     Log.v("Coordinates", "Retrying...... : ${it}")
                    
-                    initiateNewUser(latitude,longitude)
+                    initiateNewUser(latitude, longitude)
                         //getUserLocation(uid,locationManager)
                 }
             }
@@ -190,18 +222,28 @@ class Location : AppCompatActivity() {
 
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST) {
             var allSuccess = true
             for (i in permissions.indices) {
                 if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
                     allSuccess = false
-                    val requestAgain = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && shouldShowRequestPermissionRationale(permissions[i])
+                    val requestAgain = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && shouldShowRequestPermissionRationale(
+                        permissions[i]
+                    )
                     if (requestAgain) {
                         Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this, "Go to settings and enable the permission", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "Go to settings and enable the permission",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }

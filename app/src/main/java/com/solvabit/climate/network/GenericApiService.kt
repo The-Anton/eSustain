@@ -39,7 +39,7 @@ public class GenericApiService(val uid: String, val lattitude: Double, val longi
     }
 
 
-    suspend fun newUser(callback: (result: Boolean) -> Unit) {
+    suspend fun newUser(callback: (result: List<String>) -> Unit) {
 
 
         lateinit var response: parametersData
@@ -52,14 +52,14 @@ public class GenericApiService(val uid: String, val lattitude: Double, val longi
 
             if (response?.apistatus == true) {
                 Log.v("NewUser", response.toString())
-                callback(true)
+                callback(listOf("true",response.country))
             } else {
                 Log.v("NewUser", "NO data fetched")
-                callback(false)
+                callback(listOf("false","invalid"))
             }
         }catch (e:Exception){
             Log.v("API Exception", e.toString())
-            callback(false)
+            callback(listOf("false","invalid"))
             //reFetch()
         }
 
