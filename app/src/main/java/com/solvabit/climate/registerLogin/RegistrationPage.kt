@@ -135,6 +135,7 @@ class RegistrationPage : AppCompatActivity() {
                     selectedPhotoUri = act?.photoUrl
                     val username = act?.displayName
                     val email = act?.email
+                    Timber.i("Auth with google successful")
                     saveUserToFirebaseDatabase(username!!, email!!, selectedPhotoUri.toString())
                 } else {
                     // If sign in fails, display a message to the user.
@@ -197,6 +198,7 @@ class RegistrationPage : AppCompatActivity() {
 
 
     private fun saveUserToFirebaseDatabase(username: String, email: String, profileImageUrl : String){
+        Timber.i("save User to Firebase")
         val uid = FirebaseAuth.getInstance().uid?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
         val status = "Not set"
@@ -251,6 +253,7 @@ class RegistrationPage : AppCompatActivity() {
                         }
                     }
 
+                Timber.i("User saved to firebase")
                 val deepColor = Color.parseColor("#27E1EF")
                 val largeIcon = BitmapFactory.decodeResource(resources, R.drawable.blue_tick)
                 binding.registerButtonRegister.doneLoadingAnimation(deepColor, largeIcon)

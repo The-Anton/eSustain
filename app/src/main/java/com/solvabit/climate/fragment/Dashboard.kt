@@ -107,7 +107,7 @@ class Dashboard : Fragment() {
                 popupMenu.menuInflater.inflate(R.menu.cards_menu, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener {
                     if (it.itemId == R.id.Refresh) {
-                        Timber.i("Signout pressed")
+                        Timber.i("SignOut can be pressed")
                     } else if (it.itemId == R.id.more) {
                         Timber.i("Nothing happened")
                     }

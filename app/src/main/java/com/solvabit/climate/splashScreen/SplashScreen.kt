@@ -32,7 +32,7 @@ class SplashScreen : AppCompatActivity() {
         Handler().postDelayed(
             {
                 verifyUserIsLoggedIn(this)
-            }, 10000)
+            }, 1250)
     }
 
     private fun verifyUserIsLoggedIn(context: Context){
@@ -73,11 +73,13 @@ class SplashScreen : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
+        Animatoo.animateFade(this)
     }
 
     fun  startLocationActivity(){
         val intent = Intent(this, com.solvabit.climate.location.Location::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
+        Animatoo.animateFade(this)
     }
 }
