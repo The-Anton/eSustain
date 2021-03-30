@@ -44,5 +44,12 @@
         <item name="android:textColor">@color/txt_black</item>
     </style>
 
+    <style name="SpinnerBackground">
+        <item name="android:fontFamily">@font/avenir_book</item>
+        <item name="android:textSize">16sp</item>
+        <item name="overlapAnchor">true</item>
+        <item name="android:background">@drawable/spinnerbg</item>
+    </style>
+
 
 </resources>

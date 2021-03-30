@@ -1,11 +1,9 @@
 package com.solvabit.climate.fragment
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.solvabit.climate.R
-import com.solvabit.climate.activity.MainActivity
 import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.databinding.FragmentCreatePostBinding
 import com.solvabit.climate.dialog.Dialog
@@ -32,7 +29,7 @@ class CreatePostFragment : Fragment() {
 
     lateinit var binding: FragmentCreatePostBinding
     private val localUser = Dashboard.localuser
-    private var selectedPhotoUri : Uri?= null
+    private var selectedPhotoUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,10 +57,9 @@ class CreatePostFragment : Fragment() {
     }
 
     private fun createPost() {
-        val text = binding.postText.text.toString()
-        if (binding.postText.text.isEmpty()){
-            Toast.makeText(requireContext(),"Sorry, Blank can't be posted!", Toast.LENGTH_SHORT).show()
-        }else{
+        if (binding.postText.text.isEmpty()) {
+            Toast.makeText(requireContext(), "Sorry, Blank can't be posted!", Toast.LENGTH_SHORT).show()
+        } else {
             Timber.i("Going to show dialog box")
             Dialog().show(childFragmentManager, "MyCustomFragment")
             uploadImage()
@@ -71,18 +67,17 @@ class CreatePostFragment : Fragment() {
     }
 
     private fun uploadImage() {
-        if(selectedPhotoUri == null) {
+        if (selectedPhotoUri == null) {
             post("")
-        }
-        else{
+        } else {
             val filename = UUID.randomUUID().toString()
             val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
             ref.putFile(selectedPhotoUri!!)
                     .addOnSuccessListener {
-                        Timber.i( "Photo uploaded successfully: ${it.metadata?.path}")
+                        Timber.i("Photo uploaded successfully: ${it.metadata?.path}")
 
-                        ref.downloadUrl.addOnSuccessListener{
-                            Timber.i( "image downloaded url : $it")
+                        ref.downloadUrl.addOnSuccessListener {
+                            Timber.i("image downloaded url : $it")
                             post(it.toString())
                         }
                     }
@@ -90,25 +85,24 @@ class CreatePostFragment : Fragment() {
     }
 
     private fun post(postImageUrl: String) {
-        val uid = FirebaseAuth.getInstance().uid?: ""
+        val uid = FirebaseAuth.getInstance().uid ?: ""
         val time = System.currentTimeMillis().toString()
         val max = Long.MAX_VALUE
         val timestamp = max - System.currentTimeMillis()
         val ref = FirebaseDatabase.getInstance().getReference("/PostData/$timestamp")
         val text = binding.postText.text.toString()
         val category = binding.spinner2.selectedItem.toString()
-        val postData = Post(text,postImageUrl,uid,time,category,timestamp.toString(),0)
+        val postData = Post(text, postImageUrl, uid, time, category, timestamp.toString(), 0)
         ref.setValue(postData).addOnSuccessListener {
-            Toast.makeText(requireContext(),"Posted Successfully!!",Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT).show()
             binding.root.findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
         }
     }
 
-
     private fun addImage() {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent,0)
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, 0)
     }
 
     private fun addSpinner() {
@@ -131,8 +125,7 @@ class CreatePostFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == 0 && resultCode== Activity.RESULT_OK && data!= null)
-        {
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             selectedPhotoUri = data.data
             binding.postImage.setImageURI(selectedPhotoUri)
             binding.postCard.updatePadding(bottom = 8)

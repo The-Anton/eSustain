@@ -38,7 +38,7 @@ import java.util.*
 class TreesPlanted : Fragment() {
 
     private val uid = FirebaseAuth.getInstance().uid
-    private var treesPlanted : Int = 0
+    private var treesPlanted: Int = 0
     private var targetTrees: Int = 0
     private var status: String = "remaining"
 
@@ -54,7 +54,7 @@ class TreesPlanted : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-                inflater, R.layout.trees_planted_fragment, container, false
+            inflater, R.layout.trees_planted_fragment, container, false
         )
 
         val args = TreesPlantedArgs.fromBundle(requireArguments())
@@ -75,24 +75,22 @@ class TreesPlanted : Fragment() {
     }
 
 
-    private fun uploadImageDataToDevice()
-    {
+    private fun uploadImageDataToDevice() {
         binding.addPicFiveTrees.startAnimation()
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-        startActivityForResult(intent,0)
+        startActivityForResult(intent, 0)
 
     }
 
-    private var selectedPhotoUri : Uri?= null
+    private var selectedPhotoUri: Uri? = null
 
-    private var imageUrl: String ? = null
+    private var imageUrl: String? = null
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == 0 && resultCode== Activity.RESULT_OK && data!= null)
-        {
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             selectedPhotoUri = data.data
 
             val deepColor = Color.parseColor("#27E1EF")
@@ -105,16 +103,14 @@ class TreesPlanted : Fragment() {
                 uploadPhotoToFirebase()
             }
 
-        }
-        else
-        {
+        } else {
             binding.addPicFiveTrees.revertAnimation()
             return
         }
     }
 
     private fun uploadPhotoToFirebase() {
-        if (selectedPhotoUri == null){
+        if (selectedPhotoUri == null) {
             Snackbar.make(binding.root, "Hello Snackbar", Snackbar.LENGTH_SHORT).show()
             binding.postAddPicFiveTrees.revertAnimation()
             binding.postAddPicFiveTrees.visibility = View.INVISIBLE
@@ -124,55 +120,63 @@ class TreesPlanted : Fragment() {
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images-send-by-users/$filename")
         ref.putFile(selectedPhotoUri!!)
-                .addOnSuccessListener {
+            .addOnSuccessListener {
 
-                    ref.downloadUrl.addOnSuccessListener {
-                        imageUrl = it.toString()
-                        Timber.i("image downloaded url : $imageUrl")
+                ref.downloadUrl.addOnSuccessListener {
+                    imageUrl = it.toString()
+                    Timber.i("image downloaded url : $imageUrl")
 
-                        val timestamp = System.currentTimeMillis()
-                        val ref : DatabaseReference
-                        if(targetTrees==5)
-                            ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/fiveTrees/$timestamp")
-                        else
-                            ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/tenTrees/$timestamp")
-                        treesPlanted += 1
-                        val tree = Trees(
-                                imageUrl.toString(),
-                                System.currentTimeMillis()
-                        )
+                    val timestamp = System.currentTimeMillis()
+                    val ref: DatabaseReference
+                    if (targetTrees == 5)
+                        ref = FirebaseDatabase.getInstance()
+                            .getReference("/Users/$uid/fiveTrees/$timestamp")
+                    else
+                        ref = FirebaseDatabase.getInstance()
+                            .getReference("/Users/$uid/tenTrees/$timestamp")
+                    treesPlanted += 1
+                    val tree = Trees(
+                        imageUrl.toString(),
+                        System.currentTimeMillis()
+                    )
 
-                        ref.setValue(tree)
-                                .addOnSuccessListener {
-                                    val handler = Handler()
-                                    handler.postDelayed({
-                                        fetchTrees()
-                                        binding.addPicFiveTrees.revertAnimation()
-                                        binding.postAddPicFiveTrees.revertAnimation()
-                                        FirebaseDatabase.getInstance().getReference("/Users/$uid").child("treesPlanted").setValue(treesPlanted)
-                                        binding.addPicFiveTrees.setCompoundDrawablesWithIntrinsicBounds(R.drawable.rounded_button_login_register, 0, 0, 0);
-                                        binding.postAddPicFiveTrees.visibility = View.INVISIBLE
-                                    },1000)
-                                    selectedPhotoUri = null
-                                }
-                                .addOnFailureListener {
-                                    binding.addPicFiveTrees.revertAnimation()
-                                    binding.postAddPicFiveTrees.revertAnimation()
-                                    binding.postAddPicFiveTrees.visibility = View.INVISIBLE
-                                }
-                    }
+                    ref.setValue(tree)
+                        .addOnSuccessListener {
+                            val handler = Handler()
+                            handler.postDelayed({
+                                fetchTrees()
+                                binding.addPicFiveTrees.revertAnimation()
+                                binding.postAddPicFiveTrees.revertAnimation()
+                                FirebaseDatabase.getInstance().getReference("/Users/$uid")
+                                    .child("treesPlanted").setValue(treesPlanted)
+                                binding.addPicFiveTrees.setCompoundDrawablesWithIntrinsicBounds(
+                                    R.drawable.rounded_button_login_register,
+                                    0,
+                                    0,
+                                    0
+                                );
+                                binding.postAddPicFiveTrees.visibility = View.INVISIBLE
+                            }, 1000)
+                            selectedPhotoUri = null
+                        }
+                        .addOnFailureListener {
+                            binding.addPicFiveTrees.revertAnimation()
+                            binding.postAddPicFiveTrees.revertAnimation()
+                            binding.postAddPicFiveTrees.visibility = View.INVISIBLE
+                        }
                 }
-                .addOnFailureListener{
-                    binding.addPicFiveTrees.revertAnimation()
-                    binding.postAddPicFiveTrees.revertAnimation()
-                    binding.postAddPicFiveTrees.visibility = View.INVISIBLE
-                }
+            }
+            .addOnFailureListener {
+                binding.addPicFiveTrees.revertAnimation()
+                binding.postAddPicFiveTrees.revertAnimation()
+                binding.postAddPicFiveTrees.visibility = View.INVISIBLE
+            }
     }
 
-    private fun fetchTrees(){
+    private fun fetchTrees() {
         binding.numberofTreesPlanted.text = "00"
         val ref: DatabaseReference
-        if(targetTrees==5)
+        if (targetTrees == 5)
             ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/fiveTrees")
         else
             ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/tenTrees")
@@ -184,26 +188,29 @@ class TreesPlanted : Fragment() {
             override fun onDataChange(p0: DataSnapshot) {
                 val adapter = GroupAdapter<ViewHolder>()
                 binding.allTreesRecyclerView.adapter = adapter
-                p0.children.forEach{
+                p0.children.forEach {
                     val tree = it.getValue(Trees::class.java)
                     adapter.add(AddRecycleItemTrees(tree!!))
                     i += 1;
-                    if(i>=targetTrees) {
+                    if (i >= targetTrees) {
                         binding.linearLayout.visibility = View.VISIBLE
                         binding.addPicFiveTrees.visibility = View.GONE
                         binding.postAddPicFiveTrees.visibility = View.GONE
-                        val changeRemainingList = Dashboard.localuser.remainingAction.toMutableList()
-                        val changeCompletedList = Dashboard.localuser.completedAction.toMutableList()
-                        if(targetTrees==5 && status=="remaining") {
+                        val changeRemainingList =
+                            Dashboard.localuser.remainingAction.toMutableList()
+                        val changeCompletedList =
+                            Dashboard.localuser.completedAction.toMutableList()
+                        if (targetTrees == 5 && status == "remaining") {
                             changeRemainingList.removeAt(0)
                             changeCompletedList.add("1")
-                        }
-                        else if(targetTrees==10 && status=="remaining") {
+                        } else if (targetTrees == 10 && status == "remaining") {
                             changeRemainingList.removeAt(1)
                             changeCompletedList.add("2")
                         }
-                        FirebaseDatabase.getInstance().getReference("/Users/$uid/remainingAction").setValue(changeRemainingList)
-                        FirebaseDatabase.getInstance().getReference("/Users/$uid/completedAction").setValue(changeCompletedList)
+                        FirebaseDatabase.getInstance().getReference("/Users/$uid/remainingAction")
+                            .setValue(changeRemainingList)
+                        FirebaseDatabase.getInstance().getReference("/Users/$uid/completedAction")
+                            .setValue(changeCompletedList)
                     }
                     binding.numberofTreesPlanted.text = "0" + i.toString() + "/ 0" + targetTrees
                 }
@@ -212,10 +219,10 @@ class TreesPlanted : Fragment() {
         })
     }
 
-    private fun fetchCurrentUser(){
-                treesPlanted = Dashboard.localuser.treesPlanted ?: 0
-                binding.achievementNameTextView.text = Dashboard.localuser.username
-                Picasso.get().load(Dashboard.localuser.imageUrl).into(binding.userprofileImageView)
+    private fun fetchCurrentUser() {
+        treesPlanted = Dashboard.localuser.treesPlanted ?: 0
+        binding.achievementNameTextView.text = Dashboard.localuser.username
+        Picasso.get().load(Dashboard.localuser.imageUrl).into(binding.userprofileImageView)
     }
 
     private fun circularProgress() {
@@ -237,8 +244,6 @@ class TreesPlanted : Fragment() {
     }
 
 
-
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TreesPlantedViewModel::class.java)
@@ -248,7 +253,7 @@ class TreesPlanted : Fragment() {
 }
 
 
-class AddRecycleItemTrees(private val tree: Trees): Item<ViewHolder>(){
+class AddRecycleItemTrees(private val tree: Trees) : Item<ViewHolder>() {
     override fun getLayout(): Int {
         return R.layout.single_tree
     }
@@ -261,10 +266,8 @@ class AddRecycleItemTrees(private val tree: Trees): Item<ViewHolder>(){
 }
 
 
-
-
 @Parcelize
-class Trees(val treeImage: String ,val timestamp: Long):
-        Parcelable {
-    constructor(): this("",-1)
+class Trees(val treeImage: String, val timestamp: Long) :
+    Parcelable {
+    constructor() : this("", -1)
 }
