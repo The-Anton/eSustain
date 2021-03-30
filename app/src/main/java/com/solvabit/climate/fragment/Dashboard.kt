@@ -2,12 +2,10 @@ package com.solvabit.climate.fragment
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -32,12 +30,9 @@ import timber.log.Timber
 
 
 class Dashboard : Fragment() {
-    private lateinit var v: View
 
     companion object {
-        fun newInstance() = Dashboard()
         var localuser= User()
-
     }
 
     private lateinit var viewModel: DashboardViewModel
@@ -75,7 +70,7 @@ class Dashboard : Fragment() {
 
         GlobalScope.launch {
             Repository(dao,uid).fetchUpdates {
-                Log.v("Dashboard", localuser.toString())
+                Timber.i( localuser.toString())
                 addRecommendedDashboardItems()
                 addDataToDashboard()
             }
@@ -97,28 +92,6 @@ class Dashboard : Fragment() {
         addRecommendedDashboardItems()
 
     }
-  /*
-    private fun popMenu() {
-
-
-        binding.airMore.setOnClickListener {
-            context?.let {
-                val popupMenu = PopupMenu(it, binding.airMore)
-                popupMenu.menuInflater.inflate(R.menu.cards_menu, popupMenu.menu)
-                popupMenu.setOnMenuItemClickListener {
-                    if (it.itemId == R.id.Refresh) {
-                        Timber.i("SignOut can be pressed")
-                    } else if (it.itemId == R.id.more) {
-                        Timber.i("Nothing happened")
-                    }
-                    true
-                }
-
-                popupMenu.show()
-            }
-        }
-
-    }  */
 
     private fun addDataToDashboard() {
         binding.normalizedScoreData.text = localuser.normalizedScore.toString()
@@ -211,7 +184,6 @@ class Dashboard : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
@@ -232,8 +204,8 @@ class AddRecycleItemRecommended(val a: Int, val status: String, val binding: Das
     override fun bind(viewHolder: ViewHolder, position: Int) {
         if(a==0)
             return
-        var action = SingleAction()
-        action = when(a)
+
+        val action = when(a)
         {
             1->action1
             2->action2

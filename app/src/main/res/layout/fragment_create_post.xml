@@ -74,16 +74,16 @@
                     android:layout_gravity="center"
                     android:layout_weight="4"
                     android:paddingStart="10dp"
-                    tools:text="Username"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorPrimary"
+                    tools:text="Username" />
 
                 <Spinner
                     android:id="@+id/spinner2"
                     style="@style/normaltext"
-                    android:background="@drawable/spinnerbg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:background="@drawable/spinnerbg" />
 
             </LinearLayout>
 

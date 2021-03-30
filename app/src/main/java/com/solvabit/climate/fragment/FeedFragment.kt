@@ -1,17 +1,15 @@
 package com.solvabit.climate
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -19,13 +17,12 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.database.User
+import com.solvabit.climate.dialog.JoinGroupConfirmDialog
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.activity_trees_planted.*
 import kotlinx.android.synthetic.main.card_post_view.view.*
-import kotlinx.android.synthetic.main.feed_fragment.*
 import kotlinx.android.synthetic.main.feed_fragment.view.*
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -33,54 +30,52 @@ import java.util.*
 
 
 class FeedFragment : Fragment() {
-    private lateinit var v:View
+    private lateinit var v: View
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View {
+
         v = inflater.inflate(R.layout.feed_fragment, container, false)
 
         v.findViewById<LinearLayout>(R.id.create_new_post).setOnClickListener {
-            v.findNavController().navigate(FeedFragmentDirections.actionFeedFragmentToCreatePostFragment())
+            v.findNavController()
+                    .navigate(FeedFragmentDirections.actionFeedFragmentToCreatePostFragment())
         }
         fetchPostData(requireContext())
+
         return v
     }
 
     private fun fetchPostData(context: Context) {
         val adapter = GroupAdapter<ViewHolder>()
         val ref = FirebaseDatabase.getInstance().getReference("/PostData")
-                v.post_recycler_view.adapter = adapter
+        v.post_recycler_view.adapter = adapter
 
 
-                ref.addChildEventListener(object: ChildEventListener{
+        ref.addChildEventListener(object : ChildEventListener {
 
-                    override fun onCancelled(p0: DatabaseError) {}
-                    override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
-                    override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
-                    override fun onChildRemoved(p0: DataSnapshot) {}
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
+            override fun onChildRemoved(p0: DataSnapshot) {}
 
-                    override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                        val key = p0.key
-                        val post = p0.getValue(Post::class.java)
-                        Timber.i("Key - $key")
-                        if(post!=null)
-                            adapter.add(postItem(post, context))
-                    }
-                })
-
-//                    val post: Post = p0.getValue(Post::class.java)!!
-//                    Timber.i("Post - ${it.value}")
-//                    Timber.i("Again - ${post}")
-//                    if(post!=null)
-//                        adapter.add(postItem(post, context))
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                val post = p0.getValue(Post::class.java)
+                if (post != null)
+                    adapter.add(PostItem(post, context))
+            }
+        })
     }
 
 }
-class postItem(private val post: Post,val context: Context): Item<ViewHolder>() {
+
+
+class PostItem(private val post: Post, val context: Context) : Item<ViewHolder>() {
 
     private lateinit var database: DatabaseReference
     override fun getLayout(): Int {
@@ -88,8 +83,24 @@ class postItem(private val post: Post,val context: Context): Item<ViewHolder>() 
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
+
+
+        viewHolder.itemView.interested_button.setOnClickListener {
+            val dialog = JoinGroupConfirmDialog(post)
+            Timber.i("Interested button clicked")
+            dialog.show((context as AppCompatActivity).supportFragmentManager, "Show Dialog")
+        }
+
+        initializePostData(viewHolder)
+
+        popPostMenu(viewHolder)
+
+        enableLikeButton(viewHolder)
+    }
+
+    private fun initializePostData(viewHolder: ViewHolder) {
         viewHolder.itemView.post_main_text.text = post.post_text
-        if(post.post_image.isNotEmpty())
+        if (post.post_image.isNotEmpty())
             Picasso.get().load(post.post_image).into(viewHolder.itemView.post_main_image)
         viewHolder.itemView.category.text = post.category
         database = Firebase.database.reference
@@ -98,15 +109,7 @@ class postItem(private val post: Post,val context: Context): Item<ViewHolder>() 
         viewHolder.itemView.time.text = sfd.format(Date(time))
         val uid = post.uid
         val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
-        ref.keepSynced(true)
 
-        val currentUserUid = FirebaseAuth.getInstance().uid
-        /* for (i in likes) {
-            if (i == currentUserUid) {
-                viewHolder.itemView.like_icon.setColorFilter(Color.BLUE)
-                viewHolder.itemView.like_text.setTextColor(Color.BLUE)
-            }
-        } */
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
@@ -119,27 +122,24 @@ class postItem(private val post: Post,val context: Context): Item<ViewHolder>() 
                 }
 
             }
-
         })
-        viewHolder.itemView.post_more.setOnClickListener {
+    }
 
-            val popupMenu = PopupMenu(context, viewHolder.itemView.post_more)
-            popupMenu.menuInflater.inflate(R.menu.post_more_options, popupMenu.menu)
+    private fun enableLikeButton(viewHolder: ViewHolder) {
 
-            popupMenu.show()
-        }
         val likeref = FirebaseDatabase.getInstance().getReference("/PostData/${post.key}/likes/")
+        val currentUserUid = FirebaseAuth.getInstance().uid
 
         likeref.get().addOnSuccessListener { snapshot ->
-            var count = 0;
+            var count = 0
             snapshot.children.forEach {
-                if (it.value==true){
+                if (it.value == true) {
                     count++
                 }
             }
-            viewHolder.itemView.like_count.text=count.toString()
-            if (snapshot.hasChild(currentUserUid.toString())){
-                if (snapshot.child(currentUserUid.toString()).value==true){
+            viewHolder.itemView.like_count.text = count.toString()
+            if (snapshot.hasChild(currentUserUid.toString())) {
+                if (snapshot.child(currentUserUid.toString()).value == true) {
                     viewHolder.itemView.like_icon.setColorFilter(Color.BLUE)
                     viewHolder.itemView.like_text.setTextColor(Color.BLUE)
                 }
@@ -147,45 +147,42 @@ class postItem(private val post: Post,val context: Context): Item<ViewHolder>() 
         }
         viewHolder.itemView.like_button.setOnClickListener {
 
-
             likeref.get().addOnSuccessListener { snapshot ->
-                if (snapshot.hasChild(currentUserUid.toString())){
+                if (snapshot.hasChild(currentUserUid.toString())) {
                     val bool = snapshot.child(currentUserUid.toString()).value
-                    if (bool==true){
+                    if (bool == true) {
                         viewHolder.itemView.like_icon.setColorFilter(Color.BLACK)
                         viewHolder.itemView.like_text.setTextColor(Color.BLACK)
-                        viewHolder.itemView.like_count.text = (viewHolder.itemView.like_count.text.toString().toInt()-1).toString()
+                        viewHolder.itemView.like_count.text =
+                                (viewHolder.itemView.like_count.text.toString().toInt() - 1).toString()
                         likeref.child(currentUserUid.toString()).setValue(false)
-                    }else{
+                    } else {
                         viewHolder.itemView.like_icon.setColorFilter(Color.BLUE)
                         viewHolder.itemView.like_text.setTextColor(Color.BLUE)
-                        viewHolder.itemView.like_count.text = (viewHolder.itemView.like_count.text.toString().toInt()+1).toString()
+                        viewHolder.itemView.like_count.text =
+                                (viewHolder.itemView.like_count.text.toString().toInt() + 1).toString()
                         likeref.child(currentUserUid.toString()).setValue(true)
                     }
-                }else{
+                } else {
                     viewHolder.itemView.like_icon.setColorFilter(Color.BLUE)
                     viewHolder.itemView.like_text.setTextColor(Color.BLUE)
-                    viewHolder.itemView.like_count.text = (viewHolder.itemView.like_count.text.toString().toInt()+1).toString()
+                    viewHolder.itemView.like_count.text =
+                            (viewHolder.itemView.like_count.text.toString().toInt() + 1).toString()
                     likeref.child(currentUserUid.toString()).setValue(true)
                 }
 
             }
 
-            /* if (currentUserUid !in likes){
-                val updatedList:MutableList<String> = (likes+currentUserUid) as MutableList<String>
+        }
 
-                ref.push().setValue(updatedList)
-            }
-            if (currentUserUid in likes) {
-                    // dislike the button
-                    val listKey = likes.indexOf(currentUserUid)
-                    val updatedList = likes.remove(currentUserUid)
-                    val ref = FirebaseDatabase.getInstance().getReference("/PostData/$key/likes/$listKey")
-                    ref.removeValue()
-            } */
+    }
+
+    private fun popPostMenu(viewHolder: ViewHolder) {
+        viewHolder.itemView.post_more.setOnClickListener {
+            val popupMenu = PopupMenu(context, viewHolder.itemView.post_more)
+            popupMenu.menuInflater.inflate(R.menu.post_more_options, popupMenu.menu)
+            popupMenu.show()
         }
     }
+
 }
-
-
-

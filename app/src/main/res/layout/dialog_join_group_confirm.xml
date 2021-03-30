@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="32dp">
+
+    <TextView
+        android:id="@+id/confirm_join_group_textView"
+        style="@style/normalTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="@string/do_you_want_to_join_chat_with_other_n_interested_users"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cancel_button_join_group_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:textColor="@color/subtxt_black"
+        style="@style/blue_empty_button"
+        app:layout_constraintBottom_toBottomOf="@+id/join_button_join_group_dialog"
+        app:layout_constraintEnd_toStartOf="@+id/join_button_join_group_dialog"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/join_button_join_group_dialog" />
+
+    <Button
+        android:id="@+id/join_button_join_group_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/join_now"
+        style="@style/blue_filled_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cancel_button_join_group_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_join_group_textView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
