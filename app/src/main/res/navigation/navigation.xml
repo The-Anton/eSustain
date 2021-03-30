@@ -25,7 +25,11 @@
         android:id="@+id/feed_fragment"
         android:name="com.solvabit.climate.FeedFragment"
         android:label="feed_fragment"
-        tools:layout="@layout/feed_fragment" />
+        tools:layout="@layout/feed_fragment" >
+        <action
+            android:id="@+id/action_feed_fragment_to_createPostFragment"
+            app:destination="@id/createPostFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sendReferral"
         android:name="com.solvabit.climate.fragment.SendReferral"
@@ -48,4 +52,13 @@
         android:name="com.solvabit.climate.fragment.StatisticsFragment"
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" />
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.solvabit.climate.fragment.CreatePostFragment"
+        android:label="CreatePostFragment"
+        tools:layout="@layout/fragment_create_post">
+        <action
+            android:id="@+id/action_createPostFragment_to_feed_fragment"
+            app:destination="@id/feed_fragment" />
+    </fragment>
 </navigation>

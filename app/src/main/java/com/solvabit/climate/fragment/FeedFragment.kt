@@ -12,11 +12,11 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
+import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.solvabit.climate.activity.CreatePost
 import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.database.User
 import com.squareup.picasso.Picasso
@@ -44,10 +44,7 @@ class FeedFragment : Fragment() {
         v = inflater.inflate(R.layout.feed_fragment, container, false)
 
         v.findViewById<LinearLayout>(R.id.create_new_post).setOnClickListener {
-            activity?.let{
-                val intent = Intent (it, CreatePost::class.java)
-                it.startActivity(intent)
-            }
+            v.findNavController().navigate(FeedFragmentDirections.actionFeedFragmentToCreatePostFragment())
         }
         fetchPostData(requireContext())
         return v
@@ -92,7 +89,8 @@ class postItem(private val post: Post,val context: Context): Item<ViewHolder>() 
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.post_main_text.text = post.post_text
-        Picasso.get().load(post.post_image).into(viewHolder.itemView.post_main_image)
+        if(post.post_image.isNotEmpty())
+            Picasso.get().load(post.post_image).into(viewHolder.itemView.post_main_image)
         viewHolder.itemView.category.text = post.category
         database = Firebase.database.reference
         val time = post.time.toLong()
