@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -30,7 +33,9 @@ import java.util.*
 
 
 class FeedFragment : Fragment() {
+
     private lateinit var v: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -47,6 +52,10 @@ class FeedFragment : Fragment() {
                     .navigate(FeedFragmentDirections.actionFeedFragmentToCreatePostFragment())
         }
         fetchPostData(requireContext())
+
+        v.findViewById<Button>(R.id.all_groups_btn).setOnClickListener {
+            v.findNavController().navigate(FeedFragmentDirections.actionFeedFragmentToAllChatsFragment())
+        }
 
         return v
     }
@@ -72,6 +81,11 @@ class FeedFragment : Fragment() {
         })
     }
 
+    public fun navigateToChatLog()
+    {
+
+    }
+
 }
 
 
@@ -84,11 +98,10 @@ class PostItem(private val post: Post, val context: Context) : Item<ViewHolder>(
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
 
-
         viewHolder.itemView.interested_button.setOnClickListener {
             val dialog = JoinGroupConfirmDialog(post)
             Timber.i("Interested button clicked")
-            dialog.show((context as AppCompatActivity).supportFragmentManager, "Show Dialog")
+            dialog.show((context as AppCompatActivity).supportFragmentManager, "JoinGroupDialog")
         }
 
         initializePostData(viewHolder)

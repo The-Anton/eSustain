@@ -29,6 +29,12 @@
         <action
             android:id="@+id/action_feed_fragment_to_createPostFragment"
             app:destination="@id/createPostFragment" />
+        <action
+            android:id="@+id/action_feed_fragment_to_joinGroupConfirmDialog"
+            app:destination="@id/joinGroupConfirmDialog" />
+        <action
+            android:id="@+id/action_feed_fragment_to_allChatsFragment"
+            app:destination="@id/allChatsFragment" />
     </fragment>
     <fragment
         android:id="@+id/sendReferral"
@@ -61,4 +67,22 @@
             android:id="@+id/action_createPostFragment_to_feed_fragment"
             app:destination="@id/feed_fragment" />
     </fragment>
+    <dialog
+        android:id="@+id/joinGroupConfirmDialog"
+        android:name="com.solvabit.climate.dialog.JoinGroupConfirmDialog"
+        android:label="JoinGroupConfirmDialog"
+        tools:layout="@layout/dialog_join_group_confirm">
+        <action
+            android:id="@+id/action_joinGroupConfirmDialog_to_chatLogFragment"
+            app:destination="@id/chatLogFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/chatLogFragment"
+        android:name="com.solvabit.climate.fragment.ChatFragments.ChatLogFragment"
+        android:label="ChatLogFragment"
+        tools:layout="@layout/fragment_chat_log"/>
+    <fragment
+        android:id="@+id/allChatsFragment"
+        android:name="com.solvabit.climate.fragment.ChatFragments.AllChatsFragment"
+        android:label="AllChatsFragment" />
 </navigation>
