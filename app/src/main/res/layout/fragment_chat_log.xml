@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.ChatFragments.ChatLogFragment">
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingBottom="2dp">
+
+                <ImageView
+                    android:id="@+id/back_arrow_chatLog"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/groupname_chatLog"
+                    app:layout_constraintStart_toEndOf="@+id/groupimage_chatLog"
+                    app:layout_constraintTop_toTopOf="@+id/groupimage_chatLog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    tools:text="Green Agra"
+                    android:maxLength="30"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/groupimage_chatLog"
+                    app:layout_constraintBottom_toBottomOf="@+id/back_arrow_chatLog"
+                    app:layout_constraintStart_toEndOf="@+id/back_arrow_chatLog"
+                    app:layout_constraintTop_toTopOf="@+id/back_arrow_chatLog"
+                    app:layout_constraintVertical_bias="0.428"
+                    tools:srcCompat="@drawable/blue_tick"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="12dp" />
+
+                <TextView
+                    android:id="@+id/groupdate_chatLog"
+                    app:layout_constraintBottom_toBottomOf="@+id/groupimage_chatLog"
+                    app:layout_constraintStart_toEndOf="@+id/groupimage_chatLog"
+                    app:layout_constraintTop_toBottomOf="@+id/groupname_chatLog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="1dp"
+                    tools:text="12/05/21"
+                    android:textSize="15dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/enter_message_chat_log"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:ems="10"
+            android:hint="Enter message"
+            android:inputType="textMultiLine|textPersonName"
+            android:paddingLeft="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/send_button_chat_log"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/send_button_chat_log"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView_chat_log"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/blue_tick"
+            android:text="SEND" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_chat_log"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/enter_message_chat_log"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="6dp"
+            android:background="#F4F6F9" />
+
+<!--        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton-->
+<!--            android:id="@+id/button_to_send_image_chat_log"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/send_button_chat_log"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            style="@style/blue_filled_button"-->
+<!--            android:layout_marginEnd="4dp"-->
+<!--            android:layout_marginBottom="4dp"-->
+<!--            android:text="IMG"/>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

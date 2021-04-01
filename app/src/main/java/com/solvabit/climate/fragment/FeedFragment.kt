@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -17,20 +17,22 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.database.User
+import com.solvabit.climate.databinding.FeedFragmentBinding
 import com.solvabit.climate.dialog.JoinGroupConfirmDialog
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.card_post_view.view.*
-import kotlinx.android.synthetic.main.feed_fragment.view.*
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class FeedFragment : Fragment() {
-    private lateinit var v: View
+
+    private lateinit var binding: FeedFragmentBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -40,22 +42,48 @@ class FeedFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
 
-        v = inflater.inflate(R.layout.feed_fragment, container, false)
+        binding = DataBindingUtil.inflate(
+                inflater, R.layout.feed_fragment, container, false
+        )
 
-        v.findViewById<LinearLayout>(R.id.create_new_post).setOnClickListener {
-            v.findNavController()
+        binding.createNewPost.setOnClickListener {
+            binding.root.findNavController()
                     .navigate(FeedFragmentDirections.actionFeedFragmentToCreatePostFragment())
         }
+
         fetchPostData(requireContext())
 
-        return v
+        popFeedMenu()
+
+        return binding.root
+    }
+
+    private fun popFeedMenu() {
+        binding.feedMenuBtn.setOnClickListener {
+            context?.let { context ->
+                val popupMenu = android.widget.PopupMenu(context, binding.feedMenuBtn)
+                popupMenu.menuInflater.inflate(R.menu.feed_top_menu, popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener {
+                    if (it.itemId == R.id.create_post_menu) {
+                        binding.root.findNavController()
+                                .navigate(FeedFragmentDirections.actionFeedFragmentToCreatePostFragment())
+                    }
+                    else if (it.itemId == R.id.all_chats_menu) {
+                        binding.root.findNavController()
+                                .navigate(FeedFragmentDirections.actionFeedFragmentToAllChatsFragment())
+                    }
+                    true
+                }
+
+                popupMenu.show()
+            }
+        }
     }
 
     private fun fetchPostData(context: Context) {
         val adapter = GroupAdapter<ViewHolder>()
         val ref = FirebaseDatabase.getInstance().getReference("/PostData")
-        v.post_recycler_view.adapter = adapter
-
+        binding.postRecyclerView.adapter = adapter
 
         ref.addChildEventListener(object : ChildEventListener {
 
@@ -84,18 +112,21 @@ class PostItem(private val post: Post, val context: Context) : Item<ViewHolder>(
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
 
-
-        viewHolder.itemView.interested_button.setOnClickListener {
-            val dialog = JoinGroupConfirmDialog(post)
-            Timber.i("Interested button clicked")
-            dialog.show((context as AppCompatActivity).supportFragmentManager, "Show Dialog")
-        }
-
         initializePostData(viewHolder)
+
+        enableInterestedButton(viewHolder)
 
         popPostMenu(viewHolder)
 
         enableLikeButton(viewHolder)
+    }
+
+    private fun enableInterestedButton(viewHolder: ViewHolder) {
+        viewHolder.itemView.interested_button.setOnClickListener {
+            val dialog = JoinGroupConfirmDialog(post)
+            Timber.i("Interested button clicked")
+            dialog.show((context as AppCompatActivity).supportFragmentManager, "JoinGroupDialog")
+        }
     }
 
     private fun initializePostData(viewHolder: ViewHolder) {
@@ -109,6 +140,9 @@ class PostItem(private val post: Post, val context: Context) : Item<ViewHolder>(
         viewHolder.itemView.time.text = sfd.format(Date(time))
         val uid = post.uid
         val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
+
+        if(post.category!="Issue")
+            viewHolder.itemView.interested_button.visibility = View.GONE
 
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {

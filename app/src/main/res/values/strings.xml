@@ -27,7 +27,7 @@
     </string>
     <string name="string_diameter_pm10">Diameter \u2264 10μm</string>
     <string name="string_diameter_pm25">Diameter \u2264 2.5μm</string>
-    <string name="do_you_want_to_join_chat_with_other_n_interested_users">Do you want to join chat with other<br/> interested users?</string>
+    <string name="do_you_want_to_join_chat_with_other_n_interested_users">Do you want to join chat with other<br /> interested users?</string>
     <string name="join_now">Join Now</string>
     <string name="cancel">Cancel</string>
 
