@@ -39,10 +39,9 @@ class JoinGroupConfirmDialog(val post: Post) : DialogFragment() {
             val ref = FirebaseDatabase.getInstance().getReference("/PostData/${post.key}/interestedUsers/$uid")
             ref.setValue(true)
                     .addOnSuccessListener {
-                        val postLists = localUser.interestedGroups.toMutableList()
-                        postLists.add(post)
+                        val allPostMaps = localUser.interestedGroups.plus(Pair(post.key, post))
                         FirebaseDatabase.getInstance().getReference("/Users/$uid/interestedGroups")
-                                .setValue(postLists)
+                                .setValue(allPostMaps)
                                 .addOnSuccessListener {
                                     dialogView.confirm_join_group_textView.text = "Congratulations!! \n You can check your newly added group now"
                                     Toast.makeText(context, "Added successfully", Toast.LENGTH_SHORT).show()

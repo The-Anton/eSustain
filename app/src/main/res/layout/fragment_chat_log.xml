@@ -29,27 +29,28 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+                    app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/profilename_chatLog"
-                    app:layout_constraintStart_toEndOf="@+id/profileimage_chatLog"
-                    app:layout_constraintTop_toTopOf="@+id/profileimage_chatLog"
+                    android:id="@+id/groupname_chatLog"
+                    app:layout_constraintStart_toEndOf="@+id/groupimage_chatLog"
+                    app:layout_constraintTop_toTopOf="@+id/groupimage_chatLog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    tools:text="Green Agra"
+                    android:maxLength="30"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profileimage_chatLog"
+                    android:id="@+id/groupimage_chatLog"
                     app:layout_constraintBottom_toBottomOf="@+id/back_arrow_chatLog"
                     app:layout_constraintStart_toEndOf="@+id/back_arrow_chatLog"
                     app:layout_constraintTop_toTopOf="@+id/back_arrow_chatLog"
@@ -60,15 +61,15 @@
                     android:layout_marginStart="12dp" />
 
                 <TextView
-                    android:id="@+id/active_status_chatLog"
-                    app:layout_constraintBottom_toBottomOf="@+id/profileimage_chatLog"
-                    app:layout_constraintStart_toEndOf="@+id/profileimage_chatLog"
-                    app:layout_constraintTop_toBottomOf="@+id/profilename_chatLog"
+                    android:id="@+id/groupdate_chatLog"
+                    app:layout_constraintBottom_toBottomOf="@+id/groupimage_chatLog"
+                    app:layout_constraintStart_toEndOf="@+id/groupimage_chatLog"
+                    app:layout_constraintTop_toBottomOf="@+id/groupname_chatLog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="1dp"
-                    android:text="TextView"
+                    tools:text="12/05/21"
                     android:textSize="15dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -76,16 +77,16 @@
 
         <EditText
             android:id="@+id/enter_message_chat_log"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_to_send_image_chat_log"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:ems="10"
             android:hint="Enter message"
             android:inputType="textMultiLine|textPersonName"
-            android:paddingLeft="8dp" />
+            android:paddingLeft="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/send_button_chat_log"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/send_button_chat_log"
@@ -113,16 +114,16 @@
             android:layout_marginBottom="6dp"
             android:background="#F4F6F9" />
 
-        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-            android:id="@+id/button_to_send_image_chat_log"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/send_button_chat_log"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            style="@style/blue_filled_button"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:text="IMG"/>
+<!--        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton-->
+<!--            android:id="@+id/button_to_send_image_chat_log"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/send_button_chat_log"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            style="@style/blue_filled_button"-->
+<!--            android:layout_marginEnd="4dp"-->
+<!--            android:layout_marginBottom="4dp"-->
+<!--            android:text="IMG"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -240,7 +240,7 @@ class RegistrationPage : AppCompatActivity() {
             uid,
             false,
             username,
-                listOf()
+                mapOf()
         )
         ref.setValue(users)
             .addOnSuccessListener {

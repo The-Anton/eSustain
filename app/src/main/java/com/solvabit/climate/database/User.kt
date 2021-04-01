@@ -8,6 +8,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.solvabit.climate.dataModel.Post
 import org.jetbrains.annotations.NotNull
+import java.lang.reflect.Type
 
 @Entity
 data class User(
@@ -67,7 +68,7 @@ data class User(
         @ColumnInfo(name = "username")
         var username: String?,
         @ColumnInfo(name = "interestedGroups")
-        val interestedGroups: List<Post>
+        val interestedGroups: Map<String, Post>
 ) {
 
 
@@ -107,9 +108,8 @@ data class User(
             "1",
             null,
             null,
-            listOf<Post>()
+            mapOf()
     )
-
 
 }
 
@@ -133,9 +133,14 @@ class ListTypeConverter() {
 class PostTypeConverter() {
 
     @TypeConverter
-    fun postListToJson(value: List<Post>?) = Gson().toJson(value)
+    fun fromString(value: String?): Map<String?, Post?>? {
+        val mapType: Type = object : TypeToken<Map<String?, Post?>?>() {}.type
+        return Gson().fromJson(value, mapType)
+    }
 
     @TypeConverter
-    fun postJsonToList(value: String) = Gson().fromJson(value, Array<Post>::class.java).toList()
-
+    fun fromStringMap(map: Map<String?, Post?>?): String? {
+        val gson = Gson()
+        return gson.toJson(map)
+    }
 }

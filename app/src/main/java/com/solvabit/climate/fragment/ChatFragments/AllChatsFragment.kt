@@ -41,7 +41,14 @@ class AllChatsFragment : Fragment() {
         binding.allChatsRecyclerView.adapter = adapter
 
         localUser.interestedGroups.forEach {
-            adapter.add(AddAllInterestedGroups(it, binding))
+            adapter.add(AddAllInterestedGroups(it.value, binding))
+        }
+
+        adapter.setOnItemClickListener { item, view ->
+            val post = item as AddAllInterestedGroups
+            binding.root.findNavController()
+                    .navigate(AllChatsFragmentDirections.actionAllChatsFragmentToChatLogFragment(post.post))
+
         }
 
         return binding.root

@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/back_arrow"
+                android:id="@+id/back_arrow_create_post"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -35,7 +35,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/back_arrow"
+                app:layout_constraintStart_toEndOf="@+id/back_arrow_create_post"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.52" />
 

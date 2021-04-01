@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -43,6 +44,10 @@ class CreatePostFragment : Fragment() {
 
         getUser()
         addSpinner()
+
+        binding.backArrowCreatePost.setOnClickListener {
+            binding.root.findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
+        }
 
         binding.addImage.setOnClickListener {
             addImage()
