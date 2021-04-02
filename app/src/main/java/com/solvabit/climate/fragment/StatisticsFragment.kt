@@ -58,9 +58,9 @@ class StatisticsFragment : Fragment() {
         setUpViewPager(viewPager)
         tabLayout.setupWithViewPager(viewPager)
 
-        tabLayout.getTabAt(0)!!.setIcon(R.drawable.air)
+        /* tabLayout.getTabAt(0)!!.setIcon(R.drawable.air)
         tabLayout.getTabAt(1)!!.setIcon(R.drawable.forestree)
-        tabLayout.getTabAt(2)!!.setIcon(R.drawable.drop)
+        tabLayout.getTabAt(2)!!.setIcon(R.drawable.drop) */
 
     }
 

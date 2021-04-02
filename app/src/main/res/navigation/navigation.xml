@@ -102,4 +102,9 @@
             android:id="@+id/action_allChatsFragment_to_chatLogFragment"
             app:destination="@id/chatLogFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/map_fragment"
+        android:name="com.solvabit.climate.fragment.MapsFragment"
+        android:label="map_fragment"
+        tools:layout="@layout/fragment_maps" />
 </navigation>
