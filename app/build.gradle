@@ -151,8 +151,8 @@ dependencies {
     //circular seekbar half dashboard
     implementation 'me.tankery.lib:circularSeekBar:1.3.0'
 
-    //Video Player
-    def videoVersion = "v4.4.1"
-    implementation "net.protyposis.android.mediaplayer:mediaplayer:$videoVersion"
-    implementation "net.protyposis.android.mediaplayer:mediaplayer-dash:$videoVersion"
+//    //Video Player
+//    def videoVersion = "v4.4.1"
+//    implementation "net.protyposis.android.mediaplayer:mediaplayer:$videoVersion"
+//    implementation "net.protyposis.android.mediaplayer:mediaplayer-dash:$videoVersion"
 }

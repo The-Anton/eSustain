@@ -47,7 +47,7 @@
                     style="@style/normaltext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Username"
+                    tools:text="Username"
                     android:textColor="@color/colorPrimary" />
 
                 <LinearLayout
@@ -86,11 +86,14 @@
                 android:layout_width="25dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/ic_baseline_more_vert_24" />
         </LinearLayout>
 
         <View
-            android:id="@+id/divider5"
+            android:id="@+id/divider10"
             android:layout_width="wrap_content"
             android:layout_height="2dp"
             android:layout_marginStart="8dp"
