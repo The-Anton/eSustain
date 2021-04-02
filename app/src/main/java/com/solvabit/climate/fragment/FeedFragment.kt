@@ -19,6 +19,7 @@ import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.database.User
 import com.solvabit.climate.databinding.FeedFragmentBinding
 import com.solvabit.climate.dialog.JoinGroupConfirmDialog
+import com.solvabit.climate.fragment.Dashboard
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -32,6 +33,7 @@ import java.util.*
 class FeedFragment : Fragment() {
 
     private lateinit var binding: FeedFragmentBinding
+    private val localUser = Dashboard.localuser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,11 +53,17 @@ class FeedFragment : Fragment() {
                     .navigate(FeedFragmentDirections.actionFeedFragmentToCreatePostFragment())
         }
 
+        initializeShareThoughtFeed()
+
         fetchPostData(requireContext())
 
         popFeedMenu()
 
         return binding.root
+    }
+
+    private fun initializeShareThoughtFeed() {
+        Picasso.get().load(localUser.imageUrl).into(binding.userprofileImageViewFeed)
     }
 
     private fun popFeedMenu() {

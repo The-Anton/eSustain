@@ -99,6 +99,7 @@ class ChatLogFragment : Fragment() {
         val fromId = FirebaseAuth.getInstance().uid
         val imageUrl = localUser.imageUrl
 
+        if (text.isEmpty()) return
         if (fromId == null) return
 
         val chatMessage =
