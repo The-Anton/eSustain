@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Post(var post_text: String,
+class Post(
+                var post_text: String,
                 val post_image: String,
                 val uid: String,
                 val time: String,
