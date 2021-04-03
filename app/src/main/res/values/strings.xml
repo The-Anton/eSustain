@@ -14,6 +14,7 @@
     <string name="btn_two">Button 2</string>
     <string name="btn_three">Button 3</string>
     <string-array name="planets_array">
+        <item>General</item>
         <item>Achievement</item>
         <item>Issue</item>
     </string-array>

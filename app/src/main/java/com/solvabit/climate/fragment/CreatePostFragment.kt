@@ -4,16 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -23,8 +21,10 @@ import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.databinding.FragmentCreatePostBinding
 import com.solvabit.climate.dialog.Dialog
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_create_post.*
 import timber.log.Timber
 import java.util.*
+
 
 class CreatePostFragment : Fragment() {
 
@@ -58,8 +58,40 @@ class CreatePostFragment : Fragment() {
             createPost()
         }
 
+
+        val spnLocale = binding.spinner2 as Spinner
+
+        spnLocale.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+                if (adapterView != null) {
+                    if (adapterView.getItemAtPosition(i) == "Issue") {
+                        binding.groupConditions.visibility=View.VISIBLE
+                        binding.checkCreateGroup.visibility = View.VISIBLE
+                    }
+                    if (adapterView.getItemAtPosition(i) == "General" || adapterView.getItemAtPosition(i) == "Achievement") {
+                        binding.groupConditions.visibility = View.GONE
+                    }
+
+                }
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+                return
+            }
+        }
+
+        binding.checkCreateGroup.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                binding.groupName.visibility = View.VISIBLE
+            } else {
+                binding.groupName.visibility = View.GONE
+            }
+        }
+
+
         return binding.root
     }
+
 
     private fun createPost() {
         if (binding.postText.text.isEmpty()) {
@@ -97,10 +129,39 @@ class CreatePostFragment : Fragment() {
         val ref = FirebaseDatabase.getInstance().getReference("/PostData/$timestamp")
         val text = binding.postText.text.toString()
         val category = binding.spinner2.selectedItem.toString()
-        val postData = Post(text, postImageUrl, uid, time, category, timestamp.toString(), 0)
-        ref.setValue(postData).addOnSuccessListener {
-            Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT).show()
-            binding.root.findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
+        if (category == "Issue") {
+
+            if (binding.checkCreateGroup.isChecked) {
+
+                if (binding.groupName.text.isNotEmpty()) {
+
+                    val groupName = binding.groupName.text.toString()
+                    val postData = Post(text, postImageUrl, uid, time, category, timestamp.toString(), groupName, 0)
+                    ref.setValue(postData).addOnSuccessListener {
+                        Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT).show()
+                        binding.root.findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
+
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Please enter Group Name!", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                val postData = Post(text, postImageUrl, uid, time, category, timestamp.toString(), "", 0)
+                ref.setValue(postData).addOnSuccessListener {
+                    Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT).show()
+                    binding.root.findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
+                }
+            }
+
+        } else {
+
+
+            val postData = Post(text, postImageUrl, uid, time, category, timestamp.toString(), "", 0)
+            ref.setValue(postData).addOnSuccessListener {
+                Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT).show()
+                binding.root.findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
+
+            }
         }
     }
 
@@ -139,3 +200,18 @@ class CreatePostFragment : Fragment() {
     }
 
 }
+/*
+class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
+    /* val spinner: Spinner = findViewById(R.id.spinner2)
+    spinner.onItemSelectedListener = this */
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+
+
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>) {
+        // Another interface callback
+    }
+} */

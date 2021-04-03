@@ -121,7 +121,7 @@ class ChatLogFragment : Fragment() {
     }
 
     private fun initializePostData(postData: Post) {
-        binding.groupnameChatLog.text = postData.key
+        binding.groupnameChatLog.text = postData.group_name
         Picasso.get().load(postData.post_image).into(binding.groupimageChatLog)
         val time = postData.time.toLong()
         val sfd = SimpleDateFormat("dd-MM-yyyy")

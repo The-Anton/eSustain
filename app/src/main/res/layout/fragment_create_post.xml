@@ -103,6 +103,7 @@
                 style="@style/normaltext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:background="@drawable/edittextbg"
                 android:hint="Write Something for your post!"
                 android:inputType="textMultiLine"
@@ -118,6 +119,34 @@
                 android:contentDescription="Post Image"
                 android:scaleType="centerCrop" />
 
+            <LinearLayout
+                android:id="@+id/group_conditions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <CheckBox
+                    android:id="@+id/check_create_group"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Create a chat group"
+                    android:textColor="@color/subtxt_black"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/group_name"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittextbg"
+                    android:hint="Type group Namwe"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

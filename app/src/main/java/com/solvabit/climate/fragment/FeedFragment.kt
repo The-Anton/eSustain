@@ -53,11 +53,14 @@ class FeedFragment : Fragment() {
                     .navigate(FeedFragmentDirections.actionFeedFragmentToCreatePostFragment())
         }
 
+        binding.allMessages.setOnClickListener {
+            binding.root.findNavController()
+                    .navigate(FeedFragmentDirections.actionFeedFragmentToAllChatsFragment())
+        }
         initializeShareThoughtFeed()
 
         fetchPostData(requireContext())
 
-        popFeedMenu()
 
         return binding.root
     }
@@ -66,17 +69,14 @@ class FeedFragment : Fragment() {
         Picasso.get().load(localUser.imageUrl).into(binding.userprofileImageViewFeed)
     }
 
-    private fun popFeedMenu() {
+
+   /* private fun popFeedMenu() {
         binding.feedMenuBtn.setOnClickListener {
             context?.let { context ->
                 val popupMenu = android.widget.PopupMenu(context, binding.feedMenuBtn)
                 popupMenu.menuInflater.inflate(R.menu.feed_top_menu, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener {
-                    if (it.itemId == R.id.create_post_menu) {
-                        binding.root.findNavController()
-                                .navigate(FeedFragmentDirections.actionFeedFragmentToCreatePostFragment())
-                    }
-                    else if (it.itemId == R.id.all_chats_menu) {
+                    if (it.itemId == R.id.all_chats_menu) {
                         binding.root.findNavController()
                                 .navigate(FeedFragmentDirections.actionFeedFragmentToAllChatsFragment())
                     }
@@ -86,7 +86,8 @@ class FeedFragment : Fragment() {
                 popupMenu.show()
             }
         }
-    }
+    } */
+
 
     private fun fetchPostData(context: Context) {
         val adapter = GroupAdapter<ViewHolder>()
