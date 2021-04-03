@@ -103,7 +103,6 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
             app:layout_constraintTop_toBottomOf="@+id/circularProgressBar" />
-        post_add_pic_five_Trees
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/post_add_pic_five_Trees"
