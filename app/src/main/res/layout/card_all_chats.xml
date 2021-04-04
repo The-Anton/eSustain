@@ -3,29 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:padding="8dp"
+    android:background="@color/white">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:padding="2dp"
         android:id="@+id/profileimage_user_row"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        app:civ_border_color="@color/black"
-        app:civ_border_width="4dp"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="3dp"
         app:layout_constraintBottom_toBottomOf="@+id/username_user_row"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/username_user_row" />
 
     <TextView
         android:id="@+id/username_user_row"
+        style="@style/normalTitles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="18dp"
         android:maxWidth="190dp"
         android:text="Username"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@+id/profileimage_user_row"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,24 +36,16 @@
         android:id="@+id/divider3"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profileimage_user_row"
         app:layout_constraintTop_toBottomOf="@+id/username_user_row" />
 
-    <TextView
-        android:id="@+id/active_status_user_row"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/username_user_row"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/username_user_row" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
