@@ -1,39 +1,36 @@
 package com.solvabit.climate.fragment
 
-import android.app.Activity
-import android.content.Intent
-import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
-import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
+import android.opengl.Visibility
 import android.os.Bundle
-import android.os.Handler
 import android.os.Parcelable
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.storage.FirebaseStorage
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
-import com.solvabit.climate.PostItem
 import com.solvabit.climate.R
-import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.databinding.TreesPlantedFragmentBinding
 import com.solvabit.climate.fragment.PlantTreesFragments.PlantNewTreeDialog
+import com.solvabit.climate.fragment.PlantTreesFragments.ShareAchievementToPostDialog
 import com.solvabit.climate.viewModel.TreesPlantedViewModel
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.single_tree.view.*
-import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class TreesPlanted : Fragment() {
 
@@ -41,6 +38,7 @@ class TreesPlanted : Fragment() {
     private var treesPlanted: Int = 0
     private var targetTrees: Int = 0
     private var status: String = "remaining"
+    private lateinit var allPlantsList: MutableList<Trees>
 
     private lateinit var viewModel: TreesPlantedViewModel
     private lateinit var binding: TreesPlantedFragmentBinding
@@ -63,13 +61,27 @@ class TreesPlanted : Fragment() {
 
         circularProgress()
 
+        bottomNavigation.visibility = View.GONE
+
         binding.addPicFiveTrees.setOnClickListener {
             val dialog = PlantNewTreeDialog(targetTrees, treesPlanted)
             dialog.show(childFragmentManager, "TreesPlanted")
         }
 
+        binding.linearLayoutShareTreesPlanted.setOnClickListener {
+            shareAchievementToPost()
+        }
+
         return binding.root
     }
+
+    private fun shareAchievementToPost() {
+        val dialog = ShareAchievementToPostDialog(allPlantsList)
+        dialog.show(childFragmentManager, "ShareAchievement")
+//        val bitmap = getBitmapFromView(binding.allTreesRecyclerView)
+//        binding.tempImageView.setImageBitmap(bitmap)
+    }
+
 
 
     private fun fetchTrees() {
@@ -83,6 +95,7 @@ class TreesPlanted : Fragment() {
         var i = 0
         val adapter = GroupAdapter<ViewHolder>()
         binding.allTreesRecyclerView.adapter = adapter
+        allPlantsList = mutableListOf()
 
         ref.addChildEventListener(object : ChildEventListener {
 
@@ -94,11 +107,12 @@ class TreesPlanted : Fragment() {
 
                 val tree = p0.getValue(Trees::class.java)
                 adapter.add(AddRecycleItemTrees(tree!!))
+                allPlantsList.add(tree)
                 i += 1
                 if (i >= targetTrees) {
                     binding.linearLayout.visibility = View.VISIBLE
+                    binding.linearLayoutShareTreesPlanted.visibility = View.VISIBLE
                     binding.addPicFiveTrees.visibility = View.GONE
-                    binding.postAddPicFiveTrees.visibility = View.GONE
                     val changeRemainingList =
                             Dashboard.localuser.remainingAction.toMutableList()
                     val changeCompletedList =

@@ -92,33 +92,19 @@
             app:layout_constraintStart_toStartOf="@+id/achievement_name_textView"
             app:layout_constraintTop_toBottomOf="@+id/achievement_name_textView" />
 
-        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-            android:id="@+id/add_pic_five_Trees"
-            android:layout_width="110dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/blue_button"
-            android:text="Add Image"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-            app:layout_constraintTop_toBottomOf="@+id/circularProgressBar" />
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/add_pic_five_Trees"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/blue_button"
+                android:text="Plant a Tree"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/circularProgressBar" />
 
-        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-            android:id="@+id/post_add_pic_five_Trees"
-            android:layout_width="110dp"
-            android:layout_height="50dp"
-            android:background="@drawable/blue_button"
-            android:text="Post"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_marginLeft="50dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/add_pic_five_Trees"
-            app:layout_constraintStart_toEndOf="@+id/add_pic_five_Trees"
-            app:layout_constraintTop_toTopOf="@+id/add_pic_five_Trees"
-            app:spinning_bar_color="@color/white"
-            app:spinning_bar_padding="1dp" />
 
         <TextView
             android:id="@+id/numberofTreesPlanted"
@@ -144,6 +130,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="6dp"
             android:visibility="gone"
+            tools:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_pic_five_Trees">
@@ -167,6 +154,45 @@
                 app:layout_constraintTop_toBottomOf="@+id/circularProgressBar" />
 
         </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_share_trees_planted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/home_rounded_button"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="6dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="6dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_send_blue_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/home_rounded_button"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text=" Share your Achievement "
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/circularProgressBar" />
+
+            </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
