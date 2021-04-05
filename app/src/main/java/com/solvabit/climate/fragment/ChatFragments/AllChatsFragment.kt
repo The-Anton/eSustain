@@ -63,7 +63,7 @@ class AddAllInterestedGroups(val post: Post, val binding: FragmentAllChatsBindin
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.username_user_row.text = post.key
+        viewHolder.itemView.username_user_row.text = post.group_name
         Picasso.get().load(post.post_image).into(viewHolder.itemView.profileimage_user_row)
     }
 

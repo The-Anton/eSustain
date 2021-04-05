@@ -11,9 +11,11 @@ class Post(
                 val time: String,
                 val category: String,
                 val key:String,
+                val group_name: String,
                 val interested: Int): Parcelable {
 
     constructor():this(
+            "",
             "",
             "",
             "",
