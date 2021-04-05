@@ -122,7 +122,7 @@ class ShareAchievementToPostDialog(private val allTreesPlanted: List<Trees>) : D
         val timestamp = max - System.currentTimeMillis()
         val ref = FirebaseDatabase.getInstance().getReference("/PostData/$timestamp")
         val text = dialogView.post_text.text.toString()
-        val postData = Post(text, postImageUrl, uid!!, time, "Achievement", timestamp.toString(), 0)
+        val postData = Post(text, postImageUrl, uid!!, time, "Achievement", timestamp.toString(), "", 0)
         ref.setValue(postData).addOnSuccessListener {
             Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT).show()
             dialog?.dismiss()

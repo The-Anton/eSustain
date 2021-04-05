@@ -128,7 +128,7 @@ class MapsFragment : Fragment() {
              builder.setIcon(android.R.drawable.ic_dialog_map)
              val alertDialog: AlertDialog = builder.create()
              alertDialog.setCancelable(true)
-             alertDialog.show() */
+             alertDialog.show()*/
 
             val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.Theme_MaterialComponents_Light_BottomSheetDialog)
             val bottomSheetView = LayoutInflater.from(requireContext()).inflate(R.layout.bottom_sheet_planted_tree_data, bottomsheet)

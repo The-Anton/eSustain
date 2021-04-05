@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_dashboard_fragment_to_treesPlanted"
             app:destination="@id/treesPlanted" />
+        <action
+            android:id="@+id/action_dashboard_fragment_to_allChatsFragment"
+            app:destination="@id/allChatsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profile_fragment"

@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import com.solvabit.climate.FeedFragmentDirections
 import com.solvabit.climate.R
 import com.solvabit.climate.Repository.Repository
 import com.solvabit.climate.database.SingleAction
@@ -67,6 +68,10 @@ class Dashboard : Fragment() {
             ForestDialog().show(childFragmentManager, "Forest")
         }
 
+        binding.linearLayout3.setOnClickListener {
+            binding.root.findNavController()
+                    .navigate(DashboardDirections.)
+        }
 
         GlobalScope.launch {
             Repository(dao,uid).fetchUpdates {

@@ -61,8 +61,6 @@ class TreesPlanted : Fragment() {
 
         circularProgress()
 
-        bottomNavigation.visibility = View.GONE
-
         binding.addPicFiveTrees.setOnClickListener {
             val dialog = PlantNewTreeDialog(targetTrees, treesPlanted)
             dialog.show(childFragmentManager, "TreesPlanted")
