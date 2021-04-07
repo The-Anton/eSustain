@@ -91,7 +91,7 @@ class FeedFragment : Fragment() {
 
     private fun fetchPostData(context: Context) {
         val adapter = GroupAdapter<ViewHolder>()
-        val ref = FirebaseDatabase.getInstance().getReference("/PostData")
+        val ref = FirebaseDatabase.getInstance().getReference("/PostData").limitToFirst(10)
         binding.postRecyclerView.adapter = adapter
 
         ref.addChildEventListener(object : ChildEventListener {

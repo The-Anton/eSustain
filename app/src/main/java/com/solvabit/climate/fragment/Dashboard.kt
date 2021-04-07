@@ -70,7 +70,7 @@ class Dashboard : Fragment() {
 
         binding.linearLayout3.setOnClickListener {
             binding.root.findNavController()
-                    .navigate(DashboardDirections.)
+                    .navigate(DashboardDirections.actionDashboardFragmentToAllChatsFragment())
         }
 
         GlobalScope.launch {

@@ -1,35 +1,30 @@
 package com.solvabit.climate.fragment
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.location.Criteria
-import android.location.Location
-import android.location.LocationManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import com.google.android.gms.maps.*
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.*
 import com.solvabit.climate.R
 import com.solvabit.climate.dataModel.PlantedTrees
-import com.solvabit.climate.database.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.bottom_sheet_planted_tree_data.*
 import kotlinx.android.synthetic.main.bottom_sheet_planted_tree_data.view.*
-import kotlinx.android.synthetic.main.card_post_view.view.*
 import kotlinx.android.synthetic.main.fragment_maps.*
-import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,7 +46,7 @@ class MapsFragment : Fragment() {
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
          * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
+         * In this case, we just add a markerbmp.bmp near Sydney, Australia.
          * If Google Play services is not installed on the device, the user will be prompted to
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
@@ -134,6 +129,7 @@ class MapsFragment : Fragment() {
             val bottomSheetView = LayoutInflater.from(requireContext()).inflate(R.layout.bottom_sheet_planted_tree_data, bottomsheet)
 
 
+
             val dataRef = FirebaseDatabase.getInstance().getReference("/plantedTrees/$key")
             dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -144,7 +140,7 @@ class MapsFragment : Fragment() {
 
 
                     if (data?.plant_image != null) Picasso.get().load(data.plant_image).into(bottomSheetView.plant_image)
-                    bottomSheetView.findViewById<TextView>(R.id.location).text = position.toString()
+
                     if (data != null) {
                         val time = data.time.toLong()
                         val sfd = SimpleDateFormat("dd-MM-yyyy")
@@ -157,6 +153,19 @@ class MapsFragment : Fragment() {
                     TODO("Not yet implemented")
                 }
             })
+
+            val geoCoder = Geocoder(context, Locale.getDefault())
+
+            val addresses = geoCoder.getFromLocation(position.latitude, position.longitude, 1)
+            val address = addresses[0].getAddressLine(0)
+            /*
+            val city = addresses[0].locality
+            val state = addresses[0].adminArea
+            val zip = addresses[0].postalCode
+            val country = addresses[0].countryName */
+            if (address.isNotEmpty()) {
+                bottomSheetView.findViewById<TextView>(R.id.location).text = address
+            }
 
             bottomSheetView.dismiss_bottom_sheet.setOnClickListener {
                 bottomSheetDialog.dismiss()
