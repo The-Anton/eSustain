@@ -222,7 +222,7 @@ class RegistrationPage : AppCompatActivity() {
                 0,
                 0.0,
                 0.0,
-                listOf("1", "2", "3", "4"),
+                listOf("0", "1", "2", "3"),
                 0,
                 0.0,
                 0.0,

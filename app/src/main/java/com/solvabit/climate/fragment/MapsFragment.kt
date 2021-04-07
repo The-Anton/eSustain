@@ -47,7 +47,7 @@ class MapsFragment : Fragment() {
          * This callback is triggered when the map is ready to be used.
          * This is where we can add markers or lines, add listeners or move the camera.
          * In this case, we just add a markerbmp.bmp near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
+         * If Google Play services is not installed on this device and okay are you okay on the device, the user will be prompted to
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
 
@@ -55,7 +55,7 @@ class MapsFragment : Fragment() {
         googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney)) */
         val IndiaBounds = LatLngBounds(
-                LatLng((8.0), 68.7),  // SW bounds
+                LatLng((8.0), 68.7),  // SW bounds here bounds
                 LatLng((37.0), 97.25) // NE bounds
         )
         googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(IndiaBounds, 0))
@@ -70,7 +70,7 @@ class MapsFragment : Fragment() {
         )
         country_zoom.setOnClickListener {
             val country = LatLngBounds(
-                    LatLng((8.0), 68.7),  // SW bounds
+                    LatLng((8.0), 68.7),  // SW bounds bounds here
                     LatLng((37.0), 97.25) // NE bounds
             )
             googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(country, 0))
@@ -81,7 +81,7 @@ class MapsFragment : Fragment() {
             if (location != null) {
                 val cameraPosition = CameraPosition.Builder()
                         .target(LatLng(location.latitude, location.longitude)) // Sets the center of the map to location user
-                        .zoom(7f) // Sets the zoom  // Sets the tilt of the camera to 30 degrees
+                        .zoom(7f) // Sets the zoom  // Sets the tilt of the camera of the camera to 30 degrees
                         .build() // Creates a CameraPosition from the builder
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
             }
@@ -122,6 +122,7 @@ class MapsFragment : Fragment() {
              builder.setMessage("Position is $position")
              builder.setIcon(android.R.drawable.ic_dialog_map)
              val alertDialog: AlertDialog = builder.create()
+             builder.create()
              alertDialog.setCancelable(true)
              alertDialog.show()*/
 
@@ -161,6 +162,7 @@ class MapsFragment : Fragment() {
             /*
             val city = addresses[0].locality
             val state = addresses[0].adminArea
+            val zip = addresses[0].postalCode
             val zip = addresses[0].postalCode
             val country = addresses[0].countryName */
             if (addresses.isNotEmpty()) {
