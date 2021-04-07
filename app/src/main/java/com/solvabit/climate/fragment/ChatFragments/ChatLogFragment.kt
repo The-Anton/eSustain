@@ -138,7 +138,7 @@ class AddFromChatItem(private val chatMessage: ChatMessage) : Item<ViewHolder>()
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.text_card_chat_box.text = chatMessage.text
-        Picasso.get().load(chatMessage.imageUrl).into(viewHolder.itemView.imageView_card_chat_row)
+
     }
 }
 
@@ -149,6 +149,5 @@ class AddToChatItem(private val chatMessage: ChatMessage) : Item<ViewHolder>() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.text_card_chat_box.text = chatMessage.text
-        Picasso.get().load(chatMessage.imageUrl).into(viewHolder.itemView.imageView_card_chat_row)
     }
 }

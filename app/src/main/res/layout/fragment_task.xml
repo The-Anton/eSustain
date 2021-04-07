@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".fragment.TaskFragment">
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/ic_small_tree_on_ground" />
+
+        <TextView
+            android:layout_weight="5"
+            style="@style/normaltext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:text="Your Task" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coins: 0"
+            style="@style/normaltext"
+            android:layout_gravity="center"/>
+        <ImageView
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_profile_circle_24"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginRight="120dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/cardsbg">
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/cardsbg">
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:background="@drawable/cardsbg">
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginRight="120dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/cardsbg">
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

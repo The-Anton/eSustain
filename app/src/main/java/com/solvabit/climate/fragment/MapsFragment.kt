@@ -157,13 +157,14 @@ class MapsFragment : Fragment() {
             val geoCoder = Geocoder(context, Locale.getDefault())
 
             val addresses = geoCoder.getFromLocation(position.latitude, position.longitude, 1)
-            val address = addresses[0].getAddressLine(0)
+
             /*
             val city = addresses[0].locality
             val state = addresses[0].adminArea
             val zip = addresses[0].postalCode
             val country = addresses[0].countryName */
-            if (address.isNotEmpty()) {
+            if (addresses.isNotEmpty()) {
+                val address = addresses[0].getAddressLine(0)
                 bottomSheetView.findViewById<TextView>(R.id.location).text = address
             }
 
