@@ -25,10 +25,10 @@
         android:title="Map"/>
 
     <item
-        android:id="@+id/profile_fragment"
+        android:id="@+id/taskFragment"
         android:enabled="true"
         android:icon="@drawable/ic_white_account_circle_24"
-        android:title="Profile"/>
+        android:title="Task"/>
 
 
 </menu>

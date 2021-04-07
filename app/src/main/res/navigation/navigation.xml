@@ -110,4 +110,9 @@
         android:name="com.solvabit.climate.fragment.MapsFragment"
         android:label="map_fragment"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.solvabit.climate.fragment.TaskFragment"
+        android:label="fragment_task"
+        tools:layout="@layout/fragment_task" />
 </navigation>
