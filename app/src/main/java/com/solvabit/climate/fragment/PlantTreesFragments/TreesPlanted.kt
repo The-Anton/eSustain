@@ -85,7 +85,7 @@ class TreesPlanted : Fragment() {
     private fun fetchTrees() {
         binding.numberofTreesPlanted.text = "00"
         val ref: DatabaseReference
-        if (targetTrees == 5)
+        if (targetTrees == 4)
             ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/fiveTrees")
         else
             ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/tenTrees")
@@ -115,7 +115,7 @@ class TreesPlanted : Fragment() {
                             Dashboard.localuser.remainingAction.toMutableList()
                     val changeCompletedList =
                             Dashboard.localuser.completedAction.toMutableList()
-                    if (targetTrees == 5 && status == "remaining") {
+                    if (targetTrees == 4 && status == "remaining") {
                         changeRemainingList.removeAt(0)
                         changeCompletedList.add("1")
                     } else if (targetTrees == 10 && status == "remaining") {

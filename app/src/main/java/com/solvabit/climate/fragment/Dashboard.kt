@@ -68,11 +68,6 @@ class Dashboard : Fragment() {
             ForestDialog().show(childFragmentManager, "Forest")
         }
 
-        binding.linearLayout3.setOnClickListener {
-            binding.root.findNavController()
-                    .navigate(DashboardDirections.)
-        }
-
         GlobalScope.launch {
             Repository(dao,uid).fetchUpdates {
                 Timber.i( localuser.toString())
@@ -157,21 +152,15 @@ class Dashboard : Fragment() {
         binding.recommendedRecyclerView.adapter = adapter
 
         localuser.presentAction.forEach{
-            if(it!="0") {
                 adapter.add(AddRecycleItemRecommended(it.toInt(), "present", binding))
-            }
         }
 
         localuser.remainingAction.forEach {
-            if(it!="0") {
                 adapter.add(AddRecycleItemRecommended(it.toInt(), "remaining", binding))
-            }
         }
 
         localuser.completedAction.forEach{
-            if(it!="0") {
                 adapter.add(AddRecycleItemRecommended(it.toInt(), "completed", binding))
-            }
         }
 
     }
@@ -193,41 +182,36 @@ class Dashboard : Fragment() {
 
 }
 
-//Create instances of all actions
-private val action1 = SingleAction(1, "Plant five Trees", "Let's begin a new journey!", 5)
-private val action2 = SingleAction(2, "Plant ten Trees", "Let's begin a new journey!", 10)
-private val action3 = SingleAction(3, "Use Public Transport", "Let's begin a new journey!", 15)
-private val action4 = SingleAction(4, "Refer a friend", "Let's begin a new journey!", 5)
-
 
 class AddRecycleItemRecommended(val a: Int, val status: String, val binding: DashboardFragmentBinding): Item<ViewHolder>(){
+
+    private val actionsList = mutableListOf<SingleAction>()
 
     override fun getLayout(): Int {
         return R.layout.recommended_cards
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        if(a==0)
-            return
 
-        val action = when(a)
-        {
-            1->action1
-            2->action2
-            3->action3
-            4->action4
-            else-> action4
-        }
-        viewHolder.itemView.target_textView.text = action.topic
-        viewHolder.itemView.target_textView_subtext.text = action.subtopic
+        initializeAllTasks()
+
+        val action = actionsList[a]
+
+        viewHolder.itemView.target_textView.text = action.title
+        viewHolder.itemView.target_textView_subtext.text = action.sub_title
         viewHolder.itemView.background_play_pause.setOnClickListener {
             when(a){
-                1-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(5, status))
-                2-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(10, status))
+                0-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(4, status))
+                1-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(10, status))
+                2-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
                 3-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
-                4-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
             }
         }
+    }
+
+    private fun initializeAllTasks() {
+        actionsList.add(SingleAction(0, "Plant One Tree", "Begin with a single step", "tree", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(1, "Seminar", "Attend sustainable environment seminar", "seminar", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
     }
 
 }

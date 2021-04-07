@@ -59,7 +59,7 @@ class FeedFragment : Fragment() {
         }
         initializeShareThoughtFeed()
 
-        fetchPostData(requireContext())
+        fetchPostData(requireContext().applicationContext)
 
 
         return binding.root

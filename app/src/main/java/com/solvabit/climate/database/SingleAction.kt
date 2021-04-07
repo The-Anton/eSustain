@@ -1,14 +1,20 @@
 package com.solvabit.climate.database
 
 data class SingleAction(
-    val id: Int,
-    val topic:String,
-    val subtopic: String,
-    val value: Int) {
-    constructor():this(
-        0,
-        "",
-        "",
-        0
+        val id: Int,
+        val title: String,
+        val sub_title: String,
+        val category: String,
+        val number: Int,
+        val background: String,
+        val achievement_logo: String) {
+    constructor() : this(
+            0,
+            "",
+            "",
+            "",
+            0,
+            "",
+            ""
     )
 }
