@@ -17,7 +17,10 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.card_all_chats.view.*
+import kotlinx.android.synthetic.main.card_post_view.view.*
 import kotlinx.android.synthetic.main.recommended_cards.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class AllChatsFragment : Fragment() {
@@ -63,6 +66,9 @@ class AddAllInterestedGroups(val post: Post, val binding: FragmentAllChatsBindin
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
+        val time = post.time.toLong()
+        val sfd = SimpleDateFormat("dd-MM-yyyy")
+        viewHolder.itemView.group_date.text = sfd.format(Date(time))
         viewHolder.itemView.username_user_row.text = post.group_name
         Picasso.get().load(post.post_image).into(viewHolder.itemView.profileimage_user_row)
     }

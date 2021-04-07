@@ -128,7 +128,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_main_text">
+            app:layout_constraintTop_toBottomOf="@+id/issue_post_main_text">
 
             <ozaydin.serkan.com.image_zoom_view.ImageViewZoom
                 android:id="@+id/post_main_image"

@@ -32,6 +32,21 @@
         app:layout_constraintStart_toEndOf="@+id/profileimage_user_row"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/group_date"
+        style="@style/normaltext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Date"
+        android:textColor="@color/subtxt_hint"
+        app:layout_constraintBottom_toTopOf="@+id/divider3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.964"
+        app:layout_constraintStart_toEndOf="@+id/username_user_row"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.722" />
+
     <View
         android:id="@+id/divider3"
         android:layout_width="0dp"
