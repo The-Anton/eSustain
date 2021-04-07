@@ -33,10 +33,6 @@ import timber.log.Timber
 
 class Profile : Fragment() {
 
-    companion object {
-        fun newInstance() = Profile()
-    }
-
     private lateinit var viewModel: ProfileViewModel
     private lateinit var binding: ProfileFragmentBinding
 
@@ -58,6 +54,19 @@ class Profile : Fragment() {
         val instance = UserDatabase.getInstance(context?.applicationContext!!)
         val dao = instance.userDao()
 
+        logoutMenu(dao)
+
+        GlobalScope.launch {
+            Repository(dao, localuser.uid).fetchUpdates {
+                Log.v("Dashboard", localuser.toString())
+                addItemsRecyclerView( localuser.completedAction)
+
+            }
+        }
+        return binding.root
+    }
+
+    private fun logoutMenu(dao: UserDao) {
         binding.logoutPopup.setOnClickListener {
             context?.let {
                 val popupMenu = PopupMenu(it, binding.logoutPopup)
@@ -70,20 +79,9 @@ class Profile : Fragment() {
                     }
                     true
                 }
-
                 popupMenu.show()
             }
-
         }
-
-        GlobalScope.launch {
-            Repository(dao, localuser.uid).fetchUpdates {
-                Log.v("Dashboard", localuser.toString())
-                addItemsRecyclerView( localuser.completedAction)
-
-            }
-        }
-        return binding.root
     }
 
     override fun onStart() {

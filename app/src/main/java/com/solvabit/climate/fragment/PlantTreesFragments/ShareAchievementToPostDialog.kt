@@ -70,7 +70,7 @@ class ShareAchievementToPostDialog(private val allTreesPlanted: List<Trees>) : D
             allDates.add(it.timestamp)
         }
 
-        var spanCount = 3
+        var spanCount = 2
         if (allImages.size == 10)
             spanCount = 5
         StaggeredGridLayoutManager(

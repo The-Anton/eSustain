@@ -99,7 +99,7 @@ class PlantNewTreeDialog(private val targetTrees: Int, private var treesPlanted:
                         imageUrl = it.toString()
                         val timestamp = System.currentTimeMillis()
                         val dataRef: DatabaseReference
-                        if (targetTrees == 5)
+                        if (targetTrees == 4)
                             dataRef = FirebaseDatabase.getInstance()
                                     .getReference("/Users/$uid/fiveTrees/$timestamp")
                         else
@@ -113,17 +113,14 @@ class PlantNewTreeDialog(private val targetTrees: Int, private var treesPlanted:
 
                         dataRef.setValue(tree)
                                 .addOnSuccessListener {
-                                    if(dialogView.checkbox_plant_tree_dialog.isChecked){
+                                    if (dialogView.checkbox_plant_tree_dialog.isChecked) {
                                         shareOnMaps(imageUrl!!, timestamp)
                                     }
-                                    val handler = Handler()
-                                    handler.postDelayed({
-                                        dialogView.add_pic_trees_button_dialog.revertAnimation()
-                                        dialogView.post_image_button_dialog.revertAnimation()
-                                        FirebaseDatabase.getInstance().getReference("/Users/$uid")
-                                                .child("treesPlanted").setValue(treesPlanted)
-                                        dialog?.dismiss()
-                                    }, 500)
+                                    FirebaseDatabase.getInstance().getReference("/Users/$uid")
+                                            .child("treesPlanted").setValue(treesPlanted)
+                                            .addOnSuccessListener {
+                                                dialog?.dismiss()
+                                            }
                                     selectedPhotoUri = null
 
                                 }
