@@ -32,16 +32,18 @@
 
             <ImageView
                 android:id="@+id/all_messages"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/speech_bubble" />
+                app:srcCompat="@drawable/group_9" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
