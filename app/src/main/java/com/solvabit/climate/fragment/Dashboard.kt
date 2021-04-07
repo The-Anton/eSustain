@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
-import com.solvabit.climate.FeedFragmentDirections
 import com.solvabit.climate.R
 import com.solvabit.climate.Repository.Repository
 import com.solvabit.climate.database.SingleAction
@@ -54,7 +53,7 @@ class Dashboard : Fragment() {
             GlobalScope.launch(Dispatchers.Main) {
                 localRepo.getUser { user ->
                     localuser = user
-                    Timber.i("${user}")
+                    Timber.i("$user")
                     addDataToDashboard()
                 }
             }
@@ -215,3 +214,4 @@ class AddRecycleItemRecommended(val a: Int, val status: String, val binding: Das
     }
 
 }
+
