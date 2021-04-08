@@ -6,14 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.solvabit.climate.R
+import com.solvabit.climate.database.SingleAction
 import com.solvabit.climate.databinding.FragmentTaskBinding
 
 
 class TaskFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskBinding
+
+    private val localUser = Dashboard.localuser
+    private val actionsList = mutableListOf<SingleAction>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,22 +31,129 @@ class TaskFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_task, container, false)
 
 
-        val matrix = floatArrayOf(
+        initializeAllTasks()
+
+        setRemaining()
+
+        setPresent()
+
+        setClickForTasks()
+
+
+        return binding.root
+    }
+
+    private fun setClickForTasks() {
+        for( i in 0 .. 14) {
+            val imageView = returnImageId(i.toString())
+            var status = "remaining"
+            if(localUser.completedAction.contains(i.toString()))
+                status = "completed"
+            imageView.setOnClickListener {
+                when(actionsList[i-1].category){
+                    tree -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToTreesPlanted(actionsList[i-1].number, status, i.toString() ))
+                    seminar -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+                    guide -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+                    report -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+                    refer -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+                    recycle -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+                    purchase -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+                    feed -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+                }
+            }
+        }
+    }
+
+    private fun setPresent() {
+        localUser.presentAction.forEach {
+            val imageView = returnTickId(it)
+            imageView.visibility = View.GONE
+        }
+    }
+
+    private fun setRemaining() {
+        localUser.remainingAction.forEach {
+            val imageView = returnImageId(it)
+            val greenTick = returnTickId(it)
+            imageView.colorFilter = ColorMatrixColorFilter(matrix)
+            greenTick.visibility = View.GONE
+        }
+    }
+
+
+    private fun returnTickId(taskId: String): ImageView {
+        return when(taskId) {
+            "1" -> binding.greenTickAnimationPlantOneTree
+            "2" -> binding.greenTickAnimationSeminar
+            "3" -> binding.greenTickAnimationConserveElectricity
+            "4" -> binding.greenTickAnimationShareReport
+            "5" -> binding.greenTickAnimationConserveWater
+            "6" -> binding.greenTickAnimationPublicTransport
+            "7" -> binding.greenTickAnimationReferFriend
+            "8" -> binding.greenTickAnimationRecycleEWaste
+            "9" -> binding.greenTickAnimationRecyclePaper
+            "10" -> binding.greenTickAnimationReusableShoppingBag
+            "11" -> binding.greenTickAnimationWalk
+            "12" -> binding.greenTickAnimationPlantFourTree
+            "13" -> binding.greenTickAnimationUseCarPool
+            "14" -> binding.greenTickAnimationIssueFromFeed
+            else -> binding.greenTickAnimationIssueFromFeed
+        }
+    }
+
+
+    private fun returnImageId(taskId: String): ImageView {
+        return when(taskId) {
+            "1" -> binding.plantOneTreeImageViewTasks
+            "2" -> binding.seminarImageViewTasks
+            "3" -> binding.conserveElectricityImageViewTasks
+            "4" -> binding.shareReportImageViewTasks
+            "5" -> binding.conserveWaterImageViewTasks
+            "6" -> binding.publicTransportImageViewTasks
+            "7" -> binding.referFriendImageViewTasks
+            "8" -> binding.recycleEWasteImageViewTasks
+            "9" -> binding.recyclePaperImageViewTasks
+            "10" -> binding.reusableShoppingBagImageViewTasks
+            "11" -> binding.walkImageViewTasks
+            "12" -> binding.plantFourTreeImageViewTasks
+            "13" -> binding.useCarPoolImageViewTasks
+            "14" -> binding.issueFromFeedImageViewTasks
+            else -> binding.issueFromFeedImageViewTasks
+        }
+    }
+
+    private fun initializeAllTasks() {
+        actionsList.add(SingleAction(1, "Plant a Tree", "Begin with a single step", "tree", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(2, "Seminar", "Attend sustainable environment seminar", "seminar", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(3, "Save electricity", "Energy is life", "guide", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(4, "Share Report", "Help your family and friends too", "report", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(5, "Save water", "Remember water cycle & lifecycle are one", "guide", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(6, "Public Transport", "The share of public transport is just 18.1% of work trips.", "guide", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(7, "Refer friends", "Let's inspire others for a sustainable future", "refer", 5, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(8, "E-waste", "India generates about 3 million tonnes of e-waste annually and ranks third among e-waste producing countries", "recycle", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(9, "Recycle Paper", "To produce a ton of paper we need about 115,000 liters of water", "recycle", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(10, "Reusable bag", "India generates nearly 26,000 tonnes of plastic waste every day", "purchase", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(11, "Take a walk", "Walking is fun and environment friendly", "guide", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(12, "Plant four tree", "In Chicago, trees remove more than 18,000 tons of air pollution each year.", "tree", 4, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(13, "Use Carpool", "If you carpool at least twice a week, you can help reduce the emission of 1,600 pounds of greenhouse gases by a car each year", "guide", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(SingleAction(14, "Solve an Issue", "Nature is waiting for you!!", "feed", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+    }
+
+
+    companion object{
+         val matrix = floatArrayOf(
                 0.33f, 0.33f, 0.33f, 0f, 0f,
                 0.33f, 0.33f, 0.33f, 0f, 0f,
                 0.33f, 0.33f, 0.33f, 0f, 0f,
                 0f, 0f, 0f, 0.5f, 0f)
-        binding.conserveElectricityImageViewTasks.colorFilter = ColorMatrixColorFilter(matrix)
-//        binding.seminarImageViewTasks.colorFilter = ColorMatrixColorFilter(matrix)
-        binding.shareReportImageViewTasks.colorFilter = ColorMatrixColorFilter(matrix)
-
-        binding.greenTickAnimationConserveElectricity.visibility = View.GONE
-        binding.greenTickAnimationSeminar.visibility = View.GONE
-        binding.greenTickAnimationShareReport.visibility = View.GONE
-
-
-
-        return binding.root
+        const val tree = "tree"
+        const val seminar = "seminar"
+        const val guide = "guide"
+        const val report = "report"
+        const val refer = "refer"
+        const val recycle = "recycle"
+        const val purchase = "purchase"
+        const val feed = "feed"
     }
 
 }
