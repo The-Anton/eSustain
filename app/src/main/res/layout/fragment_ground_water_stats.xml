@@ -33,6 +33,21 @@ xmlns:tools="http://schemas.android.com/tools"
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/gwStageRemark"
+                    style="@style/normaltext"
+                    android:layout_width="84dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:maxWidth="210dp"
+                    android:text="Critical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/action_textView_subtext"
+                    app:layout_constraintTop_toBottomOf="@+id/airQualityHeading"
+                    app:layout_constraintVertical_bias="0.083" />
+
+                <TextView
                     android:id="@+id/airQualityHeading"
                     style="@style/normalTitles"
                     android:layout_width="wrap_content"
@@ -49,12 +64,16 @@ xmlns:tools="http://schemas.android.com/tools"
                     style="@style/normaltext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="15dp"
                     android:maxWidth="210dp"
-                    android:text="Learn more about everything that you have achieved below "
+                    android:text="Remark : "
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/gwStageRemark"
                     app:layout_constraintStart_toStartOf="@+id/airQualityHeading"
-                    app:layout_constraintTop_toBottomOf="@+id/airQualityHeading" />
+                    app:layout_constraintTop_toBottomOf="@+id/airQualityHeading"
+                    app:layout_constraintVertical_bias="0.083" />
 
                 <ImageView
                     android:id="@+id/action_imageView"
@@ -82,6 +101,8 @@ xmlns:tools="http://schemas.android.com/tools"
                     android:id="@+id/circularProgressBar_groundWaterStage_stats"
                     android:layout_width="wrap_content"
                     android:layout_height="87dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     app:cpb_background_progressbar_color="#EEE4FA"
                     app:cpb_background_progressbar_width="10dp"
                     app:cpb_progress="45"
@@ -98,16 +119,13 @@ xmlns:tools="http://schemas.android.com/tools"
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/progress_cardView_1"
+            android:id="@+id/progress_cardView_3"
             android:layout_width="160dp"
             android:layout_height="150dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/recomendbg"
-            app:layout_constraintEnd_toStartOf="@+id/progress_cardView_2"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout8"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -116,13 +134,148 @@ xmlns:tools="http://schemas.android.com/tools"
 
 
                 <TextView
+                    android:id="@+id/gwStage2017Remark"
+                    style="@style/normaltext"
+                    android:layout_width="84dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="38dp"
+                    android:maxWidth="210dp"
+                    android:text="Critical"
+                    android:textAlignment="center"
+                    app:chainUseRtl="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gwStage2017"
+                    app:layout_constraintVertical_chainStyle="spread_inside" />
+
+                <TextView
+                    android:id="@+id/gwStage2017"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/avenir_medium"
+                    android:maxLength="5"
+                    android:textColor="#4FC1E9"
+                    android:textSize="25sp"
+                    app:chainUseRtl="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="spread_inside"
+                    tools:text="00" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:fontFamily="@font/avenir_heavy"
+                    android:maxWidth="250dp"
+                    android:text="2017 Ground Water Extraction Stage %"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    app:chainUseRtl="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gwStage2017Remark"
+                    app:layout_constraintVertical_chainStyle="spread_inside" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/progress_cardView_4"
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:background="@drawable/recomendbg"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout8"
+            app:layout_constraintTop_toTopOf="@+id/progress_cardView_3">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/gwStage2013Remark"
+                    style="@style/normaltext"
+                    android:layout_width="84dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="38dp"
+                    android:maxWidth="210dp"
+                    android:text="Critical"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gwStage2013" />
+
+                <TextView
+                    android:id="@+id/gwStage2013"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/avenir_medium"
+                    android:maxLength="5"
+                    android:textColor="#4FC1E9"
+                    android:textSize="25sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="00" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:fontFamily="@font/avenir_heavy"
+                    android:maxWidth="250dp"
+                    android:text="2013 Ground Water Extraction Stage %"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gwStage2013Remark" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/progress_cardView_1"
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/recomendbg"
+            app:layout_constraintStart_toStartOf="@+id/progress_cardView_4"
+            app:layout_constraintTop_toBottomOf="@+id/progress_cardView_4">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+
+                <TextView
                     android:id="@+id/annualDomesticAllocationBy2025"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/avenir_medium"
+                    android:maxLength="5"
                     android:textColor="#4FC1E9"
                     android:textSize="25sp"
-                    android:maxLength="5"
                     app:layout_constraintBottom_toTopOf="@+id/pm10_heading"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -168,27 +321,25 @@ xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/progress_cardView_2"
             android:layout_width="160dp"
             android:layout_height="150dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/recomendbg"
-            app:layout_constraintBottom_toBottomOf="@+id/progress_cardView_1"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/progress_cardView_1"
-            app:layout_constraintTop_toTopOf="@+id/progress_cardView_1">
+            app:layout_constraintEnd_toEndOf="@+id/progress_cardView_3"
+            app:layout_constraintTop_toBottomOf="@+id/progress_cardView_4">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp">
+                tools:layout_editor_absoluteY="54dp">
 
                 <TextView
                     android:id="@+id/currentAllocationForUse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/avenir_medium"
+                    android:maxLength="5"
                     android:textColor="#4FC1E9"
                     android:textSize="25sp"
-                    android:maxLength="5"
                     app:layout_constraintBottom_toTopOf="@+id/pm25_heading"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -230,388 +381,388 @@ xmlns:tools="http://schemas.android.com/tools"
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/airQualityCardView"
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/cardsbg"
-            android:elevation="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progress_cardView_1">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/airQualityFrame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
+             <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/airQualityCardView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal"
-                    android:padding="5dp"
+                    android:layout_height="190dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/cardsbg"
+                    android:elevation="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/progress_cardView_1">
 
-                    <ImageView
-                        android:layout_width="7dp"
-                        android:layout_height="14dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/air" />
-
-                    <TextView
-                        style="@style/normalSubText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_weight="15"
-                        android:gravity="center_vertical"
-                        android:text="Ground Water Statistics" />
-
-                    <ImageView
-                        android:id="@+id/air_quality_more_stats"
-                        android:layout_width="10dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="end"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_info_24" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
-                    android:gravity="end"
-                    android:orientation="vertical"
-                    android:weightSum="8"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="vertical">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/airQualityFrame"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <LinearLayout
+                            android:id="@+id/linearLayout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="7dp"
+                                android:layout_height="14dp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/air" />
+
+                            <TextView
+                                style="@style/normalSubText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="15"
+                                android:gravity="center_vertical"
+                                android:text="Ground Water Statistics" />
+
+                            <ImageView
+                                android:id="@+id/air_quality_more_stats"
+                                android:layout_width="10dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="end"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_info_24" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
+                            android:layout_marginStart="18dp"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:weightSum="8"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
-                                style="@style/normaltext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:text="Total Annual Recharge : "
-                                android:textSize="16sp" />
+                            <LinearLayout
 
-                            <TextView
-                                android:id="@+id/totalAnnualRecharge"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:maxLength="5"
-                                android:textStyle="bold"
-                                tools:text="15.4" />
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_margin="4dp"
+                                    android:layout_weight="2"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/normaltext"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:text="Total Annual Recharge : "
+                                        android:textSize="16sp" />
+
+                                    <TextView
+                                        android:id="@+id/totalAnnualRecharge"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:maxLength="5"
+                                        android:textStyle="bold"
+                                        tools:text="15.4" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_margin="4dp"
+                                    android:layout_weight="2"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/normaltext"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:text="Current Annual Extraction : "
+                                        android:textSize="16sp" />
+
+                                    <TextView
+                                        android:id="@+id/currentAnnualExtraction"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:maxLength="4"
+                                        android:textStyle="bold"
+                                        tools:text="24.4" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_margin="4dp"
+                                    android:layout_weight="2"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/normaltext"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:text="Total Natural Discharges : "
+                                        android:textSize="16sp" />
+
+                                    <TextView
+                                        android:id="@+id/totalNaturalDischarge"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:maxLength="5"
+                                        android:textStyle="bold"
+                                        tools:text="15.4" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_margin="4dp"
+                                    android:layout_weight="2"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/normaltext"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:text="Net Availability for future use : "
+                                        android:textSize="16sp" />
+
+                                    <TextView
+                                        android:id="@+id/netAvaibilityForFuture"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:maxLength="4"
+                                        android:textStyle="bold"
+                                        tools:text="56.4" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
-                        <LinearLayout
+
+                        <TextView
+                            style="@style/normaltext"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
+                            android:layout_gravity="center_horizontal"
+                            android:text="All values are in unit - Billion Cubic Meter(bcn)"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
-                            <TextView
-                                style="@style/normaltext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Current Annual Extraction : "
-                                android:textSize="16sp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:id="@+id/currentAnnualExtraction"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:maxLength="4"
-                                android:textStyle="bold"
-                                tools:text="24.4" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/normaltext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Total Natural Discharges : "
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:id="@+id/totalNaturalDischarge"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:maxLength="5"
-                                android:textStyle="bold"
-                                tools:text="15.4" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/normaltext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="Net Availability for future use : "
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:id="@+id/netAvaibilityForFuture"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:maxLength="4"
-                                android:textStyle="bold"
-                                tools:text="56.4" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-                <TextView
-                    style="@style/normaltext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="All values are in unit - mili meter below ground level"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/airQualityCardView2"
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/cardsbg"
-            android:elevation="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/airQualityCardView">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/airQualityFrame2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
-                    android:id="@+id/linearLayout20"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/airQualityCardView2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal"
-                    android:padding="5dp"
+                    android:layout_height="190dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/cardsbg"
+                    android:elevation="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/airQualityCardView">
 
-                    <ImageView
-                        android:layout_width="7dp"
-                        android:layout_height="14dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/air" />
-
-                    <TextView
-                        style="@style/normalSubText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_weight="15"
-                        android:gravity="center_vertical"
-                        android:text="Seasonal Statistics" />
-
-                    <ImageView
-                        android:id="@+id/air_quality_more_stats4"
-                        android:layout_width="10dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="end"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_info_24" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout40"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
-                    android:gravity="end"
-                    android:orientation="vertical"
-                    android:weightSum="8"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="61dp"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="vertical">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/airQualityFrame2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <LinearLayout
+                            android:id="@+id/linearLayout20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="7dp"
+                                android:layout_height="14dp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/air" />
+
+                            <TextView
+                                style="@style/normalSubText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="15"
+                                android:gravity="center_vertical"
+                                android:text="Seasonal Statistics" />
+
+                            <ImageView
+                                android:id="@+id/air_quality_more_stats4"
+                                android:layout_width="10dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="end"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_info_24" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout40"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
+                            android:layout_marginStart="18dp"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:weightSum="8"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
-                                style="@style/normaltext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Rainfall recharge during Monsoon  : "
-                                android:textSize="16sp" />
+                            <LinearLayout
 
-                            <TextView
-                                android:id="@+id/rainfallMonsoonRecharge"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="61dp"
                                 android:layout_gravity="center_horizontal"
-                                android:maxLength="5"
-                                android:textStyle="bold"
-                                tools:text="15.4" />
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_margin="4dp"
+                                    android:layout_weight="2"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/normaltext"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:text="Rainfall recharge during Monsoon  : "
+                                        android:textSize="16sp" />
+
+                                    <TextView
+                                        android:id="@+id/rainfallMonsoonRecharge"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:maxLength="5"
+                                        android:textStyle="bold"
+                                        tools:text="15.4" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_margin="4dp"
+                                    android:layout_weight="2"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/normaltext"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:text="Rainfall recharge during Non-Monsoon  : "
+                                        android:textSize="16sp" />
+
+                                    <TextView
+                                        android:id="@+id/rainfallNonMonsoonRecharge"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:maxLength="4"
+                                        android:textStyle="bold"
+                                        tools:text="24.4" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_margin="4dp"
+                                    android:layout_weight="2"
+                                    android:orientation="horizontal" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_margin="4dp"
+                                    android:layout_weight="2"
+                                    android:orientation="horizontal" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
-                        <LinearLayout
+
+                        <TextView
+                            style="@style/normaltext"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
+                            android:layout_gravity="center_horizontal"
+                            android:text="All values are in unit - Billion Cubic Meter(bcn)"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout40"
+                            app:layout_constraintVertical_bias="0.39" />
 
-                            <TextView
-                                style="@style/normaltext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:text="Rainfall recharge during Non-Monsoon  : "
-                                android:textSize="16sp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:id="@+id/rainfallNonMonsoonRecharge"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:maxLength="4"
-                                android:textStyle="bold"
-                                tools:text="24.4" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-                <TextView
-                    style="@style/normaltext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="All values are in unit - mili meter below ground level"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout40"
-                    app:layout_constraintVertical_bias="0.39" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

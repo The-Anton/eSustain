@@ -154,6 +154,26 @@ dependencies {
     //display multiple images
     implementation 'com.github.stfalcon:multiimageview:0.1'
 
+    // dependancy for exoplayer
+    implementation 'com.google.android.exoplayer:exoplayer:r2.4.0'
+
+    // for core support in exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-core:r2.4.0'
+
+    // for adding dash support in our exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-dash:r2.4.0'
+
+    // for adding hls support in exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-hls:r2.4.0'
+
+    // for smooth streaming of video in our exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.0'
+
+    // for generating default ui of exoplayer
+    implementation 'com.google.android.exoplayer:exoplayer-ui:r2.4.0'
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
 
 //    //Video Player
 //    def videoVersion = "v4.4.1"
