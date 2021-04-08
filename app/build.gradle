@@ -154,7 +154,7 @@ dependencies {
     //display multiple images
     implementation 'com.github.stfalcon:multiimageview:0.1'
 
-<<<<<<< HEAD
+
     // dependancy for exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:r2.4.0'
 
@@ -175,12 +175,11 @@ dependencies {
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
-=======
+
     //Graphs
     implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 
 
->>>>>>> 27206dfae73fdc3497e45e1040d5fa1ce89931d7
 
 //    //Video Player
 //    def videoVersion = "v4.4.1"

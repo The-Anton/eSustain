@@ -29,14 +29,14 @@ class GuideTask : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var v = inflater.inflate(R.layout.fragment_guide_task2, container, false)
+        var v = inflater.inflate(R.layout.fragment_guide_task, container, false)
 
         val youTubePlayerView: YouTubePlayerView = v.findViewById(R.id.youtube_player_view)
         lifecycle.addObserver(youTubePlayerView)
 
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = "S0Q4gqBUs7c"
+                val videoId = "DIL2ENBqLP8"
                 youTubePlayer.loadVideo(videoId, 0F)
             }
         })

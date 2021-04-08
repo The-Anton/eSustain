@@ -5,18 +5,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.Tasks.GuideTask">
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/youtube_player_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
 
-        <FrameLayout
-            android:id="@+id/youtube_fragment"
-            android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+        app:videoId="S0Q4gqBUs7c"
+        app:autoPlay="true"
+        app:showFullScreenButton="false" />
 </FrameLayout>
