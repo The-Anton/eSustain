@@ -154,6 +154,10 @@ dependencies {
     //display multiple images
     implementation 'com.github.stfalcon:multiimageview:0.1'
 
+    //Graphs
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+
+
 
 //    //Video Player
 //    def videoVersion = "v4.4.1"
