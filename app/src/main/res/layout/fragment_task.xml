@@ -1,147 +1,361 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
     tools:context=".fragment.TaskFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayout5"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_small_tree_on_ground" />
-
-        <TextView
-            style="@style/normaltext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="16dp"
-            android:layout_weight="5"
-            android:text="Your Task" />
-
-        <TextView
-            style="@style/normaltext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Coins: 0" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:src="@drawable/ic_profile_circle_24" />
-    </LinearLayout>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="328dp"
-        android:elevation="10dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout11"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout11"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout11"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/level_completed" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/cardsbg"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <LinearLayout
+            android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="120dp"
-            android:layout_marginTop="39dp"
-            android:layout_marginRight="120dp"
-            android:background="@color/white">
+            android:layout_height="50dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/circle_blank" />
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/ic_small_tree_on_ground" />
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
+            <TextView
+                style="@style/normaltext"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:background="@color/white">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="5"
+                android:text="Your Task" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/circle_blank" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                style="@style/normaltext"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:background="@color/white">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/circle_blank" />
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="120dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="120dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/white">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Coins: 0" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/circle_blank" />
-
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/ic_profile_circle_24" />
         </LinearLayout>
 
-    </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="30dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/beginning_tasks_constraint_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/plant_one_tree_imageView_tasks"
+                            android:layout_width="95dp"
+                            android:layout_height="95dp"
+                            android:src="@drawable/blue_tick"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/green_tick_animation_plant_one_tree"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="60dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/plant_one_tree_imageView_tasks"
+                            app:layout_constraintStart_toStartOf="@+id/plant_one_tree_imageView_tasks"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/green_tick_icon" />
+
+                        <TextView
+                            android:id="@+id/plant_one_tree_textView_tasks"
+                            style="@style/normalTitles"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Plant a Tree"
+                            app:layout_constraintEnd_toEndOf="@+id/plant_one_tree_imageView_tasks"
+                            app:layout_constraintStart_toStartOf="@+id/plant_one_tree_imageView_tasks"
+                            app:layout_constraintTop_toBottomOf="@+id/plant_one_tree_imageView_tasks" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
+
+                        <ImageView
+                            android:id="@+id/seminar_imageView_tasks"
+                            android:layout_width="95dp"
+                            android:layout_height="95dp"
+                            android:src="@drawable/blue_tick"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/green_tick_animation_seminar"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="60dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/seminar_imageView_tasks"
+                            app:layout_constraintStart_toStartOf="@+id/seminar_imageView_tasks"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/green_tick_icon" />
+
+                        <TextView
+                            android:id="@+id/seminar_textView_tasks"
+                            style="@style/normalTitles"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Seminar"
+                            app:layout_constraintEnd_toEndOf="@+id/seminar_imageView_tasks"
+                            app:layout_constraintStart_toStartOf="@+id/seminar_imageView_tasks"
+                            app:layout_constraintTop_toBottomOf="@+id/seminar_imageView_tasks" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
+
+                        <ImageView
+                            android:id="@+id/conserve_electricity_imageView_tasks"
+                            android:layout_width="95dp"
+                            android:layout_height="95dp"
+                            android:src="@drawable/blue_tick"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/green_tick_animation_conserve_electricity"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="60dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/conserve_electricity_imageView_tasks"
+                            app:layout_constraintStart_toStartOf="@+id/conserve_electricity_imageView_tasks"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/green_tick_icon" />
+
+                        <TextView
+                            android:id="@+id/conserve_electricity_textView_tasks"
+                            style="@style/normalTitles"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Save electricity"
+                            app:layout_constraintEnd_toEndOf="@+id/conserve_electricity_imageView_tasks"
+                            app:layout_constraintStart_toStartOf="@+id/conserve_electricity_imageView_tasks"
+                            app:layout_constraintTop_toBottomOf="@+id/conserve_electricity_imageView_tasks" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/share_report_constraint_layout_tasks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout12">
+
+                        <ImageView
+                            android:id="@+id/share_report_imageView_tasks"
+                            android:layout_width="95dp"
+                            android:layout_height="95dp"
+                            android:src="@drawable/blue_tick"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/green_tick_animation_share_report"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="60dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/share_report_imageView_tasks"
+                            app:layout_constraintStart_toStartOf="@+id/share_report_imageView_tasks"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/green_tick_icon" />
+
+                        <TextView
+                            android:id="@+id/share_report_textView_tasks"
+                            style="@style/normalTitles"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Share Report"
+                            app:layout_constraintEnd_toEndOf="@+id/share_report_imageView_tasks"
+                            app:layout_constraintStart_toStartOf="@+id/share_report_imageView_tasks"
+                            app:layout_constraintTop_toBottomOf="@+id/share_report_imageView_tasks" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/beginning_tasks_constraint_layout">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lottieAnimationView"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:elevation="10dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout11"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayout11"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/level_completed" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="120dp"
+                        android:background="@drawable/cardsbg"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="@+id/lottieAnimationView"
+                        tools:layout_editor_absoluteX="-33dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="120dp"
+                            android:layout_marginTop="39dp"
+                            android:layout_marginRight="120dp"
+                            android:background="@color/white">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/circle_blank" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1"
+                                android:background="@color/white">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/circle_blank" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="100dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:background="@color/white">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/circle_blank" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="120dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginRight="120dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="@color/white">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/circle_blank" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
