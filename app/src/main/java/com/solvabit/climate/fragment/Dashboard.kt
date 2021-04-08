@@ -147,20 +147,20 @@ class Dashboard : Fragment() {
 
     private fun addRecommendedDashboardItems(){
 
-        val adapter = GroupAdapter<ViewHolder>()
-        binding.recommendedRecyclerView.adapter = adapter
-
-        localuser.presentAction.forEach{
-                adapter.add(AddRecycleItemRecommended(it.toInt(), "present", binding))
-        }
-
-        localuser.remainingAction.forEach {
-                adapter.add(AddRecycleItemRecommended(it.toInt(), "remaining", binding))
-        }
-
-        localuser.completedAction.forEach{
-                adapter.add(AddRecycleItemRecommended(it.toInt(), "completed", binding))
-        }
+//        val adapter = GroupAdapter<ViewHolder>()
+//        binding.recommendedRecyclerView.adapter = adapter
+//
+//        localuser.presentAction.forEach{
+//                adapter.add(AddRecycleItemRecommended(it.toInt(), "present", binding))
+//        }
+//
+//        localuser.remainingAction.forEach {
+//                adapter.add(AddRecycleItemRecommended(it.toInt(), "remaining", binding))
+//        }
+//
+//        localuser.completedAction.forEach{
+//                adapter.add(AddRecycleItemRecommended(it.toInt(), "completed", binding))
+//        }
 
     }
 
@@ -200,8 +200,8 @@ class AddRecycleItemRecommended(val a: Int, val status: String, val binding: Das
         viewHolder.itemView.target_textView_subtext.text = action.sub_title
         viewHolder.itemView.background_play_pause.setOnClickListener {
             when(a){
-                0-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(4, status))
-                1-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(10, status))
+                0-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(4, status, "1"))
+                1-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToTreesPlanted(10, status, "1"))
                 2-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
                 3-> binding.root.findNavController().navigate(DashboardDirections.actionDashboardFragmentToSendReferral())
             }

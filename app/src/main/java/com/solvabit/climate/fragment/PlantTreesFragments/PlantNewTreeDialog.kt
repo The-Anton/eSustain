@@ -8,11 +8,10 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.solvabit.climate.R
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.dialog_plant_new_tree.view.*
 import timber.log.Timber
 import java.util.*
 
-class PlantNewTreeDialog(private val targetTrees: Int, private var treesPlanted: Int) : DialogFragment() {
+class PlantNewTreeDialog(private val targetTrees: Int, private var treesPlanted: Int, private var taskId: String) : DialogFragment() {
 
     private lateinit var dialogView: View
     private val uid = FirebaseAuth.getInstance().uid
@@ -91,20 +90,14 @@ class PlantNewTreeDialog(private val targetTrees: Int, private var treesPlanted:
         }
 
         val filename = UUID.randomUUID().toString()
-        val ref = FirebaseStorage.getInstance().getReference("/images-send-by-users/$filename")
+        val ref = FirebaseStorage.getInstance().getReference("/images-send-by-users-for-planting-tree/$filename")
         ref.putFile(selectedPhotoUri!!)
                 .addOnSuccessListener {
 
                     ref.downloadUrl.addOnSuccessListener {
                         imageUrl = it.toString()
                         val timestamp = System.currentTimeMillis()
-                        val dataRef: DatabaseReference
-                        if (targetTrees == 4)
-                            dataRef = FirebaseDatabase.getInstance()
-                                    .getReference("/Users/$uid/fiveTrees/$timestamp")
-                        else
-                            dataRef = FirebaseDatabase.getInstance()
-                                    .getReference("/Users/$uid/tenTrees/$timestamp")
+                        val dataRef = FirebaseDatabase.getInstance().getReference("/Users/$uid/AllTasks/$taskId/$timestamp")
                         treesPlanted += 1
                         val tree = Trees(
                                 imageUrl.toString(),
@@ -125,6 +118,7 @@ class PlantNewTreeDialog(private val targetTrees: Int, private var treesPlanted:
 
                                 }
                                 .addOnFailureListener {
+                                    Toast.makeText(context, "Unable to add Image!!\n Check your connection", Toast.LENGTH_SHORT).show()
                                     dialogView.add_pic_trees_button_dialog.revertAnimation()
                                     dialogView.post_image_button_dialog.revertAnimation()
                                     dialogView.post_image_button_dialog.visibility = View.INVISIBLE
@@ -132,6 +126,7 @@ class PlantNewTreeDialog(private val targetTrees: Int, private var treesPlanted:
                     }
                 }
                 .addOnFailureListener {
+                    Toast.makeText(context, "Unable to add Image!!\n Check your connection", Toast.LENGTH_SHORT).show()
                     dialogView.add_pic_trees_button_dialog.revertAnimation()
                     dialogView.post_image_button_dialog.revertAnimation()
                     dialogView.post_image_button_dialog.visibility = View.INVISIBLE

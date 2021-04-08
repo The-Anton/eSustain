@@ -210,7 +210,7 @@ class RegistrationPage : AppCompatActivity() {
                 false,
                 "City",
                 0.0,
-                listOf("0"),
+                listOf(),
                 "Country",
                 email,
                 0.0,
@@ -222,11 +222,15 @@ class RegistrationPage : AppCompatActivity() {
                 0,
                 0.0,
                 0.0,
+<<<<<<< HEAD
                 listOf("0", "1"),
+=======
+                listOf("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"),
+>>>>>>> 27206dfae73fdc3497e45e1040d5fa1ce89931d7
                 0,
                 0.0,
                 0.0,
-                listOf("0"),
+                listOf("1"),
             "Rookie",
                 0,
                 0.0,
