@@ -15,9 +15,6 @@
         <action
             android:id="@+id/action_dashboard_fragment_to_treesPlanted"
             app:destination="@id/treesPlanted" />
-        <action
-            android:id="@+id/action_dashboard_fragment_to_allChatsFragment"
-            app:destination="@id/allChatsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profile_fragment"
@@ -55,6 +52,8 @@
             app:argType="integer" />
         <argument
             android:name="status"
+            app:argType="string" />
+        <argument android:name="taskId"
             app:argType="string" />
     </fragment>
     <fragment
@@ -114,5 +113,12 @@
         android:id="@+id/taskFragment"
         android:name="com.solvabit.climate.fragment.TaskFragment"
         android:label="fragment_task"
-        tools:layout="@layout/fragment_task" />
+        tools:layout="@layout/fragment_task" >
+        <action
+            android:id="@+id/action_taskFragment_to_treesPlanted"
+            app:destination="@id/treesPlanted" />
+        <action
+            android:id="@+id/action_taskFragment_to_sendReferral"
+            app:destination="@id/sendReferral" />
+    </fragment>
 </navigation>

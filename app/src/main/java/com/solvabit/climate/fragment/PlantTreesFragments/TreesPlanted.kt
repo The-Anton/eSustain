@@ -12,9 +12,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.maps.model.Dash
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.solvabit.climate.R
 import com.solvabit.climate.databinding.TreesPlantedFragmentBinding
@@ -28,6 +30,7 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.single_tree.view.*
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,6 +42,9 @@ class TreesPlanted : Fragment() {
     private var targetTrees: Int = 0
     private var status: String = "remaining"
     private lateinit var allPlantsList: MutableList<Trees>
+    private var taskId = "1"
+    private var localTreesPlanted = 0
+    private val localUser = Dashboard.localuser
 
     private lateinit var viewModel: TreesPlantedViewModel
     private lateinit var binding: TreesPlantedFragmentBinding
@@ -54,15 +60,16 @@ class TreesPlanted : Fragment() {
         val args = TreesPlantedArgs.fromBundle(requireArguments())
         targetTrees = args.targetTrees
         status = args.status
+        taskId = args.taskId
 
         fetchCurrentUser()
 
         fetchTrees()
 
-        circularProgress()
+        circularProgress(localTreesPlanted, targetTrees)
 
         binding.addPicFiveTrees.setOnClickListener {
-            val dialog = PlantNewTreeDialog(targetTrees, treesPlanted)
+            val dialog = PlantNewTreeDialog(targetTrees, treesPlanted, taskId)
             dialog.show(childFragmentManager, "TreesPlanted")
         }
 
@@ -76,27 +83,19 @@ class TreesPlanted : Fragment() {
     private fun shareAchievementToPost() {
         val dialog = ShareAchievementToPostDialog(allPlantsList)
         dialog.show(childFragmentManager, "ShareAchievement")
-//        val bitmap = getBitmapFromView(binding.allTreesRecyclerView)
-//        binding.tempImageView.setImageBitmap(bitmap)
     }
 
 
 
     private fun fetchTrees() {
         binding.numberofTreesPlanted.text = "00"
-        val ref: DatabaseReference
-        if (targetTrees == 4)
-            ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/fiveTrees")
-        else
-            ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/tenTrees")
+        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/AllTasks/$taskId")
 
-        var i = 0
         val adapter = GroupAdapter<ViewHolder>()
         binding.allTreesRecyclerView.adapter = adapter
         allPlantsList = mutableListOf()
 
         ref.addChildEventListener(object : ChildEventListener {
-
             override fun onCancelled(p0: DatabaseError) {}
             override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
@@ -106,44 +105,53 @@ class TreesPlanted : Fragment() {
                 val tree = p0.getValue(Trees::class.java)
                 adapter.add(AddRecycleItemTrees(tree!!))
                 allPlantsList.add(tree)
-                i += 1
-                if (i >= targetTrees) {
+                localTreesPlanted = allPlantsList.size
+                if (localTreesPlanted >= targetTrees) {
                     binding.linearLayout.visibility = View.VISIBLE
                     binding.linearLayoutShareTreesPlanted.visibility = View.VISIBLE
                     binding.addPicFiveTrees.visibility = View.GONE
-                    val changeRemainingList =
-                            Dashboard.localuser.remainingAction.toMutableList()
-                    val changeCompletedList =
-                            Dashboard.localuser.completedAction.toMutableList()
-                    if (targetTrees == 4 && status == "remaining") {
-                        changeRemainingList.removeAt(0)
-                        changeCompletedList.add("1")
-                    } else if (targetTrees == 10 && status == "remaining") {
-                        changeRemainingList.removeAt(1)
-                        changeCompletedList.add("2")
+                    if(localUser.remainingAction.contains(taskId) || localUser.presentAction.contains(taskId))
+                    {
+                        Timber.i("Inside remaining")
+                        val changePresentList =
+                                Dashboard.localuser.presentAction.toMutableList()
+                        val changeRemainingList =
+                                Dashboard.localuser.remainingAction.toMutableList()
+                        val changeCompletedList =
+                                Dashboard.localuser.completedAction.toMutableList()
+                        if(changePresentList.indexOf(taskId) != -1)
+                            changePresentList.removeAt(changePresentList.indexOf(taskId))
+                        if(changeRemainingList.indexOf(taskId) != -1) {
+                            Timber.i("Removing remaining list")
+                            changeRemainingList.removeAt(changeRemainingList.indexOf(taskId))
+                        }
+                        if(changeCompletedList.indexOf(taskId) == -1)
+                            changeCompletedList.add(taskId)
+                        FirebaseDatabase.getInstance().getReference("/Users/$uid/presentAction")
+                                .setValue(changePresentList)
+                        FirebaseDatabase.getInstance().getReference("/Users/$uid/remainingAction")
+                                .setValue(changeRemainingList)
+                        FirebaseDatabase.getInstance().getReference("/Users/$uid/completedAction")
+                                .setValue(changeCompletedList)
                     }
-                    FirebaseDatabase.getInstance().getReference("/Users/$uid/remainingAction")
-                            .setValue(changeRemainingList)
-                    FirebaseDatabase.getInstance().getReference("/Users/$uid/completedAction")
-                            .setValue(changeCompletedList)
                 }
-                binding.numberofTreesPlanted.text = "0" + i.toString() + "/ 0" + targetTrees
+                binding.numberofTreesPlanted.text = "0" + localTreesPlanted + "/ 0" + targetTrees
             }
         })
     }
 
     private fun fetchCurrentUser() {
-        treesPlanted = Dashboard.localuser.treesPlanted ?: 0
-        binding.achievementNameTextView.text = Dashboard.localuser.username
-        Picasso.get().load(Dashboard.localuser.imageUrl).into(binding.userprofileImageView)
+        treesPlanted = localUser.treesPlanted ?: 0
+        binding.achievementNameTextView.text = localUser.username
+        Picasso.get().load(localUser.imageUrl).into(binding.userprofileImageView)
     }
 
-    private fun circularProgress() {
+    private fun circularProgress(progress: Int, maxProgress: Int) {
         val circularProgressBar = binding.circularProgressBar
         circularProgressBar.apply {
-            setProgressWithAnimation(165f, 4000) // =1s
+            setProgressWithAnimation(progress.toFloat(), 4000) // =1s
             // Set Progress Max
-            progressMax = 200f
+            progressMax = maxProgress.toFloat()
             // Set ProgressBar Color
             progressBarColor = Color.BLACK
             // Set background ProgressBar Color
