@@ -11,70 +11,62 @@ import com.solvabit.climate.registerLogin.ResetPassword.Companion.TAG
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.lang.Exception
 
-public class FirebaseService(var dao:UserDao, var uid: String) {
+public class FirebaseService(var uid: String) {
 
 
-     suspend fun fetchUser(myCallback: (result:User)-> Unit){
+    suspend fun fetchUser(myCallback: (result: User) -> Unit) {
         var database = FirebaseDatabase.getInstance();
         val ref = database.getReference("Users/$uid")
-        var user:User = User()
-                ref.get().addOnSuccessListener {
-                    user = it.getValue(User::class.java)!!
-                    Log.v("FirebaseService","Fetched User From Firebase ${user}")
+        var user: User = User()
+        ref.get().addOnSuccessListener {
+            user = it.getValue(User::class.java)!!
+            Log.v("FirebaseService", "Fetched User From Firebase ${user}")
 
-                    myCallback.invoke(user)
+            myCallback.invoke(user)
 
-                }.addOnFailureListener{
-                    Log.v("FirebaseService", "Error getting data")
-                }
+        }.addOnFailureListener {
+            Log.v("FirebaseService", "Error getting data")
+        }
     }
 
 
-
-
-    fun isnewuser(uid: String , myCallback: (result: Boolean) -> Unit){
-        Log.v("FirebaseService","Fetched User has not been initialized")
+    fun isnewuser(uid: String, myCallback: (result: Boolean) -> Unit) {
+        Log.v("FirebaseService", "Fetched User has not been initialized")
         var database = FirebaseDatabase.getInstance();
         val ref = database.getReference("Users/$uid/updated")
 
         ref.get().addOnSuccessListener {
             myCallback.invoke(it as Boolean)
-        }.addOnFailureListener{
+        }.addOnFailureListener {
             Log.v("FirebaseService", "Error getting data")
         }
     }
 
 
-
-
-
-
-
-
-    fun userStatus(myCallback: (result:String)-> Unit){
+    fun userStatus(myCallback: (result: String) -> Unit) {
         var database = FirebaseDatabase.getInstance();
         val refU = database.getReference("Users/$uid/updated")
 
         refU.get().addOnSuccessListener {
 
-            var status =false
-            if(it.value != null){
+            var status = false
+            if (it.value != null) {
                 status = it.value as Boolean
             }
-            Log.v("FirebaseService","User is updated ->> ${status}")
+            Log.v("FirebaseService", "User is updated ->> ${status}")
 
-            if(status==true){
+            if (status == true) {
                 myCallback.invoke("true")
-            }else{
+            } else {
                 myCallback.invoke("false")
             }
-        }.addOnFailureListener{
+        }.addOnFailureListener {
             Log.v("FirebaseService", "Error getting data")
             myCallback.invoke("error")
         }
     }
 
-    fun fetchContinuosUpdates(myCallback: (result: User) -> Unit){
+    fun fetchContinuosUpdates(myCallback: (result: User) -> Unit) {
         var database = FirebaseDatabase.getInstance();
         val refU = database.getReference("Users/$uid")
 
@@ -97,8 +89,7 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
     }
 
 
-
-    fun fetchUpdates(myCallback: (result: User) -> Unit){
+    fun fetchUpdates(myCallback: (result: User) -> Unit) {
         var database = FirebaseDatabase.getInstance();
         val refU = database.getReference("Users/$uid")
 
@@ -106,24 +97,31 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
 
             var user = it.getValue(User::class.java)!!
 
-            Log.v("FirebaseService","One time fetch update called")
+            Log.v("FirebaseService", "One time fetch update called")
 
             myCallback.invoke(user)
 
-        }.addOnFailureListener{
+        }.addOnFailureListener {
             Log.v("FirebaseService", "Error getting data")
         }
     }
+
+
+    fun writeUpdatesForTreesPlanted(user: User) {
+        FirebaseDatabase.getInstance().getReference("/Users/$uid")
+            .child("treesPlanted").setValue(user.treesPlanted)
+    }
+
 
     private fun fetchLocationFromFirebase() {
 
     }
 
-    fun saveUser(uid: String,user:User){
+    fun saveUser(uid: String, user: User) {
 
     }
 
-    fun updateUser(uid: String,user: User){
+    fun updateUser(uid: String, user: User) {
 
     }
 

@@ -15,6 +15,15 @@
         <action
             android:id="@+id/action_dashboard_fragment_to_treesPlanted"
             app:destination="@id/treesPlanted" />
+        <action
+            android:id="@+id/action_dashboard_fragment_to_recycleTask"
+            app:destination="@id/recycleTask" />
+        <action
+            android:id="@+id/action_dashboard_fragment_to_guideTask"
+            app:destination="@id/guideTask" />
+        <action
+            android:id="@+id/action_dashboard_fragment_to_guideTask2"
+            app:destination="@id/guideTask" />
     </fragment>
     <fragment
         android:id="@+id/profile_fragment"
@@ -41,7 +50,14 @@
         android:id="@+id/sendReferral"
         android:name="com.solvabit.climate.fragment.SendReferral"
         android:label="send_referral_fragment"
-        tools:layout="@layout/send_referral_fragment" />
+        tools:layout="@layout/send_referral_fragment" >
+        <action
+            android:id="@+id/action_sendReferral_to_taskFragment"
+            app:destination="@id/taskFragment" />
+        <action
+            android:id="@+id/action_sendReferral_to_dashboard_fragment"
+            app:destination="@id/dashboard_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/treesPlanted"
         android:name="com.solvabit.climate.fragment.TreesPlanted"
@@ -55,6 +71,12 @@
             app:argType="string" />
         <argument android:name="taskId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_treesPlanted_to_taskFragment"
+            app:destination="@id/taskFragment" />
+        <action
+            android:id="@+id/action_treesPlanted_to_dashboard_fragment"
+            app:destination="@id/dashboard_fragment" />
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
@@ -120,10 +142,35 @@
         <action
             android:id="@+id/action_taskFragment_to_sendReferral"
             app:destination="@id/sendReferral" />
+        <action
+            android:id="@+id/action_taskFragment_to_recycleTask"
+            app:destination="@id/recycleTask" />
+        <action
+            android:id="@+id/action_taskFragment_to_guideTask"
+            app:destination="@id/guideTask" />
     </fragment>
     <fragment
         android:id="@+id/recycleTask"
         android:name="com.solvabit.climate.fragment.Tasks.RecycleTask"
         android:label="fragment_recycle_task"
-        tools:layout="@layout/fragment_recycle_task" />
+        tools:layout="@layout/fragment_recycle_task" >
+        <argument
+            android:name="taskId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_recycleTask_to_taskFragment"
+            app:destination="@id/taskFragment" />
+        <action
+            android:id="@+id/action_recycleTask_to_dashboard_fragment"
+            app:destination="@id/dashboard_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/guideTask"
+        android:name="com.solvabit.climate.fragment.Tasks.GuideTask"
+        android:label="fragment_guide_task"
+        tools:layout="@layout/fragment_guide_task" >
+        <argument
+            android:name="taskId"
+            app:argType="string" />
+    </fragment>
 </navigation>
