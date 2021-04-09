@@ -69,7 +69,6 @@ class SendReferral : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SendReferralViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
