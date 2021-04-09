@@ -9,7 +9,7 @@ import com.solvabit.climate.network.FirebaseService
 
 public class Repository constructor(val dao: UserDao,val uid:String) {
 
-    private  val firebaseService = FirebaseService(dao,uid)
+    private  val firebaseService = FirebaseService(uid)
 
      suspend fun getUser(myCallback: (result: User) -> Unit) {
         val userCount = dao.hasUser(uid)
@@ -50,7 +50,7 @@ public class Repository constructor(val dao: UserDao,val uid:String) {
 
     suspend fun fetchUpdates(myCallback: (result: User) -> Unit){
 
-        FirebaseService(dao,uid).fetchUpdates{
+        FirebaseService(uid).fetchUpdates{
             localuser = it
             dao.update(it)
             val user = dao.getUserByUID(uid)
@@ -59,7 +59,7 @@ public class Repository constructor(val dao: UserDao,val uid:String) {
 
         }
 
-        FirebaseService(dao,uid).fetchContinuosUpdates{
+        FirebaseService(uid).fetchContinuosUpdates{
             localuser = it
             dao.update(it)
             val user = dao.getUserByUID(uid)

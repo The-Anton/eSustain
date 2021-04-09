@@ -2,34 +2,37 @@ package com.solvabit.climate.fragment
 
 import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import com.solvabit.climate.R
 import com.solvabit.climate.database.SingleAction
 import com.solvabit.climate.databinding.FragmentTaskBinding
+import com.solvabit.climate.dialog.StartNewTaskDialog
+import timber.log.Timber
 
 
-class TaskFragment : Fragment() {
+class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
 
     private lateinit var binding: FragmentTaskBinding
 
     private val localUser = Dashboard.localuser
-    private val actionsList = mutableListOf<SingleAction>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_task, container, false)
-
 
         initializeAllTasks()
 
@@ -49,19 +52,69 @@ class TaskFragment : Fragment() {
             var status = "remaining"
             if(localUser.completedAction.contains(i.toString()))
                 status = "completed"
+            else if(localUser.presentAction.contains(i.toString()))
+                status = "present"
             imageView.setOnClickListener {
-                when(actionsList[i-1].category){
-                    tree -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToTreesPlanted(actionsList[i-1].number, status, i.toString() ))
-                    seminar -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
-                    guide -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
-                    report -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
-                    refer -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
-                    recycle -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
-                    purchase -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
-                    feed -> binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+
+                if(status=="remaining")
+                {
+                    showAddTaskDialog(i.toString())
+                }
+                else
+                {
+                    navigateToTask(i, status)
                 }
             }
         }
+    }
+
+    private fun navigateToTask(i: Int, status: String) {
+        when(actionsList[i - 1].category){
+            tree -> binding.root.findNavController().navigate(
+                TaskFragmentDirections.actionTaskFragmentToTreesPlanted(
+                    actionsList[i - 1].number,
+                    status,
+                    i.toString()
+                )
+            )
+            seminar -> binding.root.findNavController()
+                .navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+            guide -> binding.root.findNavController().navigate(
+                TaskFragmentDirections.actionTaskFragmentToGuideTask(
+                    i.toString()
+                )
+            )
+            report -> binding.root.findNavController()
+                .navigate(TaskFragmentDirections.actionTaskFragmentToSendReportFragment())
+            refer -> binding.root.findNavController()
+                .navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+            recycle -> binding.root.findNavController().navigate(
+                TaskFragmentDirections.actionTaskFragmentToRecycleTask(
+                    i.toString()
+                )
+            )
+            purchase -> binding.root.findNavController()
+                .navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+            feed -> binding.root.findNavController()
+                .navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+        }
+    }
+
+    private fun showAddTaskDialog(taskId: String) {
+        val fm: FragmentManager = parentFragmentManager
+        val startNewTaskDialogFragment: StartNewTaskDialog =
+            StartNewTaskDialog(taskId)
+        startNewTaskDialogFragment.setTargetFragment(this, 300)
+        startNewTaskDialogFragment.show(fm, "fragment_edit_name")
+    }
+
+    override fun onFinishEditDialog(taskId: String, remainingAction: List<String>, presentAction: List<String>) {
+        navigateToTask(taskId.toInt(), "present")
+        localUser.remainingAction = remainingAction
+        localUser.presentAction = presentAction
+        setRemaining()
+        setPresent()
+        setClickForTasks()
     }
 
     private fun setPresent() {
@@ -72,6 +125,8 @@ class TaskFragment : Fragment() {
     }
 
     private fun setRemaining() {
+        Timber.i("Setting Remaining")
+        Timber.i("$localUser")
         localUser.remainingAction.forEach {
             val imageView = returnImageId(it)
             val greenTick = returnTickId(it)
@@ -123,29 +178,169 @@ class TaskFragment : Fragment() {
     }
 
     private fun initializeAllTasks() {
-        actionsList.add(SingleAction(1, "Plant a Tree", "Begin with a single step", "tree", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(2, "Seminar", "Attend sustainable environment seminar", "seminar", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(3, "Save electricity", "Energy is life", "guide", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(4, "Share Report", "Help your family and friends too", "report", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(5, "Save water", "Remember water cycle & lifecycle are one", "guide", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(6, "Public Transport", "The share of public transport is just 18.1% of work trips.", "guide", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(7, "Refer friends", "Let's inspire others for a sustainable future", "refer", 5, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(8, "E-waste", "India generates about 3 million tonnes of e-waste annually and ranks third among e-waste producing countries", "recycle", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(9, "Recycle Paper", "To produce a ton of paper we need about 115,000 liters of water", "recycle", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(10, "Reusable bag", "India generates nearly 26,000 tonnes of plastic waste every day", "purchase", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(11, "Take a walk", "Walking is fun and environment friendly", "guide", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(12, "Plant four tree", "In Chicago, trees remove more than 18,000 tons of air pollution each year.", "tree", 4, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(13, "Use Carpool", "If you carpool at least twice a week, you can help reduce the emission of 1,600 pounds of greenhouse gases by a car each year", "guide", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(14, "Solve an Issue", "Nature is waiting for you!!", "feed", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
+        actionsList.add(
+            SingleAction(
+                1,
+                "Plant a Tree",
+                "Begin with a single step",
+                "tree",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                2,
+                "Seminar",
+                "Attend sustainable environment seminar",
+                "seminar",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                3,
+                "Save electricity",
+                "Energy is life",
+                "guide",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                4,
+                "Share Report",
+                "Help your family and friends too",
+                "report",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                5,
+                "Save water",
+                "Remember water cycle & lifecycle are one",
+                "guide",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                6,
+                "Public Transport",
+                "The share of public transport is just 18.1% of work trips.",
+                "guide",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                7,
+                "Refer friends",
+                "Let's inspire others for a sustainable future",
+                "refer",
+                5,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                8,
+                "E-waste",
+                "India generates about 3 million tonnes of e-waste annually and ranks third among e-waste producing countries",
+                "recycle",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                9,
+                "Recycle Paper",
+                "To produce a ton of paper we need about 115,000 liters of water",
+                "recycle",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                10,
+                "Reusable bag",
+                "India generates nearly 26,000 tonnes of plastic waste every day",
+                "purchase",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                11,
+                "Take a walk",
+                "Walking is fun and environment friendly",
+                "guide",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                12,
+                "Plant four tree",
+                "In Chicago, trees remove more than 18,000 tons of air pollution each year.",
+                "tree",
+                4,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                13,
+                "Use Carpool",
+                "If you carpool at least twice a week, you can help reduce the emission of 1,600 pounds of greenhouse gases by a car each year",
+                "guide",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
+        actionsList.add(
+            SingleAction(
+                14,
+                "Solve an Issue",
+                "Nature is waiting for you!!",
+                "feed",
+                1,
+                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
+            )
+        )
     }
 
-
     companion object{
-         val matrix = floatArrayOf(
-                0.33f, 0.33f, 0.33f, 0f, 0f,
-                0.33f, 0.33f, 0.33f, 0f, 0f,
-                0.33f, 0.33f, 0.33f, 0f, 0f,
-                0f, 0f, 0f, 0.5f, 0f)
+        val matrix = floatArrayOf(
+            0.33f, 0.33f, 0.33f, 0f, 0f,
+            0.33f, 0.33f, 0.33f, 0f, 0f,
+            0.33f, 0.33f, 0.33f, 0f, 0f,
+            0f, 0f, 0f, 0.5f, 0f
+        )
         const val tree = "tree"
         const val seminar = "seminar"
         const val guide = "guide"
@@ -154,6 +349,6 @@ class TaskFragment : Fragment() {
         const val recycle = "recycle"
         const val purchase = "purchase"
         const val feed = "feed"
+        val actionsList = mutableListOf<SingleAction>()
     }
-
 }

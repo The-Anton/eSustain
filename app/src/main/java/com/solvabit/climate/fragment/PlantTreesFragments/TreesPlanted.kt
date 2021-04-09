@@ -19,6 +19,7 @@ import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.solvabit.climate.R
+import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.TreesPlantedFragmentBinding
 import com.solvabit.climate.fragment.PlantTreesFragments.PlantNewTreeDialog
 import com.solvabit.climate.fragment.PlantTreesFragments.ShareAchievementToPostDialog
@@ -56,6 +57,9 @@ class TreesPlanted : Fragment() {
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.trees_planted_fragment, container, false
         )
+
+        val instance = UserDatabase.getInstance(context?.applicationContext!!)
+        val dao = instance.userDao()
 
         val args = TreesPlantedArgs.fromBundle(requireArguments())
         targetTrees = args.targetTrees

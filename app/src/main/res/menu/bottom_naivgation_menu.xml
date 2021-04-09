@@ -25,7 +25,7 @@
         android:title="Map"/>
 
     <item
-        android:id="@+id/recycleTask"
+        android:id="@+id/taskFragment"
         android:enabled="true"
         android:icon="@drawable/ic_white_account_circle_24"
         android:title="Task"/>

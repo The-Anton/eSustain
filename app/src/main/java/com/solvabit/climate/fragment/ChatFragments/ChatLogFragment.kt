@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -32,6 +33,7 @@ class ChatLogFragment : Fragment() {
     private lateinit var binding: FragmentChatLogBinding
     private val adapter = GroupAdapter<ViewHolder>()
     private val localUser = Dashboard.localuser
+    private lateinit var navbar: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,8 @@ class ChatLogFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_chat_log, container, false)
         binding.recyclerViewChatLog.adapter = adapter
+        navbar = activity?.findViewById(R.id.bottomNavigation)!!
+        navbar.visibility = View.GONE
 
         val args = ChatLogFragmentArgs.fromBundle(requireArguments())
         val postData = args.postData
@@ -60,6 +64,11 @@ class ChatLogFragment : Fragment() {
         initializePostData(postData)
 
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        navbar.visibility = View.VISIBLE
     }
 
     private fun listenForMessages(postData: Post) {

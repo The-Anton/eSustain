@@ -16,8 +16,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.solvabit.climate.R
 import com.solvabit.climate.dataModel.PlantedTrees
+import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.fragment.Dashboard
 import com.solvabit.climate.fragment.Trees
+import com.solvabit.climate.network.FirebaseService
 import kotlinx.android.synthetic.main.dialog_plant_new_tree.view.*
 import timber.log.Timber
 import java.util.*
@@ -98,7 +100,6 @@ class PlantNewTreeDialog(private val targetTrees: Int, private var treesPlanted:
                         imageUrl = it.toString()
                         val timestamp = System.currentTimeMillis()
                         val dataRef = FirebaseDatabase.getInstance().getReference("/Users/$uid/AllTasks/$taskId/$timestamp")
-                        treesPlanted += 1
                         val tree = Trees(
                                 imageUrl.toString(),
                                 System.currentTimeMillis()
@@ -109,11 +110,17 @@ class PlantNewTreeDialog(private val targetTrees: Int, private var treesPlanted:
                                     if (dialogView.checkbox_plant_tree_dialog.isChecked) {
                                         shareOnMaps(imageUrl!!, timestamp)
                                     }
-                                    FirebaseDatabase.getInstance().getReference("/Users/$uid")
-                                            .child("treesPlanted").setValue(treesPlanted)
-                                            .addOnSuccessListener {
-                                                dialog?.dismiss()
-                                            }
+
+                                    FirebaseDatabase.getInstance().getReference("/Users/$uid/treesPlanted")
+                                        .get()
+                                        .addOnSuccessListener {
+                                            treesPlanted = it.value.toString().toInt() + 1
+                                            FirebaseDatabase.getInstance().getReference("/Users/$uid")
+                                                .child("treesPlanted").setValue(treesPlanted)
+                                                .addOnSuccessListener {
+                                                    dialog?.dismiss()
+                                                }
+                                        }
                                     selectedPhotoUri = null
 
                                 }

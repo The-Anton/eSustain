@@ -4,44 +4,70 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.solvabit.climate.R
+import com.solvabit.climate.databinding.FragmentGuideTaskBinding
+import com.solvabit.climate.fragment.TaskFragment
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [GuideTask.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GuideTask : Fragment() {
+
+
+    private lateinit var binding: FragmentGuideTaskBinding
+    private lateinit var youTubePlayerView: YouTubePlayerView
+    private lateinit var navbar: BottomNavigationView
+    private val actionsList = TaskFragment.actionsList
+    private var taskId = 0
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        var v = inflater.inflate(R.layout.fragment_guide_task, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_guide_task, container, false)
 
-        val youTubePlayerView: YouTubePlayerView = v.findViewById(R.id.youtube_player_view)
+        val args = GuideTaskArgs.fromBundle(requireArguments())
+        taskId = args.taskId.toInt()
+
+        navbar = activity?.findViewById(R.id.bottomNavigation)!!
+        navbar.visibility = View.GONE
+
+        initalizeToolbar()
+
+        initalizeVideoPlayer()
+
+        return binding.root
+    }
+
+    private fun initalizeVideoPlayer() {
+        youTubePlayerView = binding.youtubePlayerView
         lifecycle.addObserver(youTubePlayerView)
 
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = "DIL2ENBqLP8"
+                val videoId = "iLLYX3RbtPQ"
                 youTubePlayer.loadVideo(videoId, 0F)
             }
         })
-
-        return v
     }
 
+    private fun initalizeToolbar() {
+        binding.guideTitle.text = actionsList[taskId - 1].title.toString()
+        binding.backArrowGuide.setOnClickListener {
+            binding.root.findNavController().popBackStack()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        youTubePlayerView.release()
+        navbar.visibility = View.VISIBLE
+    }
 }

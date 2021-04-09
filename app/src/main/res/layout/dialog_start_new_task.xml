@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/start_new_task_textView"
+        style="@style/normalTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Do you want to start this task ?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cancel_button_start_new_task_dialog"
+        style="@style/blue_empty_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Will Start later"
+        android:textColor="@color/subtxt_black"
+        app:layout_constraintEnd_toEndOf="@+id/start_new_task_button_dialog"
+        app:layout_constraintStart_toStartOf="@+id/start_new_task_button_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/start_new_task_button_dialog" />
+
+    <Button
+        android:id="@+id/start_new_task_button_dialog"
+        style="@style/blue_filled_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="Yes, Let's Start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_new_task_textView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
