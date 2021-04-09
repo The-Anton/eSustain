@@ -85,7 +85,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 )
             )
             report -> binding.root.findNavController()
-                .navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
+                .navigate(TaskFragmentDirections.actionTaskFragmentToSendReportFragment())
             refer -> binding.root.findNavController()
                 .navigate(TaskFragmentDirections.actionTaskFragmentToSendReferral())
             recycle -> binding.root.findNavController().navigate(
