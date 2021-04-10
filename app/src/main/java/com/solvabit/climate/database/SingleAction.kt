@@ -6,7 +6,7 @@ data class SingleAction(
         val sub_title: String,
         val category: String,
         val number: Int,
-        val background: String,
+        val background: Int,
         val achievement_logo: String) {
     constructor() : this(
             0,
@@ -14,7 +14,7 @@ data class SingleAction(
             "",
             "",
             0,
-            "",
+            0,
             ""
     )
 }

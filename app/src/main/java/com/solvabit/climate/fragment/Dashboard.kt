@@ -217,8 +217,6 @@ class AddRecycleItemRecommended(val a: Int, val status: String, val binding: Das
     }
 
     private fun initializeAllTasks() {
-        actionsList.add(SingleAction(0, "Plant One Tree", "Begin with a single step", "tree", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
-        actionsList.add(SingleAction(1, "Seminar", "Attend sustainable environment seminar", "seminar", 1, "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg", "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"))
     }
 
 }
