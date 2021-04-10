@@ -13,6 +13,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.solvabit.climate.R
 import com.solvabit.climate.databinding.FragmentGuideTaskBinding
+import com.solvabit.climate.fragment.Dashboard
 import com.solvabit.climate.fragment.TaskFragment
 import kotlinx.android.synthetic.main.fragment_guide_task.*
 
@@ -23,7 +24,7 @@ class GuideTask : Fragment() {
     private lateinit var binding: FragmentGuideTaskBinding
     private lateinit var youTubePlayerView: YouTubePlayerView
     private lateinit var navbar: BottomNavigationView
-    private val actionsList = TaskFragment.actionsList
+    private val actionsList = Dashboard.actionsList
     private var taskId = 0
 
 

@@ -21,10 +21,20 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
 
     private lateinit var binding: FragmentTaskBinding
 
-    private val localUser = Dashboard.localuser
+    private var localUser = Dashboard.localuser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        localUser = Dashboard.localuser
+        setRemaining()
+        setPresent()
+        setClickForTasks()
+
     }
 
     override fun onCreateView(
@@ -42,7 +52,6 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
         setPresent()
 
         setClickForTasks()
-
 
         return binding.root
     }
@@ -105,7 +114,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
 
     private fun showAddTaskDialog(taskId: String) {
         val fm: FragmentManager = parentFragmentManager
-        val startNewTaskDialogFragment: StartNewTaskDialog =
+        val startNewTaskDialogFragment =
             StartNewTaskDialog(taskId)
         startNewTaskDialogFragment.setTargetFragment(this, 300)
         startNewTaskDialogFragment.show(fm, "fragment_edit_name")

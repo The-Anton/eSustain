@@ -134,6 +134,7 @@
                             android:id="@+id/seminar_imageView_tasks"
                             android:layout_width="95dp"
                             android:layout_height="95dp"
+                            tools:src="@drawable/blue_tick"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -155,7 +156,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="@{allActions.get(1).title}"
+                            android:text="Seminar"
                             app:layout_constraintEnd_toEndOf="@+id/seminar_imageView_tasks"
                             app:layout_constraintStart_toStartOf="@+id/seminar_imageView_tasks"
                             app:layout_constraintTop_toBottomOf="@+id/seminar_imageView_tasks" />
