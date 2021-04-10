@@ -2,6 +2,7 @@ package com.solvabit.climate.fragment.StatsFragments
 
 import android.os.Bundle
 import android.os.DropBoxManager
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +12,20 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.firebase.auth.FirebaseAuth
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.solvabit.climate.R
+import com.solvabit.climate.Repository.Repository
+import com.solvabit.climate.database.Stats
+import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.FragmentAirQualityStatsBinding
 import com.solvabit.climate.databinding.FragmentForestDensityStatsBinding
 import com.solvabit.climate.dialog.ForestDialog
 import com.solvabit.climate.fragment.Dashboard
 import kotlinx.android.synthetic.main.fragment_forest_density_stats.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.security.KeyStore
 
 class ForestDensityStatsFragment : Fragment() {
@@ -35,18 +43,32 @@ class ForestDensityStatsFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_forest_density_stats, container, false)
+        val uid = FirebaseAuth.getInstance().uid.toString()
+        val instance = UserDatabase.getInstance(context?.applicationContext!!)
+        val dao = instance.userDao()
+        val statsDao = instance.statsDao()
+        val localRepo = Repository(dao, uid)
 
         addData()
         binding.forestQualityMoreStats.setOnClickListener {
             ForestDialog().show(childFragmentManager, "Forest")
         }
 
-        setLineChart()
+        val stats = Stats()
+        setLineChart(stats)
+        GlobalScope.launch(Dispatchers.Main) {
+            localRepo.getStats(statsDao){
+                Log.v("StatsFragment",it.toString())
+                setLineChart(it)
+            }
+
+        }
 
         return binding.root
     }
 
-    private fun setLineChart() {
+
+    private fun setLineChart(stats:Stats) {
 
         val xvalue = ArrayList<String>()
         xvalue.add("2011")
@@ -56,24 +78,34 @@ class ForestDensityStatsFragment : Fragment() {
         xvalue.add("2019")
 
         val lineEntry = ArrayList<Entry>()
-        lineEntry.add(Entry(20f, 0))
-        lineEntry.add(Entry(10f, 1))
-        lineEntry.add(Entry(15f, 2))
-        lineEntry.add(Entry(30f, 3))
-        lineEntry.add(Entry(10f, 4))
+        lineEntry.add(Entry(stats.actual_forest_cover_2009.toFloat(), 0))
+        lineEntry.add(Entry(stats.actual_forest_cover_2011.toFloat(), 1))
+        lineEntry.add(Entry(stats.actual_forest_cover_2013.toFloat(), 2))
+        lineEntry.add(Entry(stats.actual_forest_cover_2015.toFloat(), 3))
+        lineEntry.add(Entry(stats.actual_forest_cover_2019.toFloat(), 4))
 
         val lineEntry1 = ArrayList<Entry>()
-        lineEntry1.add(Entry(10f, 0))
-        lineEntry1.add(Entry(30f, 1))
-        lineEntry1.add(Entry(35f, 2))
-        lineEntry1.add(Entry(20f, 3))
-        lineEntry1.add(Entry(15f, 4))
+        lineEntry1.add(Entry(stats.open_forest_2009.toFloat(), 0))
+        lineEntry1.add(Entry(stats.open_forest_2011.toFloat(), 1))
+        lineEntry1.add(Entry(stats.open_forest_2013.toFloat(), 2))
+        lineEntry1.add(Entry(stats.open_forest_2015.toFloat(), 3))
+        lineEntry1.add(Entry(stats.open_forest_2019.toFloat(), 4))
 
-        val linedataset = LineDataSet(lineEntry, "First")
+        val lineEntry2 = ArrayList<Entry>()
+        lineEntry2.add(Entry(stats.percentage_of_geographical_area_2009.toFloat(), 0))
+        lineEntry2.add(Entry(stats.percentage_of_geographical_area_2011.toFloat(), 1))
+        lineEntry2.add(Entry(stats.percentage_of_geographical_area_2013.toFloat(), 2))
+        lineEntry2.add(Entry(stats.percentage_of_geographical_area_2015.toFloat(), 3))
+        lineEntry2.add(Entry(stats.percentage_of_geographical_area_2019.toFloat(), 4))
+
+        val linedataset = LineDataSet(lineEntry, "Actual Forest Cover(in Sq.Km)")
         linedataset.color = resources.getColor(R.color.green)
 
-        val linedataset1 = LineDataSet(lineEntry1, "Second")
+        val linedataset1 = LineDataSet(lineEntry1, "Open Forest Cover(in Sq.Km)")
         linedataset1.color = resources.getColor(R.color.blue)
+
+        val linedataset2 = LineDataSet(lineEntry2, "Percentage % of total forest cover")
+        linedataset2.color = resources.getColor(R.color.orange)
 
         linedataset.circleRadius = 0f
         linedataset.setDrawFilled(true)
@@ -87,17 +119,37 @@ class ForestDensityStatsFragment : Fragment() {
         linedataset1.fillAlpha = 30
         linedataset1.setDrawCubic(true)
 
+        linedataset2.circleRadius = 0f
+        linedataset2.setDrawFilled(true)
+        linedataset2.fillColor = resources.getColor(R.color.orange)
+        linedataset2.fillAlpha = 30
+        linedataset2.setDrawCubic(true)
+
         val linedatasetArray = arrayListOf<LineDataSet>(linedataset, linedataset1)
-        val data = LineData(xvalue, linedatasetArray as List<ILineDataSet>?)
-        binding.lineChart.data = data
+        val linedatasetArray2 = arrayListOf<LineDataSet>(linedataset2)
+
+        val actualCoverData = LineData(xvalue, linedatasetArray as List<ILineDataSet>?)
+        val percentageData = LineData(xvalue, linedatasetArray2 as List<ILineDataSet>?)
+
+        binding.lineChart.data = actualCoverData
         binding.lineChart.setBackgroundColor(resources.getColor(R.color.white))
         binding.lineChart.animateXY(3000, 3000)
         binding.lineChart.setTouchEnabled(false)
+        binding.lineChart.setDescription(" ")
         binding.lineChart.setDrawGridBackground(false)
         binding.lineChart.getXAxis().setDrawGridLines(false);
         binding.lineChart.getAxisLeft().setDrawGridLines(false);
         binding.lineChart.getAxisRight().setDrawGridLines(false);
 
+        binding.lineChart2.data = percentageData
+        binding.lineChart2.setBackgroundColor(resources.getColor(R.color.white))
+        binding.lineChart2.animateXY(3000, 3000)
+        binding.lineChart2.setTouchEnabled(false)
+        binding.lineChart2.setDescription(" ")
+        binding.lineChart2.setDrawGridBackground(false)
+        binding.lineChart2.getXAxis().setDrawGridLines(false);
+        binding.lineChart2.getAxisLeft().setDrawGridLines(false);
+        binding.lineChart2.getAxisRight().setDrawGridLines(false);
     }
 
     private fun addData() {

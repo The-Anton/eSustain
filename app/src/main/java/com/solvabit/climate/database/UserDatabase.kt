@@ -3,10 +3,11 @@ package com.solvabit.climate.database
 import android.content.Context
 import androidx.room.*
 
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(entities = [User::class,Stats::class], version = 3, exportSchema = false)
 @TypeConverters(ListTypeConverter::class, PostTypeConverter::class)
 abstract class UserDatabase: RoomDatabase(){
     abstract fun userDao(): UserDao
+    abstract fun statsDao(): StatsDao
 
     companion object {
 

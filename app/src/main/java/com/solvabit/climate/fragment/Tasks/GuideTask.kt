@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -16,6 +15,7 @@ import com.solvabit.climate.R
 import com.solvabit.climate.databinding.FragmentGuideTaskBinding
 import com.solvabit.climate.fragment.Dashboard
 import com.solvabit.climate.fragment.TaskFragment
+import kotlinx.android.synthetic.main.fragment_guide_task.*
 
 
 class GuideTask : Fragment() {
@@ -42,23 +42,43 @@ class GuideTask : Fragment() {
 
         initalizeToolbar()
 
-        initalizeVideoPlayer()
+        initalizeVideoPlayer(taskId)
 
+        initateQuiz(taskId)
         return binding.root
     }
 
-    private fun initalizeVideoPlayer() {
+    private fun initalizeVideoPlayer(taksId: Int) {
         youTubePlayerView = binding.youtubePlayerView
         lifecycle.addObserver(youTubePlayerView)
+        var videoId = "iLLYX3RbtPQ"
 
+        when(taksId){
+            3 -> videoId = "23XQ-hQoR7A"
+            5 -> videoId = "iLLYX3RbtPQ"
+
+        }
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = "iLLYX3RbtPQ"
+
                 youTubePlayer.loadVideo(videoId, 0F)
             }
         })
     }
 
+
+    private fun initateQuiz(taksId: Int) {
+        var quizContainer = binding.quizContainer
+        val inflater = LayoutInflater.from(context)
+        when(taksId){
+            3 -> inflater.inflate(R.layout.conserve_electricity_quiz,quizContainer, true)
+
+            5 -> inflater.inflate(R.layout.conserve_water_quiz,quizContainer, true)
+
+
+        }
+
+    }
     private fun initalizeToolbar() {
         binding.guideTitle.text = actionsList[taskId - 1].title.toString()
         binding.backArrowGuide.setOnClickListener {
