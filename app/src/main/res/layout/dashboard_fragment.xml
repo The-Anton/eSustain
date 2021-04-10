@@ -99,8 +99,7 @@
                         android:layout_width="13dp"
                         android:layout_height="12dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                         />
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/statusText"
@@ -143,11 +142,11 @@
 
                         <TextView
                             android:id="@+id/progress_textView"
+                            style="@style/normalTitles"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="34dp"
                             android:layout_marginTop="16dp"
-                            style="@style/normalTitles"
                             android:text="Your Place"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -184,21 +183,21 @@
                                     app:layout_constraintTop_toTopOf="parent">
 
                                     <ImageView
-                                        android:layout_gravity="center"
                                         android:layout_width="7dp"
                                         android:layout_height="14dp"
+                                        android:layout_gravity="center"
                                         android:layout_marginStart="10dp"
                                         android:layout_weight="1"
                                         android:src="@drawable/air" />
 
                                     <TextView
+                                        style="@style/normalSubText"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="5dp"
-                                        android:gravity="center_vertical"
                                         android:layout_weight="15"
-                                        style="@style/normalSubText"
+                                        android:gravity="center_vertical"
                                         android:text="Air Quality Index" />
 
                                     <ImageView
@@ -466,11 +465,11 @@
                             android:id="@+id/ForestIndexCardView"
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
-                            android:elevation="0dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginEnd="16dp"
                             android:background="@drawable/cardsbg"
+                            android:elevation="0dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/airQualityCardView">
@@ -494,28 +493,28 @@
                                     app:layout_constraintTop_toTopOf="parent">
 
                                     <ImageView
-                                        android:layout_gravity="center"
-                                        android:layout_weight="1"
                                         android:layout_width="7dp"
                                         android:layout_height="20dp"
+                                        android:layout_gravity="center"
                                         android:layout_marginStart="4dp"
+                                        android:layout_weight="1"
                                         android:src="@drawable/forestree" />
 
                                     <TextView
-                                        android:layout_weight="15"
+                                        style="@style/normalSubText"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Forest Density"
                                         android:layout_gravity="center_vertical"
-                                        style="@style/normalSubText"
-                                        android:layout_marginStart="5dp"/>
+                                        android:layout_marginStart="5dp"
+                                        android:layout_weight="15"
+                                        android:text="Forest Density" />
 
                                     <ImageView
                                         android:id="@+id/air_more"
-                                        android:layout_weight="1"
                                         android:layout_width="10dp"
                                         android:layout_height="30dp"
                                         android:layout_gravity="end"
+                                        android:layout_weight="1"
                                         android:src="@drawable/ic_info_24" />
 
 
@@ -770,28 +769,255 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/ForestIndexCardView" />
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="5dp"
+                            android:orientation="vertical"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/recommended_textview">
 
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recommended_recyclerView"
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/recommended_cardView"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:nestedScrollingEnabled="false"
-                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                                android:layout_height="180dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginBottom="16dp"
+                                android:background="@drawable/recomendbg"
+                                app:cardBackgroundColor="#fff"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="5dp"
+                                app:cardMaxElevation="5dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent">
 
-                        </RelativeLayout>
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <TextView
+                                        android:id="@+id/target_textView_1"
+                                        style="@style/normalTitles"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="24dp"
+                                        android:text="Environment Goals"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.083"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/target_textView_subtext_1"
+                                        style="@style/normaltext"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:maxWidth="220dp"
+                                        android:text="Complete these goals for a sustainable future"
+                                        app:layout_constraintStart_toStartOf="@+id/target_textView_1"
+                                        app:layout_constraintTop_toBottomOf="@+id/target_textView_1" />
+
+                                    <ImageView
+                                        android:id="@+id/target_black_imageView"
+                                        android:layout_width="100dp"
+                                        android:layout_height="100dp"
+                                        android:src="@drawable/plant_one_tree_round_icons"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.924"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/background_play_pause"
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:src="@drawable/rounded_button"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/target_textView_subtext_1"
+                                        app:layout_constraintTop_toBottomOf="@+id/target_textView_subtext_1" />
+
+                                    <ImageView
+                                        android:id="@+id/image_play_pause"
+                                        android:layout_width="35dp"
+                                        android:layout_height="35dp"
+                                        android:src="@drawable/ic_playw"
+                                        app:layout_constraintBottom_toBottomOf="@+id/background_play_pause"
+                                        app:layout_constraintEnd_toEndOf="@+id/background_play_pause"
+                                        app:layout_constraintStart_toStartOf="@+id/background_play_pause"
+                                        app:layout_constraintTop_toTopOf="@+id/background_play_pause" />
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/recommended_cardView_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="180dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginBottom="16dp"
+                                android:background="@drawable/recomendbg"
+                                app:cardBackgroundColor="#fff"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="5dp"
+                                app:cardMaxElevation="5dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <TextView
+                                        android:id="@+id/target_textView_2"
+                                        style="@style/normalTitles"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="24dp"
+                                        android:text="Environment Goals"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.083"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/target_textView_subtext_2"
+                                        style="@style/normaltext"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:maxWidth="220dp"
+                                        android:text="Complete these goals for a sustainable future"
+                                        app:layout_constraintStart_toStartOf="@+id/target_textView_2"
+                                        app:layout_constraintTop_toBottomOf="@+id/target_textView_2" />
+
+                                    <ImageView
+                                        android:id="@+id/target_black_imageView_2"
+                                        android:layout_width="100dp"
+                                        android:layout_height="100dp"
+                                        android:src="@drawable/plant_one_tree_round_icons"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.924"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/background_play_pause_2"
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:src="@drawable/rounded_button"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/target_textView_subtext_2"
+                                        app:layout_constraintTop_toBottomOf="@+id/target_textView_subtext_2" />
+
+                                    <ImageView
+                                        android:id="@+id/image_play_pause_2"
+                                        android:layout_width="35dp"
+                                        android:layout_height="35dp"
+                                        android:src="@drawable/ic_playw"
+                                        app:layout_constraintBottom_toBottomOf="@+id/background_play_pause_2"
+                                        app:layout_constraintEnd_toEndOf="@+id/background_play_pause_2"
+                                        app:layout_constraintStart_toStartOf="@+id/background_play_pause_2"
+                                        app:layout_constraintTop_toTopOf="@+id/background_play_pause_2" />
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/recommended_cardView_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="180dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginBottom="16dp"
+                                android:background="@drawable/recomendbg"
+                                app:cardBackgroundColor="#fff"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="5dp"
+                                app:cardMaxElevation="5dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <TextView
+                                        android:id="@+id/target_textView_3"
+                                        style="@style/normalTitles"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="24dp"
+                                        android:text="Environment Goals"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.083"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/target_textView_subtext_3"
+                                        style="@style/normaltext"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:maxWidth="220dp"
+                                        android:text="Complete these goals for a sustainable future"
+                                        app:layout_constraintStart_toStartOf="@+id/target_textView_3"
+                                        app:layout_constraintTop_toBottomOf="@+id/target_textView_3" />
+
+                                    <ImageView
+                                        android:id="@+id/target_black_imageView_3"
+                                        android:layout_width="100dp"
+                                        android:layout_height="100dp"
+                                        android:src="@drawable/plant_one_tree_round_icons"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.924"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/background_play_pause_3"
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:src="@drawable/rounded_button"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/target_textView_subtext_3"
+                                        app:layout_constraintTop_toBottomOf="@+id/target_textView_subtext_3" />
+
+                                    <ImageView
+                                        android:id="@+id/image_play_pause_3"
+                                        android:layout_width="35dp"
+                                        android:layout_height="35dp"
+                                        android:src="@drawable/ic_playw"
+                                        app:layout_constraintBottom_toBottomOf="@+id/background_play_pause_3"
+                                        app:layout_constraintEnd_toEndOf="@+id/background_play_pause_3"
+                                        app:layout_constraintStart_toStartOf="@+id/background_play_pause_3"
+                                        app:layout_constraintTop_toTopOf="@+id/background_play_pause_3" />
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
