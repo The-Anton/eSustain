@@ -8,17 +8,30 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.solvabit.climate.R
+import com.solvabit.climate.Repository.Repository
+import com.solvabit.climate.database.Stats
+import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.FragmentSendReportBinding
 import com.solvabit.climate.fragment.Dashboard
+import com.solvabit.climate.fragment.Dashboard.Companion.localuser
+import kotlinx.android.synthetic.main.bottom_sheet_planted_tree_data.*
 import kotlinx.android.synthetic.main.dialog_share_achievement_to_feed.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -44,13 +57,27 @@ class SendReportFragment : Fragment() {
 
         navbar = activity?.findViewById(R.id.bottomNavigation)!!
         navbar.visibility = View.GONE
-
+        val uid = FirebaseAuth.getInstance().uid.toString()
+        val instance = UserDatabase.getInstance(context?.applicationContext!!)
+        val dao = instance.userDao()
+        val statsDao = instance.statsDao()
+        val localRepo = Repository(dao, uid)
         initializeData()
 
         binding.shareReportButton.setOnClickListener {
             showShareIntent()
         }
 
+        val stats = Stats()
+        setLineChart(stats)
+        GlobalScope.launch(Dispatchers.Main) {
+            localRepo.getStats(statsDao){
+                Log.v("StatsFragment",it.toString())
+                setLineChart(it)
+            }
+
+        }
+        setPieChart()
         return binding.root
     }
 
@@ -80,7 +107,92 @@ class SendReportFragment : Fragment() {
         // Step 7: Start/Launch Share intent
         startActivity(intent)
     }
+    private fun setLineChart(stats: Stats) {
 
+        val xvalue = ArrayList<String>()
+        xvalue.add("2011")
+        xvalue.add("2012")
+        xvalue.add("2014")
+        xvalue.add("2015")
+        xvalue.add("2019")
+
+        val lineEntry = ArrayList<Entry>()
+        lineEntry.add(Entry(stats.actual_forest_cover_2009.toFloat(), 0))
+        lineEntry.add(Entry(stats.actual_forest_cover_2011.toFloat(), 1))
+        lineEntry.add(Entry(stats.actual_forest_cover_2013.toFloat(), 2))
+        lineEntry.add(Entry(stats.actual_forest_cover_2015.toFloat(), 3))
+        lineEntry.add(Entry(stats.actual_forest_cover_2019.toFloat(), 4))
+
+        val lineEntry1 = ArrayList<Entry>()
+        lineEntry1.add(Entry(stats.open_forest_2009.toFloat(), 0))
+        lineEntry1.add(Entry(stats.open_forest_2011.toFloat(), 1))
+        lineEntry1.add(Entry(stats.open_forest_2013.toFloat(), 2))
+        lineEntry1.add(Entry(stats.open_forest_2015.toFloat(), 3))
+        lineEntry1.add(Entry(stats.open_forest_2019.toFloat(), 4))
+
+
+
+        val linedataset = LineDataSet(lineEntry, "AFC")
+        linedataset.color = resources.getColor(R.color.green)
+
+        val linedataset1 = LineDataSet(lineEntry1, "OFC")
+        linedataset1.color = resources.getColor(R.color.blue)
+
+
+        linedataset.circleRadius = 0f
+        linedataset.setDrawFilled(true)
+        linedataset.fillColor = resources.getColor(R.color.green)
+        linedataset.fillAlpha = 30
+        linedataset.setDrawCubic(true)
+
+        linedataset1.circleRadius = 0f
+        linedataset1.setDrawFilled(true)
+        linedataset1.fillColor = resources.getColor(R.color.blue)
+        linedataset1.fillAlpha = 30
+        linedataset1.setDrawCubic(true)
+
+
+        val linedatasetArray = arrayListOf<LineDataSet>(linedataset, linedataset1)
+
+        val actualCoverData = LineData(xvalue, linedatasetArray as List<ILineDataSet>?)
+
+        binding.lineChart.data = actualCoverData
+        binding.lineChart.setBackgroundColor(resources.getColor(R.color.white))
+        binding.lineChart.animateXY(3000, 3000)
+        binding.lineChart.setTouchEnabled(false)
+        binding.lineChart.setDrawGridBackground(false)
+        binding.lineChart.getXAxis().setDrawGridLines(false);
+        binding.lineChart.setDescription(" ")
+        binding.lineChart.getAxisLeft().setDrawGridLines(false);
+        binding.lineChart.getAxisRight().setDrawGridLines(false);
+
+    }
+
+
+    private fun setPieChart() {
+
+        val scaleValue = java.util.ArrayList<String>()
+        scaleValue.add("GWS")
+        scaleValue.add("TAR")
+        scaleValue.add("CAE")
+        scaleValue.add("CAU")
+        scaleValue.add("RMR")
+
+        val lineEntry = java.util.ArrayList<Entry>()
+        lineEntry.add(Entry(localuser.groundWaterData[5].toFloat(), 1))
+        lineEntry.add(Entry(localuser.groundWaterData[2].toFloat(), 2))
+        lineEntry.add(Entry(localuser.groundWaterData[3].toFloat(), 3))
+        lineEntry.add(Entry(localuser.groundWaterData[9].toFloat(), 4))
+        val pieDataSet = PieDataSet(lineEntry, "")
+        val dataSet = PieData(scaleValue, pieDataSet)
+        pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS)
+        binding.pieChart.animateXY(5000, 5000)
+        binding.pieChart.setDrawSliceText(true)
+        binding.pieChart.setDescription(" ")
+        binding.pieChart.data = dataSet
+
+
+    }
 
     private fun initializeData() {
         binding.apply {

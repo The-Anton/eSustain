@@ -135,6 +135,7 @@ class ForestDensityStatsFragment : Fragment() {
         binding.lineChart.setBackgroundColor(resources.getColor(R.color.white))
         binding.lineChart.animateXY(3000, 3000)
         binding.lineChart.setTouchEnabled(false)
+        binding.lineChart.setDescription(" ")
         binding.lineChart.setDrawGridBackground(false)
         binding.lineChart.getXAxis().setDrawGridLines(false);
         binding.lineChart.getAxisLeft().setDrawGridLines(false);
@@ -144,6 +145,7 @@ class ForestDensityStatsFragment : Fragment() {
         binding.lineChart2.setBackgroundColor(resources.getColor(R.color.white))
         binding.lineChart2.animateXY(3000, 3000)
         binding.lineChart2.setTouchEnabled(false)
+        binding.lineChart2.setDescription(" ")
         binding.lineChart2.setDrawGridBackground(false)
         binding.lineChart2.getXAxis().setDrawGridLines(false);
         binding.lineChart2.getAxisLeft().setDrawGridLines(false);

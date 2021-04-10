@@ -712,10 +712,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout18"
-                android:layout_width="0dp"
-                android:layout_height="170dp"
+                android:layout_width="191dp"
+                android:layout_height="138dp"
                 android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="@+id/constraintLayout17"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout16"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout15">
 
@@ -732,6 +731,29 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout13"
+                android:layout_width="183dp"
+                android:layout_height="138dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/constraintLayout18"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout17">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layoutDirection="inherit"
+                    android:textDirection="ltr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </com.github.mikephil.charting.charts.PieChart>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/progress_cardView_1"
                 android:layout_width="100dp"
@@ -739,9 +761,8 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/cardsbg"
                 app:layout_constraintEnd_toStartOf="@+id/progress_cardView_3"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout18"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout16"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout18">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -795,8 +816,7 @@
                 android:layout_height="110dp"
                 android:background="@drawable/cardsbg"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/constraintLayout18"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout17"
                 app:layout_constraintStart_toEndOf="@+id/progress_cardView_3"
                 app:layout_constraintTop_toTopOf="@+id/progress_cardView_3">
 
