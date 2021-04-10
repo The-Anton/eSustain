@@ -95,7 +95,7 @@ class Location : AppCompatActivity() {
 
 
     fun checkStatus(dao: UserDao){
-        FirebaseService(dao, uid).userStatus { result ->
+        FirebaseService( uid).userStatus { result ->
             if(result.equals("error")){
                 Log.v("Firebase", "Got error ")
 //                button.revertAnimation()

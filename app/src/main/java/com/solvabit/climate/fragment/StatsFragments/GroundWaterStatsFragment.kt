@@ -1,17 +1,20 @@
 package com.solvabit.climate.fragment.StatsFragments
 
+import android.graphics.Typeface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.solvabit.climate.R
-import com.solvabit.climate.databinding.FragmentForestDensityStatsBinding
 import com.solvabit.climate.databinding.FragmentGroundWaterStatsBinding
 import com.solvabit.climate.fragment.Dashboard
 import kotlinx.android.synthetic.main.fragment_ground_water_stats.*
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,22 +33,51 @@ class GroundWaterStatsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_ground_water_stats, container, false
+                inflater, R.layout.fragment_ground_water_stats, container, false
         )
 
         addData()
-
+        setPieChart()
         return binding.root
     }
 
+
+
+
+    private fun setPieChart() {
+
+        val scaleValue = ArrayList<String>()
+        scaleValue.add("Ground Water Stage")
+        scaleValue.add("Total Ann. Recharge")
+        scaleValue.add("Current Ann. Extraction")
+        scaleValue.add("Current Alloc. For Use")
+        scaleValue.add("Rainfall Monsoon Recharge")
+
+        val lineEntry = ArrayList<Entry>()
+        lineEntry.add(Entry(localuser.groundWaterData[11].toFloat(), 1))
+        lineEntry.add(Entry(localuser.groundWaterData[5].toFloat(), 2))
+        lineEntry.add(Entry(localuser.groundWaterData[2].toFloat(), 3))
+        lineEntry.add(Entry(localuser.groundWaterData[3].toFloat(), 4))
+        lineEntry.add(Entry(localuser.groundWaterData[9].toFloat(), 5))
+        val pieDataSet = PieDataSet(lineEntry, "Year")
+        val dataSet = PieData(scaleValue, pieDataSet)
+        pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS)
+        binding.pieChart.animateXY(5000, 5000)
+
+        binding.pieChart.data = dataSet
+
+
+    }
+
+
     private fun addData() {
         circularloader(
-            localuser.groundWaterData[11]?.toFloat()
-                ?: 0f, 300f, binding.circularProgressBarGroundWaterStageStats
+                localuser.groundWaterData[11]?.toFloat()
+                        ?: 0f, 300f, binding.circularProgressBarGroundWaterStageStats
         )
 
 

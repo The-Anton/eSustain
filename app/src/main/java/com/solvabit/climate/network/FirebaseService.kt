@@ -1,20 +1,18 @@
 package com.solvabit.climate.network
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import com.example.forests.data.parametersDataService
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.solvabit.climate.database.Stats
 import com.solvabit.climate.database.User
-import com.solvabit.climate.database.UserDao
 import com.solvabit.climate.registerLogin.ResetPassword.Companion.TAG
-import kotlinx.coroutines.suspendCancellableCoroutine
-import java.lang.Exception
+import com.solvabit.climate.utility.StatsUtility
 
-public class FirebaseService(var dao:UserDao, var uid: String) {
+public class FirebaseService(var uid: String) {
 
 
-     suspend fun fetchUser(myCallback: (result:User)-> Unit){
+    suspend fun fetchUser(myCallback: (result:User)-> Unit){
         var database = FirebaseDatabase.getInstance();
         val ref = database.getReference("Users/$uid")
         var user:User = User()
@@ -30,8 +28,6 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
     }
 
 
-
-
     fun isnewuser(uid: String , myCallback: (result: Boolean) -> Unit){
         Log.v("FirebaseService","Fetched User has not been initialized")
         var database = FirebaseDatabase.getInstance();
@@ -43,12 +39,6 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
             Log.v("FirebaseService", "Error getting data")
         }
     }
-
-
-
-
-
-
 
 
     fun userStatus(myCallback: (result:String)-> Unit){
@@ -74,6 +64,7 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
         }
     }
 
+
     fun fetchContinuosUpdates(myCallback: (result: User) -> Unit){
         var database = FirebaseDatabase.getInstance();
         val refU = database.getReference("Users/$uid")
@@ -97,7 +88,6 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
     }
 
 
-
     fun fetchUpdates(myCallback: (result: User) -> Unit){
         var database = FirebaseDatabase.getInstance();
         val refU = database.getReference("Users/$uid")
@@ -112,6 +102,30 @@ public class FirebaseService(var dao:UserDao, var uid: String) {
 
         }.addOnFailureListener{
             Log.v("FirebaseService", "Error getting data")
+        }
+    }
+
+    fun fetchStats(myCallback: (result: Stats) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val refU = db.collection("forestCoverYearWiseComparision").document("india").collection("statesComparision").document("bihar")
+
+        refU.get().addOnSuccessListener {
+
+            var data = it.data
+            var stats = Stats()
+            Log.v("FirebaseService","Stats data fetch update called")
+            Log.v("FirebaseService",data.toString())
+
+            if (data != null) {
+                stats = StatsUtility().parseForestComparision(uid,data)
+            }
+
+
+            myCallback.invoke(stats)
+
+        }.addOnFailureListener{
+            Log.v("FirebaseService", "Error getting stats data")
         }
     }
 
