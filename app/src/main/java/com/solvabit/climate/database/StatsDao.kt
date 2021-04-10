@@ -7,8 +7,8 @@ interface StatsDao {
     @Query("SELECT COUNT(*) FROM Stats WHERE uid = :UID")
     fun hasStats(UID: String): Int
 
-    @Query("SELECT * FROM User WHERE uid = :UID")
-    fun getStatsByUID(UID: String): User
+    @Query("SELECT * FROM Stats WHERE uid = :UID")
+    fun getStatsByUID(UID: String): Stats
 
     @Insert
     fun insert(stats : Stats)

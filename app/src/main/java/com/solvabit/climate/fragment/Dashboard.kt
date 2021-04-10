@@ -2,6 +2,7 @@ package com.solvabit.climate.fragment
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -56,6 +57,10 @@ class Dashboard : Fragment() {
                     Timber.i("$user")
                     addDataToDashboard()
                 }
+
+                localRepo.fetchStatsData {
+                    Log.v("Stats", it.toString())
+                }
             }
         }
         addDataToDashboard()
@@ -68,11 +73,14 @@ class Dashboard : Fragment() {
         }
 
         GlobalScope.launch {
-            Repository(dao,uid).fetchUpdates {
+            localRepo.fetchUpdates {
                 Timber.i( localuser.toString())
                 addRecommendedDashboardItems()
                 addDataToDashboard()
             }
+
+
+
         }
 
 
