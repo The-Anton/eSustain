@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/back_arrow_report"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_keyboard_backspace_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/normaltext"
+                android:layout_marginStart="16dp"
+                android:text="Share Report"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/back_arrow_report"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.52" />
+
+            <Button
+                android:id="@+id/share_report_button"
+                style="@style/blue_filled_button"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginEnd="15dp"
+                android:text="Share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/report_constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+            tools:context=".fragment.Tasks.SendReportFragment">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:padding="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/username_black_imageView"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_profilew"
+                    app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
+
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/circularProgressBar"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    app:cpb_background_progressbar_color="#b6bbd8"
+                    app:cpb_background_progressbar_width="5dp"
+                    app:cpb_progress_direction="to_right"
+                    app:cpb_progressbar_color="#3f51b5"
+                    app:cpb_progressbar_width="6dp"
+                    app:cpb_round_border="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userprofile_imageView"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
+
+
+                <TextView
+                    android:id="@+id/achievement_name_textView"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:textColor="#8542DC"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+                    app:layout_constraintStart_toEndOf="@+id/username_black_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/username_black_imageView"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="John Smith" />
+
+                <TextView
+                    android:id="@+id/email_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenir_book"
+                    android:textColor="@color/subtxt_black"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@+id/achievement_name_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/achievement_name_textView"
+                    tools:text="johnsmith@gmail.com" />
+
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/map_pointer"
+                    app:layout_constraintStart_toStartOf="@+id/email_profile"
+                    app:layout_constraintTop_toBottomOf="@+id/email_profile" />
+
+                <TextView
+                    android:id="@+id/place_profile"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/tagsbg"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintTop_toTopOf="@+id/imageView4"
+                    tools:text=" Agra, Uttar Pradesh" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/cardsbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:minHeight="90dp">
+
+                    <TextView
+                        android:id="@+id/airQualityHeading"
+                        style="@style/normalTitles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Normalized Score"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.083"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/normalizedScoreHeadingReport"
+                        style="@style/normaltext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:maxWidth="190dp"
+                        android:text="Know about the air you breathe everytime "
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/airQualityHeading"
+                        app:layout_constraintTop_toBottomOf="@+id/airQualityHeading" />
+
+                    <ImageView
+                        android:id="@+id/action_imageView"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/rounded_button"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/normalizedScoreReport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="98.4"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
+                        app:layout_constraintEnd_toEndOf="@+id/action_imageView"
+                        app:layout_constraintStart_toStartOf="@+id/action_imageView"
+                        app:layout_constraintTop_toTopOf="@+id/action_imageView" />
+
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                        android:id="@+id/circularProgressBarNormalizedScoreReport"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cpb_background_progressbar_color="#EEE4FA"
+                        app:cpb_background_progressbar_width="10dp"
+                        app:cpb_progress="45"
+                        app:cpb_progress_direction="to_right"
+                        app:cpb_progressbar_color="#8542DC"
+                        app:cpb_progressbar_width="6dp"
+                        app:cpb_round_border="true"
+                        app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
+                        app:layout_constraintEnd_toEndOf="@+id/action_imageView"
+                        app:layout_constraintStart_toStartOf="@+id/action_imageView"
+                        app:layout_constraintTop_toTopOf="@+id/action_imageView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout16"
+                android:layout_width="100dp"
+                android:layout_height="115dp"
+                android:background="@drawable/recomendbg"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout15"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout15"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout8"
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout15">
+
+                <TextView
+                    android:id="@+id/aqi_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="127"
+                    android:textColor="#4FC1E9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/aqi_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Air Quality Index"
+                    android:textSize="10dp"
+                    app:layout_constraintEnd_toEndOf="@+id/aqi_report"
+                    app:layout_constraintStart_toStartOf="@+id/aqi_report"
+                    app:layout_constraintTop_toBottomOf="@+id/aqi_report" />
+
+                <View
+                    android:id="@+id/divider7"
+                    android:layout_width="70dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/aqi_report_text" />
+
+                <TextView
+                    android:id="@+id/pm10_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textSize="10dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/pm10_report"
+                    app:layout_constraintEnd_toEndOf="@+id/pm10_report"
+                    app:layout_constraintStart_toStartOf="@+id/pm10_report" />
+
+                <TextView
+                    android:id="@+id/pm10_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="PM 10"
+                    android:textSize="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/pm25_report"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider7" />
+
+                <TextView
+                    android:id="@+id/pm25_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textSize="10dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/pm25_report"
+                    app:layout_constraintEnd_toEndOf="@+id/pm25_report"
+                    app:layout_constraintStart_toStartOf="@+id/pm25_report" />
+
+                <TextView
+                    android:id="@+id/pm25_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="PM 2.5"
+                    android:textSize="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/pm10_report"
+                    app:layout_constraintTop_toBottomOf="@+id/divider7" />
+
+                <TextView
+                    android:id="@+id/co_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textSize="10dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/co_report"
+                    app:layout_constraintEnd_toEndOf="@+id/co_report"
+                    app:layout_constraintStart_toStartOf="@+id/co_report" />
+
+                <TextView
+                    android:id="@+id/co_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="CO"
+                    android:textSize="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/o3_report"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pm10_report" />
+
+                <TextView
+                    android:id="@+id/o3_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textSize="10dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/o3_report"
+                    app:layout_constraintEnd_toEndOf="@+id/o3_report"
+                    app:layout_constraintStart_toStartOf="@+id/o3_report" />
+
+                <TextView
+                    android:id="@+id/o3_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="O3"
+                    android:textSize="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/co_report"
+                    app:layout_constraintTop_toBottomOf="@+id/pm25_report" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout15"
+                android:layout_width="100dp"
+                android:layout_height="115dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/recomendbg"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout17"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/constraintLayout16"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
+
+                <TextView
+                    android:id="@+id/forest_density_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="127"
+                    android:textColor="#4FC1E9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/forest_density_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Forest Density"
+                    android:textSize="10dp"
+                    app:layout_constraintEnd_toEndOf="@+id/forest_density_report"
+                    app:layout_constraintStart_toStartOf="@+id/forest_density_report"
+                    app:layout_constraintTop_toBottomOf="@+id/forest_density_report" />
+
+                <View
+                    android:id="@+id/divider8"
+                    android:layout_width="70dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/forest_density_report_text" />
+
+                <TextView
+                    android:id="@+id/total_area_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textSize="10dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/total_area_report"
+                    app:layout_constraintEnd_toEndOf="@+id/total_area_report"
+                    app:layout_constraintStart_toStartOf="@+id/total_area_report" />
+
+                <TextView
+                    android:id="@+id/total_area_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Total Area"
+                    android:textSize="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/actual_forest_report"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider8" />
+
+                <TextView
+                    android:id="@+id/actual_forest_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textSize="10dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/actual_forest_report"
+                    app:layout_constraintEnd_toEndOf="@+id/actual_forest_report"
+                    app:layout_constraintStart_toStartOf="@+id/actual_forest_report" />
+
+                <TextView
+                    android:id="@+id/actual_forest_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Actual Forest"
+                    android:textSize="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/total_area_report"
+                    app:layout_constraintTop_toBottomOf="@+id/divider8" />
+
+                <TextView
+                    android:id="@+id/open_forest_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textSize="10dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/open_forest_report"
+                    app:layout_constraintEnd_toEndOf="@+id/open_forest_report"
+                    app:layout_constraintStart_toStartOf="@+id/open_forest_report" />
+
+                <TextView
+                    android:id="@+id/open_forest_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Open Forest"
+                    android:textSize="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/no_forest_report"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/actual_forest_report" />
+
+                <TextView
+                    android:id="@+id/no_forest_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textColor="@color/black"
+                    android:textSize="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/no_forest_report"
+                    app:layout_constraintEnd_toEndOf="@+id/no_forest_report"
+                    app:layout_constraintStart_toStartOf="@+id/no_forest_report" />
+
+                <TextView
+                    android:id="@+id/no_forest_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="No Forest"
+                    android:textSize="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/open_forest_report"
+                    app:layout_constraintTop_toBottomOf="@+id/actual_forest_report" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout17"
+                android:layout_width="100dp"
+                android:layout_height="115dp"
+                android:background="@drawable/recomendbg"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout15"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/constraintLayout15"
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout15">
+
+                <TextView
+                    android:id="@+id/water_level_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="127"
+                    android:textColor="#4FC1E9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/water_level_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Ground Water Level"
+                    android:textSize="10dp"
+                    app:layout_constraintEnd_toEndOf="@+id/water_level_report"
+                    app:layout_constraintStart_toStartOf="@+id/water_level_report"
+                    app:layout_constraintTop_toBottomOf="@+id/water_level_report" />
+
+                <View
+                    android:id="@+id/divider9"
+                    android:layout_width="70dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/water_level_report_text" />
+
+                <TextView
+                    android:id="@+id/annual_recharge_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textSize="10dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/annual_recharge_report"
+                    app:layout_constraintEnd_toEndOf="@+id/annual_recharge_report"
+                    app:layout_constraintStart_toStartOf="@+id/annual_recharge_report" />
+
+                <TextView
+                    android:id="@+id/annual_recharge_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Annual Recharge"
+                    android:textSize="6dp"
+                    app:layout_constraintEnd_toStartOf="@+id/annual_extraction_report"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider9" />
+
+                <TextView
+                    android:id="@+id/annual_extraction_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textSize="10dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/annual_extraction_report"
+                    app:layout_constraintEnd_toEndOf="@+id/annual_extraction_report"
+                    app:layout_constraintHorizontal_bias="0.333"
+                    app:layout_constraintStart_toStartOf="@+id/annual_extraction_report" />
+
+                <TextView
+                    android:id="@+id/annual_extraction_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Annual Extraction"
+                    android:textSize="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/annual_recharge_report"
+                    app:layout_constraintTop_toBottomOf="@+id/divider9" />
+
+                <TextView
+                    android:id="@+id/natural_discharge_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textSize="10dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/natural_discharge_report"
+                    app:layout_constraintEnd_toEndOf="@+id/natural_discharge_report"
+                    app:layout_constraintStart_toStartOf="@+id/natural_discharge_report" />
+
+                <TextView
+                    android:id="@+id/natural_discharge_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="Natural \nDischarge"
+                    android:textSize="6dp"
+                    app:layout_constraintEnd_toStartOf="@+id/future_available_report"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/annual_recharge_report" />
+
+                <TextView
+                    android:id="@+id/future_available_report_text"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="127"
+                    android:textSize="10dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/future_available_report"
+                    app:layout_constraintEnd_toEndOf="@+id/future_available_report"
+                    app:layout_constraintStart_toStartOf="@+id/future_available_report" />
+
+                <TextView
+                    android:id="@+id/future_available_report"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="Future \nAvailability"
+                    android:textSize="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/natural_discharge_report"
+                    app:layout_constraintTop_toBottomOf="@+id/annual_extraction_report" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout18"
+                android:layout_width="0dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout17"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout16"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout15">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </com.github.mikephil.charting.charts.LineChart>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progress_cardView_1"
+                android:layout_width="100dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/cardsbg"
+                app:layout_constraintEnd_toStartOf="@+id/progress_cardView_3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout18"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout18">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="-16dp"
+                    tools:layout_editor_absoluteY="0dp">
+
+                    <ImageView
+                        android:id="@+id/progess_tree_imageView8"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_small_tree_on_ground"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.daasuu.cat.CountAnimationTextView
+                        android:id="@+id/number_trees_planted_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/avenir_medium"
+                        android:textColor="#4FC1E9"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="@+id/progess_tree_imageView8"
+                        app:layout_constraintStart_toStartOf="@+id/progess_tree_imageView8"
+                        app:layout_constraintTop_toBottomOf="@+id/progess_tree_imageView8"
+                        tools:text="00" />
+
+                    <TextView
+                        android:id="@+id/number_trees_planted_textView_subtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_book"
+                        android:maxWidth="250dp"
+                        android:text="Trees Planted"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="@+id/number_trees_planted_textView"
+                        app:layout_constraintStart_toStartOf="@+id/number_trees_planted_textView"
+                        app:layout_constraintTop_toBottomOf="@+id/number_trees_planted_textView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progress_cardView_2"
+                android:layout_width="100dp"
+                android:layout_height="110dp"
+                android:background="@drawable/cardsbg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout18"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/progress_cardView_3"
+                app:layout_constraintTop_toTopOf="@+id/progress_cardView_3">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="-25dp">
+
+                    <ImageView
+                        android:id="@+id/progess_give_tree_imageView"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_plant_a_tree"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.daasuu.cat.CountAnimationTextView
+                        android:id="@+id/number_trees_referred_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_medium"
+                        android:textColor="#4FC1E9"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="@+id/progess_give_tree_imageView"
+                        app:layout_constraintStart_toStartOf="@+id/progess_give_tree_imageView"
+                        app:layout_constraintTop_toBottomOf="@+id/progess_give_tree_imageView"
+                        tools:text="00" />
+
+                    <TextView
+                        android:id="@+id/number_trees_referred_textView_subtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_book"
+                        android:maxWidth="250dp"
+                        android:text="Trees Referred"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="@+id/number_trees_referred_textView"
+                        app:layout_constraintStart_toStartOf="@+id/number_trees_referred_textView"
+                        app:layout_constraintTop_toBottomOf="@+id/number_trees_referred_textView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progress_cardView_3"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:background="@drawable/cardsbg"
+                app:layout_constraintBottom_toBottomOf="@+id/progress_cardView_1"
+                app:layout_constraintEnd_toStartOf="@+id/progress_cardView_2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/progress_cardView_1"
+                app:layout_constraintTop_toTopOf="@+id/progress_cardView_1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="-16dp"
+                    tools:layout_editor_absoluteY="0dp">
+
+                    <ImageView
+                        android:id="@+id/progess_tree_imageView9"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/task_icon"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.daasuu.cat.CountAnimationTextView
+                        android:id="@+id/number_task_completed_report"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/avenir_medium"
+                        android:textColor="#4FC1E9"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="@+id/progess_tree_imageView9"
+                        app:layout_constraintStart_toStartOf="@+id/progess_tree_imageView9"
+                        app:layout_constraintTop_toBottomOf="@+id/progess_tree_imageView9"
+                        tools:text="00" />
+
+                    <TextView
+                        android:id="@+id/number_task_completed_textView_subtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_book"
+                        android:maxWidth="250dp"
+                        android:text="Completed Tasks"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="@+id/number_task_completed_report"
+                        app:layout_constraintStart_toStartOf="@+id/number_task_completed_report"
+                        app:layout_constraintTop_toBottomOf="@+id/number_task_completed_report" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -171,10 +171,8 @@ dependencies {
     // for smooth streaming of video in our exoplayer.
     implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.0'
 
-    // for generating default ui of exoplayer
-    implementation 'com.google.android.exoplayer:exoplayer-ui:r2.4.0'
+    // youtube Player
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
-
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
 
     //Graphs

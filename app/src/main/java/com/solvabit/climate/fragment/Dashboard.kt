@@ -108,13 +108,13 @@ class Dashboard : Fragment() {
 
         if (localuser.normalizedScore!=null){
             if(localuser.normalizedScore!! <= 500 ){
-                binding.statusText.text = " Your are in Critical Condition!"
+                binding.statusText.text = " You are in Critical Condition!"
                 binding.linearLayout3.setBackgroundResource(R.drawable.red_rounded_button)
                 binding.imageView6.setBackgroundResource(R.drawable.ic_baseline_block_24)
 
                 binding.imageView6.setBackgroundResource(R.drawable.ic_baseline_block_24)
             }else if(localuser.normalizedScore!! <= 700 ){
-                binding.statusText.text = "  Your are on border line !"
+                binding.statusText.text = "  You are on border line !"
                 binding.linearLayout3.setBackgroundResource(R.drawable.orange_rounded_button)
                 binding.imageView6.setBackgroundResource(R.drawable.ic_baseline_warning_24)
             }else{
