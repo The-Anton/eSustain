@@ -53,6 +53,10 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
 
         setClickForTasks()
 
+        binding.coinsAndProfileTask.setOnClickListener {
+            binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToProfileFragment())
+        }
+
         return binding.root
     }
 

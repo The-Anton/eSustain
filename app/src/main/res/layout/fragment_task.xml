@@ -5,10 +5,18 @@
     tools:context=".fragment.TaskFragment">
 
     <data>
-        <import type="com.solvabit.climate.database.SingleAction"/>
-        <import type="java.util.List"/>
-        <variable name="singleAction" type="SingleAction"/>
-        <variable name="allActions" type="List&lt;SingleAction>"/>
+
+        <import type="com.solvabit.climate.database.SingleAction" />
+
+        <import type="java.util.List" />
+
+        <variable
+            name="singleAction"
+            type="SingleAction" />
+
+        <variable
+            name="allActions"
+            type="List&lt;SingleAction>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,19 +48,30 @@
                 android:layout_weight="5"
                 android:text="Your Task" />
 
-            <TextView
-                style="@style/normaltext"
+            <LinearLayout
+                android:id="@+id/coins_and_profile_task"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Coins: 0" />
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/ic_profile_circle_24" />
+                <TextView
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:text="Coins: 0" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_profile_circle_24" />
+
+            </LinearLayout>
         </LinearLayout>
 
         <ScrollView
@@ -134,10 +153,10 @@
                             android:id="@+id/seminar_imageView_tasks"
                             android:layout_width="95dp"
                             android:layout_height="95dp"
-                            tools:src="@drawable/blue_tick"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/blue_tick" />
 
                         <com.airbnb.lottie.LottieAnimationView
                             android:id="@+id/green_tick_animation_seminar"

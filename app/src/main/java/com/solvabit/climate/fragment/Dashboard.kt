@@ -82,14 +82,10 @@ class Dashboard : Fragment() {
 
         GlobalScope.launch {
             Repository(dao, uid).fetchUpdates {
-            localRepo.fetchUpdates {
-                Timber.i( localuser.toString())
+                Timber.i(localuser.toString())
                 addDataToDashboard()
                 addRecommendedDashboardItems(localuser)
             }
-
-
-
         }
 
 
@@ -135,7 +131,11 @@ class Dashboard : Fragment() {
         }
 
         binding.circularProgressBar.progress = normalizedScore / 10
-        circularloader(localuser.aqi?.toFloat() ?: 0f, 500f, binding.circularProgressBarAirQuality)
+        circularloader(
+            localuser.aqi?.toFloat() ?: 0f,
+            500f,
+            binding.circularProgressBarAirQuality
+        )
         initializeAirData()
         initializeForestData()
 
@@ -197,25 +197,25 @@ class Dashboard : Fragment() {
     }
 
     private fun addNavigation(taskId1: Int, taskId2: Int, taskId3: Int) {
-        for(i in 1..3){
+        for (i in 1..3) {
             val card = returnImageId(i.toString())
             card.setOnClickListener {
-            var status = "remaining"
-                if(i==1) {
+                var status = "remaining"
+                if (i == 1) {
                     status = returnStatus(taskId1.toString())
-                    if(status=="remaining")
+                    if (status == "remaining")
                         addTask(taskId1.toString())
                     navigateToTask(taskId1, status)
                 }
-                if(i==2) {
+                if (i == 2) {
                     status = returnStatus(taskId2.toString())
-                    if(status=="remaining")
+                    if (status == "remaining")
                         addTask(taskId2.toString())
                     navigateToTask(taskId2, status)
                 }
-                if(i==3) {
+                if (i == 3) {
                     status = returnStatus(taskId3.toString())
-                    if(status=="remaining")
+                    if (status == "remaining")
                         addTask(taskId3.toString())
                     navigateToTask(taskId3, status)
                 }
@@ -243,15 +243,14 @@ class Dashboard : Fragment() {
             }
     }
 
-    private fun returnStatus(taskId1: String): String
-    {
-        if(localuser.presentAction.contains(taskId1))
+    private fun returnStatus(taskId1: String): String {
+        if (localuser.presentAction.contains(taskId1))
             return "present"
         return "remaining"
     }
 
     private fun returnImageId(cardId: String): ConstraintLayout {
-        return when(cardId) {
+        return when (cardId) {
             "1" -> binding.recommendedCardView
             "2" -> binding.recommendedCardView2
             "3" -> binding.recommendedCardView3
@@ -261,7 +260,7 @@ class Dashboard : Fragment() {
 
 
     private fun navigateToTask(i: Int, status: String) {
-        when(actionsList[i - 1].category){
+        when (actionsList[i - 1].category) {
             TaskFragment.tree -> binding.root.findNavController().navigate(
                 DashboardDirections.actionDashboardFragmentToTreesPlanted(
                     actionsList[i - 1].number,
@@ -292,7 +291,11 @@ class Dashboard : Fragment() {
         }
     }
 
-    private fun circularloader(data: Float, max: Float, circularProgressBar: CircularProgressBar) {
+    private fun circularloader(
+        data: Float,
+        max: Float,
+        circularProgressBar: CircularProgressBar
+    ) {
         circularProgressBar.apply {
             setProgressWithAnimation(data, 3000) // =1s
             progressMax = max

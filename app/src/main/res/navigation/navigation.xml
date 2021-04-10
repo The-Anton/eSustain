@@ -141,6 +141,9 @@
         <action
             android:id="@+id/action_taskFragment_to_sendReportFragment"
             app:destination="@id/sendReportFragment" />
+        <action
+            android:id="@+id/action_taskFragment_to_profile_fragment"
+            app:destination="@id/profile_fragment" />
     </fragment>
     <fragment
         android:id="@+id/recycleTask"
