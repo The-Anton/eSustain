@@ -30,9 +30,10 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_task, container, false)
+        binding.allActions = actionsList
 
         initializeAllTasks()
 
@@ -47,8 +48,10 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
     }
 
     private fun setClickForTasks() {
-        for( i in 0 .. 14) {
+
+        for( i in 1 .. 15) {
             val imageView = returnImageId(i.toString())
+            imageView.setImageResource(actionsList[i-1].background)
             var status = "remaining"
             if(localUser.completedAction.contains(i.toString()))
                 status = "completed"
@@ -108,7 +111,11 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
         startNewTaskDialogFragment.show(fm, "fragment_edit_name")
     }
 
-    override fun onFinishEditDialog(taskId: String, remainingAction: List<String>, presentAction: List<String>) {
+    override fun onFinishEditDialog(
+        taskId: String,
+        remainingAction: List<String>,
+        presentAction: List<String>
+    ) {
         navigateToTask(taskId.toInt(), "present")
         localUser.remainingAction = remainingAction
         localUser.presentAction = presentAction
@@ -178,6 +185,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
     }
 
     private fun initializeAllTasks() {
+
         actionsList.add(
             SingleAction(
                 1,
@@ -185,7 +193,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "Begin with a single step",
                 "tree",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.plant_one_tree_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -196,7 +204,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "Attend sustainable environment seminar",
                 "seminar",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.seminar_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -207,7 +215,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "Energy is life",
                 "guide",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.save_electricity_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -218,7 +226,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "Help your family and friends too",
                 "report",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.share_report_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -229,7 +237,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "Remember water cycle & lifecycle are one",
                 "guide",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.save_water_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -240,7 +248,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "The share of public transport is just 18.1% of work trips.",
                 "guide",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.public_transport_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -251,7 +259,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "Let's inspire others for a sustainable future",
                 "refer",
                 5,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.refer_friend_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -262,7 +270,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "India generates about 3 million tonnes of e-waste annually and ranks third among e-waste producing countries",
                 "recycle",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.ewaste_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -273,7 +281,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "To produce a ton of paper we need about 115,000 liters of water",
                 "recycle",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.recycle_paper_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -284,7 +292,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "India generates nearly 26,000 tonnes of plastic waste every day",
                 "purchase",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.reusable_bag_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -295,7 +303,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "Walking is fun and environment friendly",
                 "guide",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.walk_round_icon,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -306,7 +314,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "In Chicago, trees remove more than 18,000 tons of air pollution each year.",
                 "tree",
                 4,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.plant_four_trees_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -317,7 +325,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "If you carpool at least twice a week, you can help reduce the emission of 1,600 pounds of greenhouse gases by a car each year",
                 "guide",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.use_carpool_round_icons,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )
@@ -328,7 +336,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "Nature is waiting for you!!",
                 "feed",
                 1,
-                "https://i.pinimg.com/originals/77/84/a5/7784a584a095a9f6688605f4c081c01e.jpg",
+                R.drawable.walk_round_icon,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )

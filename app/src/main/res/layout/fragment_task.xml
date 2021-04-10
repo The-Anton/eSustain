@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragment.TaskFragment">
 
+    <data>
+        <import type="com.solvabit.climate.database.SingleAction"/>
+        <import type="java.util.List"/>
+        <variable name="singleAction" type="SingleAction"/>
+        <variable name="allActions" type="List&lt;SingleAction>"/>
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -85,7 +92,7 @@
                             android:id="@+id/plant_one_tree_imageView_tasks"
                             android:layout_width="95dp"
                             android:layout_height="95dp"
-                            android:src="@drawable/blue_tick"
+                            android:src="@drawable/plant_one_tree_round_icons"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -127,7 +134,6 @@
                             android:id="@+id/seminar_imageView_tasks"
                             android:layout_width="95dp"
                             android:layout_height="95dp"
-                            android:src="@drawable/blue_tick"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -149,7 +155,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Seminar"
+                            android:text="@{allActions.get(1).title}"
                             app:layout_constraintEnd_toEndOf="@+id/seminar_imageView_tasks"
                             app:layout_constraintStart_toStartOf="@+id/seminar_imageView_tasks"
                             app:layout_constraintTop_toBottomOf="@+id/seminar_imageView_tasks" />
@@ -169,7 +175,6 @@
                             android:id="@+id/conserve_electricity_imageView_tasks"
                             android:layout_width="95dp"
                             android:layout_height="95dp"
-                            android:src="@drawable/blue_tick"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
