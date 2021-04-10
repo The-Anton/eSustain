@@ -58,16 +58,15 @@ class GroundWaterStatsFragment : Fragment() {
         scaleValue.add("Rainfall Monsoon Recharge")
 
         val lineEntry = ArrayList<Entry>()
-        lineEntry.add(Entry(localuser.groundWaterData[11].toFloat(), 1))
-        lineEntry.add(Entry(localuser.groundWaterData[5].toFloat(), 2))
-        lineEntry.add(Entry(localuser.groundWaterData[2].toFloat(), 3))
-        lineEntry.add(Entry(localuser.groundWaterData[3].toFloat(), 4))
-        lineEntry.add(Entry(localuser.groundWaterData[9].toFloat(), 5))
+        lineEntry.add(Entry(localuser.groundWaterData[5].toFloat(), 1))
+        lineEntry.add(Entry(localuser.groundWaterData[2].toFloat(), 2))
+        lineEntry.add(Entry(localuser.groundWaterData[3].toFloat(), 3))
+        lineEntry.add(Entry(localuser.groundWaterData[9].toFloat(), 4))
         val pieDataSet = PieDataSet(lineEntry, "Year")
         val dataSet = PieData(scaleValue, pieDataSet)
         pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS)
         binding.pieChart.animateXY(5000, 5000)
-
+        binding.pieChart.setDescription(" ")
         binding.pieChart.data = dataSet
 
 

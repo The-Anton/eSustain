@@ -69,189 +69,26 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2"
-                style="@style/questions_style">
-
-                <TextView
-                    android:id="@+id/question1_text"
-                    style="@style/normalSubText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                   android:text="How are you doing today?" />
-
-                <RadioGroup
-                    android:id="@+id/radioGroup1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/question1_text">
-
-                    <RadioButton
-                        android:id="@+id/option1_rg1"
-                        style="@style/normalSubText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:text="Male" />
-
-                    <RadioButton
-                        android:id="@+id/option2_rg1"
-                        style="@style/normalSubText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.13"
-                        android:checked="false"
-                        android:text="Female" />
-
-                    <RadioButton
-                        android:id="@+id/option3_rg1"
-                        style="@style/normalSubText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.13"
-                        android:checked="false"
-                        android:text="Female" />
-
-                </RadioGroup>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout13"
-                style="@style/questions_style"
-                app:layout_constraintEnd_toEndOf="@+id/constraintLayout9"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout9"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
-
-                <TextView
-                    android:id="@+id/question2_text"
-                    style="@style/normalSubText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="How are you doing today?" />
-
-                <RadioGroup
-                    android:id="@+id/radioGroup2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/question2_text"
-                    app:layout_constraintVertical_bias="0.751">
-
-                    <RadioButton
-                        android:id="@+id/option1_rg2"
-                        style="@style/normalSubText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:text="Male" />
-
-                    <RadioButton
-                        android:id="@+id/option2_rg2"
-                        style="@style/normalSubText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.13"
-                        android:checked="false"
-                        android:text="Female" />
-
-                    <RadioButton
-                        android:id="@+id/option3_rg2"
-                        style="@style/normalSubText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.13"
-                        android:checked="false"
-                        android:text="Female" />
-
-                </RadioGroup>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout14"
-                style="@style/questions_style"
-                app:layout_constraintEnd_toEndOf="@+id/constraintLayout13"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout13"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout13">
-
-                <TextView
-                    android:id="@+id/question3_text"
-                    style="@style/normalSubText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="Whats is your hobby here?" />
-
-                <RadioGroup
-                    android:id="@+id/radioGroup3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/question3_text"
-                    app:layout_constraintVertical_bias="0.751">
-
-                    <RadioButton
-                        android:id="@+id/option1_rg3"
-                        style="@style/normalSubText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:text="Male" />
-
-                    <RadioButton
-                        android:id="@+id/option2_rg3"
-                        style="@style/normalSubText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.13"
-                        android:checked="false"
-                        android:text="Female" />
-
-                    <RadioButton
-                        android:id="@+id/option3_rg3"
-                        style="@style/normalSubText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.13"
-                        android:checked="false"
-                        android:text="Female" />
-
-                </RadioGroup>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <FrameLayout
+                android:id="@+id/quizContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                app:layout_constraintEnd_toEndOf="@+id/cardView2"
+                app:layout_constraintStart_toStartOf="@+id/cardView2"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
             <Button
                 android:id="@+id/submit_button_guide"
                 style="@style/blue_filled_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="148dp"
+                android:layout_marginTop="40dp"
                 android:text="Submit"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout14"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout14"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout14" />
+                app:layout_constraintStart_toStartOf="@+id/cardView2"
+                app:layout_constraintTop_toBottomOf="@+id/quizContainer" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -49,7 +49,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
 
     private fun setClickForTasks() {
 
-        for( i in 1 .. 15) {
+        for( i in 1 .. 14) {
             val imageView = returnImageId(i.toString())
             imageView.setImageResource(actionsList[i-1].background)
             var status = "remaining"
