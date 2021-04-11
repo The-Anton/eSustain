@@ -74,26 +74,9 @@ class MapsFragment : Fragment() {
             }
         }
 
-       // runnableHandler()
     }
 
 
-
-    fun runnableHandler() {
-        val mainHandler = Handler(Looper.getMainLooper())
-
-        mainHandler.post(object : Runnable {
-            override fun run() {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (!checkPermission(permissions)) {
-                            requestPermissions(permissions, PERMISSION_REQUEST)
-                        }
-                    }
-                    mainHandler.postDelayed(this, 3000)
-                }
-        })
-
-    }
 
     private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
         return ContextCompat.getDrawable(context, vectorResId)?.run {
@@ -163,10 +146,13 @@ class MapsFragment : Fragment() {
 
                 val data = p0.getValue(PlantedTrees::class.java)
 
+                val plantingTime = data?.time?.toLong()
+                val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+                val dateString = simpleDateFormat.format(plantingTime)
 
                 val location = data?.lon?.let { LatLng(data.lat, it) }
                 val marker = googleMap.addMarker(location?.let {
-                    MarkerOptions().position(it).title("Rohit Kumar Planted tree on 02/03/21").snippet("Population: 4,137,400")
+                    MarkerOptions().position(it).title("${data.username} Planted tree on ${dateString}").snippet("Lat- ${data.lat}, Lon- ${data.lon}")
                         .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.marker))
                 })
                 marker.tag = p0.key
