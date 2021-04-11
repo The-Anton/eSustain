@@ -1,6 +1,8 @@
 # eSustain🌳
 
+#### ⚠️Currently only available for Indian Users 🤕
 
+###### 🧪 If you are testing this application from outside India you will be provided with the option to use an Indian location for simulating the application.
 <img src="https://user-images.githubusercontent.com/51144829/112753561-8a00cd80-8ff5-11eb-8b76-e31cf8ee572b.png" width=20% > <img src="https://user-images.githubusercontent.com/51144829/112753164-18744f80-8ff4-11eb-8b2a-6fbb11257b0f.png" width=20% > <img src="https://user-images.githubusercontent.com/51144829/112753383-0810a480-8ff5-11eb-8493-09fe962c1b64.png" width=20% ><img src="https://user-images.githubusercontent.com/51144829/112753932-663e8700-8ff7-11eb-8086-343234290bfd.png" width=20% >  
 
 <img src="https://user-images.githubusercontent.com/51144829/112753879-1f509180-8ff7-11eb-8d37-dbed18307afc.png" width=20% > <img src="https://user-images.githubusercontent.com/51144829/112753880-22e41880-8ff7-11eb-8de7-041f29c1c52f.png" width=20% > <img src="https://user-images.githubusercontent.com/51144829/112753552-85d4b000-8ff5-11eb-802e-1461b4e70f33.png" width=20% > <img src="https://user-images.githubusercontent.com/51144829/112754118-56737280-8ff8-11eb-84b8-2ef8f8f04b0c.png" width=20% > 
