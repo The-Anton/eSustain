@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-private const val PERMISSION_REQUEST = 10
+const val PERMISSION_REQUEST = 10
 
 class Location : AppCompatActivity() {
 

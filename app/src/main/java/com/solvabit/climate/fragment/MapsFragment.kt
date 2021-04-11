@@ -1,16 +1,27 @@
 package com.solvabit.climate.fragment
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Geocoder
+import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.PermissionChecker.checkCallingOrSelfPermission
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
@@ -21,6 +32,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.*
 import com.solvabit.climate.R
 import com.solvabit.climate.dataModel.PlantedTrees
+import com.solvabit.climate.location.PERMISSION_REQUEST
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.bottom_sheet_planted_tree_data.*
 import kotlinx.android.synthetic.main.bottom_sheet_planted_tree_data.view.*
@@ -30,6 +42,58 @@ import java.util.*
 
 
 class MapsFragment : Fragment() {
+
+    lateinit var locationManager: LocationManager
+    private var permissions = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
+    private lateinit var uid: String
+    var gpsStatus: Boolean = false
+
+
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        //locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        return inflater.inflate(R.layout.fragment_maps, container, false)
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkPermission(permissions)) {
+                requestPermissions(permissions, PERMISSION_REQUEST)
+            }else{
+                val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+                mapFragment?.getMapAsync(callback)
+            }
+        }
+
+       // runnableHandler()
+    }
+
+
+
+    fun runnableHandler() {
+        val mainHandler = Handler(Looper.getMainLooper())
+
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (!checkPermission(permissions)) {
+                            requestPermissions(permissions, PERMISSION_REQUEST)
+                        }
+                    }
+                    mainHandler.postDelayed(this, 3000)
+                }
+        })
+
+    }
 
     private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
         return ContextCompat.getDrawable(context, vectorResId)?.run {
@@ -55,23 +119,23 @@ class MapsFragment : Fragment() {
         googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney)) */
         val IndiaBounds = LatLngBounds(
-                LatLng((8.0), 68.7),  // SW bounds here bounds
-                LatLng((37.0), 97.25) // NE bounds
+            LatLng((8.0), 68.7),  // SW bounds here bounds
+            LatLng((37.0), 97.25) // NE bounds
         )
         googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(IndiaBounds, 0))
         googleMap.setPadding(0, 0, 0, 0)
         googleMap.uiSettings.isZoomControlsEnabled = false
         googleMap.isMyLocationEnabled = true
         googleMap.setMapStyle(
-                MapStyleOptions.loadRawResourceStyle(
-                        requireContext(),
-                        R.raw.style_json
-                )
+            MapStyleOptions.loadRawResourceStyle(
+                requireContext(),
+                R.raw.style_json
+            )
         )
         country_zoom.setOnClickListener {
             val country = LatLngBounds(
-                    LatLng((8.0), 68.7),  // SW bounds bounds here
-                    LatLng((37.0), 97.25) // NE bounds
+                LatLng((8.0), 68.7),  // SW bounds bounds here
+                LatLng((37.0), 97.25) // NE bounds
             )
             googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(country, 0))
 
@@ -80,9 +144,9 @@ class MapsFragment : Fragment() {
             val location = googleMap.myLocation
             if (location != null) {
                 val cameraPosition = CameraPosition.Builder()
-                        .target(LatLng(location.latitude, location.longitude)) // Sets the center of the map to location user
-                        .zoom(7f) // Sets the zoom  // Sets the tilt of the camera of the camera to 30 degrees
-                        .build() // Creates a CameraPosition from the builder
+                    .target(LatLng(location.latitude, location.longitude)) // Sets the center of the map to location user
+                    .zoom(7f) // Sets the zoom  // Sets the tilt of the camera of the camera to 30 degrees
+                    .build() // Creates a CameraPosition from the builder
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
             }
         }
@@ -103,7 +167,7 @@ class MapsFragment : Fragment() {
                 val location = data?.lon?.let { LatLng(data.lat, it) }
                 val marker = googleMap.addMarker(location?.let {
                     MarkerOptions().position(it).title("Rohit Kumar Planted tree on 02/03/21").snippet("Population: 4,137,400")
-                            .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.marker))
+                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.marker))
                 })
                 marker.tag = p0.key
 
@@ -185,17 +249,37 @@ class MapsFragment : Fragment() {
 
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+
+    private fun checkPermission(permissionArray: Array<String>): Boolean {
+        var allSuccess = true
+        for (i in permissionArray.indices) {
+            if (ActivityCompat.checkSelfPermission(requireContext(),permissionArray[i]) == PackageManager.PERMISSION_GRANTED)
+                allSuccess = false
+        }
+        return allSuccess
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_REQUEST) {
+            var allSuccess = true
+            for (i in permissions.indices) {
+                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                    allSuccess = false
+
+                }
+            }
+
+            if(allSuccess){
+                val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+                mapFragment?.getMapAsync(callback)
+            }
+
+        }
     }
 }
