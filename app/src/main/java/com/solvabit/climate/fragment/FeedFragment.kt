@@ -10,7 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationMenu
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
@@ -20,10 +27,14 @@ import com.solvabit.climate.database.User
 import com.solvabit.climate.databinding.FeedFragmentBinding
 import com.solvabit.climate.dialog.JoinGroupConfirmDialog
 import com.solvabit.climate.fragment.Dashboard
+import com.solvabit.climate.network.FirebaseService
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.card_post_view.view.*
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -34,6 +45,8 @@ class FeedFragment : Fragment() {
 
     private lateinit var binding: FeedFragmentBinding
     private val localUser = Dashboard.localuser
+    val uid = FirebaseAuth.getInstance().uid.toString()
+    val firebaseService = FirebaseService(uid)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +63,7 @@ class FeedFragment : Fragment() {
 
         binding.createNewPost.setOnClickListener {
             binding.root.findNavController()
-                    .navigate(FeedFragmentDirections.actionFeedFragmentToCreatePostFragment())
+                    .navigate(FeedFragmentDirections.actionFeedFragmentToCreatePostFragment(false))
         }
 
         binding.allMessages.setOnClickListener {
@@ -65,6 +78,22 @@ class FeedFragment : Fragment() {
         return binding.root
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        changeBottomNavigationState()
+    }
+
+    fun changeBottomNavigationState(){
+        val bottomNavMenu = activity?.bottomNavigation?.menu
+
+        bottomNavMenu?.getItem(0)?.isEnabled = true
+        bottomNavMenu?.getItem(1)?.isEnabled = true
+        bottomNavMenu?.getItem(2)?.isEnabled = false
+        bottomNavMenu?.getItem(3)?.isEnabled = true
+        bottomNavMenu?.getItem(4)?.isEnabled = true
+
+    }
     private fun initializeShareThoughtFeed() {
         Picasso.get().load(localUser.imageUrl).into(binding.userprofileImageViewFeed)
     }
@@ -89,30 +118,21 @@ class FeedFragment : Fragment() {
     } */
 
 
+
     private fun fetchPostData(context: Context) {
         val adapter = GroupAdapter<ViewHolder>()
-        val ref = FirebaseDatabase.getInstance().getReference("/PostData").limitToFirst(10)
         binding.postRecyclerView.adapter = adapter
+        firebaseService.fetchPostData {
+            post ->  adapter.add(PostItem(post, context,firebaseService))
 
-        ref.addChildEventListener(object : ChildEventListener {
+        }
 
-            override fun onCancelled(p0: DatabaseError) {}
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
-            override fun onChildRemoved(p0: DataSnapshot) {}
-
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                val post = p0.getValue(Post::class.java)
-                if (post != null)
-                    adapter.add(PostItem(post, context))
-            }
-        })
     }
 
 }
 
 
-class PostItem(private val post: Post, val context: Context) : Item<ViewHolder>() {
+class PostItem(private val post: Post, val context: Context,val firebaseService: FirebaseService) : Item<ViewHolder>() {
 
     private lateinit var database: DatabaseReference
     override fun getLayout(): Int {
@@ -140,32 +160,31 @@ class PostItem(private val post: Post, val context: Context) : Item<ViewHolder>(
 
     private fun initializePostData(viewHolder: ViewHolder) {
         viewHolder.itemView.post_main_text.text = post.post_text
+
         if (post.post_image.isNotEmpty())
             Picasso.get().load(post.post_image).into(viewHolder.itemView.post_main_image)
+
         viewHolder.itemView.category.text = post.category
         database = Firebase.database.reference
+
         val time = post.time.toLong()
         val sfd = SimpleDateFormat("dd-MM-yyyy")
         viewHolder.itemView.time.text = sfd.format(Date(time))
         val uid = post.uid
-        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
 
         if(post.category!="Issue")
             viewHolder.itemView.interested_button.visibility = View.GONE
 
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-            }
+        firebaseService.initializePostData {
+            user ->
 
-            override fun onDataChange(p0: DataSnapshot) {
-                val user = p0.getValue(User::class.java)
-                viewHolder.itemView.username.text = user?.username
-                if (user?.imageUrl != null) {
-                    Picasso.get().load(user.imageUrl).into(viewHolder.itemView.user_image)
-                }
+            viewHolder.itemView.username.text = user?.username
 
+            if (user?.imageUrl != null) {
+                Picasso.get().load(user.imageUrl).into(viewHolder.itemView.user_image)
             }
-        })
+        }
+
     }
 
     private fun enableLikeButton(viewHolder: ViewHolder) {

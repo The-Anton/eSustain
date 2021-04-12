@@ -83,6 +83,9 @@
             app:destination="@id/feed_fragment"
             app:popUpTo="@id/feed_fragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="recyclepost"
+            app:argType="boolean" />
     </fragment>
     <dialog
         android:id="@+id/joinGroupConfirmDialog"
@@ -153,6 +156,16 @@
         <argument
             android:name="taskId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_recycleTask_to_createPostFragment"
+            app:destination="@id/createPostFragment" >
+            <argument
+                android:name="postTypeId"
+                android:defaultValue="0" />
+            <argument
+                android:name="recyclePost"
+                android:defaultValue="false" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/guideTask"

@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solvabit.climate.R
 import com.solvabit.climate.databinding.FragmentRecycleTaskBinding
@@ -41,7 +41,10 @@ class RecycleTask : Fragment() {
         navbar.visibility = View.GONE
 
         initializeToolbar()
-
+        binding.button.setOnClickListener {
+            val action = RecycleTaskDirections.actionRecycleTaskToCreatePostFragment(true)
+            findNavController().navigate(action)
+        }
         return binding.root
     }
 

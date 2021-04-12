@@ -78,7 +78,7 @@ public class Repository constructor(val dao: UserDao,val uid:String) {
     suspend fun fetchStatsData(myCallback: (result: Stats)-> Unit){
         Log.v("Repository", "fetchStatsData called")
 
-        firebaseService.fetchStats { result ->
+        firebaseService.fetchStats(dao) { result ->
             myCallback.invoke(result)
         }
 

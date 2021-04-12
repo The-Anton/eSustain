@@ -31,9 +31,11 @@ import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.*
 import com.solvabit.climate.R
+import com.solvabit.climate.dataModel.IssueDataMaps
 import com.solvabit.climate.dataModel.PlantedTrees
 import com.solvabit.climate.location.PERMISSION_REQUEST
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet_planted_tree_data.*
 import kotlinx.android.synthetic.main.bottom_sheet_planted_tree_data.view.*
 import kotlinx.android.synthetic.main.fragment_maps.*
@@ -65,6 +67,7 @@ class MapsFragment : Fragment() {
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        changeBottomNavigationState()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkPermission(permissions)) {
                 requestPermissions(permissions, PERMISSION_REQUEST)
@@ -76,8 +79,17 @@ class MapsFragment : Fragment() {
 
     }
 
+    fun changeBottomNavigationState(){
 
+        val bottomNavMenu = activity?.bottomNavigation?.menu
 
+        bottomNavMenu?.getItem(0)?.isEnabled = true
+        bottomNavMenu?.getItem(1)?.isEnabled = true
+        bottomNavMenu?.getItem(2)?.isEnabled = true
+        bottomNavMenu?.getItem(3)?.isEnabled = false
+        bottomNavMenu?.getItem(4)?.isEnabled = true
+
+    }
     private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
         return ContextCompat.getDrawable(context, vectorResId)?.run {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
@@ -133,6 +145,9 @@ class MapsFragment : Fragment() {
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
             }
         }
+
+
+
         val ref = FirebaseDatabase.getInstance().getReference("/plantedTrees")
         ref.addChildEventListener(object : ChildEventListener {
 
@@ -161,6 +176,34 @@ class MapsFragment : Fragment() {
             }
         })
 
+
+        val issueRef = FirebaseDatabase.getInstance().getReference("/issues")
+        issueRef.addChildEventListener(object : ChildEventListener {
+
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
+            override fun onChildRemoved(p0: DataSnapshot) {}
+
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+
+
+                val data = p0.getValue(IssueDataMaps::class.java)
+
+                val plantingTime = data?.time?.toLong()
+                val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+                val dateString = simpleDateFormat.format(plantingTime)
+
+                val location = data?.lon?.let { LatLng(data.lat, it) }
+                val marker = googleMap.addMarker(location?.let {
+                    MarkerOptions().position(it).title("${data.username} started the issue. ").snippet("Dated ${dateString}")
+                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.issue))
+                })
+                marker.tag = p0.key
+
+
+            }
+        })
 
         googleMap.setOnMarkerClickListener(OnMarkerClickListener { marker ->
             val position = marker.position

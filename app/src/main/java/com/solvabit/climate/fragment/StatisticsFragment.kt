@@ -52,6 +52,11 @@ class StatisticsFragment : Fragment() {
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        changeBottomNavigationState()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -70,5 +75,17 @@ class StatisticsFragment : Fragment() {
         adapter.addFragment(ForestDensityStatsFragment(), "Forest")
         adapter.addFragment(GroundWaterStatsFragment(), "Water")
         viewPager.adapter = adapter
+    }
+
+    fun changeBottomNavigationState(){
+
+        val bottomNavMenu = activity?.bottomNavigation?.menu
+
+        bottomNavMenu?.getItem(0)?.isEnabled = true
+        bottomNavMenu?.getItem(1)?.isEnabled = false
+        bottomNavMenu?.getItem(2)?.isEnabled = true
+        bottomNavMenu?.getItem(3)?.isEnabled = true
+        bottomNavMenu?.getItem(4)?.isEnabled = true
+
     }
 }
