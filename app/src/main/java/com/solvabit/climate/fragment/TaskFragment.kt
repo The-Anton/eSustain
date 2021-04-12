@@ -1,6 +1,7 @@
 package com.solvabit.climate.fragment
 
 import android.graphics.ColorMatrixColorFilter
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
+import com.google.android.gms.maps.SupportMapFragment
 import com.solvabit.climate.R
 import com.solvabit.climate.database.SingleAction
 import com.solvabit.climate.databinding.FragmentTaskBinding
 import com.solvabit.climate.dialog.StartNewTaskDialog
+import com.solvabit.climate.location.PERMISSION_REQUEST
+import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
 
@@ -58,6 +62,22 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        changeBottomNavigationState()
+    }
+
+    fun changeBottomNavigationState(){
+
+        val bottomNavMenu = activity?.bottomNavigation?.menu
+
+        bottomNavMenu?.getItem(0)?.isEnabled = true
+        bottomNavMenu?.getItem(1)?.isEnabled = true
+        bottomNavMenu?.getItem(2)?.isEnabled = true
+        bottomNavMenu?.getItem(3)?.isEnabled = true
+        bottomNavMenu?.getItem(4)?.isEnabled = false
     }
 
     private fun setClickForTasks() {

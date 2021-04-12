@@ -20,6 +20,7 @@ import com.solvabit.climate.R
 import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.databinding.FragmentCreatePostBinding
 import com.solvabit.climate.dialog.Dialog
+import com.solvabit.climate.fragment.Tasks.GuideTaskArgs
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_create_post.*
 import timber.log.Timber
@@ -42,6 +43,9 @@ class CreatePostFragment : Fragment() {
                 inflater, R.layout.fragment_create_post, container, false
         )
 
+        val args = CreatePostFragmentArgs.fromBundle(requireArguments())
+        var isRecyclePost = args.recyclepost
+
         getUser()
         addSpinner()
 
@@ -61,6 +65,10 @@ class CreatePostFragment : Fragment() {
 
         val spnLocale = binding.spinner2 as Spinner
 
+        if(isRecyclePost){
+            spnLocale.setSelection(1)
+            spnLocale.isEnabled = false
+        }
         spnLocale.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
                 if (adapterView != null) {
