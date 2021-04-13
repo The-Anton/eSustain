@@ -28,6 +28,7 @@ import com.solvabit.climate.viewModel.DashboardViewModel
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.recommended_cards.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -92,6 +93,10 @@ class Dashboard : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        changeBottomNavigationState()
+    }
 
     override fun onStart() {
         super.onStart()
@@ -100,6 +105,17 @@ class Dashboard : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+    }
+
+    fun changeBottomNavigationState(){
+        val bottomNavMenu = activity?.bottomNavigation?.menu
+
+        bottomNavMenu?.getItem(0)?.isEnabled = false
+        bottomNavMenu?.getItem(1)?.isEnabled = true
+        bottomNavMenu?.getItem(2)?.isEnabled = true
+        bottomNavMenu?.getItem(3)?.isEnabled = true
+        bottomNavMenu?.getItem(4)?.isEnabled = true
 
     }
 

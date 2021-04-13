@@ -17,9 +17,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.solvabit.climate.R
+import com.solvabit.climate.dataModel.IssueOnMaps
 import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.databinding.FragmentCreatePostBinding
 import com.solvabit.climate.dialog.Dialog
+import com.solvabit.climate.fragment.Tasks.GuideTaskArgs
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_create_post.*
 import timber.log.Timber
@@ -42,6 +44,9 @@ class CreatePostFragment : Fragment() {
                 inflater, R.layout.fragment_create_post, container, false
         )
 
+        val args = CreatePostFragmentArgs.fromBundle(requireArguments())
+        var isRecyclePost = args.recyclepost
+
         getUser()
         addSpinner()
 
@@ -61,6 +66,10 @@ class CreatePostFragment : Fragment() {
 
         val spnLocale = binding.spinner2 as Spinner
 
+        if(isRecyclePost){
+            spnLocale.setSelection(1)
+            spnLocale.isEnabled = false
+        }
         spnLocale.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
                 if (adapterView != null) {
@@ -98,7 +107,7 @@ class CreatePostFragment : Fragment() {
             Toast.makeText(requireContext(), "Sorry, Blank can't be posted!", Toast.LENGTH_SHORT).show()
         } else {
             Timber.i("Going to show dialog box")
-            Dialog().show(childFragmentManager, "MyCustomFragment")
+
             uploadImage()
         }
     }
@@ -130,11 +139,12 @@ class CreatePostFragment : Fragment() {
         val text = binding.postText.text.toString()
         val category = binding.spinner2.selectedItem.toString()
         if (category == "Issue") {
-
+            saveUserLocation(postImageUrl)
             if (binding.checkCreateGroup.isChecked) {
 
                 if (binding.groupName.text.isNotEmpty()) {
 
+                    Dialog().show(childFragmentManager, "MyCustomFragment")
                     val groupName = binding.groupName.text.toString()
                     val postData = Post(text, postImageUrl, uid, time, category, timestamp.toString(), groupName, 0)
                     ref.setValue(postData).addOnSuccessListener {
@@ -155,13 +165,28 @@ class CreatePostFragment : Fragment() {
 
         } else {
 
-
+            Dialog().show(childFragmentManager, "MyCustomFragment")
             val postData = Post(text, postImageUrl, uid, time, category, timestamp.toString(), "", 0)
             ref.setValue(postData).addOnSuccessListener {
                 Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT).show()
                 binding.root.findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
 
             }
+        }
+    }
+
+    private fun saveUserLocation(post_image: String) {
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        val time = System.currentTimeMillis().toString()
+        val max = Long.MAX_VALUE
+        val timestamp = max - System.currentTimeMillis()
+        val ref = FirebaseDatabase.getInstance().getReference("/issues/$timestamp")
+        val text = binding.postText.text.toString()
+        val category = binding.spinner2.selectedItem.toString()
+        val groupName = binding.groupName.text.toString()
+        val issueData = IssueOnMaps(category,groupName,0.0,0.0,post_image,text,time,uid)
+        ref.setValue(issueData).addOnSuccessListener {
+            Timber.i("Location Saved!!")
         }
     }
 
