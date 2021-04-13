@@ -56,7 +56,9 @@ class GuideTask : Fragment() {
         when(taksId){
             3 -> videoId = "23XQ-hQoR7A"
             5 -> videoId = "iLLYX3RbtPQ"
-
+            6 -> videoId = "NDig_mkApg8"
+            11 -> videoId = "qFNFLT9Y8eQ"
+            13 -> videoId = "-t6W7hG1sBU"
         }
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
