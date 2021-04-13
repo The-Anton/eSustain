@@ -19,13 +19,14 @@
 
 
         <TextView
-            android:layout_gravity="center"
-            android:layout_weight="1"
+            android:id="@+id/bottomSheetTitle"
             style="@style/normaltext"
-            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Trees Planted by user"/>
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Trees Planted by user"
+            android:textColor="@color/white" />
         <ImageView
             android:id="@+id/dismiss_bottom_sheet"
             android:layout_gravity="center"

@@ -18,7 +18,7 @@ import com.solvabit.climate.fragment.StatsFragments.StatsViewPagerAdapter
 import com.solvabit.climate.onboarding.ViewPagerAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.aqui_intro.view.*
+import kotlinx.android.synthetic.main.aqi_intro.view.*
 import kotlinx.android.synthetic.main.fragment_statistics.*
 import kotlinx.android.synthetic.main.fragment_statistics.view.*
 

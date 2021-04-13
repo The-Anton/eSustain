@@ -182,9 +182,9 @@ public class FirebaseService(var uid: String) {
     }
 
 
-    fun initializePostData(myCallback: (result: User) -> Unit){
+    fun initializePostData(postUid:String,myCallback: (result: User) -> Unit){
 
-        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/Users/$postUid")
 
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
 

@@ -143,8 +143,26 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/edittextbg"
-                    android:hint="Type group Namwe"
+                    android:hint="  Group Name"
                     android:visibility="gone"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/group_conditions2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <CheckBox
+                    android:id="@+id/check_share_location"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Share Issue Location"
+                    android:textColor="@color/subtxt_black"
+                    android:visibility="gone" />
+
 
             </LinearLayout>
         </LinearLayout>

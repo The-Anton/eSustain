@@ -10,18 +10,13 @@ import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.PermissionChecker.checkCallingOrSelfPermission
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
@@ -54,6 +49,7 @@ class MapsFragment : Fragment() {
     var gpsStatus: Boolean = false
 
 
+    var mapMarkerKeys = mutableMapOf<String,String>()
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -166,12 +162,13 @@ class MapsFragment : Fragment() {
                 val dateString = simpleDateFormat.format(plantingTime)
 
                 val location = data?.lon?.let { LatLng(data.lat, it) }
-                val marker = googleMap.addMarker(location?.let {
+                var marker = googleMap.addMarker(location?.let {
                     MarkerOptions().position(it).title("${data.username} Planted tree on ${dateString}").snippet("Lat- ${data.lat}, Lon- ${data.lon}")
-                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.marker))
+                        .icon(activity?.let { it1 -> bitmapDescriptorFromVector(it1.applicationContext, R.drawable.plantmarkersmall) })
                 })
                 marker.tag = p0.key
-
+                mapMarkerKeys[p0.key.toString()] = "plantation"
+                Log.v("Maps", marker.tag.toString() +" " + mapMarkerKeys.get(p0.key.toString()))
 
             }
         })
@@ -195,11 +192,14 @@ class MapsFragment : Fragment() {
                 val dateString = simpleDateFormat.format(plantingTime)
 
                 val location = data?.lon?.let { LatLng(data.lat, it) }
-                val marker = googleMap.addMarker(location?.let {
+                var marker = googleMap.addMarker(location?.let {
                     MarkerOptions().position(it).title("${data.username} started the issue. ").snippet("Dated ${dateString}")
-                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.issue))
+                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.issuemarkersmall))
                 })
                 marker.tag = p0.key
+                mapMarkerKeys[p0.key.toString()] = "issue"
+                Log.v("Maps", marker.tag.toString() +" " + mapMarkerKeys.get(p0.key.toString()))
+
 
 
             }
@@ -208,7 +208,7 @@ class MapsFragment : Fragment() {
         googleMap.setOnMarkerClickListener(OnMarkerClickListener { marker ->
             val position = marker.position
             val key = marker.tag
-
+            var dataRef = FirebaseDatabase.getInstance().getReference("/plantedTrees/$key")
 
             /* val builder = AlertDialog.Builder(requireContext())
              builder.setTitle("Location of the tree planted")
@@ -223,30 +223,63 @@ class MapsFragment : Fragment() {
             val bottomSheetView = LayoutInflater.from(requireContext()).inflate(R.layout.bottom_sheet_planted_tree_data, bottomsheet)
 
 
+            if(mapMarkerKeys[key] == "issue"){
+                dataRef = FirebaseDatabase.getInstance().getReference("/issues/$key")
+                dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val data = snapshot.getValue(IssueDataMaps::class.java)
 
-            val dataRef = FirebaseDatabase.getInstance().getReference("/plantedTrees/$key")
-            dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val data = snapshot.getValue(PlantedTrees::class.java)
-
-                    bottomSheetView.findViewById<TextView>(R.id.tree_planted_user).text = data?.username
-                    if (data?.user_image != null) Picasso.get().load(data.user_image).into(bottomSheetView.tree_planted_userImage)
+                        bottomSheetView.findViewById<TextView>(R.id.tree_planted_user).text = data?.username
+                        bottomSheetView.findViewById<TextView>(R.id.bottomSheetTitle).text = "Issue started by user"
 
 
-                    if (data?.plant_image != null) Picasso.get().load(data.plant_image).into(bottomSheetView.plant_image)
+                        if (data?.user_image != null) Picasso.get().load(data.user_image).into(bottomSheetView.tree_planted_userImage)
 
-                    if (data != null) {
-                        val time = data.time.toLong()
-                        val sfd = SimpleDateFormat("dd-MM-yyyy")
-                        bottomSheetView.findViewById<TextView>(R.id.timing_of_tree_planted).text = sfd.format(Date(time))
+
+                        if (data?.post_image != null) Picasso.get().load(data.post_image).into(bottomSheetView.plant_image)
+
+                        if (data != null) {
+                            val time = data.time.toLong()
+                            val sfd = SimpleDateFormat("dd-MM-yyyy")
+                            bottomSheetView.findViewById<TextView>(R.id.timing_of_tree_planted).text = sfd.format(Date(time))
+                        }
+
                     }
 
-                }
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
 
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-            })
+            }
+
+            if(mapMarkerKeys[key] == "plantation"){
+                dataRef = FirebaseDatabase.getInstance().getReference("/plantedTrees/$key")
+                dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val data = snapshot.getValue(PlantedTrees::class.java)
+
+                        bottomSheetView.findViewById<TextView>(R.id.tree_planted_user).text = data?.username
+                        if (data?.user_image != null) Picasso.get().load(data.user_image).into(bottomSheetView.tree_planted_userImage)
+
+
+                        if (data?.plant_image != null) Picasso.get().load(data.plant_image).into(bottomSheetView.plant_image)
+
+                        if (data != null) {
+                            val time = data.time.toLong()
+                            val sfd = SimpleDateFormat("dd-MM-yyyy")
+                            bottomSheetView.findViewById<TextView>(R.id.timing_of_tree_planted).text = sfd.format(Date(time))
+                        }
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
+
+            }
+
 
             val geoCoder = Geocoder(context, Locale.getDefault())
 

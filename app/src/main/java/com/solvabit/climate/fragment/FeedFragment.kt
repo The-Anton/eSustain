@@ -175,7 +175,7 @@ class PostItem(private val post: Post, val context: Context,val firebaseService:
         if(post.category!="Issue")
             viewHolder.itemView.interested_button.visibility = View.GONE
 
-        firebaseService.initializePostData {
+        firebaseService.initializePostData(uid) {
             user ->
 
             viewHolder.itemView.username.text = user?.username
