@@ -70,7 +70,8 @@ class AddAllInterestedGroups(val post: Post, val binding: FragmentAllChatsBindin
         val sfd = SimpleDateFormat("dd-MM-yyyy")
         viewHolder.itemView.group_date.text = sfd.format(Date(time))
         viewHolder.itemView.username_user_row.text = post.group_name
-        Picasso.get().load(post.post_image).into(viewHolder.itemView.profileimage_user_row)
+        if (post.post_image.isNotEmpty())
+            Picasso.get().load(post.post_image).into(viewHolder.itemView.profileimage_user_row)
     }
 
 }
