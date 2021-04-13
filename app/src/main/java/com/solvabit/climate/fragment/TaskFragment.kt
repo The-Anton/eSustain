@@ -349,7 +349,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
                 "Nature is waiting for you!!",
                 "feed",
                 1,
-                R.drawable.walk_round_icon,
+                R.drawable.shop_second_hand_round_icon,
                 "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX36746250.jpg"
             )
         )

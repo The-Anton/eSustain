@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding="20dp"
+            android:padding="15dp"
             android:translationZ="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,9 +25,8 @@
                 android:id="@+id/username_black_imageView"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,8 +42,8 @@
 
             <com.mikhaellopez.circularprogressbar.CircularProgressBar
                 android:id="@+id/circularProgressBar"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
                 app:cpb_background_progressbar_color="#b6bbd8"
                 app:cpb_background_progressbar_width="5dp"
                 app:cpb_progress_direction="to_right"
@@ -58,8 +57,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userprofile_imageView_stats"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
                 app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
                 app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
@@ -71,7 +70,7 @@
                 style="@style/normaltext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="18dp"
                 android:textColor="#8542DC"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
@@ -85,12 +84,13 @@
                 style="@style/normaltext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="6dp"
                 android:background="@drawable/tagsbg"
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="2dp"
+                android:textSize="12dp"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -99,12 +99,25 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="@+id/username_stats"
                 app:layout_constraintTop_toBottomOf="@+id/username_stats"
                 app:srcCompat="@drawable/map_pointer" />
+
+            <ImageView
+                android:id="@+id/share_button_stats"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="15dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_share"
+                app:layout_constraintBottom_toBottomOf="@+id/place_stats"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/username_stats" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
