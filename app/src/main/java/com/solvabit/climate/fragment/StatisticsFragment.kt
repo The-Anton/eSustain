@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -47,6 +48,10 @@ class StatisticsFragment : Fragment() {
         v.username_stats.text = localuser.username.toString()
         v.place_stats.text = " " + localuser.city + ", " + localuser.state
         Picasso.get().load(localuser.imageUrl).into(v.userprofile_imageView_stats)
+
+        v.share_button_stats.setOnClickListener {
+            v.findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToSendReportFragment())
+        }
 
         return v
 

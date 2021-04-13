@@ -27,6 +27,7 @@ import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.FragmentSendReportBinding
 import com.solvabit.climate.fragment.Dashboard
 import com.solvabit.climate.fragment.Dashboard.Companion.localuser
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.bottom_sheet_planted_tree_data.*
 import kotlinx.android.synthetic.main.dialog_share_achievement_to_feed.view.*
 import kotlinx.coroutines.Dispatchers
@@ -199,6 +200,7 @@ class SendReportFragment : Fragment() {
             achievementNameTextView.text = localUser.username
             emailProfile.text = localUser.email
             placeProfile.text = " " + localUser.city + ", " + localUser.state
+            Picasso.get().load(localUser.imageUrl).into(this.userprofileImageView)
 
             normalizedScoreReport.text = localUser.normalizedScore?.toInt().toString()
             normalizedScoreHeadingReport.text = normalizedScoreHeading()

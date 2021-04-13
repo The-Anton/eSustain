@@ -72,7 +72,11 @@
         android:id="@+id/statisticsFragment"
         android:name="com.solvabit.climate.fragment.StatisticsFragment"
         android:label="fragment_statistics"
-        tools:layout="@layout/fragment_statistics" />
+        tools:layout="@layout/fragment_statistics" >
+        <action
+            android:id="@+id/action_statisticsFragment_to_sendReportFragment"
+            app:destination="@id/sendReportFragment" />
+    </fragment>
     <fragment
         android:id="@+id/createPostFragment"
         android:name="com.solvabit.climate.fragment.CreatePostFragment"
