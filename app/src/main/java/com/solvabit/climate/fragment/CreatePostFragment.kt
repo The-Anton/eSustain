@@ -144,6 +144,18 @@ class CreatePostFragment : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mainHandler.removeCallbacks(locationCheckboxRunner)
+
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mainHandler.removeCallbacks(locationCheckboxRunner)
+
+    }
+
     private fun createPost() {
         if (binding.postText.text.isEmpty()) {
             Toast.makeText(requireContext(), "Sorry, Post can't be blank!", Toast.LENGTH_SHORT).show()

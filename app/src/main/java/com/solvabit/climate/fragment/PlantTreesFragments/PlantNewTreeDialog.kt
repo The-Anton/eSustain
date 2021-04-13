@@ -127,6 +127,18 @@ class PlantNewTreeDialog(private val targetTrees: Int, private var treesPlanted:
 
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mainHandler.removeCallbacks(locationCheckboxRunner)
+
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mainHandler.removeCallbacks(locationCheckboxRunner)
+
+    }
     private fun uploadPhotoToFirebase() {
         if (selectedPhotoUri == null) {
             dialogView.post_image_button_dialog.revertAnimation()
