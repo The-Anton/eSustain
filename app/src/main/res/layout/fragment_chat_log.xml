@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/white"
+                android:background="@drawable/topbar"
                 android:paddingBottom="2dp">
 
                 <ImageView
@@ -85,7 +85,7 @@
             style="@style/normalSubText"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:background="@drawable/edittextbg"
+            android:background="@color/white"
             android:hint="Enter message"
             android:inputType="textMultiLine|textPersonName"
             android:paddingStart="8dp"
