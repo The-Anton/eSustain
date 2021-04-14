@@ -219,7 +219,7 @@ class MapsFragment : Fragment() {
              alertDialog.setCancelable(true)
              alertDialog.show()*/
 
-            val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.Theme_MaterialComponents_Light_BottomSheetDialog)
+            val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
             val bottomSheetView = LayoutInflater.from(requireContext()).inflate(R.layout.bottom_sheet_planted_tree_data, bottomsheet)
 
 

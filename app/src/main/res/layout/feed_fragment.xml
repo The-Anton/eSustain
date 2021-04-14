@@ -13,7 +13,7 @@
             android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/white"
+            android:background="@drawable/topbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
+                    android:layout_margin="4dp"
                     android:background="@drawable/cardsbg">
 
                     <de.hdodenhof.circleimageview.CircleImageView

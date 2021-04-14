@@ -11,7 +11,6 @@
         android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +25,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:text="Trees Planted by user"
-            android:textColor="@color/white" />
+            android:textColor="@color/txt_black" />
         <ImageView
             android:id="@+id/dismiss_bottom_sheet"
             android:layout_gravity="center"
@@ -35,17 +34,28 @@
             android:src="@drawable/ic_baseline_close_24"/>
     </LinearLayout>
 
+    <View
+        android:id="@+id/line2"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
     <LinearLayout
         android:id="@+id/linearLayout8"
         android:layout_width="235dp"
-        android:layout_height="68dp"
+        android:layout_height="60dp"
         android:orientation="vertical"
         android:padding="10dp"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
         <LinearLayout
-            android:layout_width="219dp"
-            android:layout_height="40dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/tree_planted_userImage"
@@ -73,14 +83,15 @@
             android:background="?android:attr/listDivider" />
     </LinearLayout>
 
-    <ImageView
+    <ozaydin.serkan.com.image_zoom_view.ImageViewZoom
         android:id="@+id/plant_image"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:adjustViewBounds="true"
+        android:maxHeight="300dp"
         android:contentDescription="Post Image"
-        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:cropToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
@@ -96,8 +107,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout9"
-        android:layout_width="408dp"
-        android:layout_height="59dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,25 +118,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0"
+            android:layout_weight="1"
             android:src="@drawable/ic_baseline_my_location_24" />
 
         <TextView
             android:id="@+id/location"
             style="@style/normaltext"
-            android:layout_width="361dp"
-            android:layout_height="38dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:layout_weight="2"
+            android:layout_weight="20"
             android:text="Location" />
+
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/line4"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout9" />
     <LinearLayout
         android:id="@+id/linearLayout11"
         android:layout_width="178dp"
-        android:layout_height="66dp"
+        android:layout_height="60dp"
         android:padding="10dp"
         app:layout_constraintStart_toEndOf="@+id/linearLayout8"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
