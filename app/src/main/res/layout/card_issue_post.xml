@@ -142,10 +142,10 @@
                 tools:src="@drawable/apple" />
 
             <com.google.android.gms.maps.MapView
-                android:layout_weight="1"
+                android:id="@+id/issue_map"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/issue_map" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 

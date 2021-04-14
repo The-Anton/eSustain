@@ -1,7 +1,7 @@
 package com.solvabit.climate.onboarding
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.cuberto.liquid_swipe.LiquidPager
 import com.solvabit.climate.R
 

@@ -1,391 +1,391 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="myUser"
             type="com.solvabit.climate.database.User" />
     </data>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    tools:context=".fragment.Profile">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".fragment.Profile">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/username_black_imageView"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_profilew"
-                app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
-                app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
-                app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
-                app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
-
-            <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                android:id="@+id/circularProgressBar"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                app:cpb_background_progressbar_color="#b6bbd8"
-                app:cpb_background_progressbar_width="5dp"
-                app:cpb_progress_direction="to_right"
-                app:cpb_progressbar_color="#3f51b5"
-                app:cpb_progressbar_width="6dp"
-                app:cpb_round_border="false"
-                app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
-                app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
-                app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
-                app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/userprofile_imageView"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
-                app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
-                app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
-                app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
-
-
-            <TextView
-                android:id="@+id/achievement_name_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                tools:text="John Smith"
-                android:textColor="#8542DC"
-                style="@style/normaltext"
-                android:textStyle="bold"
-                android:text="@={myUser.username}"
-                app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
-                app:layout_constraintStart_toEndOf="@+id/username_black_imageView"
-                app:layout_constraintTop_toTopOf="@+id/username_black_imageView"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/email_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/avenir_book"
-                tools:text="johnsmith@gmail.com"
-                android:textColor="@color/subtxt_black"
-                android:textSize="15sp"
-                android:text="@={myUser.email}"
-                app:layout_constraintStart_toStartOf="@+id/achievement_name_textView"
-                app:layout_constraintTop_toBottomOf="@+id/achievement_name_textView" />
-
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/map_pointer"
-                app:layout_constraintStart_toStartOf="@+id/email_profile"
-                app:layout_constraintTop_toBottomOf="@+id/email_profile" />
-
-            <TextView
-                android:id="@+id/place_profile"
-                style="@style/normaltext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/tagsbg"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="@+id/imageView4"
-                tools:text=" Agra, Uttar Pradesh"
-                android:paddingBottom="2dp"
-                android:paddingTop="2dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"/>
-
-            <ImageView
-                android:id="@+id/logout_popup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_more_vert_24"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/achievement_name_textView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.263" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/recomendbg"
-            app:layout_constraintEnd_toEndOf="@+id/textView5"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/textView5">
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="48dp">
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/action_textView"
-                    style="@style/normalTitles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Target Underway"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.083"
+                <ImageView
+                    android:id="@+id/username_black_imageView"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_profilew"
+                    app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
+
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/circularProgressBar"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    app:cpb_background_progressbar_color="#b6bbd8"
+                    app:cpb_background_progressbar_width="5dp"
+                    app:cpb_progress_direction="to_right"
+                    app:cpb_progressbar_color="#3f51b5"
+                    app:cpb_progressbar_width="6dp"
+                    app:cpb_round_border="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userprofile_imageView"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/username_black_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/username_black_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/username_black_imageView" />
+
+
                 <TextView
-                    android:id="@+id/action_textView_subtext"
+                    android:id="@+id/achievement_name_textView"
                     style="@style/normaltext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="210dp"
-                    android:text="Learn more about everything that you have achieved below "
-                    app:layout_constraintStart_toStartOf="@+id/action_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/action_textView" />
+                    android:layout_marginStart="24dp"
+                    android:text="@={myUser.username}"
+                    android:textColor="#8542DC"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/username_black_imageView"
+                    app:layout_constraintStart_toEndOf="@+id/username_black_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/username_black_imageView"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="John Smith" />
+
+                <TextView
+                    android:id="@+id/email_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenir_book"
+                    android:text="@={myUser.email}"
+                    android:textColor="@color/subtxt_black"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@+id/achievement_name_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/achievement_name_textView"
+                    tools:text="johnsmith@gmail.com" />
+
 
                 <ImageView
-                    android:id="@+id/action_imageView"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginEnd="16dp"
-                    android:src="@drawable/rounded_button"
+                    android:id="@+id/imageView4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/map_pointer"
+                    app:layout_constraintStart_toStartOf="@+id/email_profile"
+                    app:layout_constraintTop_toBottomOf="@+id/email_profile" />
+
+                <TextView
+                    android:id="@+id/place_profile"
+                    style="@style/normaltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/tagsbg"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintTop_toTopOf="@+id/imageView4"
+                    tools:text=" Agra, Uttar Pradesh" />
+
+                <ImageView
+                    android:id="@+id/logout_popup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_baseline_more_vert_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/achievement_name_textView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.263" />
 
-                <ImageView
-                    android:id="@+id/achievement_trophy_imageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_motivationw"
-                    app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
-                    app:layout_constraintEnd_toEndOf="@+id/action_imageView"
-                    app:layout_constraintStart_toStartOf="@+id/action_imageView"
-                    app:layout_constraintTop_toTopOf="@+id/action_imageView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <TextView
-            android:id="@+id/progress_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/avenir_medium"
-            android:text="Progress"
-            android:textColor="#4FC1E9"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-            app:layout_constraintHorizontal_bias="0.016"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/progress_cardView_1"
-            android:layout_width="160dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/cardsbg"
-            app:layout_constraintEnd_toStartOf="@+id/progress_cardView_2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progress_textView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="-16dp"
-                tools:layout_editor_absoluteY="0dp">
+                android:layout_height="110dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/recomendbg"
+                app:layout_constraintEnd_toEndOf="@+id/textView5"
+                app:layout_constraintStart_toStartOf="@+id/textView5"
+                app:layout_constraintTop_toBottomOf="@+id/textView5">
 
-                <ImageView
-                    android:id="@+id/progess_tree_imageView8"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="25dp"
-                    android:src="@drawable/ic_small_tree_on_ground"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="48dp">
 
-                <com.daasuu.cat.CountAnimationTextView
-                    android:id="@+id/number_trees_planted_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:fontFamily="@font/avenir_medium"
-                    android:text="@={`` + myUser.treesPlanted}"
-                    android:textColor="#4FC1E9"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="@+id/progess_tree_imageView8"
-                    app:layout_constraintStart_toStartOf="@+id/progess_tree_imageView8"
-                    app:layout_constraintTop_toBottomOf="@+id/progess_tree_imageView8"
-                    tools:text="00" />
+                    <TextView
+                        android:id="@+id/action_textView"
+                        style="@style/normalTitles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Target Underway"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.083"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/number_trees_planted_textView_subtext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenir_book"
-                    android:maxWidth="250dp"
-                    android:text="Trees Planted"
-                    android:textSize="13sp"
-                    app:layout_constraintEnd_toEndOf="@+id/number_trees_planted_textView"
-                    app:layout_constraintStart_toStartOf="@+id/number_trees_planted_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/number_trees_planted_textView" />
+                    <TextView
+                        android:id="@+id/action_textView_subtext"
+                        style="@style/normaltext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="210dp"
+                        android:text="Learn more about everything that you have achieved below "
+                        app:layout_constraintStart_toStartOf="@+id/action_textView"
+                        app:layout_constraintTop_toBottomOf="@+id/action_textView" />
+
+                    <ImageView
+                        android:id="@+id/action_imageView"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/rounded_button"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/achievement_trophy_imageView"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_motivationw"
+                        app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
+                        app:layout_constraintEnd_toEndOf="@+id/action_imageView"
+                        app:layout_constraintStart_toStartOf="@+id/action_imageView"
+                        app:layout_constraintTop_toTopOf="@+id/action_imageView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/progress_cardView_2"
-            android:layout_width="160dp"
-            android:layout_height="150dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/cardsbg"
-            app:layout_constraintBottom_toBottomOf="@+id/progress_cardView_1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/progress_cardView_1"
-            app:layout_constraintTop_toTopOf="@+id/progress_cardView_1">
+            <TextView
+                android:id="@+id/progress_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/avenir_medium"
+                android:text="Progress"
+                android:textColor="#4FC1E9"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+                app:layout_constraintHorizontal_bias="0.016"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp">
+                android:id="@+id/progress_cardView_1"
+                android:layout_width="160dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/cardsbg"
+                app:layout_constraintEnd_toStartOf="@+id/progress_cardView_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress_textView">
 
-                <ImageView
-                    android:id="@+id/progess_give_tree_imageView"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@drawable/ic_plant_a_tree"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="-16dp"
+                    tools:layout_editor_absoluteY="0dp">
 
-                <com.daasuu.cat.CountAnimationTextView
-                    android:id="@+id/number_trees_referred_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenir_medium"
-                    android:text="@={`` + myUser.treesReferred}"
-                    android:textColor="#4FC1E9"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="@+id/progess_give_tree_imageView"
-                    app:layout_constraintStart_toStartOf="@+id/progess_give_tree_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/progess_give_tree_imageView"
-                    tools:text="54" />
+                    <ImageView
+                        android:id="@+id/progess_tree_imageView8"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="25dp"
+                        android:src="@drawable/ic_small_tree_on_ground"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/number_trees_referred_textView_subtext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenir_book"
-                    android:maxWidth="250dp"
-                    android:text="Trees Referred"
-                    android:textSize="13sp"
-                    app:layout_constraintEnd_toEndOf="@+id/number_trees_referred_textView"
-                    app:layout_constraintStart_toStartOf="@+id/number_trees_referred_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/number_trees_referred_textView" />
+                    <com.daasuu.cat.CountAnimationTextView
+                        android:id="@+id/number_trees_planted_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/avenir_medium"
+                        android:text="@={`` + myUser.treesPlanted}"
+                        android:textColor="#4FC1E9"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="@+id/progess_tree_imageView8"
+                        app:layout_constraintStart_toStartOf="@+id/progess_tree_imageView8"
+                        app:layout_constraintTop_toBottomOf="@+id/progess_tree_imageView8"
+                        tools:text="00" />
+
+                    <TextView
+                        android:id="@+id/number_trees_planted_textView_subtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_book"
+                        android:maxWidth="250dp"
+                        android:text="Trees Planted"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="@+id/number_trees_planted_textView"
+                        app:layout_constraintStart_toStartOf="@+id/number_trees_planted_textView"
+                        app:layout_constraintTop_toBottomOf="@+id/number_trees_planted_textView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progress_cardView_2"
+                android:layout_width="160dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/cardsbg"
+                app:layout_constraintBottom_toBottomOf="@+id/progress_cardView_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/progress_cardView_1"
+                app:layout_constraintTop_toTopOf="@+id/progress_cardView_1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp">
+
+                    <ImageView
+                        android:id="@+id/progess_give_tree_imageView"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_plant_a_tree"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.daasuu.cat.CountAnimationTextView
+                        android:id="@+id/number_trees_referred_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_medium"
+                        android:text="@={`` + myUser.treesReferred}"
+                        android:textColor="#4FC1E9"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="@+id/progess_give_tree_imageView"
+                        app:layout_constraintStart_toStartOf="@+id/progess_give_tree_imageView"
+                        app:layout_constraintTop_toBottomOf="@+id/progess_give_tree_imageView"
+                        tools:text="54" />
+
+                    <TextView
+                        android:id="@+id/number_trees_referred_textView_subtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_book"
+                        android:maxWidth="250dp"
+                        android:text="Trees Referred"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="@+id/number_trees_referred_textView"
+                        app:layout_constraintStart_toStartOf="@+id/number_trees_referred_textView"
+                        app:layout_constraintTop_toBottomOf="@+id/number_trees_referred_textView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/achievement_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/avenir_medium"
+                android:text="Achievement"
+                android:textColor="#4FC1E9"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.018"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_profile_achievements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/achievement_textView" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/avenir_medium"
+                android:text="Ongoing"
+                android:textColor="#4FC1E9"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.014"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress_cardView_1" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/achievement_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/avenir_medium"
-            android:text="Achievement"
-            android:textColor="#4FC1E9"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.018"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_profile_achievements"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:nestedScrollingEnabled="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/achievement_textView" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="Ongoing"
-            android:fontFamily="@font/avenir_medium"
-            android:textColor="#4FC1E9"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.014"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progress_cardView_1" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</ScrollView>
+    </ScrollView>
 </layout>

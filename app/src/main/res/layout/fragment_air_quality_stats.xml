@@ -3,443 +3,443 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    tools:context=".fragment.StatsFragments.AirQualityStatsFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="25dp">
-
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".fragment.StatsFragments.AirQualityStatsFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/cardsbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:paddingBottom="25dp">
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout8"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/airQualityHeading"
-                    style="@style/normalTitles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:text="Air Quality Index"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.083"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/action_textView_subtext"
-                    style="@style/normaltext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:maxWidth="190dp"
-                    android:text="Know about the air you breathe everytime "
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/airQualityHeading"
-                    app:layout_constraintTop_toBottomOf="@+id/airQualityHeading" />
-
-                <ImageView
-                    android:id="@+id/action_imageView"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/rounded_button"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/airQualityStats"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="98.4"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
-                    app:layout_constraintEnd_toEndOf="@+id/action_imageView"
-                    app:layout_constraintStart_toStartOf="@+id/action_imageView"
-                    app:layout_constraintTop_toTopOf="@+id/action_imageView" />
-
-                <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                    android:id="@+id/circularProgressBarAirQualityStats"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    app:cpb_background_progressbar_color="#EEE4FA"
-                    app:cpb_background_progressbar_width="10dp"
-                    app:cpb_progress="45"
-                    app:cpb_progress_direction="to_right"
-                    app:cpb_progressbar_color="#8542DC"
-                    app:cpb_progressbar_width="7dp"
-                    app:cpb_round_border="true"
-                    app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
-                    app:layout_constraintEnd_toEndOf="@+id/action_imageView"
-                    app:layout_constraintStart_toStartOf="@+id/action_imageView"
-                    app:layout_constraintTop_toTopOf="@+id/action_imageView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/progress_cardView_1"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/recomendbg"
-            app:layout_constraintEnd_toStartOf="@+id/progress_cardView_2"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout8"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <TextView
-                    android:id="@+id/pm10Stats"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenir_medium"
-                    android:textColor="#4FC1E9"
-                    android:textSize="25sp"
-                    android:maxLength="5"
-                    app:layout_constraintBottom_toTopOf="@+id/pm10_heading"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    tools:text="00" />
-
-                <TextView
-                    android:id="@+id/pm10_heading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenir_heavy"
-                    android:maxWidth="250dp"
-                    android:text="PM 10"
-                    android:textSize="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/pm10_diameter"
-                    app:layout_constraintEnd_toEndOf="@+id/pm10Stats"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/pm10Stats"
-                    app:layout_constraintTop_toBottomOf="@+id/pm10Stats" />
-
-                <TextView
-                    android:id="@+id/pm10_diameter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenir_book"
-                    android:maxWidth="250dp"
-                    android:text="@string/string_diameter_pm10"
-                    android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/pm10_heading"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/pm10_heading"
-                    app:layout_constraintTop_toBottomOf="@+id/pm10_heading" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/progress_cardView_2"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@drawable/recomendbg"
-            app:layout_constraintBottom_toBottomOf="@+id/progress_cardView_1"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/progress_cardView_1"
-            app:layout_constraintTop_toTopOf="@+id/progress_cardView_1">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp">
-
-                <TextView
-                    android:id="@+id/pm25Stats"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenir_medium"
-                    android:textColor="#4FC1E9"
-                    android:textSize="25sp"
-                    android:maxLength="5"
-                    app:layout_constraintBottom_toTopOf="@+id/pm25_heading"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    tools:text="00" />
-
-                <TextView
-                    android:id="@+id/pm25_heading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenir_heavy"
-                    android:maxWidth="250dp"
-                    android:text="PM 2.5"
-                    android:textSize="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/pm25_diameter"
-                    app:layout_constraintEnd_toEndOf="@+id/pm25Stats"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/pm25Stats"
-                    app:layout_constraintTop_toBottomOf="@+id/pm25Stats" />
-
-                <TextView
-                    android:id="@+id/pm25_diameter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenir_book"
-                    android:maxWidth="250dp"
-                    android:text="@string/string_diameter_pm25"
-                    android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/pm25_heading"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/pm25_heading"
-                    app:layout_constraintTop_toBottomOf="@+id/pm25_heading" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/airQualityCardView"
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/cardsbg"
-            android:elevation="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progress_cardView_1">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/airQualityFrame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/cardsbg"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal"
-                    android:padding="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:layout_width="7dp"
-                        android:layout_height="14dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/air" />
+                    android:layout_height="match_parent">
 
                     <TextView
-                        style="@style/normalSubText"
+                        android:id="@+id/airQualityHeading"
+                        style="@style/normalTitles"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_weight="15"
-                        android:gravity="center_vertical"
-                        android:text="Composition in Air" />
+                        android:layout_marginTop="18dp"
+                        android:text="Air Quality Index"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.083"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/action_textView_subtext"
+                        style="@style/normaltext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:maxWidth="190dp"
+                        android:text="Know about the air you breathe everytime "
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/airQualityHeading"
+                        app:layout_constraintTop_toBottomOf="@+id/airQualityHeading" />
 
                     <ImageView
-                        android:id="@+id/air_quality_more_stats"
-                        android:layout_width="10dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="end"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_info_24" />
+                        android:id="@+id/action_imageView"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/rounded_button"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/airQualityStats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="98.4"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
+                        app:layout_constraintEnd_toEndOf="@+id/action_imageView"
+                        app:layout_constraintStart_toStartOf="@+id/action_imageView"
+                        app:layout_constraintTop_toTopOf="@+id/action_imageView" />
+
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                        android:id="@+id/circularProgressBarAirQualityStats"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        app:cpb_background_progressbar_color="#EEE4FA"
+                        app:cpb_background_progressbar_width="10dp"
+                        app:cpb_progress="45"
+                        app:cpb_progress_direction="to_right"
+                        app:cpb_progressbar_color="#8542DC"
+                        app:cpb_progressbar_width="7dp"
+                        app:cpb_round_border="true"
+                        app:layout_constraintBottom_toBottomOf="@+id/action_imageView"
+                        app:layout_constraintEnd_toEndOf="@+id/action_imageView"
+                        app:layout_constraintStart_toStartOf="@+id/action_imageView"
+                        app:layout_constraintTop_toTopOf="@+id/action_imageView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                </LinearLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progress_cardView_1"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/recomendbg"
+                app:layout_constraintEnd_toStartOf="@+id/progress_cardView_2"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout8"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
 
-                <LinearLayout
-                    android:id="@+id/linearLayout4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
-                    android:gravity="end"
-                    android:orientation="vertical"
-                    android:weightSum="8"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/pm10Stats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_medium"
+                        android:maxLength="5"
+                        android:textColor="#4FC1E9"
+                        android:textSize="25sp"
+                        app:layout_constraintBottom_toTopOf="@+id/pm10_heading"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tools:text="00" />
+
+                    <TextView
+                        android:id="@+id/pm10_heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_heavy"
+                        android:maxWidth="250dp"
+                        android:text="PM 10"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/pm10_diameter"
+                        app:layout_constraintEnd_toEndOf="@+id/pm10Stats"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/pm10Stats"
+                        app:layout_constraintTop_toBottomOf="@+id/pm10Stats" />
+
+                    <TextView
+                        android:id="@+id/pm10_diameter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_book"
+                        android:maxWidth="250dp"
+                        android:text="@string/string_diameter_pm10"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/pm10_heading"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/pm10_heading"
+                        app:layout_constraintTop_toBottomOf="@+id/pm10_heading" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progress_cardView_2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/recomendbg"
+                app:layout_constraintBottom_toBottomOf="@+id/progress_cardView_1"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/progress_cardView_1"
+                app:layout_constraintTop_toTopOf="@+id/progress_cardView_1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp">
+
+                    <TextView
+                        android:id="@+id/pm25Stats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_medium"
+                        android:maxLength="5"
+                        android:textColor="#4FC1E9"
+                        android:textSize="25sp"
+                        app:layout_constraintBottom_toTopOf="@+id/pm25_heading"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tools:text="00" />
+
+                    <TextView
+                        android:id="@+id/pm25_heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_heavy"
+                        android:maxWidth="250dp"
+                        android:text="PM 2.5"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/pm25_diameter"
+                        app:layout_constraintEnd_toEndOf="@+id/pm25Stats"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/pm25Stats"
+                        app:layout_constraintTop_toBottomOf="@+id/pm25Stats" />
+
+                    <TextView
+                        android:id="@+id/pm25_diameter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_book"
+                        android:maxWidth="250dp"
+                        android:text="@string/string_diameter_pm25"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/pm25_heading"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/pm25_heading"
+                        app:layout_constraintTop_toBottomOf="@+id/pm25_heading" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/airQualityCardView"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/cardsbg"
+                android:elevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress_cardView_1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/airQualityFrame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:padding="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
+                        <ImageView
+                            android:layout_width="7dp"
+                            android:layout_height="14dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/air" />
+
+                        <TextView
+                            style="@style/normalSubText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="15"
+                            android:gravity="center_vertical"
+                            android:text="Composition in Air" />
+
+                        <ImageView
+                            android:id="@+id/air_quality_more_stats"
+                            android:layout_width="10dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="end"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_info_24" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:layout_marginStart="18dp"
+                        android:gravity="end"
+                        android:orientation="vertical"
+                        android:weightSum="8"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <LinearLayout
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="vertical">
 
-                            <TextView
-                                style="@style/normaltext"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Carbon Monoxide (CO) : "
-                                android:textSize="16sp" />
+                                android:layout_gravity="bottom"
+                                android:layout_margin="4dp"
+                                android:layout_weight="2"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/co_airQuality"
+                                <TextView
+                                    style="@style/normaltext"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="Carbon Monoxide (CO) : "
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/co_airQuality"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:maxLength="5"
+                                    android:textStyle="bold"
+                                    tools:text="15.4" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:maxLength="5"
-                                android:textStyle="bold"
-                                tools:text="15.4" />
+                                android:layout_gravity="bottom"
+                                android:layout_margin="4dp"
+                                android:layout_weight="2"
+                                android:orientation="horizontal">
 
-                        </LinearLayout>
+                                <TextView
+                                    style="@style/normaltext"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="Sulfur Dioxide (SO2) : "
+                                    android:textSize="16sp" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/so2_airQuality"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:maxLength="4"
+                                    android:textStyle="bold"
+                                    tools:text="24.4" />
 
-                            <TextView
-                                style="@style/normaltext"
+
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Sulfur Dioxide (SO2) : "
-                                android:textSize="16sp" />
+                                android:layout_gravity="bottom"
+                                android:layout_margin="4dp"
+                                android:layout_weight="2"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/so2_airQuality"
+                                <TextView
+                                    style="@style/normaltext"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="Ozone (O3) : "
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/o3_airQuality"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:maxLength="5"
+                                    android:textStyle="bold"
+                                    tools:text="15.4" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:maxLength="4"
-                                android:textStyle="bold"
-                                tools:text="24.4" />
+                                android:layout_gravity="bottom"
+                                android:layout_margin="4dp"
+                                android:layout_weight="2"
+                                android:orientation="horizontal">
 
+                                <TextView
+                                    style="@style/normaltext"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="Nitrogen Dioxide (NO2) : "
+                                    android:textSize="16sp" />
 
-                        </LinearLayout>
+                                <TextView
+                                    android:id="@+id/no2_airQuality"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:maxLength="4"
+                                    android:textStyle="bold"
+                                    tools:text="56.4" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/normaltext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Ozone (O3) : "
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:id="@+id/o3_airQuality"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:maxLength="5"
-                                android:textStyle="bold"
-                                tools:text="15.4" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_margin="4dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/normaltext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="Nitrogen Dioxide (NO2) : "
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:id="@+id/no2_airQuality"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:maxLength="4"
-                                android:textStyle="bold"
-                                tools:text="56.4" />
+                            </LinearLayout>
 
                         </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
 
+                    <TextView
+                        style="@style/normaltext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="All values are in unit - µg/m3"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
-                <TextView
-                    style="@style/normaltext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="All values are in unit - µg/m3"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</ScrollView>
+    </ScrollView>
 
 </layout>

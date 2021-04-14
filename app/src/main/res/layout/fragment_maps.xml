@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/linearLayout5"
@@ -41,49 +41,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
         tools:context=".fragment.MapsFragment" />
-<!--
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+    <!--
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/state_zoom"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/blue_button"
-            android:text="Zoom to Your State"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            style="@style/normaltext" />
-        <Button
-            android:id="@+id/country_zoom"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/outlined_button"
-            android:text="Look all over Country"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            style="@style/normaltext" />
-    </LinearLayout> -->
+            <Button
+                android:id="@+id/state_zoom"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/blue_button"
+                android:text="Zoom to Your State"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                style="@style/normaltext" />
+            <Button
+                android:id="@+id/country_zoom"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/outlined_button"
+                android:text="Look all over Country"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                style="@style/normaltext" />
+        </LinearLayout> -->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/state_zoom"
-        android:tooltipText="Look over Country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        app:backgroundTint="@color/colorPrimary"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:tooltipText="Look over Country"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_location_city_24" />
@@ -91,12 +91,12 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/country_zoom"
         android:layout_width="wrap_content"
-        app:backgroundTint="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:tooltipText="Zoom to your city"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:tooltipText="Zoom to your city"
+        app:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/state_zoom"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_door_back_24" />

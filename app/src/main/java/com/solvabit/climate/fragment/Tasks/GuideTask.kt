@@ -14,8 +14,6 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import com.solvabit.climate.R
 import com.solvabit.climate.databinding.FragmentGuideTaskBinding
 import com.solvabit.climate.fragment.Dashboard
-import com.solvabit.climate.fragment.TaskFragment
-import kotlinx.android.synthetic.main.fragment_guide_task.*
 
 
 class GuideTask : Fragment() {
@@ -53,7 +51,7 @@ class GuideTask : Fragment() {
         lifecycle.addObserver(youTubePlayerView)
         var videoId = "iLLYX3RbtPQ"
 
-        when(taksId){
+        when (taksId) {
             3 -> videoId = "23XQ-hQoR7A"
             5 -> videoId = "iLLYX3RbtPQ"
             6 -> videoId = "NDig_mkApg8"
@@ -72,17 +70,18 @@ class GuideTask : Fragment() {
     private fun initateQuiz(taksId: Int) {
         var quizContainer = binding.quizContainer
         val inflater = LayoutInflater.from(context)
-        when(taksId){
-            3 -> inflater.inflate(R.layout.conserve_electricity_quiz,quizContainer, true)
+        when (taksId) {
+            3 -> inflater.inflate(R.layout.conserve_electricity_quiz, quizContainer, true)
 
-            5 -> inflater.inflate(R.layout.conserve_water_quiz,quizContainer, true)
+            5 -> inflater.inflate(R.layout.conserve_water_quiz, quizContainer, true)
 
 
         }
 
     }
+
     private fun initalizeToolbar() {
-        binding.guideTitle.text = actionsList[taskId - 1].title.toString()
+        binding.guideTitle.text = actionsList[taskId - 1].title
         binding.backArrowGuide.setOnClickListener {
             binding.root.findNavController().popBackStack()
         }

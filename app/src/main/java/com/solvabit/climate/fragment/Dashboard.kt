@@ -1,16 +1,15 @@
 package com.solvabit.climate.fragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -23,13 +22,8 @@ import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.DashboardFragmentBinding
 import com.solvabit.climate.dialog.AqiDialog
 import com.solvabit.climate.dialog.ForestDialog
-import com.solvabit.climate.dialog.StartNewTaskDialog
 import com.solvabit.climate.viewModel.DashboardViewModel
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.recommended_cards.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -49,7 +43,7 @@ class Dashboard : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.dashboard_fragment, container, false
         )
@@ -98,17 +92,7 @@ class Dashboard : Fragment() {
         changeBottomNavigationState()
     }
 
-    override fun onStart() {
-        super.onStart()
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-    }
-
-    fun changeBottomNavigationState(){
+    fun changeBottomNavigationState() {
         val bottomNavMenu = activity?.bottomNavigation?.menu
 
         bottomNavMenu?.getItem(0)?.isEnabled = false
@@ -187,7 +171,7 @@ class Dashboard : Fragment() {
             arr.add(localuser.remainingAction[1].toInt())
             arr.add(localuser.remainingAction[2].toInt())
         } else {
-            localuser?.presentAction.forEach {
+            localuser.presentAction.forEach {
                 arr.add(it.toInt())
             }
             var i = 0

@@ -184,7 +184,6 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 
 
-
 //    //Video Player
 //    def videoVersion = "v4.4.1"
 //    implementation "net.protyposis.android.mediaplayer:mediaplayer:$videoVersion"

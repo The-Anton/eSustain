@@ -90,8 +90,8 @@
                 android:paddingTop="2dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="2dp"
-                android:textSize="12dp"
                 android:textColor="@color/white"
+                android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="@+id/imageView4"
@@ -132,9 +132,9 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
 
                 <com.google.android.material.appbar.AppBarLayout
@@ -145,11 +145,11 @@
 
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/statsNavigationTabLayout"
+                        style="@style/normalTitles"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:tabIndicatorColor="#00CFC3"
                         android:background="@color/white"
-                        style="@style/normalTitles">
+                        app:tabIndicatorColor="#00CFC3">
 
                     </com.google.android.material.tabs.TabLayout>
 
@@ -161,7 +161,7 @@
                     android:id="@+id/statsViewPager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="-8dp"/>
+                    android:layout_marginTop="-8dp" />
 
             </LinearLayout>
 

@@ -1,26 +1,20 @@
 package com.solvabit.climate.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager.widget.ViewPager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
 import com.solvabit.climate.R
 import com.solvabit.climate.fragment.StatsFragments.AirQualityStatsFragment
 import com.solvabit.climate.fragment.StatsFragments.ForestDensityStatsFragment
 import com.solvabit.climate.fragment.StatsFragments.GroundWaterStatsFragment
 import com.solvabit.climate.fragment.StatsFragments.StatsViewPagerAdapter
-import com.solvabit.climate.onboarding.ViewPagerAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.aqi_intro.view.*
-import kotlinx.android.synthetic.main.fragment_statistics.*
 import kotlinx.android.synthetic.main.fragment_statistics.view.*
 
 class StatisticsFragment : Fragment() {
@@ -30,15 +24,10 @@ class StatisticsFragment : Fragment() {
     lateinit var tabLayout: TabLayout
     val localuser = Dashboard.localuser
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         v = inflater.inflate(R.layout.fragment_statistics, container, false)
 
         viewPager = v.findViewById(R.id.statsViewPager)
@@ -50,7 +39,8 @@ class StatisticsFragment : Fragment() {
         Picasso.get().load(localuser.imageUrl).into(v.userprofile_imageView_stats)
 
         v.share_button_stats.setOnClickListener {
-            v.findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToSendReportFragment())
+            v.findNavController()
+                .navigate(StatisticsFragmentDirections.actionStatisticsFragmentToSendReportFragment())
         }
 
         return v
@@ -82,7 +72,7 @@ class StatisticsFragment : Fragment() {
         viewPager.adapter = adapter
     }
 
-    fun changeBottomNavigationState(){
+    fun changeBottomNavigationState() {
 
         val bottomNavMenu = activity?.bottomNavigation?.menu
 

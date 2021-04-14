@@ -11,10 +11,10 @@ interface StatsDao {
     fun getStatsByUID(UID: String): Stats
 
     @Insert
-    fun insert(stats : Stats)
+    fun insert(stats: Stats)
 
     @Update
-    fun update(stats : Stats)
+    fun update(stats: Stats)
 
     @Delete
     fun delete(uid: User)

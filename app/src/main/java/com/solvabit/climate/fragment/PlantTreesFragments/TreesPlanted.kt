@@ -1,9 +1,6 @@
 package com.solvabit.climate.fragment
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Color
-import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
@@ -12,11 +9,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.maps.model.Dash
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.solvabit.climate.R
 import com.solvabit.climate.database.UserDatabase
@@ -29,7 +26,6 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.single_tree.view.*
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -51,11 +47,11 @@ class TreesPlanted : Fragment() {
     private lateinit var binding: TreesPlantedFragmentBinding
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(
-                inflater, R.layout.trees_planted_fragment, container, false
+            inflater, R.layout.trees_planted_fragment, container, false
         )
 
         val instance = UserDatabase.getInstance(context?.applicationContext!!)
@@ -90,7 +86,6 @@ class TreesPlanted : Fragment() {
     }
 
 
-
     private fun fetchTrees() {
         binding.numberofTreesPlanted.text = "00"
         val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid/AllTasks/$taskId")
@@ -114,29 +109,31 @@ class TreesPlanted : Fragment() {
                     binding.linearLayout.visibility = View.VISIBLE
                     binding.linearLayoutShareTreesPlanted.visibility = View.VISIBLE
                     binding.addPicFiveTrees.visibility = View.GONE
-                    if(localUser.remainingAction.contains(taskId) || localUser.presentAction.contains(taskId))
-                    {
+                    if (localUser.remainingAction.contains(taskId) || localUser.presentAction.contains(
+                            taskId
+                        )
+                    ) {
                         Timber.i("Inside remaining")
                         val changePresentList =
-                                Dashboard.localuser.presentAction.toMutableList()
+                            Dashboard.localuser.presentAction.toMutableList()
                         val changeRemainingList =
-                                Dashboard.localuser.remainingAction.toMutableList()
+                            Dashboard.localuser.remainingAction.toMutableList()
                         val changeCompletedList =
-                                Dashboard.localuser.completedAction.toMutableList()
-                        if(changePresentList.indexOf(taskId) != -1)
+                            Dashboard.localuser.completedAction.toMutableList()
+                        if (changePresentList.indexOf(taskId) != -1)
                             changePresentList.removeAt(changePresentList.indexOf(taskId))
-                        if(changeRemainingList.indexOf(taskId) != -1) {
+                        if (changeRemainingList.indexOf(taskId) != -1) {
                             Timber.i("Removing remaining list")
                             changeRemainingList.removeAt(changeRemainingList.indexOf(taskId))
                         }
-                        if(changeCompletedList.indexOf(taskId) == -1)
+                        if (changeCompletedList.indexOf(taskId) == -1)
                             changeCompletedList.add(taskId)
                         FirebaseDatabase.getInstance().getReference("/Users/$uid/presentAction")
-                                .setValue(changePresentList)
+                            .setValue(changePresentList)
                         FirebaseDatabase.getInstance().getReference("/Users/$uid/remainingAction")
-                                .setValue(changeRemainingList)
+                            .setValue(changeRemainingList)
                         FirebaseDatabase.getInstance().getReference("/Users/$uid/completedAction")
-                                .setValue(changeCompletedList)
+                            .setValue(changeCompletedList)
                     }
                 }
                 binding.numberofTreesPlanted.text = "0" + localTreesPlanted + "/ 0" + targetTrees
@@ -192,6 +189,6 @@ class AddRecycleItemTrees(private val tree: Trees) : Item<ViewHolder>() {
 
 @Parcelize
 class Trees(val treeImage: String, val timestamp: Long) :
-        Parcelable {
+    Parcelable {
     constructor() : this("", -1)
 }

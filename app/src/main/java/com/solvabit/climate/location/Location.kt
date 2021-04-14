@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.solvabit.climate.R
 import com.solvabit.climate.activity.MainActivity
 import com.solvabit.climate.activity.UnavailableActivity
@@ -26,8 +27,8 @@ import com.solvabit.climate.network.GenericApiService
 import kotlinx.android.synthetic.main.activity_location.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.*
-
 
 const val PERMISSION_REQUEST = 10
 
@@ -40,34 +41,31 @@ class Location : AppCompatActivity() {
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
     private lateinit var uid: String
-    private var updatedToFirebase = false
     private lateinit var location: Map<String, Double>
-    var gpsStatus: Boolean = false
+    private var gpsStatus: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location)
-        //button.visibility = View.INVISIBLE
-
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         uid = FirebaseAuth.getInstance().uid.toString()
 
         val bundle = this.intent.extras
 
         if (bundle != null) {
-            var fakeLatitude = bundle.getSerializable("latitude")
-            var fakeLongtitude = bundle.getSerializable("longitude")
+            val fakeLatitude = bundle.getSerializable("latitude")
+            val fakeLongtitude = bundle.getSerializable("longitude")
 
             initiateNewUser(fakeLatitude as Double, fakeLongtitude as Double)
 
-        }else{
+        } else {
             val instance = UserDatabase.getInstance(this@Location)
             val dao = instance.userDao()
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
 
-            var editor: SharedPreferences.Editor? = sharedPreferences.edit()
+            val editor: SharedPreferences.Editor? = sharedPreferences.edit()
             editor?.putString("noOfTimesLocationUpdated", 0.toString())
             editor?.putString("locationListenerCount", 0.toString())
             editor?.apply()
@@ -75,9 +73,8 @@ class Location : AppCompatActivity() {
 
             checkStatus(dao)
 
-            randomButton.setOnClickListener{
+            randomButton.setOnClickListener {
                 randomButton.startAnimation()
-                //initiateNewUser(location["latitude"]!!.toDouble(),location["longitude"]!!.toDouble())
                 checkStatus(dao)
             }
 
@@ -93,24 +90,23 @@ class Location : AppCompatActivity() {
     }
 
 
-
-    fun checkStatus(dao: UserDao){
-        FirebaseService( uid).userStatus { result ->
-            if(result.equals("error")){
-                Log.v("Firebase", "Got error ")
-//                button.revertAnimation()
+    fun checkStatus(dao: UserDao) {
+        FirebaseService(uid).userStatus { result ->
+            if (result.equals("error")) {
+                Timber.tag("Firebase").v("Got error ")
                 randomButton.visibility = View.VISIBLE
-            }else{
-                if(result.equals("true")){
-                    Log.v("Firebase", "Got true")
+            } else {
+                if (result.equals("true")) {
+                    Timber.tag("Firebase").v("Got true")
                     startMainActivity()
-                }else{
-                    Log.v("Firebase", "Got false")
+                } else {
+                    Timber.tag("Firebase").v("Got false")
                     runnableHandler()
                 }
             }
         }
     }
+
     fun runnableHandler() {
         val mainHandler = Handler(Looper.getMainLooper())
 
@@ -142,28 +138,20 @@ class Location : AppCompatActivity() {
 
     }
 
-    fun startMainActivity() {
-        Log.v("Intent", "Stared Intent")
-
+    private fun startMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
-        Log.v("Intent", "Stared Intent2")
-
         startActivity(intent)
     }
 
-    fun startUnavailableActivity() {
-        Log.v("Intent", "Stared Intent")
-
+    private fun startUnavailableActivity() {
         val intent = Intent(this, UnavailableActivity::class.java)
-        Log.v("Intent", "Stared Intent2")
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
-
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
+
     private fun locationEnabled(): Boolean {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
         return gpsStatus
     }
 
@@ -182,9 +170,9 @@ class Location : AppCompatActivity() {
 
         LocationService(uid, locationManager).getLocation(this) { result ->
             location = result
-            var latitude = location["latitude"]!!.toDouble()
-            var longitude = location["longitude"]!!.toDouble()
-            Log.v("Coordinates", "Location from phone : ${location}")
+            val latitude = location["latitude"]!!.toDouble()
+            val longitude = location["longitude"]!!.toDouble()
+            Timber.v("Coordinates %s", "Location from phone : ${location}")
 
             initiateNewUser(latitude, longitude)
 
@@ -200,26 +188,25 @@ class Location : AppCompatActivity() {
         GlobalScope.launch {
             GenericApiService(uid, latitude, longitude).newUser {
 
-                Log.v("Coordinates", "Made api call ")
+                Timber.v("Coordinates %s", "Made api call ")
 
-                if (it[0].equals("true")) {
-                    Log.v("Coordinates", "Response : ${it}")
-                    if (it[1].equals("India")){
+                if (it[0] == "true") {
+                    Timber.v("Coordinates %s", "Response : ${it}")
+                    FirebaseCrashlytics.getInstance().log("Api Response(New User) : ${it}")
+                    if (it[1].equals("India")) {
                         startMainActivity()
-                    }else{
+                    } else {
                         startUnavailableActivity()
                     }
 
-                }else{
-                    Log.v("Coordinates", "Retrying...... : ${it}")
-                   
+                } else {
+                    Timber.v("Coordinates %s", "Retrying...... : ${it}")
+
                     initiateNewUser(latitude, longitude)
-                        //getUserLocation(uid,locationManager)
                 }
             }
         }
     }
-
 
 
     override fun onRequestPermissionsResult(
@@ -233,9 +220,10 @@ class Location : AppCompatActivity() {
             for (i in permissions.indices) {
                 if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
                     allSuccess = false
-                    val requestAgain = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && shouldShowRequestPermissionRationale(
-                        permissions[i]
-                    )
+                    val requestAgain =
+                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && shouldShowRequestPermissionRationale(
+                            permissions[i]
+                        )
                     if (requestAgain) {
                         Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
                     } else {
@@ -247,20 +235,12 @@ class Location : AppCompatActivity() {
                     }
                 }
             }
-          if (allSuccess) {
-              Log.v("Permission", "Got permission")
-              getUserLocation(uid, locationManager)
+            if (allSuccess) {
+                Log.v("Permission", "Got permission")
+                getUserLocation(uid, locationManager)
 
-          }
-//                LocationService(uid, locationManager).getLocation(this, { result ->
-//                    location = result
-//                    var latitude = location["latitude"]!!.toDouble()
-//                    var longitude = location["longitude"]!!.toDouble()
-//
-//                    Log.v("Coordinates", "Location from phone : ${location}")
-//                    initiateNewUser(latitude,longitude)
-//
-//                })
+            }
+
         }
     }
 }

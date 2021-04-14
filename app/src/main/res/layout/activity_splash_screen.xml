@@ -21,8 +21,8 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/rounded_logo"
-            android:contentDescription="Logo of app" />
+            android:contentDescription="Logo of app"
+            android:src="@drawable/rounded_logo" />
 
     </LinearLayout>
 
@@ -33,10 +33,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="32dp"
         android:fontFamily="@font/avenir_book"
-        android:textStyle="bold"
-        android:textColor="#203cc3"
         android:text="By Solvabit"
+        android:textColor="#203cc3"
         android:textSize="20sp"
+        android:textStyle="bold"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

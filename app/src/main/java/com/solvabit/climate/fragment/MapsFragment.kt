@@ -49,11 +49,11 @@ class MapsFragment : Fragment() {
     var gpsStatus: Boolean = false
 
 
-    var mapMarkerKeys = mutableMapOf<String,String>()
+    var mapMarkerKeys = mutableMapOf<String, String>()
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         //locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -67,15 +67,16 @@ class MapsFragment : Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkPermission(permissions)) {
                 requestPermissions(permissions, PERMISSION_REQUEST)
-            }else{
-                val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+            } else {
+                val mapFragment =
+                    childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
                 mapFragment?.getMapAsync(callback)
             }
         }
 
     }
 
-    fun changeBottomNavigationState(){
+    fun changeBottomNavigationState() {
 
         val bottomNavMenu = activity?.bottomNavigation?.menu
 
@@ -86,10 +87,12 @@ class MapsFragment : Fragment() {
         bottomNavMenu?.getItem(4)?.isEnabled = true
 
     }
+
     private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
         return ContextCompat.getDrawable(context, vectorResId)?.run {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-            val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+            val bitmap =
+                Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
             draw(Canvas(bitmap))
             BitmapDescriptorFactory.fromBitmap(bitmap)
         }
@@ -135,13 +138,17 @@ class MapsFragment : Fragment() {
             val location = googleMap.myLocation
             if (location != null) {
                 val cameraPosition = CameraPosition.Builder()
-                    .target(LatLng(location.latitude, location.longitude)) // Sets the center of the map to location user
+                    .target(
+                        LatLng(
+                            location.latitude,
+                            location.longitude
+                        )
+                    ) // Sets the center of the map to location user
                     .zoom(7f) // Sets the zoom  // Sets the tilt of the camera of the camera to 30 degrees
                     .build() // Creates a CameraPosition from the builder
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
             }
         }
-
 
 
         val ref = FirebaseDatabase.getInstance().getReference("/plantedTrees")
@@ -163,12 +170,19 @@ class MapsFragment : Fragment() {
 
                 val location = data?.lon?.let { LatLng(data.lat, it) }
                 var marker = googleMap.addMarker(location?.let {
-                    MarkerOptions().position(it).title("${data.username} Planted tree on ${dateString}").snippet("Lat- ${data.lat}, Lon- ${data.lon}")
-                        .icon(activity?.let { it1 -> bitmapDescriptorFromVector(it1.applicationContext, R.drawable.plantmarkersmall) })
+                    MarkerOptions().position(it)
+                        .title("${data.username} Planted tree on ${dateString}")
+                        .snippet("Lat- ${data.lat}, Lon- ${data.lon}")
+                        .icon(activity?.let { it1 ->
+                            bitmapDescriptorFromVector(
+                                it1.applicationContext,
+                                R.drawable.plantmarkersmall
+                            )
+                        })
                 })
                 marker.tag = p0.key
                 mapMarkerKeys[p0.key.toString()] = "plantation"
-                Log.v("Maps", marker.tag.toString() +" " + mapMarkerKeys.get(p0.key.toString()))
+                Log.v("Maps", marker.tag.toString() + " " + mapMarkerKeys.get(p0.key.toString()))
 
             }
         })
@@ -193,13 +207,18 @@ class MapsFragment : Fragment() {
 
                 val location = data?.lon?.let { LatLng(data.lat, it) }
                 var marker = googleMap.addMarker(location?.let {
-                    MarkerOptions().position(it).title("${data.username} started the issue. ").snippet("Dated ${dateString}")
-                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.issuemarkersmall))
+                    MarkerOptions().position(it).title("${data.username} started the issue. ")
+                        .snippet("Dated ${dateString}")
+                        .icon(
+                            bitmapDescriptorFromVector(
+                                requireContext(),
+                                R.drawable.issuemarkersmall
+                            )
+                        )
                 })
                 marker.tag = p0.key
                 mapMarkerKeys[p0.key.toString()] = "issue"
-                Log.v("Maps", marker.tag.toString() +" " + mapMarkerKeys.get(p0.key.toString()))
-
+                Log.v("Maps", marker.tag.toString() + " " + mapMarkerKeys.get(p0.key.toString()))
 
 
             }
@@ -219,29 +238,36 @@ class MapsFragment : Fragment() {
              alertDialog.setCancelable(true)
              alertDialog.show()*/
 
-            val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-            val bottomSheetView = LayoutInflater.from(requireContext()).inflate(R.layout.bottom_sheet_planted_tree_data, bottomsheet)
+            val bottomSheetDialog =
+                BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+            val bottomSheetView = LayoutInflater.from(requireContext())
+                .inflate(R.layout.bottom_sheet_planted_tree_data, bottomsheet)
 
 
-            if(mapMarkerKeys[key] == "issue"){
+            if (mapMarkerKeys[key] == "issue") {
                 dataRef = FirebaseDatabase.getInstance().getReference("/issues/$key")
                 dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val data = snapshot.getValue(IssueDataMaps::class.java)
 
-                        bottomSheetView.findViewById<TextView>(R.id.tree_planted_user).text = data?.username
-                        bottomSheetView.findViewById<TextView>(R.id.bottomSheetTitle).text = "Issue started by user"
+                        bottomSheetView.findViewById<TextView>(R.id.tree_planted_user).text =
+                            data?.username
+                        bottomSheetView.findViewById<TextView>(R.id.bottomSheetTitle).text =
+                            "Issue started by user"
 
 
-                        if (data?.user_image != null) Picasso.get().load(data.user_image).into(bottomSheetView.tree_planted_userImage)
+                        if (data?.user_image != null) Picasso.get().load(data.user_image)
+                            .into(bottomSheetView.tree_planted_userImage)
 
 
-                        if (data?.post_image != null) Picasso.get().load(data.post_image).into(bottomSheetView.plant_image)
+                        if (data?.post_image != null) Picasso.get().load(data.post_image)
+                            .into(bottomSheetView.plant_image)
 
                         if (data != null) {
                             val time = data.time.toLong()
                             val sfd = SimpleDateFormat("dd-MM-yyyy")
-                            bottomSheetView.findViewById<TextView>(R.id.timing_of_tree_planted).text = sfd.format(Date(time))
+                            bottomSheetView.findViewById<TextView>(R.id.timing_of_tree_planted).text =
+                                sfd.format(Date(time))
                         }
 
                     }
@@ -253,22 +279,26 @@ class MapsFragment : Fragment() {
 
             }
 
-            if(mapMarkerKeys[key] == "plantation"){
+            if (mapMarkerKeys[key] == "plantation") {
                 dataRef = FirebaseDatabase.getInstance().getReference("/plantedTrees/$key")
                 dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val data = snapshot.getValue(PlantedTrees::class.java)
 
-                        bottomSheetView.findViewById<TextView>(R.id.tree_planted_user).text = data?.username
-                        if (data?.user_image != null) Picasso.get().load(data.user_image).into(bottomSheetView.tree_planted_userImage)
+                        bottomSheetView.findViewById<TextView>(R.id.tree_planted_user).text =
+                            data?.username
+                        if (data?.user_image != null) Picasso.get().load(data.user_image)
+                            .into(bottomSheetView.tree_planted_userImage)
 
 
-                        if (data?.plant_image != null) Picasso.get().load(data.plant_image).into(bottomSheetView.plant_image)
+                        if (data?.plant_image != null) Picasso.get().load(data.plant_image)
+                            .into(bottomSheetView.plant_image)
 
                         if (data != null) {
                             val time = data.time.toLong()
                             val sfd = SimpleDateFormat("dd-MM-yyyy")
-                            bottomSheetView.findViewById<TextView>(R.id.timing_of_tree_planted).text = sfd.format(Date(time))
+                            bottomSheetView.findViewById<TextView>(R.id.timing_of_tree_planted).text =
+                                sfd.format(Date(time))
                         }
 
                     }
@@ -315,7 +345,11 @@ class MapsFragment : Fragment() {
     private fun checkPermission(permissionArray: Array<String>): Boolean {
         var allSuccess = true
         for (i in permissionArray.indices) {
-            if (ActivityCompat.checkSelfPermission(requireContext(),permissionArray[i]) == PackageManager.PERMISSION_GRANTED)
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    permissionArray[i]
+                ) == PackageManager.PERMISSION_GRANTED
+            )
                 allSuccess = false
         }
         return allSuccess
@@ -337,8 +371,9 @@ class MapsFragment : Fragment() {
                 }
             }
 
-            if(allSuccess){
-                val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+            if (allSuccess) {
+                val mapFragment =
+                    childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
                 mapFragment?.getMapAsync(callback)
             }
 

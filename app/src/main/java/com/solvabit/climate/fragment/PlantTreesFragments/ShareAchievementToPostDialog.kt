@@ -74,8 +74,8 @@ class ShareAchievementToPostDialog(private val allTreesPlanted: List<Trees>) : D
         if (allImages.size == 10)
             spanCount = 5
         StaggeredGridLayoutManager(
-                spanCount, // span count
-                StaggeredGridLayoutManager.VERTICAL // orientation
+            spanCount, // span count
+            StaggeredGridLayoutManager.VERTICAL // orientation
         ).apply {
             // specify the layout manager for recycler view
             multiImage.layoutManager = this
@@ -87,7 +87,8 @@ class ShareAchievementToPostDialog(private val allTreesPlanted: List<Trees>) : D
 
     private fun createPost() {
         if (dialogView.post_text.text.isEmpty()) {
-            Toast.makeText(requireContext(), "Sorry, Blank can't be posted!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Sorry, Blank can't be posted!", Toast.LENGTH_SHORT)
+                .show()
         } else {
             Timber.i("Going to show dialog box")
             com.solvabit.climate.dialog.Dialog().show(childFragmentManager, "MyCustomFragment")
@@ -98,7 +99,8 @@ class ShareAchievementToPostDialog(private val allTreesPlanted: List<Trees>) : D
     }
 
     private fun uploadImage(bitmap: Bitmap) {
-        val ref = FirebaseStorage.getInstance().getReference("/images/$uid/tenTreesPlant/${bitmap.toString()}")
+        val ref = FirebaseStorage.getInstance()
+            .getReference("/images/$uid/tenTreesPlant/$bitmap")
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
@@ -107,10 +109,10 @@ class ShareAchievementToPostDialog(private val allTreesPlanted: List<Trees>) : D
             Timber.i("Upload Failed")
         }.addOnSuccessListener { taskSnapshot ->
             ref.downloadUrl
-                    .addOnSuccessListener {
-                        Timber.i("Download Url - ${it.toString()}")
-                        post(it.toString())
-                    }
+                .addOnSuccessListener {
+                    Timber.i("Download Url - $it")
+                    post(it.toString())
+                }
 
         }
 
@@ -122,7 +124,8 @@ class ShareAchievementToPostDialog(private val allTreesPlanted: List<Trees>) : D
         val timestamp = max - System.currentTimeMillis()
         val ref = FirebaseDatabase.getInstance().getReference("/PostData/$timestamp")
         val text = dialogView.post_text.text.toString()
-        val postData = Post(text, postImageUrl, uid!!, time, "Achievement", timestamp.toString(), "", 0)
+        val postData =
+            Post(text, postImageUrl, uid!!, time, "Achievement", timestamp.toString(), "", 0)
         ref.setValue(postData).addOnSuccessListener {
             Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT).show()
             dialog?.dismiss()

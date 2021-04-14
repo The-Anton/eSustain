@@ -14,11 +14,11 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) :
             0 -> return First_Screen()
             1 -> return Second_Screen()
             2 -> return Third_Screen()
-            else -> return First_Screen();
+            else -> return First_Screen()
         }
     }
 
     override fun getCount(): Int {
-        return 3;
+        return 3
     }
 }

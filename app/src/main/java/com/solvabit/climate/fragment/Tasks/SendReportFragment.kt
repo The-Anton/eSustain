@@ -6,13 +6,11 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.data.*
@@ -28,32 +26,24 @@ import com.solvabit.climate.databinding.FragmentSendReportBinding
 import com.solvabit.climate.fragment.Dashboard
 import com.solvabit.climate.fragment.Dashboard.Companion.localuser
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.bottom_sheet_planted_tree_data.*
-import kotlinx.android.synthetic.main.dialog_share_achievement_to_feed.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
 
 
 class SendReportFragment : Fragment() {
 
     private lateinit var binding: FragmentSendReportBinding
     private lateinit var navbar: BottomNavigationView
-    private val localUser = Dashboard.localuser
+    private val localUser = localuser
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_send_report, container, false)
 
         navbar = activity?.findViewById(R.id.bottomNavigation)!!
@@ -72,8 +62,8 @@ class SendReportFragment : Fragment() {
         val stats = Stats()
         setLineChart(stats)
         GlobalScope.launch(Dispatchers.Main) {
-            localRepo.getStats(statsDao){
-                Log.v("StatsFragment",it.toString())
+            localRepo.getStats(statsDao) {
+                Log.v("StatsFragment", it.toString())
                 setLineChart(it)
             }
 
@@ -95,7 +85,12 @@ class SendReportFragment : Fragment() {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
 
         // Step 4: Save image & get path of it
-        val path = MediaStore.Images.Media.insertImage(requireContext().contentResolver, bitmap, "tempimage", null)
+        val path = MediaStore.Images.Media.insertImage(
+            requireContext().contentResolver,
+            bitmap,
+            "tempimage",
+            null
+        )
 
         // Step 5: Get URI of saved image
         val uri = Uri.parse(path)
@@ -108,6 +103,7 @@ class SendReportFragment : Fragment() {
         // Step 7: Start/Launch Share intent
         startActivity(intent)
     }
+
     private fun setLineChart(stats: Stats) {
 
         val xvalue = ArrayList<String>()
@@ -130,7 +126,6 @@ class SendReportFragment : Fragment() {
         lineEntry1.add(Entry(stats.open_forest_2013.toFloat(), 2))
         lineEntry1.add(Entry(stats.open_forest_2015.toFloat(), 3))
         lineEntry1.add(Entry(stats.open_forest_2019.toFloat(), 4))
-
 
 
         val linedataset = LineDataSet(lineEntry, "AFC")
@@ -162,10 +157,10 @@ class SendReportFragment : Fragment() {
         binding.lineChart.animateXY(3000, 3000)
         binding.lineChart.setTouchEnabled(false)
         binding.lineChart.setDrawGridBackground(false)
-        binding.lineChart.getXAxis().setDrawGridLines(false);
+        binding.lineChart.xAxis.setDrawGridLines(false)
         binding.lineChart.setDescription(" ")
-        binding.lineChart.getAxisLeft().setDrawGridLines(false);
-        binding.lineChart.getAxisRight().setDrawGridLines(false);
+        binding.lineChart.axisLeft.setDrawGridLines(false)
+        binding.lineChart.axisRight.setDrawGridLines(false)
 
     }
 
@@ -217,11 +212,11 @@ class SendReportFragment : Fragment() {
             openForestReportText.text = localUser.openForest.toString()
             noForestReportText.text = localUser.noForest.toString()
 
-            waterLevelReport.text = localUser.groundWaterData[11].toString()
-            annualRechargeReportText.text = localUser.groundWaterData[5].toString()
-            annualExtractionReportText.text = localUser.groundWaterData[2].toString()
-            naturalDischargeReportText.text = localUser.groundWaterData[12].toString()
-            futureAvailableReportText.text = localUser.groundWaterData[6].toString()
+            waterLevelReport.text = localUser.groundWaterData[11]
+            annualRechargeReportText.text = localUser.groundWaterData[5]
+            annualExtractionReportText.text = localUser.groundWaterData[2]
+            naturalDischargeReportText.text = localUser.groundWaterData[12]
+            futureAvailableReportText.text = localUser.groundWaterData[6]
 
             numberTreesPlantedTextView.text = localUser.treesPlanted.toString()
             numberTaskCompletedReport.text = localUser.completedAction.count().toString()
@@ -232,15 +227,15 @@ class SendReportFragment : Fragment() {
     }
 
     private fun normalizedScoreHeading(): String {
-        if (Dashboard.localuser.normalizedScore!=null){
-            if(Dashboard.localuser.normalizedScore!! <= 500 ){
+        if (localuser.normalizedScore != null) {
+            if (localuser.normalizedScore!! <= 500) {
                 return " You are in Critical Condition!"
-            }else if(Dashboard.localuser.normalizedScore!! <= 700 ){
+            } else if (localuser.normalizedScore!! <= 700) {
                 return "You are on border line !"
-            }else{
+            } else {
                 return "Congratulation! You are good"
             }
-        }else{
+        } else {
             return "Congratulation! You are good"
         }
     }
@@ -272,7 +267,7 @@ class SendReportFragment : Fragment() {
 //    }
 
 
-    private fun getBitmapFromView(view: View) :Bitmap{
+    private fun getBitmapFromView(view: View): Bitmap {
         //Define a bitmap with the same size as the view
         val returnedBitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         //Bind a canvas to it

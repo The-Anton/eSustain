@@ -1,6 +1,5 @@
 package com.solvabit.climate.registerLogin
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import timber.log.Timber
 

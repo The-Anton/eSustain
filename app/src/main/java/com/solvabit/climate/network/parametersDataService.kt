@@ -1,6 +1,5 @@
 package com.example.forests.data
 
-import android.util.Log
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.solvabit.climate.network.parametersData
 import kotlinx.coroutines.Deferred
@@ -10,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 
@@ -21,16 +21,16 @@ interface parametersDataService {
         @Query("longitude") longitude: Double
     ): Deferred<parametersData>
 
-    companion object{
+    companion object {
         operator fun invoke(): parametersDataService? {
 
-            val requestInterceptor = Interceptor{chain ->
+            val requestInterceptor = Interceptor { chain ->
                 val url = chain.request()
                     .url()
                     .newBuilder()
                     .build()
 
-                Log.v("API", "Url : ${url}")
+                Timber.tag("API").v("Url : ${url}")
 
 
                 val request = chain.request()
@@ -43,8 +43,8 @@ interface parametersDataService {
             }
             val okHttpClient = OkHttpClient.Builder()
 
-                    .readTimeout(50,TimeUnit.SECONDS)
-                    .connectTimeout(50,TimeUnit.SECONDS)
+                .readTimeout(50, TimeUnit.SECONDS)
+                .connectTimeout(50, TimeUnit.SECONDS)
                 .addInterceptor(requestInterceptor)
                 .build()
 
