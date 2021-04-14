@@ -21,6 +21,7 @@ import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -48,6 +49,7 @@ class CreatePostFragment : Fragment() {
             Manifest.permission.ACCESS_COARSE_LOCATION
     )
     val mainHandler = Handler(Looper.getMainLooper())
+    private lateinit var navbar: BottomNavigationView
 
     var locationCheckboxRunner = object : Runnable {
         override fun run() {
@@ -75,6 +77,9 @@ class CreatePostFragment : Fragment() {
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_create_post, container, false
         )
+
+        navbar = activity?.findViewById<BottomNavigationView>(R.id.bottomNavigation)!!
+        navbar?.visibility = View.GONE
 
         val args = CreatePostFragmentArgs.fromBundle(requireArguments())
         var isRecyclePost = args.recyclepost
@@ -150,6 +155,10 @@ class CreatePostFragment : Fragment() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        navbar?.visibility = View.VISIBLE
+    }
     override fun onDetach() {
         super.onDetach()
         mainHandler.removeCallbacks(locationCheckboxRunner)

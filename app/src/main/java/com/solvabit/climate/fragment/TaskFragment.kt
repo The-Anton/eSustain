@@ -17,6 +17,7 @@ import com.solvabit.climate.database.SingleAction
 import com.solvabit.climate.databinding.FragmentTaskBinding
 import com.solvabit.climate.dialog.StartNewTaskDialog
 import com.solvabit.climate.location.PERMISSION_REQUEST
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
@@ -49,6 +50,8 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_task, container, false)
         binding.allActions = actionsList
 
+
+
         initializeAllTasks()
 
         setRemaining()
@@ -56,6 +59,8 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
         setPresent()
 
         setClickForTasks()
+
+        Picasso.get().load(Dashboard.localuser.imageUrl).into(binding.userImage)
 
         binding.coinsAndProfileTask.setOnClickListener {
             binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToProfileFragment())

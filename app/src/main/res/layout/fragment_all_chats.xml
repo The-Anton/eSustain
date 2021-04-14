@@ -10,7 +10,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout10"
-            android:background="@color/white"
+            android:background="@drawable/topbar"
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
