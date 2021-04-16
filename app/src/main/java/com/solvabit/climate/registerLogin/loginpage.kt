@@ -48,14 +48,14 @@ class loginpage : AppCompatActivity() {
 
     private fun login() {
 
-        binding.imageView2.setOnClickListener {
-            Toast.makeText(this, "Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
-
-        }
-
-        binding.imageView3.setOnClickListener {
-            Toast.makeText(this, "Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
-        }
+//        binding.imageView2.setOnClickListener {
+//            Toast.makeText(this, "Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
+//
+//        }
+//
+//        binding.imageView3.setOnClickListener {
+//            Toast.makeText(this, "Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
+//        }
 
         binding.googleLogin.setOnClickListener {
 

@@ -54,15 +54,15 @@ class RegistrationPage : AppCompatActivity() {
             startGoogleAuth()
         }
 
-        //facebook button click
-        binding.facebookRegister.setOnClickListener {
-            Toast.makeText(this, "Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
-        }
-
-        //apple button click
-        binding.appleRegister.setOnClickListener {
-            Toast.makeText(this, "Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
-        }
+//        //facebook button click
+//        binding.facebookRegister.setOnClickListener {
+//            Toast.makeText(this, "Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
+//        }
+//
+//        //apple button click
+//        binding.appleRegister.setOnClickListener {
+//            Toast.makeText(this, "Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
+//        }
 
 
         //already have an account click listener

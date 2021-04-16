@@ -166,38 +166,21 @@
                 app:layout_constraintTop_toTopOf="@+id/textView3" />
 
 
-            <ImageView
+            <com.shobhitpuri.custombuttons.GoogleSignInButton
                 android:id="@+id/google_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/facebook_register"
-                app:layout_constraintEnd_toStartOf="@+id/facebook_register"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/password_editText_register"
-                app:layout_constraintTop_toTopOf="@+id/facebook_register"
-                app:srcCompat="@drawable/google" />
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="25dp"
+                android:text="@string/google_sign_up"
+                app:isDarkTheme="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-            <ImageView
-                android:id="@+id/facebook_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                app:layout_constraintEnd_toStartOf="@+id/apple_register"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/google_register"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
-                app:srcCompat="@drawable/facebook" />
-
-
-            <ImageView
-                android:id="@+id/apple_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/facebook_register"
-                app:layout_constraintEnd_toEndOf="@+id/password_editText_register"
-                app:layout_constraintStart_toEndOf="@+id/facebook_register"
-                app:layout_constraintTop_toTopOf="@+id/facebook_register"
-                app:srcCompat="@drawable/apple" />
 
             <TextView
                 android:id="@+id/textview01"
@@ -205,27 +188,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="100dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="Already registered? "
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/facebook_register"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/google_register" />
 
             <TextView
                 android:id="@+id/already_account_register"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="19dp"
                 android:layout_marginEnd="56dp"
                 android:text="Sign in"
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/textview01"
-                app:layout_constraintTop_toBottomOf="@+id/facebook_register" />
+                app:layout_constraintTop_toBottomOf="@+id/google_register" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -145,7 +145,7 @@ class Location : AppCompatActivity() {
 
     private fun startUnavailableActivity() {
         val intent = Intent(this, UnavailableActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
+        //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
 

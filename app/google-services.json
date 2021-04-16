@@ -52,11 +52,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "960548557802-lh1i1i5itthdahelf4f3i00ghakjodu2.apps.googleusercontent.com",
+          "client_id": "960548557802-s9741ch1b2qvli2uu2p3edsjh51a36oj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.solvabit.climate",
-            "certificate_hash": "98822f9eb7061fc3bb9e2b5a78f1eef15cc02cc3"
+            "certificate_hash": "ca621ef6edcacdd3956439ef13236c8ce54581ef"
           }
         },
         {

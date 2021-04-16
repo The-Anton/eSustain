@@ -38,15 +38,15 @@
         style="@style/normalSubText"
         android:layout_width="366dp"
         android:layout_height="66dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="115dp"
+        android:layout_marginEnd="23dp"
         android:text="We are currently providing services to India Only"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/randomButton"
-        app:layout_constraintTop_toBottomOf="@+id/animationView"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="22dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/animationView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

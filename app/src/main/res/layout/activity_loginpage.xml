@@ -12,6 +12,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingTop="40dp"
             android:paddingBottom="60dp">
 
             <TextView
@@ -39,7 +40,7 @@
                 android:background="@drawable/rounded_corner_registration"
                 android:drawableLeft="@drawable/ic_outline_email_24"
                 android:ems="10"
-                android:hint="Email Address"
+                android:hint="  Email Address"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -128,38 +129,21 @@
                 app:layout_constraintEnd_toEndOf="@+id/password_editText_login"
                 app:layout_constraintTop_toBottomOf="@+id/password_editText_login" />
 
-            <ImageView
+            <com.shobhitpuri.custombuttons.GoogleSignInButton
                 android:id="@+id/google_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                app:layout_constraintEnd_toStartOf="@+id/imageView2"
-                app:layout_constraintHorizontal_bias="0.666"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView2"
-                app:srcCompat="@drawable/google" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="25dp"
+                android:text="Log in with Google"
+                app:isDarkTheme="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
-                app:srcCompat="@drawable/facebook" />
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.31"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toTopOf="@+id/imageView2"
-                app:srcCompat="@drawable/apple" />
 
             <TextView
                 android:id="@+id/textview01"
@@ -167,10 +151,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="72dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="32dp"
                 android:text="Not registered yet? "
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/google_login" />
 
             <TextView
                 android:id="@+id/back_to_registration_login"
