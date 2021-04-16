@@ -156,7 +156,7 @@ class Location : AppCompatActivity() {
 
         val intent = Intent(this, UnavailableActivity::class.java)
         Log.v("Intent", "Stared Intent2")
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
+        
 
         startActivity(intent)
     }
