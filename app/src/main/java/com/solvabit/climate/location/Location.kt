@@ -156,6 +156,7 @@ class Location : AppCompatActivity() {
 
         val intent = Intent(this, UnavailableActivity::class.java)
         Log.v("Intent", "Stared Intent2")
+
         
 
         startActivity(intent)
