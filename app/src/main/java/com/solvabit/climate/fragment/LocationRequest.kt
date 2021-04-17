@@ -52,8 +52,8 @@ class LocationRequest : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
 
         v = inflater.inflate(R.layout.fragment_location_request, container, false)
@@ -70,6 +70,7 @@ class LocationRequest : Fragment() {
 
         return v;
     }
+
 
 
 }

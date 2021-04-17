@@ -51,6 +51,7 @@ class ProcessLocation : Fragment() {
             val fakeLatitude = bundle.getSerializable("latitude")
             val fakeLongtitude = bundle.getSerializable("longitude")
 
+            initateNewUser()
             initiateNewUser(uid, fakeLatitude as Double, fakeLongtitude as Double) {
                 if (!it) {
                     if (buttonVisible) {
@@ -90,6 +91,10 @@ class ProcessLocation : Fragment() {
 
 
         return v;
+    }
+
+    private fun initateNewUser() {
+        TODO("Not yet implemented")
     }
 
 
