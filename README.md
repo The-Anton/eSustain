@@ -1,11 +1,12 @@
 # eSustain🌳
 
-### 👨‍💻 [APK-v1.0](https://drive.google.com/file/d/10C5EGUJD1s0yplfSBfCmnURX0Xi7Tsev/view?usp=sharing)
+### 👨‍💻 [APK-v1.0.1](https://drive.google.com/file/d/1HjmjZJppDL6xsZ2sWZM4AosIjLbc1bj8/view?usp=sharing)
 
 ### Note:-
 #### ⚠️Currently only available for Indian Users 🤕
 
-###### 🧪 If you are testing this application from outside India you will be provided with the option to use an Indian location for simulating the application. ***( If it still crashes, then consider to use the application in an android emulator, using an Indian location )***
+###### 🧪 If you are testing this application from outside India you will be provided with the option to use an Indian location for simulating the application. 
+<u>If it still crashes, then consider to use the application in an android emulator, using an Indian location </u>
 
 
 
@@ -51,7 +52,7 @@ To modify or edit the source code we suggest some pre-requisites
 2. Android Device or Emulator installed along with Android Studio
 3. Minimum supported Android SDK
 
-⭐ Your can always install the app with the latest release apk if you are unable to build the application localy 👨‍💻 [APK-v1.0](https://drive.google.com/file/d/10C5EGUJD1s0yplfSBfCmnURX0Xi7Tsev/view?usp=sharing)
+⭐ Your can always install the app with the latest release apk if you are unable to build the application localy 👨‍💻 [APK-v1.0.1](https://drive.google.com/file/d/1HjmjZJppDL6xsZ2sWZM4AosIjLbc1bj8/view?usp=sharing)
 
 Android Studio Version
 ----------------------
