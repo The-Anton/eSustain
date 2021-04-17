@@ -1,6 +1,6 @@
 # eSustain🌳
 
-### 👨‍💻 [APK-v1.0.1](https://drive.google.com/file/d/1HjmjZJppDL6xsZ2sWZM4AosIjLbc1bj8/view?usp=sharing)
+### 👨‍💻 [APK-v1.0.2](https://drive.google.com/file/d/10C5EGUJD1s0yplfSBfCmnURX0Xi7Tsev/view?usp=sharing)
 
 ### Note:-
 #### ⚠️Currently only available for Indian Users 🤕
@@ -52,7 +52,7 @@ To modify or edit the source code we suggest some pre-requisites
 2. Android Device or Emulator installed along with Android Studio
 3. Minimum supported Android SDK
 
-⭐ Your can always install the app with the latest release apk if you are unable to build the application localy 👨‍💻 [APK-v1.0.1](https://drive.google.com/file/d/1HjmjZJppDL6xsZ2sWZM4AosIjLbc1bj8/view?usp=sharing)
+⭐ Your can always install the app with the latest release apk if you are unable to build the application localy 👨‍💻 [APK-v1.0.2](https://drive.google.com/file/d/10C5EGUJD1s0yplfSBfCmnURX0Xi7Tsev/view?usp=sharing)
 
 Android Studio Version
 ----------------------
@@ -83,4 +83,4 @@ Getting Started
 4. Build the project and run the sample. You may need to update gradle and library versions. 
 Follow the guidance provided by Android Studio. 
 5. If you build the project and finds an error regarding Cuberto/liquid-swipe-android, then consider this [Cuberto/liquid-swipe-android](https://github.com/Cuberto/liquid-swipe-android) github repo to add your credentials into the project
-6. If you still not able to build the project try installing the [APK](https://drive.google.com/file/d/1HjmjZJppDL6xsZ2sWZM4AosIjLbc1bj8/view?usp=sharing) of the applicaiton
+6. If you still not able to build the project try installing the [APK](https://drive.google.com/file/d/10C5EGUJD1s0yplfSBfCmnURX0Xi7Tsev/view?usp=sharing) of the applicaiton
