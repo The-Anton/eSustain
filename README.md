@@ -78,10 +78,9 @@ Getting Started
 ---------------
 
 1. [Install Android Studio](https://developer.android.com/studio/install.html),
-if you don't already have it. (If you are just starting the course, you will be guided
-through this process.)
-2. Download the starter sample for the codelab.
-3. Open the sample into Android Studio.
+2. [Download the project](https://github.com/The-Anton/eSustain/archive/refs/heads/main.zip)
+3. Open the project into Android Studio.
 4. Build the project and run the sample. You may need to update gradle and library versions. 
 Follow the guidance provided by Android Studio. 
 5. If you build the project and finds an error regarding Cuberto/liquid-swipe-android, then consider this [Cuberto/liquid-swipe-android](https://github.com/Cuberto/liquid-swipe-android) github repo to add your credentials into the project
+6. If you still not able to build the project try installing the [APK](https://drive.google.com/file/d/1HjmjZJppDL6xsZ2sWZM4AosIjLbc1bj8/view?usp=sharing) of the applicaiton
