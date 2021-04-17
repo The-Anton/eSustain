@@ -5,7 +5,7 @@
 ### Note:-
 #### ⚠️Currently only available for Indian Users 🤕
 
-###### 🧪 If you are testing this application from outside India you will be provided with the option to use an Indian location for simulating the application. ( If it still crashes, then consider to use the application in an android emulator, using an <b> Indian location </b> )
+###### 🧪 If you are testing this application from outside India you will be provided with the option to use an Indian location for simulating the application. ***( If it still crashes, then consider to use the application in an android emulator, using an Indian location )***
 
 
 
