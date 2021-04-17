@@ -36,7 +36,7 @@ class UnavailableActivity : AppCompatActivity() {
             doubleArrayOf(27.1767, 78.0081),
             doubleArrayOf(26.4499, 80.3319)
         )
-        val random = (0..5).random()
+        val random = (0..4).random()
         Timber.v(
             "Unavailable For This Location: Random Location - %s",
             listOf(arr[random][0], arr[random][1]).toString()

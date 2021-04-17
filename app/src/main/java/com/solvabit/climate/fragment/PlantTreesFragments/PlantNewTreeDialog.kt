@@ -214,7 +214,7 @@ class PlantNewTreeDialog(
         activity?.let {
             val locationManager = it.getSystemService(Context.LOCATION_SERVICE) as LocationManager
             uid?.let { it1 ->
-                LocationService(it1, locationManager).getLocation(it.applicationContext) {
+                LocationService(it).getLocation() {
                     val plantTreeOnMaps = it["latitude"]?.let { it2 ->
                         it["longitude"]?.let { it3 ->
                             PlantedTrees(

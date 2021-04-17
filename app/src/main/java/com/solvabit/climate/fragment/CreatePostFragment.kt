@@ -200,7 +200,7 @@ class CreatePostFragment : Fragment() {
         val text = binding.postText.text.toString()
         val category = binding.spinner2.selectedItem.toString()
         if (category == "Issue") {
-            saveIssueMapNode(postImageUrl)
+            //saveIssueMapNode(postImageUrl)
             if (binding.checkCreateGroup.isChecked) {
 
                 if (binding.groupName.text.isNotEmpty()) {
@@ -338,7 +338,7 @@ class CreatePostFragment : Fragment() {
 
         activity?.let {
             val locationManager = it.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            LocationService(uid, locationManager).getLocation(it.applicationContext) {
+            LocationService(it).getLocation() {
                 val issueData = it["latitude"]?.let { it1 ->
                     it["longitude"]?.let { it2 ->
                         localUser.username?.let { it3 ->

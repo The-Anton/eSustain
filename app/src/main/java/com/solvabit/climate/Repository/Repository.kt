@@ -12,7 +12,7 @@ class Repository constructor(val dao: UserDao, val uid: String) {
 
     private val firebaseService = FirebaseService(uid)
 
-     fun getUser(myCallback: (result: User) -> Unit) {
+    fun getUser(myCallback: (result: User) -> Unit) {
         val userCount = dao.hasUser(uid)
         Timber.tag("Repository").v("User count : ${userCount}")
 
@@ -38,7 +38,7 @@ class Repository constructor(val dao: UserDao, val uid: String) {
 
     }
 
-     fun getStats(statsDao: StatsDao, myCallback: (result: Stats) -> Unit) {
+    fun getStats(statsDao: StatsDao, myCallback: (result: Stats) -> Unit) {
         val hasStats = statsDao.hasStats(uid)
         Timber.tag("Repository").v("Stats count : ${hasStats}")
 
@@ -63,7 +63,7 @@ class Repository constructor(val dao: UserDao, val uid: String) {
 
     }
 
-     fun fetchUserData(myCallback: (result: User) -> Unit) {
+    fun fetchUserData(myCallback: (result: User) -> Unit) {
         Timber.tag("Repository").v("fetchUserData called")
 
         firebaseService.fetchUser { result ->

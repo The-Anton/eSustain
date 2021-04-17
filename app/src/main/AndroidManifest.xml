@@ -32,7 +32,9 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".activity.UnavailableActivity" />
-        <activity android:name=".location.Location" />
+        <activity android:name=".location.Location">
+
+        </activity>
         <activity android:name=".registerLogin.ResetPassword" />
         <activity android:name=".registerLogin.RegistrationPage" />
         <activity android:name=".registerLogin.loginpage" />

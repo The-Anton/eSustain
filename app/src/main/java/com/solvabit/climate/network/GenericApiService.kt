@@ -6,7 +6,6 @@ import com.example.forests.data.parametersDataService
 class GenericApiService(val uid: String, val lattitude: Double, val longitude: Double) {
 
 
-
     suspend fun newUser(callback: (result: List<String>) -> Unit) {
 
 

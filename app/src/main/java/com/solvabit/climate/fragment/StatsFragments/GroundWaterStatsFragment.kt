@@ -67,7 +67,9 @@ class GroundWaterStatsFragment : Fragment() {
 
     private fun addData() {
         circularloader(
-            localuser.groundWaterData[11].toFloat(), 300f, binding.circularProgressBarGroundWaterStageStats
+            localuser.groundWaterData[11].toFloat(),
+            300f,
+            binding.circularProgressBarGroundWaterStageStats
         )
 
 

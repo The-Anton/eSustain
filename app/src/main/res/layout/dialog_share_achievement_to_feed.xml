@@ -78,7 +78,6 @@
                 tools:text="Username" />
 
             <TextView
-                android:id="@+id/achievement_tag_dialog"
                 style="@style/normaltext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

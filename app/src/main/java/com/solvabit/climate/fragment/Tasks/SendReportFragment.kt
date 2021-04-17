@@ -23,7 +23,6 @@ import com.solvabit.climate.Repository.Repository
 import com.solvabit.climate.database.Stats
 import com.solvabit.climate.database.UserDatabase
 import com.solvabit.climate.databinding.FragmentSendReportBinding
-import com.solvabit.climate.fragment.Dashboard
 import com.solvabit.climate.fragment.Dashboard.Companion.localuser
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
