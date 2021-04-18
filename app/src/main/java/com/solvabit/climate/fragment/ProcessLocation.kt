@@ -12,6 +12,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.solvabit.climate.R
 import com.solvabit.climate.activity.MainActivity
 import com.solvabit.climate.activity.UnavailableActivity
+import com.solvabit.climate.location.FusedLocationService
 import com.solvabit.climate.location.LocationService
 import com.solvabit.climate.network.GenericApiService
 import kotlinx.android.synthetic.main.fragment_process_location.view.*
@@ -51,7 +52,6 @@ class ProcessLocation : Fragment() {
             val fakeLatitude = bundle.getSerializable("latitude")
             val fakeLongtitude = bundle.getSerializable("longitude")
 
-            initateNewUser()
             initiateNewUser(uid, fakeLatitude as Double, fakeLongtitude as Double) {
                 if (!it) {
                     if (buttonVisible) {
@@ -93,9 +93,6 @@ class ProcessLocation : Fragment() {
         return v;
     }
 
-    private fun initateNewUser() {
-        TODO("Not yet implemented")
-    }
 
 
     private fun startMainActivity() {
@@ -116,6 +113,19 @@ class ProcessLocation : Fragment() {
         locationService.getLocation { result ->
             myCallback.invoke(result)
         }
+
+        activity?.let {
+            FusedLocationService(it, this.requireActivity()).setUpLocationListener {
+                Timber.tag("FusedLocation ").v(it.toString())
+                myCallback.invoke(
+                    mapOf<String, Double>(
+                        "latitude" to it[0].latitude,
+                        "longitude" to it[0].longitude
+                    )
+                )
+            }
+        }
+
 
     }
 
