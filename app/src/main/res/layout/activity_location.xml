@@ -6,50 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".location.Location">
 
-    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-        android:id="@+id/randomButton"
-        android:layout_width="153dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="64dp"
-        android:background="@drawable/blue_button"
-        android:text="Try Again"
-        android:textColor="@android:color/white"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:visibility="invisible"
+
+    <FrameLayout
+        android:id="@+id/frameLocationFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:spinning_bar_color="@android:color/white"
-        app:spinning_bar_padding="1dp" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView"
-        android:layout_width="388dp"
-        android:layout_height="533dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/loadingearth" />
-
-    <TextView
-        android:id="@+id/locationStatusText"
-        style="@style/normalSubText"
-        android:layout_width="352dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginBottom="115dp"
-        android:text="We are processing your data... It will take some time"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/randomButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/animationView"
-        app:layout_constraintVertical_bias="0.0" />
-
-
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

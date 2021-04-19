@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/waterQuizLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout9"
         style="@style/questions_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnknownIdInLayout">
 
         <TextView
             android:id="@+id/question1_text"
@@ -24,7 +24,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-            android:id="@+id/radioGroup1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -35,7 +34,6 @@
             app:layout_constraintTop_toBottomOf="@+id/question1_text">
 
             <RadioButton
-                android:id="@+id/option1_rg1"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,7 +41,6 @@
                 android:text="Goal of water conservation" />
 
             <RadioButton
-                android:id="@+id/option2_rg1"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,12 +66,11 @@
             style="@style/normalSubText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="What is the main cause of water pollution?"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="What is the main cause of water pollution?" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-            android:id="@+id/radioGroup2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="1"
@@ -86,7 +82,6 @@
             app:layout_constraintVertical_bias="0.751">
 
             <RadioButton
-                android:id="@+id/option1_rg2"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,7 +89,6 @@
                 android:text="Invasive species" />
 
             <RadioButton
-                android:id="@+id/option2_rg2"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -103,7 +97,6 @@
                 android:text="Animals" />
 
             <RadioButton
-                android:id="@+id/option3_rg2"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -127,12 +120,11 @@
             style="@style/normalSubText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Which of the following is a way of conserving water?"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Which of the following is a way of conserving water?" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-            android:id="@+id/radioGroup3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="1"
@@ -144,7 +136,6 @@
             app:layout_constraintVertical_bias="0.751">
 
             <RadioButton
-                android:id="@+id/option1_rg3"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -152,7 +143,6 @@
                 android:text="Leave the tap running while brushing teeth" />
 
             <RadioButton
-                android:id="@+id/option2_rg3"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -161,7 +151,6 @@
                 android:text="Use a hose to wash the car" />
 
             <RadioButton
-                android:id="@+id/option3_rg3"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -192,7 +181,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-            android:id="@+id/radioGroup4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="1"
@@ -204,7 +192,6 @@
             app:layout_constraintVertical_bias="0.751">
 
             <RadioButton
-                android:id="@+id/option1_rg4"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -212,7 +199,6 @@
                 android:text="Yes" />
 
             <RadioButton
-                android:id="@+id/option2_rg4"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -224,8 +210,6 @@
         </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

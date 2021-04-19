@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/not_interested"
-        android:title="Not Interested"/>
-    <item
-        android:id="@+id/share"
-        android:title="Share"/>
-    <item android:id="@+id/delete"
-        android:title="Delete"/>
+    <item android:title="Not Interested" />
+    <item android:title="Share" />
+    <item android:title="Delete" />
 </menu>

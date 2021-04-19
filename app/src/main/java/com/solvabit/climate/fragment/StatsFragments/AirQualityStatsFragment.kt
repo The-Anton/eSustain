@@ -1,41 +1,29 @@
 package com.solvabit.climate.fragment.StatsFragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.google.firebase.auth.FirebaseAuth
+import androidx.fragment.app.Fragment
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.solvabit.climate.R
-import com.solvabit.climate.Repository.Repository
-import com.solvabit.climate.database.UserDatabase
-import com.solvabit.climate.databinding.DashboardFragmentBindingImpl
 import com.solvabit.climate.databinding.FragmentAirQualityStatsBinding
 import com.solvabit.climate.dialog.AqiDialog
 import com.solvabit.climate.fragment.Dashboard
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class AirQualityStatsFragment : Fragment() {
 
     lateinit var binding: FragmentAirQualityStatsBinding
     val localuser = Dashboard.localuser
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
         binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_air_quality_stats, container, false
+            inflater, R.layout.fragment_air_quality_stats, container, false
         )
 
         addData()
@@ -49,7 +37,11 @@ class AirQualityStatsFragment : Fragment() {
     }
 
     private fun addData() {
-        circularloader(localuser.aqi?.toFloat() ?: 0f, 500f, binding.circularProgressBarAirQualityStats)
+        circularloader(
+            localuser.aqi?.toFloat() ?: 0f,
+            500f,
+            binding.circularProgressBarAirQualityStats
+        )
 
         binding.apply {
             this.airQualityStats.text = localuser.aqi.toString()
@@ -62,7 +54,7 @@ class AirQualityStatsFragment : Fragment() {
         }
     }
 
-    private fun circularloader(data: Float, max:Float, circularProgressBar : CircularProgressBar){
+    private fun circularloader(data: Float, max: Float, circularProgressBar: CircularProgressBar) {
         circularProgressBar.apply {
             setProgressWithAnimation(data, 3000) // =1s
             progressMax = max

@@ -1,11 +1,11 @@
 package com.solvabit.climate.fragment.Tasks
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,10 +21,6 @@ class RecycleTask : Fragment() {
     private val actionsList = TaskFragment.actionsList
     private var taskId = 0
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +45,7 @@ class RecycleTask : Fragment() {
     }
 
     private fun initializeToolbar() {
-        binding.recycleTitle.text = actionsList[taskId - 1].title.toString()
+        binding.recycleTitle.text = actionsList[taskId - 1].title
         binding.backArrowRecycle.setOnClickListener {
             binding.root.findNavController().popBackStack()
         }

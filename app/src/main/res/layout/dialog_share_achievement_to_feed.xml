@@ -78,7 +78,6 @@
                 tools:text="Username" />
 
             <TextView
-                android:id="@+id/achievement_tag_dialog"
                 style="@style/normaltext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -103,8 +102,8 @@
             android:background="@drawable/edittextbg"
             android:hint="Write Something for your post!"
             android:inputType="textMultiLine"
-            android:padding="10dp"
             android:minHeight="60dp"
+            android:padding="10dp"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
@@ -119,8 +118,8 @@
                 android:id="@+id/user_image_achievement_bitmap"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:elevation="10dp"
                 android:layout_marginRight="40dp"
+                android:elevation="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/post_image_multi_image_dialog"
                 app:layout_constraintStart_toStartOf="@+id/post_image_multi_image_dialog"
@@ -131,8 +130,8 @@
                 android:id="@+id/logo_achievement_bitmap"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:elevation="8dp"
                 android:layout_marginStart="40dp"
+                android:elevation="8dp"
                 android:src="@drawable/ic_profile_circle_24"
                 app:layout_constraintBottom_toBottomOf="@+id/user_image_achievement_bitmap"
                 app:layout_constraintStart_toStartOf="@+id/user_image_achievement_bitmap"

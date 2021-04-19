@@ -1,8 +1,5 @@
 package com.solvabit.climate.dataModel
 
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -13,7 +10,6 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.card_issue_post.view.*
-import kotlinx.android.synthetic.main.card_post_view.view.*
 import kotlinx.android.synthetic.main.card_post_view.view.category
 import kotlinx.android.synthetic.main.card_post_view.view.post_main_image
 import java.text.SimpleDateFormat
@@ -58,7 +54,6 @@ class IssuePost(private val post: Post) : Item<ViewHolder>() {
             }
         })
     }
-
 
 
 }

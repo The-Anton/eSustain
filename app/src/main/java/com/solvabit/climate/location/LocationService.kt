@@ -1,38 +1,37 @@
 package com.solvabit.climate.location
 
+import android.Manifest
 import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.preference.PreferenceManager
+import androidx.core.app.ActivityCompat
 import com.google.firebase.database.FirebaseDatabase
-import com.solvabit.climate.network.GenericApiService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
-class LocationService(var uid: String, var locationManager: LocationManager) {
+class LocationService(var context: Context) {
 
-    private var hasGps = false
-    private var hasNetwork = false
     private var locationGps: Location? = null
-    private var locationNetwork: Location? = null
     private var location: Location? = null
-    private lateinit var locationListener:LocationListener
-    var locationListenerCount =0
-    var database = FirebaseDatabase.getInstance();
-
+    private lateinit var locationListener: LocationListener
+    var database = FirebaseDatabase.getInstance()
+    var permissions = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
+    private var gpsStatus: Boolean = false
+    var noOfRetry = 0
+    lateinit var locationManager: LocationManager
 
     @SuppressLint("MissingPermission")
-    fun getLocation(context: Context, myCallback: (result: Map<String, Double>) -> Unit) {
+    fun getLocation(myCallback: (result: Map<String, Double>) -> Unit) {
+        locationManager =
+            context.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
         val hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         val hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
@@ -42,8 +41,13 @@ class LocationService(var uid: String, var locationManager: LocationManager) {
                 locationGps = p0
                 location = locationGps
 
-                Log.v("LocationService", " GPS: ${locationGps}")
-                myCallback.invoke(mapOf<String, Double>("latitude" to locationGps!!.latitude, "longitude" to locationGps!!.longitude))
+                Timber.v("LocationService %s", " GPS: ${locationGps}")
+                myCallback.invoke(
+                    mapOf<String, Double>(
+                        "latitude" to locationGps!!.latitude,
+                        "longitude" to locationGps!!.longitude
+                    )
+                )
                 locationManager.removeUpdates(locationListener)
 
             }
@@ -55,22 +59,42 @@ class LocationService(var uid: String, var locationManager: LocationManager) {
             if (hasGps) {
 
                 locationManager.requestLocationUpdates(
-                        LocationManager.GPS_PROVIDER,
-                        5000,
-                        0F,
-                        locationListener
+                    LocationManager.GPS_PROVIDER,
+                    5000,
+                    0F,
+                    locationListener
                 )
-
-//
-//                val localGpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-//                if (localGpsLocation != null) locationGps = localGpsLocation
 
             }
         } else {
-            Toast.makeText(context, "Please turn on your location or internet", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Please turn on your location or internet", Toast.LENGTH_SHORT)
+                .show()
 
         }
 
+    }
+
+
+    fun locationEnabled(): Boolean {
+        locationManager =
+            context.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        return gpsStatus
+    }
+
+    fun checkPermission(): Boolean {
+
+        var allSuccess = true
+        for (i in permissions.indices) {
+            if (ActivityCompat.checkSelfPermission(
+                    context,
+                    permissions[i]
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                allSuccess = false
+            }
+        }
+        return allSuccess
     }
 
 

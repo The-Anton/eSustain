@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/electricityQuizLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout9"
         style="@style/questions_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/question1_text"
@@ -23,7 +21,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-            android:id="@+id/radioGroup1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -34,7 +31,6 @@
             app:layout_constraintTop_toBottomOf="@+id/question1_text">
 
             <RadioButton
-                android:id="@+id/option1_rg1"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +38,6 @@
                 android:text="Yes" />
 
             <RadioButton
-                android:id="@+id/option2_rg1"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,12 +63,11 @@
             style="@style/normalSubText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Which consume least electricity?"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Which consume least electricity?" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-            android:id="@+id/radioGroup2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="1"
@@ -85,7 +79,6 @@
             app:layout_constraintVertical_bias="0.751">
 
             <RadioButton
-                android:id="@+id/option1_rg2"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -93,7 +86,6 @@
                 android:text="CFL bulbs" />
 
             <RadioButton
-                android:id="@+id/option2_rg2"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,7 +94,6 @@
                 android:text="LED lights" />
 
             <RadioButton
-                android:id="@+id/option3_rg2"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -126,12 +117,11 @@
             style="@style/normalSubText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="How we can have more day light in our houses?"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="How we can have more day light in our houses?" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-            android:id="@+id/radioGroup3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="1"
@@ -143,7 +133,6 @@
             app:layout_constraintVertical_bias="0.751">
 
             <RadioButton
-                android:id="@+id/option1_rg3"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -151,7 +140,6 @@
                 android:text="Open window curtains" />
 
             <RadioButton
-                android:id="@+id/option2_rg3"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -160,7 +148,6 @@
                 android:text="Buidling houses with with transparent mirror walls" />
 
             <RadioButton
-                android:id="@+id/option3_rg3"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -191,7 +178,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-            android:id="@+id/radioGroup4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="1"
@@ -203,7 +189,6 @@
             app:layout_constraintVertical_bias="0.751">
 
             <RadioButton
-                android:id="@+id/option1_rg4"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -211,7 +196,6 @@
                 android:text="Yes" />
 
             <RadioButton
-                android:id="@+id/option2_rg4"
                 style="@style/normalSubText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -223,8 +207,6 @@
         </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,18 +17,18 @@
         android:id="@+id/feed_fragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_dynamic_feed_24"
-        android:title="Feed"/>
+        android:title="Feed" />
     <item
         android:id="@+id/map_fragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_map_24"
-        android:title="Map"/>
+        android:title="Map" />
 
     <item
         android:id="@+id/taskFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_add_task_24"
-        android:title="Task"/>
+        android:title="Task" />
 
 
 </menu>

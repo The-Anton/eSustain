@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.solvabit.climate.R
 import com.solvabit.climate.fragment.Dashboard
-import kotlinx.android.synthetic.main.dialog_join_group_confirm.view.*
 import timber.log.Timber
 
 
@@ -19,7 +18,11 @@ class StartNewTaskDialog(val taskId: String) : DialogFragment() {
     private val localUser = Dashboard.localuser
 
     interface EditNameDialogListener {
-        fun onFinishEditDialog(taskId: String, remainingAction: List<String>, presentAction: List<String>)
+        fun onFinishEditDialog(
+            taskId: String,
+            remainingAction: List<String>,
+            presentAction: List<String>
+        )
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

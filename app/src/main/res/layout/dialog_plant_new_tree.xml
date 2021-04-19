@@ -22,11 +22,11 @@
         android:id="@+id/add_pic_trees_button_dialog"
         android:layout_width="110dp"
         android:layout_height="50dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/blue_button"
         android:text="Add Image"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grow_tree_animation_dialog" />
@@ -42,11 +42,11 @@
         android:adjustViewBounds="true"
         android:cropToPadding="false"
         android:visibility="gone"
-        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_pic_trees_button_dialog"
-        tools:srcCompat="@drawable/apple" />
+        tools:srcCompat="@drawable/apple"
+        tools:visibility="visible" />
 
     <CheckBox
         android:id="@+id/checkbox_plant_tree_dialog"
@@ -55,10 +55,10 @@
         android:layout_marginTop="15dp"
         android:text="Share on maps"
         android:visibility="gone"
-        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_tree_dialog" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_tree_dialog"
+        tools:visibility="visible" />
 
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/post_image_button_dialog"
@@ -70,11 +70,11 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:visibility="gone"
-        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox_plant_tree_dialog" />
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_plant_tree_dialog"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

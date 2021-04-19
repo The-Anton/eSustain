@@ -42,13 +42,13 @@
 
                 <TextView
                     android:id="@+id/groupname_chatLog"
+                    style="@style/normalTitles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:maxLength="30"
                     android:textColor="@android:color/black"
-                    style="@style/normalTitles"
                     app:layout_constraintStart_toEndOf="@+id/groupimage_chatLog"
                     app:layout_constraintTop_toTopOf="@+id/groupimage_chatLog"
                     tools:text="Green Agra" />
@@ -93,8 +93,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/send_button_chat_log"
             app:layout_constraintStart_toStartOf="parent" />
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/send_button_chat_log"

@@ -1,13 +1,12 @@
 package com.solvabit.climate.fragment.StatsFragments
 
 import android.os.Bundle
-import android.os.DropBoxManager
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -18,31 +17,25 @@ import com.solvabit.climate.R
 import com.solvabit.climate.Repository.Repository
 import com.solvabit.climate.database.Stats
 import com.solvabit.climate.database.UserDatabase
-import com.solvabit.climate.databinding.FragmentAirQualityStatsBinding
 import com.solvabit.climate.databinding.FragmentForestDensityStatsBinding
 import com.solvabit.climate.dialog.ForestDialog
 import com.solvabit.climate.fragment.Dashboard
-import kotlinx.android.synthetic.main.fragment_forest_density_stats.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.security.KeyStore
 
 class ForestDensityStatsFragment : Fragment() {
 
     lateinit var binding: FragmentForestDensityStatsBinding
     val localuser = Dashboard.localuser
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_forest_density_stats, container, false)
+            inflater, R.layout.fragment_forest_density_stats, container, false
+        )
         val uid = FirebaseAuth.getInstance().uid.toString()
         val instance = UserDatabase.getInstance(context?.applicationContext!!)
         val dao = instance.userDao()
@@ -57,8 +50,8 @@ class ForestDensityStatsFragment : Fragment() {
         val stats = Stats()
         setLineChart(stats)
         GlobalScope.launch(Dispatchers.Main) {
-            localRepo.getStats(statsDao){
-                Log.v("StatsFragment",it.toString())
+            localRepo.getStats(statsDao) {
+                Log.v("StatsFragment", it.toString())
                 setLineChart(it)
             }
 
@@ -68,7 +61,7 @@ class ForestDensityStatsFragment : Fragment() {
     }
 
 
-    private fun setLineChart(stats:Stats) {
+    private fun setLineChart(stats: Stats) {
 
         val xvalue = ArrayList<String>()
         xvalue.add("2011")
@@ -137,9 +130,9 @@ class ForestDensityStatsFragment : Fragment() {
         binding.lineChart.setTouchEnabled(false)
         binding.lineChart.setDescription(" ")
         binding.lineChart.setDrawGridBackground(false)
-        binding.lineChart.getXAxis().setDrawGridLines(false);
-        binding.lineChart.getAxisLeft().setDrawGridLines(false);
-        binding.lineChart.getAxisRight().setDrawGridLines(false);
+        binding.lineChart.xAxis.setDrawGridLines(false)
+        binding.lineChart.axisLeft.setDrawGridLines(false)
+        binding.lineChart.axisRight.setDrawGridLines(false)
 
         binding.lineChart2.data = percentageData
         binding.lineChart2.setBackgroundColor(resources.getColor(R.color.white))
@@ -147,15 +140,17 @@ class ForestDensityStatsFragment : Fragment() {
         binding.lineChart2.setTouchEnabled(false)
         binding.lineChart2.setDescription(" ")
         binding.lineChart2.setDrawGridBackground(false)
-        binding.lineChart2.getXAxis().setDrawGridLines(false);
-        binding.lineChart2.getAxisLeft().setDrawGridLines(false);
-        binding.lineChart2.getAxisRight().setDrawGridLines(false);
+        binding.lineChart2.xAxis.setDrawGridLines(false)
+        binding.lineChart2.axisLeft.setDrawGridLines(false)
+        binding.lineChart2.axisRight.setDrawGridLines(false)
     }
 
     private fun addData() {
 
-        circularloader(localuser.forestDensity?.toFloat()
-                ?: 0f, 10f, binding.circularProgressBarForestQualityStats)
+        circularloader(
+            localuser.forestDensity?.toFloat()
+                ?: 0f, 10f, binding.circularProgressBarForestQualityStats
+        )
         binding.apply {
             this.forestQualityStats.text = localuser.forestDensity.toString()
             this.treesPlantedStats.text = localuser.treesPlanted.toString()

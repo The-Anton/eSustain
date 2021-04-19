@@ -1,11 +1,11 @@
 package com.solvabit.climate.fragment.ChatFragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -23,8 +23,6 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.card_from_chat_box.view.*
-import kotlinx.android.synthetic.main.card_post_view.view.*
-import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,12 +33,10 @@ class ChatLogFragment : Fragment() {
     private val localUser = Dashboard.localuser
     private lateinit var navbar: BottomNavigationView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_chat_log, container, false)
         binding.recyclerViewChatLog.adapter = adapter
@@ -52,7 +48,7 @@ class ChatLogFragment : Fragment() {
 
         binding.backArrowChatLog.setOnClickListener {
             binding.root.findNavController()
-                    .navigate(ChatLogFragmentDirections.actionChatLogFragmentToAllChatsFragment())
+                .navigate(ChatLogFragmentDirections.actionChatLogFragmentToAllChatsFragment())
         }
 
         binding.sendButtonChatLog.setOnClickListener {
@@ -87,12 +83,9 @@ class ChatLogFragment : Fragment() {
 
                 if (chatMessage != null) {
 
-                    if(chatMessage.fromId == uid)
-                    {
+                    if (chatMessage.fromId == uid) {
                         adapter.add(AddToChatItem(chatMessage))
-                    }
-                    else
-                    {
+                    } else {
                         adapter.add(AddFromChatItem(chatMessage))
                     }
                     binding.recyclerViewChatLog.scrollToPosition(adapter.itemCount - 1)
@@ -112,26 +105,26 @@ class ChatLogFragment : Fragment() {
         if (fromId == null) return
 
         val chatMessage =
-                ChatMessage(
-                        postData.key,
-                        text,
-                        fromId,
-                        System.currentTimeMillis(),
-                        imageUrl!!
-                )
+            ChatMessage(
+                postData.key,
+                text,
+                fromId,
+                System.currentTimeMillis(),
+                imageUrl!!
+            )
 
         val ref = FirebaseDatabase.getInstance().getReference("/allMessages/${postData.key}").push()
         ref.setValue(chatMessage)
-                .addOnSuccessListener {
-                    binding.enterMessageChatLog.text.clear()
-                    binding.recyclerViewChatLog.scrollToPosition(adapter.itemCount - 1)
-                }
+            .addOnSuccessListener {
+                binding.enterMessageChatLog.text.clear()
+                binding.recyclerViewChatLog.scrollToPosition(adapter.itemCount - 1)
+            }
 
     }
 
     private fun initializePostData(postData: Post) {
         binding.groupnameChatLog.text = postData.group_name
-        if(postData.post_image.isNotEmpty())
+        if (postData.post_image.isNotEmpty())
             Picasso.get().load(postData.post_image).into(binding.groupimageChatLog)
         val time = postData.time.toLong()
         val sfd = SimpleDateFormat("dd-MM-yyyy")

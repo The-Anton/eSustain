@@ -10,14 +10,14 @@ import com.solvabit.climate.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.card_staggered_recycler_view.view.*
 
-class StaggeredRecyclerViewAdapter(private val images: MutableList<String>)
-    : RecyclerView.Adapter<StaggeredRecyclerViewAdapter.ViewHolder>() {
+class StaggeredRecyclerViewAdapter(private val images: MutableList<String>) :
+    RecyclerView.Adapter<StaggeredRecyclerViewAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // inflate the custom view from xml layout file
         val view: View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.card_staggered_recycler_view,parent,false)
+            .inflate(R.layout.card_staggered_recycler_view, parent, false)
 
         // return the view holder
         return ViewHolder(view)
@@ -27,7 +27,7 @@ class StaggeredRecyclerViewAdapter(private val images: MutableList<String>)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // display the current color
-        holder.image.colorFilter = LightingColorFilter(0xFF7F7F7F.toInt(),0x00000000)
+        holder.image.colorFilter = LightingColorFilter(0xFF7F7F7F.toInt(), 0x00000000)
         Picasso.get().load(images[position]).into(holder.image)
 //        holder.color.text = images[position]
     }
@@ -39,7 +39,7 @@ class StaggeredRecyclerViewAdapter(private val images: MutableList<String>)
     }
 
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.staggered_imageView
     }
 

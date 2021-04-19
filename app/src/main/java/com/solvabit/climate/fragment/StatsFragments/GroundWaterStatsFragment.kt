@@ -1,19 +1,19 @@
 package com.solvabit.climate.fragment.StatsFragments
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.solvabit.climate.R
 import com.solvabit.climate.databinding.FragmentGroundWaterStatsBinding
 import com.solvabit.climate.fragment.Dashboard
-import kotlinx.android.synthetic.main.fragment_ground_water_stats.*
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,30 +22,22 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-
 class GroundWaterStatsFragment : Fragment() {
     lateinit var binding: FragmentGroundWaterStatsBinding
     val localuser = Dashboard.localuser
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_ground_water_stats, container, false
+            inflater, R.layout.fragment_ground_water_stats, container, false
         )
 
         addData()
         setPieChart()
         return binding.root
     }
-
-
 
 
     private fun setPieChart() {
@@ -75,29 +67,27 @@ class GroundWaterStatsFragment : Fragment() {
 
     private fun addData() {
         circularloader(
-                localuser.groundWaterData[11]?.toFloat()
-                        ?: 0f, 300f, binding.circularProgressBarGroundWaterStageStats
+            localuser.groundWaterData[11].toFloat(),
+            300f,
+            binding.circularProgressBarGroundWaterStageStats
         )
 
 
         binding.apply {
-            this.groundwaterstage.text = localuser.groundWaterData[11].toString()
-            this.annualDomesticAllocationBy2025.text = localuser.groundWaterData[0].toString()
-            this.currentAllocationForUse.text = localuser.groundWaterData[3].toString()
-            this.totalAnnualRecharge.text = localuser.groundWaterData[5].toString()
-            this.currentAnnualExtraction.text = localuser.groundWaterData[2].toString()
-            this.totalNaturalDischarge.text = localuser.groundWaterData[12].toString()
-            this.netAvaibilityForFuture.text = localuser.groundWaterData[6].toString()
-            this.rainfallMonsoonRecharge.text = localuser.groundWaterData[9].toString()
-            this.rainfallNonMonsoonRecharge.text = localuser.groundWaterData[10].toString()
+            this.groundwaterstage.text = localuser.groundWaterData[11]
+            this.annualDomesticAllocationBy2025.text = localuser.groundWaterData[0]
+            this.currentAllocationForUse.text = localuser.groundWaterData[3]
+            this.totalAnnualRecharge.text = localuser.groundWaterData[5]
+            this.currentAnnualExtraction.text = localuser.groundWaterData[2]
+            this.totalNaturalDischarge.text = localuser.groundWaterData[12]
+            this.netAvaibilityForFuture.text = localuser.groundWaterData[6]
+            this.rainfallMonsoonRecharge.text = localuser.groundWaterData[9]
+            this.rainfallNonMonsoonRecharge.text = localuser.groundWaterData[10]
 
         }
 
 
-
-
     }
-
 
 
     fun circularloader(data: Float, max: Float, circularProgressBar: CircularProgressBar) {

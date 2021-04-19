@@ -32,21 +32,23 @@ class JoinGroupConfirmDialog(val post: Post) : DialogFragment() {
         joinGroupBtn.setOnClickListener {
             Toast.makeText(context, "Joining group", Toast.LENGTH_SHORT).show()
             val uid = FirebaseAuth.getInstance().uid
-            val ref = FirebaseDatabase.getInstance().getReference("/PostData/${post.key}/interestedUsers/$uid")
+            val ref = FirebaseDatabase.getInstance()
+                .getReference("/PostData/${post.key}/interestedUsers/$uid")
             ref.setValue(true)
-                    .addOnSuccessListener {
-                        val allPostMaps = localUser.interestedGroups.plus(Pair(post.key, post))
-                        FirebaseDatabase.getInstance().getReference("/Users/$uid/interestedGroups")
-                                .setValue(allPostMaps)
-                                .addOnSuccessListener {
-                                    dialogView.confirm_join_group_textView.text = "Congratulations!! \n You can check your newly added group now"
-                                    Toast.makeText(
-                                        context,
-                                        "Added successfully",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                    }
+                .addOnSuccessListener {
+                    val allPostMaps = localUser.interestedGroups.plus(Pair(post.key, post))
+                    FirebaseDatabase.getInstance().getReference("/Users/$uid/interestedGroups")
+                        .setValue(allPostMaps)
+                        .addOnSuccessListener {
+                            dialogView.confirm_join_group_textView.text =
+                                "Congratulations!! \n You can check your newly added group now"
+                            Toast.makeText(
+                                context,
+                                "Added successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                }
 
         }
 

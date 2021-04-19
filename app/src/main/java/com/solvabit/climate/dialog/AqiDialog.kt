@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.solvabit.climate.R
 
-class AqiDialog:DialogFragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+class AqiDialog : DialogFragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.aqi_intro, container, false)
     }
 

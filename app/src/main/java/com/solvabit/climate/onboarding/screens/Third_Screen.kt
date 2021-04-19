@@ -23,9 +23,9 @@ class Third_Screen : Fragment() {
 
         view.get_started.setOnClickListener {
             val intent = Intent(activity, RegistrationPage::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            Animatoo.animateSlideUp(context);   //fire the animation
+            Animatoo.animateSlideUp(context)   //fire the animation
         }
 
         return view

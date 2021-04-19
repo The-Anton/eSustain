@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.LocationPermissionInfo">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="311dp"
+            android:layout_height="378dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/locationsheet" />
+
+        <TextView
+            android:id="@+id/infoText1"
+            style="@style/normalSubText"
+            android:layout_width="303dp"
+            android:layout_height="83dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="115dp"
+            android:text="To provide you with the realistic and genuine environment data in your region the app requires your location."
+            android:textAlignment="center"
+            android:textColor="#8A8686"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/animationView"
+            app:layout_constraintStart_toStartOf="@+id/animationView"
+            app:layout_constraintTop_toBottomOf="@+id/animationView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/infoText2"
+            style="@style/normalSubText"
+            android:layout_width="308dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="5dp"
+            android:text="We never share your location with any other third party application."
+            android:textAlignment="center"
+            android:textColor="@color/light_gray"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/grantPermissionButton"
+            app:layout_constraintEnd_toEndOf="@+id/infoText1"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="@+id/infoText1"
+            app:layout_constraintTop_toBottomOf="@+id/infoText1" />
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/grantPermissionButton"
+            style="@style/normalSubText"
+            android:layout_width="256dp"
+            android:layout_height="52dp"
+            android:layout_marginBottom="72dp"
+            android:background="@drawable/blue_button"
+            android:text="Grant Location Permission"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/infoText2"
+            app:spinning_bar_color="@android:color/white"
+            app:spinning_bar_padding="1dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

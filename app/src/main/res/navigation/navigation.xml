@@ -2,13 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
     app:startDestination="@id/dashboard_fragment">
     <fragment
         android:id="@+id/dashboard_fragment"
         android:name="com.solvabit.climate.fragment.Dashboard"
         android:label="dashboard_fragment"
-        tools:layout="@layout/dashboard_fragment" >
+        tools:layout="@layout/dashboard_fragment">
         <action
             android:id="@+id/action_dashboard_fragment_to_sendReferral"
             app:destination="@id/sendReferral" />
@@ -37,7 +36,7 @@
         android:id="@+id/feed_fragment"
         android:name="com.solvabit.climate.FeedFragment"
         android:label="feed_fragment"
-        tools:layout="@layout/feed_fragment" >
+        tools:layout="@layout/feed_fragment">
         <action
             android:id="@+id/action_feed_fragment_to_createPostFragment"
             app:destination="@id/createPostFragment"
@@ -65,14 +64,15 @@
         <argument
             android:name="status"
             app:argType="string" />
-        <argument android:name="taskId"
+        <argument
+            android:name="taskId"
             app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.solvabit.climate.fragment.StatisticsFragment"
         android:label="fragment_statistics"
-        tools:layout="@layout/fragment_statistics" >
+        tools:layout="@layout/fragment_statistics">
         <action
             android:id="@+id/action_statisticsFragment_to_sendReportFragment"
             app:destination="@id/sendReportFragment" />
@@ -132,7 +132,7 @@
         android:id="@+id/taskFragment"
         android:name="com.solvabit.climate.fragment.TaskFragment"
         android:label="fragment_task"
-        tools:layout="@layout/fragment_task" >
+        tools:layout="@layout/fragment_task">
         <action
             android:id="@+id/action_taskFragment_to_treesPlanted"
             app:destination="@id/treesPlanted" />
@@ -156,13 +156,13 @@
         android:id="@+id/recycleTask"
         android:name="com.solvabit.climate.fragment.Tasks.RecycleTask"
         android:label="fragment_recycle_task"
-        tools:layout="@layout/fragment_recycle_task" >
+        tools:layout="@layout/fragment_recycle_task">
         <argument
             android:name="taskId"
             app:argType="string" />
         <action
             android:id="@+id/action_recycleTask_to_createPostFragment"
-            app:destination="@id/createPostFragment" >
+            app:destination="@id/createPostFragment">
             <argument
                 android:name="postTypeId"
                 android:defaultValue="0" />
@@ -175,7 +175,7 @@
         android:id="@+id/guideTask"
         android:name="com.solvabit.climate.fragment.Tasks.GuideTask"
         android:label="fragment_guide_task"
-        tools:layout="@layout/fragment_guide_task" >
+        tools:layout="@layout/fragment_guide_task">
         <argument
             android:name="taskId"
             app:argType="string" />
@@ -184,5 +184,5 @@
         android:id="@+id/sendReportFragment"
         android:name="com.solvabit.climate.fragment.Tasks.SendReportFragment"
         android:label="SendReportFragment"
-        tools:layout="@layout/fragment_send_report"/>
+        tools:layout="@layout/fragment_send_report" />
 </navigation>

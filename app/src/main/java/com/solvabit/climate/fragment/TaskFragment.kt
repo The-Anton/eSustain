@@ -1,7 +1,6 @@
 package com.solvabit.climate.fragment
 
 import android.graphics.ColorMatrixColorFilter
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +10,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
-import com.google.android.gms.maps.SupportMapFragment
 import com.solvabit.climate.R
 import com.solvabit.climate.database.SingleAction
 import com.solvabit.climate.databinding.FragmentTaskBinding
 import com.solvabit.climate.dialog.StartNewTaskDialog
-import com.solvabit.climate.location.PERMISSION_REQUEST
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
@@ -27,10 +24,6 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
     private lateinit var binding: FragmentTaskBinding
 
     private var localUser = Dashboard.localuser
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onResume() {
         super.onResume()
@@ -63,7 +56,8 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
         Picasso.get().load(Dashboard.localuser.imageUrl).into(binding.userImage)
 
         binding.coinsAndProfileTask.setOnClickListener {
-            binding.root.findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToProfileFragment())
+            binding.root.findNavController()
+                .navigate(TaskFragmentDirections.actionTaskFragmentToProfileFragment())
         }
 
         return binding.root
@@ -74,7 +68,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
         changeBottomNavigationState()
     }
 
-    fun changeBottomNavigationState(){
+    fun changeBottomNavigationState() {
 
         val bottomNavMenu = activity?.bottomNavigation?.menu
 
@@ -87,22 +81,19 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
 
     private fun setClickForTasks() {
 
-        for( i in 1 .. 14) {
+        for (i in 1..14) {
             val imageView = returnImageId(i.toString())
-            imageView.setImageResource(actionsList[i-1].background)
+            imageView.setImageResource(actionsList[i - 1].background)
             var status = "remaining"
-            if(localUser.completedAction.contains(i.toString()))
+            if (localUser.completedAction.contains(i.toString()))
                 status = "completed"
-            else if(localUser.presentAction.contains(i.toString()))
+            else if (localUser.presentAction.contains(i.toString()))
                 status = "present"
             imageView.setOnClickListener {
 
-                if(status=="remaining")
-                {
+                if (status == "remaining") {
                     showAddTaskDialog(i.toString())
-                }
-                else
-                {
+                } else {
                     navigateToTask(i, status)
                 }
             }
@@ -110,7 +101,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
     }
 
     private fun navigateToTask(i: Int, status: String) {
-        when(actionsList[i - 1].category){
+        when (actionsList[i - 1].category) {
             tree -> binding.root.findNavController().navigate(
                 TaskFragmentDirections.actionTaskFragmentToTreesPlanted(
                     actionsList[i - 1].number,
@@ -182,7 +173,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
 
 
     private fun returnTickId(taskId: String): ImageView {
-        return when(taskId) {
+        return when (taskId) {
             "1" -> binding.greenTickAnimationPlantOneTree
             "2" -> binding.greenTickAnimationSeminar
             "3" -> binding.greenTickAnimationConserveElectricity
@@ -203,7 +194,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
 
 
     private fun returnImageId(taskId: String): ImageView {
-        return when(taskId) {
+        return when (taskId) {
             "1" -> binding.plantOneTreeImageViewTasks
             "2" -> binding.seminarImageViewTasks
             "3" -> binding.conserveElectricityImageViewTasks
@@ -380,7 +371,7 @@ class TaskFragment : Fragment(), StartNewTaskDialog.EditNameDialogListener {
         )
     }
 
-    companion object{
+    companion object {
         val matrix = floatArrayOf(
             0.33f, 0.33f, 0.33f, 0f, 0f,
             0.33f, 0.33f, 0.33f, 0f, 0f,

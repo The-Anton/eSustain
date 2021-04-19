@@ -3,10 +3,10 @@ package com.solvabit.climate.registerLogin
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -32,30 +32,30 @@ class loginpage : AppCompatActivity() {
         login()
 
         //forgot password
-        binding.forgotPasswordLogin.setOnClickListener{
+        binding.forgotPasswordLogin.setOnClickListener {
             val intent = Intent(this, ResetPassword::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
 
         //Back to registration text
-        binding.backToRegistrationLogin.setOnClickListener{
-            val intent = Intent(this , RegistrationPage::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
+        binding.backToRegistrationLogin.setOnClickListener {
+            val intent = Intent(this, RegistrationPage::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
     }
 
-    private fun login(){
+    private fun login() {
 
-        binding.imageView2.setOnClickListener {
-            Toast.makeText(this,"Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
-
-        }
-
-        binding.imageView3.setOnClickListener {
-            Toast.makeText(this,"Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
-        }
+//        binding.imageView2.setOnClickListener {
+//            Toast.makeText(this, "Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
+//
+//        }
+//
+//        binding.imageView3.setOnClickListener {
+//            Toast.makeText(this, "Support Not Availaible!! ", Toast.LENGTH_SHORT).show()
+//        }
 
         binding.googleLogin.setOnClickListener {
 
@@ -75,46 +75,49 @@ class loginpage : AppCompatActivity() {
         }
 
 
-        binding.loginButtonLogin.setOnClickListener{
+        binding.loginButtonLogin.setOnClickListener {
 
             binding.loginButtonLogin.startAnimation()
 
             val email = binding.emailEditTextLogin.text.toString()
             val password = binding.passwordEditTextLogin.text.toString()
 
-            if(email.isEmpty() || password.isEmpty()){
+            if (email.isEmpty() || password.isEmpty()) {
                 binding.loginButtonLogin.revertAnimation()
                 Toast.makeText(this, "Enter all Credentials", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener{
-                    if(it.isSuccessful) {
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
                         val deepColor = Color.parseColor("#27E1EF")
-                        val largeIcon = BitmapFactory.decodeResource(resources, R.drawable.blue_tick)
+                        val largeIcon =
+                            BitmapFactory.decodeResource(resources, R.drawable.blue_tick)
                         binding.loginButtonLogin.doneLoadingAnimation(deepColor, largeIcon)
                         val uid = FirebaseAuth.getInstance().uid
                         FirebaseDatabase.getInstance().getReference("/Users/$uid/active")
                             .setValue(true)
                         val handler = Handler()
                         handler.postDelayed({
-                            Toast.makeText(this, "Successfully Logged in", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, com.solvabit.climate.location.Location::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
+                            Toast.makeText(this, "Successfully Logged in", Toast.LENGTH_SHORT)
+                                .show()
+                            val intent =
+                                Intent(this, com.solvabit.climate.location.Location::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)
-                        },1000)
-                    }
-                    else
-                    {
+                        }, 1000)
+                    } else {
                         binding.loginButtonLogin.revertAnimation()
-                        Toast.makeText(this, "Wrong credentials. Try again!!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Wrong credentials. Try again!!", Toast.LENGTH_SHORT)
+                            .show()
                         return@addOnCompleteListener
                     }
                 }
                 .addOnFailureListener {
                     binding.loginButtonLogin.revertAnimation()
-                    Toast.makeText(this , "Error Logging in !!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error Logging in !!", Toast.LENGTH_SHORT).show()
                 }
 
         }
@@ -129,7 +132,7 @@ class loginpage : AppCompatActivity() {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
-                Timber.i( "firebaseAuthWithGoogle: $account.id")
+                Timber.i("firebaseAuthWithGoogle: $account.id")
 
                 Toast.makeText(this, "Sign in successful", Toast.LENGTH_SHORT).show()
 
@@ -143,9 +146,10 @@ class loginpage : AppCompatActivity() {
                 handler.postDelayed({
                     Toast.makeText(this, "Successfully Logged in", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, com.solvabit.climate.location.Location::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or ( Intent.FLAG_ACTIVITY_NEW_TASK)
+                    intent.flags =
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
-                },1000)
+                }, 1000)
 
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately

@@ -1,42 +1,9 @@
-package com.solvabit.climate.network;
+package com.solvabit.climate.network
 
 import android.util.Log
-import com.example.forests.data.airQualityDataService
-import com.example.forests.data.airQualityResponse.Data
 import com.example.forests.data.parametersDataService
-import java.net.CacheResponse
 
-public class GenericApiService(val uid: String, val lattitude: Double, val longitude: Double) {
-
-
-    suspend fun AirQualityData(): Data {
-        lateinit var airQualityData: List<Data>
-        val apiService = airQualityDataService()
-        val response = apiService?.getTreesByCoordinates(lattitude, longitude)?.await()
-        if (response != null) {
-            airQualityData = response.data
-            val aqi = airQualityData[0].aqi.toInt()
-
-            Log.i("AirQualityAPIresponse", response.data.toString())
-            return airQualityData[0]
-        }
-        return airQualityData[0]
-    }
-
-
-    suspend fun StateForestData(): Data {
-        lateinit var airQualityData: List<Data>
-        val apiService = airQualityDataService()
-        val response = apiService?.getTreesByCoordinates(lattitude, longitude)?.await()
-        if (response != null) {
-            airQualityData = response.data
-            val aqi = airQualityData[0].aqi.toInt()
-
-            Log.i("AirQualityAPIresponse", response.data.toString())
-            return airQualityData[0]
-        }
-        return airQualityData[0]
-    }
+class GenericApiService(val uid: String, val lattitude: Double, val longitude: Double) {
 
 
     suspend fun newUser(callback: (result: List<String>) -> Unit) {
@@ -52,18 +19,16 @@ public class GenericApiService(val uid: String, val lattitude: Double, val longi
 
             if (response?.apistatus == true) {
                 Log.v("NewUser", response.toString())
-                callback(listOf("true",response.country))
+                callback(listOf("true", response.country))
             } else {
                 Log.v("NewUser", "NO data fetched")
-                callback(listOf("false","invalid"))
+                callback(listOf("false", "invalid"))
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Log.v("API Exception", e.toString())
-            callback(listOf("false","invalid"))
+            callback(listOf("false", "invalid"))
             //reFetch()
         }
-
-
 
 
     }

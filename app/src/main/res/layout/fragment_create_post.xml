@@ -66,8 +66,8 @@
                     android:id="@+id/user_image"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_weight="0"
                     android:layout_gravity="center"
+                    android:layout_weight="0"
                     android:src="@drawable/ic_profile_circle_24" />
 
                 <TextView
@@ -115,12 +115,12 @@
             <ImageView
                 android:id="@+id/post_image"
                 android:layout_width="match_parent"
-                android:maxHeight="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:cropToPadding="false"
                 android:contentDescription="Post Image"
+                android:cropToPadding="false"
+                android:maxHeight="200dp"
                 android:scaleType="centerCrop" />
 
             <LinearLayout
@@ -148,9 +148,10 @@
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:hint="  Group Name"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/group_conditions2"
                 android:layout_width="match_parent"

@@ -1,8 +1,8 @@
 package com.solvabit.climate.registerLogin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.solvabit.climate.R
 import kotlinx.android.synthetic.main.activity_reset_password.*
@@ -27,8 +27,8 @@ class ResetPassword : AppCompatActivity() {
 
         }
     }
-    companion object
-    {
+
+    companion object {
         val TAG = "resetPassword"
     }
 }

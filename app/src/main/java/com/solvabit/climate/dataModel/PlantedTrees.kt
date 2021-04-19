@@ -9,13 +9,13 @@ class PlantedTrees(
     var username: String,
     var user_image: String
 ) {
-    constructor():this(
-            0.0,
-            0.0,
-            "",
-            "",
-            "",
-            "",
-            ""
+    constructor() : this(
+        0.0,
+        0.0,
+        "",
+        "",
+        "",
+        "",
+        ""
     )
 }

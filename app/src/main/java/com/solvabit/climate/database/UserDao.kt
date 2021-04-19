@@ -12,10 +12,10 @@ interface UserDao {
     fun getUserByUID(UID: String): User
 
     @Insert
-    fun insert(user : User)
+    fun insert(user: User)
 
     @Update
-    fun update(user : User)
+    fun update(user: User)
 
     @Delete
     fun delete(uid: User)

@@ -1,57 +1,38 @@
 package com.solvabit.climate.network
 
-import android.content.Context
 import android.util.Log
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.solvabit.climate.PostItem
 import com.solvabit.climate.dataModel.Post
 import com.solvabit.climate.database.Stats
 import com.solvabit.climate.database.User
 import com.solvabit.climate.database.UserDao
 import com.solvabit.climate.registerLogin.ResetPassword.Companion.TAG
 import com.solvabit.climate.utility.StatsUtility
-import com.squareup.picasso.Picasso
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.card_post_view.view.*
+import timber.log.Timber
 
-public class FirebaseService(var uid: String) {
+class FirebaseService(var uid: String) {
+    var database = FirebaseDatabase.getInstance()
 
 
-    suspend fun fetchUser(myCallback: (result:User)-> Unit){
-        var database = FirebaseDatabase.getInstance();
+    fun fetchUser(myCallback: (result: User) -> Unit) {
         val ref = database.getReference("Users/$uid")
-        var user: User = User()
+        var user: User
         ref.get().addOnSuccessListener {
             user = it.getValue(User::class.java)!!
-            Log.v("FirebaseService", "Fetched User From Firebase ${user}")
+            Timber.tag("FirebaseService ").v("Fetched User From Firebase ${user}")
 
             myCallback.invoke(user)
 
         }.addOnFailureListener {
-            Log.v("FirebaseService", "Error getting data")
+            Timber.tag("FirebaseService ").v("Error getting data")
         }
     }
 
 
-    fun isnewuser(uid: String , myCallback: (result: Boolean) -> Unit){
-        Log.v("FirebaseService","Fetched User has not been initialized")
+    fun userStatus(myCallback: (result: String) -> Unit) {
 
-        var database = FirebaseDatabase.getInstance();
-        val ref = database.getReference("Users/$uid/updated")
-
-        ref.get().addOnSuccessListener {
-            myCallback.invoke(it as Boolean)
-        }.addOnFailureListener {
-            Log.v("FirebaseService", "Error getting data")
-        }
-    }
-
-    fun userStatus(myCallback: (result:String)-> Unit){
-
-        var database = FirebaseDatabase.getInstance();
         val refU = database.getReference("Users/$uid/updated")
 
         refU.get().addOnSuccessListener {
@@ -60,7 +41,7 @@ public class FirebaseService(var uid: String) {
             if (it.value != null) {
                 status = it.value as Boolean
             }
-            Log.v("FirebaseService", "User is updated ->> ${status}")
+            Timber.tag("FirebaseService ").v("User is updated ->> ${status}")
 
             if (status == true) {
                 myCallback.invoke("true")
@@ -68,14 +49,13 @@ public class FirebaseService(var uid: String) {
                 myCallback.invoke("false")
             }
         }.addOnFailureListener {
-            Log.v("FirebaseService", "Error getting data")
+            Timber.tag("FirebaseService ").v("Error getting data")
             myCallback.invoke("error")
         }
     }
 
-    fun fetchContinuosUpdates(myCallback: (result: User) -> Unit){
+    fun fetchContinuosUpdates(myCallback: (result: User) -> Unit) {
 
-        var database = FirebaseDatabase.getInstance();
         val refU = database.getReference("Users/$uid")
 
 
@@ -83,7 +63,7 @@ public class FirebaseService(var uid: String) {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 val user = dataSnapshot.getValue<User>()
-                Log.v("Repository", user.toString())
+                Timber.tag("Repository ").v(user.toString())
                 myCallback.invoke(user as User)
 
             }
@@ -96,57 +76,57 @@ public class FirebaseService(var uid: String) {
         refU.addValueEventListener(postListener)
     }
 
-    fun fetchUpdates(myCallback: (result: User) -> Unit){
+    fun fetchUpdates(myCallback: (result: User) -> Unit) {
 
-        var database = FirebaseDatabase.getInstance();
         val refU = database.getReference("Users/$uid")
 
         refU.get().addOnSuccessListener {
 
-            var user = it.getValue(User::class.java)!!
+            val user = it.getValue(User::class.java)!!
 
-            Log.v("FirebaseService", "One time fetch update called")
+            Timber.tag("FirebaseService ").v("One time fetch update called")
 
             myCallback.invoke(user)
 
         }.addOnFailureListener {
-            Log.v("FirebaseService", "Error getting data")
+            Timber.tag("FirebaseService ").v("Error getting data")
         }
     }
 
-    fun fetchStats( dao: UserDao, myCallback: (result: Stats) -> Unit){
+    fun fetchStats(dao: UserDao, myCallback: (result: Stats) -> Unit) {
 
-        if(dao.hasUser(uid)==1){
+        if (dao.hasUser(uid) == 1) {
             val user = dao.getUserByUID(uid)
             var state = user.state
 
-            if (state!=null){
+            if (state != null) {
                 state = state.toLowerCase()
             }
             val db = FirebaseFirestore.getInstance()
             val refU = state?.let {
-                db.collection("forestCoverYearWiseComparision").document("india").collection("statesComparision").document(
-                    it
-                )
+                db.collection("forestCoverYearWiseComparision").document("india")
+                    .collection("statesComparision").document(
+                        it
+                    )
             }
 
             if (refU != null) {
                 refU.get().addOnSuccessListener {
 
-                    var data = it.data
+                    val data = it.data
                     var stats = Stats()
 
-                    Log.v("FirebaseService","Stats data fetch update called")
-                    Log.v("FirebaseService",data.toString())
+                    Timber.tag("FirebaseService ").v("Stats data fetch update called")
+                    Timber.tag("FirebaseService ").v(data.toString())
 
                     if (data != null) {
-                        stats = StatsUtility().parseForestComparision(uid,data)
+                        stats = StatsUtility().parseForestComparision(uid, data)
                     }
 
                     myCallback.invoke(stats)
 
-                }.addOnFailureListener{
-                    Log.v("FirebaseService", "Error getting stats data")
+                }.addOnFailureListener {
+                    Timber.tag("FirebaseService ").v("Error getting stats data")
                 }
             }
         }
@@ -174,7 +154,7 @@ public class FirebaseService(var uid: String) {
 
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 val post = p0.getValue(Post::class.java)
-                if (post != null){
+                if (post != null) {
                     myCallback.invoke(post)
                 }
             }
@@ -182,7 +162,7 @@ public class FirebaseService(var uid: String) {
     }
 
 
-    fun initializePostData(postUid:String,myCallback: (result: User) -> Unit){
+    fun initializePostData(postUid: String, myCallback: (result: User) -> Unit) {
 
         val ref = FirebaseDatabase.getInstance().getReference("/Users/$postUid")
 
@@ -198,22 +178,6 @@ public class FirebaseService(var uid: String) {
                 }
             }
         })
-    }
-
-    private fun fetchLocationFromFirebase() {
-
-    }
-
-    fun saveUser(uid: String, user: User) {
-
-    }
-
-    fun updateUser(uid: String, user: User) {
-
-    }
-
-    fun onResponse(user: User) {
-
     }
 
 

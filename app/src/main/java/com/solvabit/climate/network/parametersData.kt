@@ -1,8 +1,6 @@
 package com.solvabit.climate.network
 
 
-import com.google.gson.annotations.SerializedName
-
 data class parametersData(
     val actualForest: Int,
     val aqi: Double,
@@ -20,7 +18,7 @@ data class parametersData(
     val recommendedTarget: Int,
     val so2: Double,
     val state: String,
-    val apistatus:Boolean,
+    val apistatus: Boolean,
     val status: Boolean,
     val totalArea: Int,
     val updated: Boolean,

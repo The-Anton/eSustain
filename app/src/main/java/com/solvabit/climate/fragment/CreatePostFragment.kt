@@ -14,14 +14,16 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -33,7 +35,6 @@ import com.solvabit.climate.dialog.Dialog
 import com.solvabit.climate.location.LocationService
 import com.solvabit.climate.location.PERMISSION_REQUEST
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_create_post.*
 import timber.log.Timber
 import java.util.*
 
@@ -45,19 +46,18 @@ class CreatePostFragment : Fragment() {
     private var selectedPhotoUri: Uri? = null
     lateinit var locationManager: LocationManager
     private var permissions = arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
     )
     val mainHandler = Handler(Looper.getMainLooper())
-    private lateinit var navbar: BottomNavigationView
 
     var locationCheckboxRunner = object : Runnable {
         override fun run() {
             if (!locationEnabled() && binding.checkShareLocation.isChecked) {
                 Toast.makeText(
-                        activity,
-                        "Please turn on your location ",
-                        Toast.LENGTH_SHORT
+                    activity,
+                    "Please turn on your location ",
+                    Toast.LENGTH_SHORT
                 ).show()
                 binding.checkShareLocation.isChecked = false
             } else {
@@ -68,18 +68,14 @@ class CreatePostFragment : Fragment() {
 
         }
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_create_post, container, false
+            inflater, R.layout.fragment_create_post, container, false
         )
-
-        navbar = activity?.findViewById<BottomNavigationView>(R.id.bottomNavigation)!!
-        navbar?.visibility = View.GONE
 
         val args = CreatePostFragmentArgs.fromBundle(requireArguments())
         var isRecyclePost = args.recyclepost
@@ -88,7 +84,8 @@ class CreatePostFragment : Fragment() {
         addSpinner()
 
         binding.backArrowCreatePost.setOnClickListener {
-            binding.root.findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
+            binding.root.findNavController()
+                .navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
         }
 
         binding.addImage.setOnClickListener {
@@ -101,9 +98,9 @@ class CreatePostFragment : Fragment() {
         }
 
 
-        val spnLocale = binding.spinner2 as Spinner
+        val spnLocale = binding.spinner2
 
-        if(isRecyclePost){
+        if (isRecyclePost) {
             spnLocale.setSelection(1)
             spnLocale.isEnabled = false
         }
@@ -111,11 +108,14 @@ class CreatePostFragment : Fragment() {
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
                 if (adapterView != null) {
                     if (adapterView.getItemAtPosition(i) == "Issue") {
-                        binding.groupConditions.visibility=View.VISIBLE
+                        binding.groupConditions.visibility = View.VISIBLE
                         binding.checkCreateGroup.visibility = View.VISIBLE
                         binding.checkShareLocation.visibility = View.VISIBLE
                     }
-                    if (adapterView.getItemAtPosition(i) == "General" || adapterView.getItemAtPosition(i) == "Achievement") {
+                    if (adapterView.getItemAtPosition(i) == "General" || adapterView.getItemAtPosition(
+                            i
+                        ) == "Achievement"
+                    ) {
                         binding.groupConditions.visibility = View.GONE
                     }
 
@@ -136,8 +136,8 @@ class CreatePostFragment : Fragment() {
             }
         }
 
-        binding.checkShareLocation.setOnCheckedChangeListener { buttonView,isChecked ->
-            if(isChecked){
+        binding.checkShareLocation.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
                 checkLocationPermission()
                 runnableHandler()
             }
@@ -155,10 +155,6 @@ class CreatePostFragment : Fragment() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        navbar?.visibility = View.VISIBLE
-    }
     override fun onDetach() {
         super.onDetach()
         mainHandler.removeCallbacks(locationCheckboxRunner)
@@ -167,7 +163,8 @@ class CreatePostFragment : Fragment() {
 
     private fun createPost() {
         if (binding.postText.text.isEmpty()) {
-            Toast.makeText(requireContext(), "Sorry, Post can't be blank!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Sorry, Post can't be blank!", Toast.LENGTH_SHORT)
+                .show()
         } else {
             Timber.i("Going to show dialog box")
 
@@ -179,18 +176,18 @@ class CreatePostFragment : Fragment() {
         if (selectedPhotoUri == null) {
             post("")
         } else {
-            Dialog( ).show(childFragmentManager, "MyCustomFragment")
+            Dialog().show(childFragmentManager, "MyCustomFragment")
             val filename = UUID.randomUUID().toString()
             val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
             ref.putFile(selectedPhotoUri!!)
-                    .addOnSuccessListener {
-                        Timber.i("Photo uploaded successfully: ${it.metadata?.path}")
+                .addOnSuccessListener {
+                    Timber.i("Photo uploaded successfully: ${it.metadata?.path}")
 
-                        ref.downloadUrl.addOnSuccessListener {
-                            Timber.i("image downloaded url : $it")
-                            post(it.toString())
-                        }
+                    ref.downloadUrl.addOnSuccessListener {
+                        Timber.i("image downloaded url : $it")
+                        post(it.toString())
                     }
+                }
         }
     }
 
@@ -203,37 +200,57 @@ class CreatePostFragment : Fragment() {
         val text = binding.postText.text.toString()
         val category = binding.spinner2.selectedItem.toString()
         if (category == "Issue") {
-            saveIssueMapNode(postImageUrl)
+            //saveIssueMapNode(postImageUrl)
             if (binding.checkCreateGroup.isChecked) {
 
                 if (binding.groupName.text.isNotEmpty()) {
 
                     val groupName = binding.groupName.text.toString()
-                    val postData = Post(text, postImageUrl, uid, time, category, timestamp.toString(), groupName, 0)
+                    val postData = Post(
+                        text,
+                        postImageUrl,
+                        uid,
+                        time,
+                        category,
+                        timestamp.toString(),
+                        groupName,
+                        0
+                    )
                     ref.setValue(postData).addOnSuccessListener {
-                        Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT).show()
-                        binding.root.findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
+                        Toast.makeText(
+                            requireContext(),
+                            "Posted Successfully!!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        binding.root.findNavController()
+                            .navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
 
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Please enter Group Name!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Please enter Group Name!", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } else {
-                val postData = Post(text, postImageUrl, uid, time, category, timestamp.toString(), "", 0)
+                val postData =
+                    Post(text, postImageUrl, uid, time, category, timestamp.toString(), "", 0)
                 ref.setValue(postData).addOnSuccessListener {
                     mainHandler.removeCallbacks(locationCheckboxRunner)
-                    Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT).show()
-                    binding.root.findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
+                    Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT)
+                        .show()
+                    binding.root.findNavController()
+                        .navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
                 }
             }
 
         } else {
 
-            val postData = Post(text, postImageUrl, uid, time, category, timestamp.toString(), "", 0)
+            val postData =
+                Post(text, postImageUrl, uid, time, category, timestamp.toString(), "", 0)
             ref.setValue(postData).addOnSuccessListener {
                 mainHandler.removeCallbacks(locationCheckboxRunner)
                 Toast.makeText(requireContext(), "Posted Successfully!!", Toast.LENGTH_SHORT).show()
-                binding.root.findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
+                binding.root.findNavController()
+                    .navigate(CreatePostFragmentDirections.actionCreatePostFragmentToFeedFragment())
 
             }
         }
@@ -248,18 +265,18 @@ class CreatePostFragment : Fragment() {
     }
 
 
-    fun  checkLocationPermission(){
+    fun checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkPermission(permissions)) {
                 requestPermissions(permissions, PERMISSION_REQUEST)
-            }else{
+            } else {
                 askForLocation()
             }
         }
     }
 
     private fun askForLocation() {
-        if(!locationEnabled()){
+        if (!locationEnabled()) {
             Toast.makeText(context, "Please turn on your location", Toast.LENGTH_SHORT).show()
             binding.checkShareLocation.isChecked = false
         }
@@ -268,15 +285,17 @@ class CreatePostFragment : Fragment() {
 
     private fun locationEnabled(): Boolean {
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        var gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
-        return gpsStatus
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
 
     private fun checkPermission(permissionArray: Array<String>): Boolean {
         var allSuccess = true
         for (i in permissionArray.indices) {
-            if (ActivityCompat.checkSelfPermission(requireContext(),permissionArray[i]) == PackageManager.PERMISSION_GRANTED)
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    permissionArray[i]
+                ) == PackageManager.PERMISSION_GRANTED
+            )
                 allSuccess = false
         }
         return allSuccess
@@ -284,9 +303,9 @@ class CreatePostFragment : Fragment() {
 
 
     override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST) {
@@ -298,13 +317,12 @@ class CreatePostFragment : Fragment() {
                 }
             }
 
-            if(allSuccess){
+            if (allSuccess) {
                 askForLocation()
             }
 
         }
     }
-
 
 
     private fun saveIssueMapNode(post_image: String) {
@@ -318,9 +336,30 @@ class CreatePostFragment : Fragment() {
         val groupName = binding.groupName.text.toString()
 
 
-        activity?.let {val locationManager = it.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            LocationService(uid,locationManager).getLocation(it.applicationContext) {
-                val issueData = it["latitude"]?.let { it1 -> it["longitude"]?.let { it2 -> localUser.username?.let { it3 -> localUser.imageUrl?.let { it4 -> IssueDataMaps(it1,it2,time,uid,category,groupName," ",post_image,text, it3, it4) } } } }
+        activity?.let {
+            val locationManager = it.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            LocationService(it).getLocation() {
+                val issueData = it["latitude"]?.let { it1 ->
+                    it["longitude"]?.let { it2 ->
+                        localUser.username?.let { it3 ->
+                            localUser.imageUrl?.let { it4 ->
+                                IssueDataMaps(
+                                    it1,
+                                    it2,
+                                    time,
+                                    uid,
+                                    category,
+                                    groupName,
+                                    " ",
+                                    post_image,
+                                    text,
+                                    it3,
+                                    it4
+                                )
+                            }
+                        }
+                    }
+                }
 
 
                 ref.setValue(issueData).addOnSuccessListener {
@@ -328,7 +367,6 @@ class CreatePostFragment : Fragment() {
                 }
             }
         }
-
 
 
     }
@@ -342,9 +380,9 @@ class CreatePostFragment : Fragment() {
     private fun addSpinner() {
         val spinner: Spinner = binding.spinner2
         ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.planets_array,
-                android.R.layout.simple_spinner_item
+            requireContext(),
+            R.array.planets_array,
+            android.R.layout.simple_spinner_item
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
@@ -368,18 +406,3 @@ class CreatePostFragment : Fragment() {
     }
 
 }
-/*
-class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
-    /* val spinner: Spinner = findViewById(R.id.spinner2)
-    spinner.onItemSelectedListener = this */
-    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-
-
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>) {
-        // Another interface callback
-    }
-} */
