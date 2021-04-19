@@ -34,6 +34,7 @@ class Location : AppCompatActivity() {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.frameLocationFragment, locationProcess)
             transaction.commit()
+
         }
 
         //        if (bundle != null) {

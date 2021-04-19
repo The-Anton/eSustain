@@ -1,8 +1,12 @@
 # eSustain🌳
 
+### 👨‍💻 [APK-v1.0.5](https://drive.google.com/file/d/1Oaez71_q2Gw7kAWW7VLm0AviuIqHHKo6/view?usp=sharing)
+
+### Note:-
 #### ⚠️Currently only available for Indian Users 🤕
 
-###### 🧪 If you are testing this application from outside India you will be provided with the option to use an Indian location for simulating the application.
+###### 🧪 If you are testing this application from outside India you will be provided with the option to use an Indian location for simulating the application. 
+###### ⚠️ If it still crashes, then consider to use the application in an android emulator, using an Indian location
 
 
 
@@ -48,6 +52,8 @@ To modify or edit the source code we suggest some pre-requisites
 2. Android Device or Emulator installed along with Android Studio
 3. Minimum supported Android SDK
 
+⭐ Your can always install the app with the latest release apk if you are unable to build the application localy 👨‍💻 [APK-v1.0.5](https://drive.google.com/file/d/1Oaez71_q2Gw7kAWW7VLm0AviuIqHHKo6/view?usp=sharing)
+
 Android Studio Version
 ----------------------
 
@@ -72,9 +78,9 @@ Getting Started
 ---------------
 
 1. [Install Android Studio](https://developer.android.com/studio/install.html),
-if you don't already have it. (If you are just starting the course, you will be guided
-through this process.)
-2. Download the starter sample for the codelab.
-2. Open the sample into Android Studio.
-3. Build and run the sample. You may need to update gradle and library versions. 
+2. [Download the project](https://github.com/The-Anton/eSustain/archive/refs/heads/main.zip)
+3. Open the project into Android Studio.
+4. Build the project and run the sample. You may need to update gradle and library versions. 
 Follow the guidance provided by Android Studio. 
+5. If you build the project and finds an error regarding Cuberto/liquid-swipe-android, then consider this [Cuberto/liquid-swipe-android](https://github.com/Cuberto/liquid-swipe-android) github repo to add your credentials into the project
+6. If you still not able to build the project try installing the [APK](https://drive.google.com/file/d/1Oaez71_q2Gw7kAWW7VLm0AviuIqHHKo6/view?usp=sharing) of the applicaiton
