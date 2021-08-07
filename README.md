@@ -8,8 +8,6 @@
 #### ⚠️Currently only available for Indian Users 🤕
 
 ###### 🧪 If you are testing this application from outside India you will be provided with the option to use an Indian location for simulating the application. 
-###### ⚠️ If it still crashes, then consider to use the application in an android emulator, using an Indian location
-
 
 
 [![E-Sustain](https://user-images.githubusercontent.com/51144829/114654369-a98f3a00-9d07-11eb-9906-8377b7446fb7.png)](https://www.youtube.com/watch?v=m3yw8S2BLtc)
