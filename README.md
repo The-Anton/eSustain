@@ -25,7 +25,6 @@
 
 Version - 1
 
-### [Backend Server](https://github.com/The-Anton/eSustain_Backend)
 
 
 Introduction
